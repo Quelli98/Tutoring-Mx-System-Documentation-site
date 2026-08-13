@@ -1,11 +1,27 @@
 {
-  "meetings": [],
-  "planning": [],
+  "meetings": [
+    {
+      "id": "stakeholder-expectations-2026-08-06",
+      "title": "Stakeholder expectations and project oversight",
+      "date": "2026-08-06",
+      "type": "Stakeholder/client meeting",
+      "attendees": "Five participants recorded by Microsoft Teams",
+      "summary": "The group discussed the project expectations and how progress would be monitored. The team was expected to operate like a small start-up: organise its own work, establish and follow its own working methods, remain accountable for delivery, and keep the project on track while receiving guidance and oversight from the tutor.",
+      "outcomes": "The team would define its Git and project methodology, plan and monitor sprint work, document decisions and evidence, raise blockers early, and use tutor guidance to check direction without transferring ownership of delivery away from the group.",
+      "proof": "evidence/stakeholder-meeting-attendance-redacted.png"
+    }
+  ],
+  "planning": [
+    {"id":"database-decision-2026","title":"Select PostgreSQL, Express and Neon instead of Supabase-generated endpoints","date":"2026-08-08","sprint":1,"category":"Database","summary":"The team questioned whether Supabase would conflict with the requirement to design and implement a handwritten API. The group sought clarification, compared alternatives, circulated a short technical motivation and agreed to proceed with PostgreSQL and Express. React was also accepted for the client interface.","outcomes":"Use a handwritten Express API with Prisma and PostgreSQL hosted on Neon. Team members were invited to the shared Neon project and given access instructions. The supporting PDF records the motivation; later commits and tests must prove the implementation.","proofs":["evidence/database-consultation.png","evidence/database-alternative.png","evidence/database-team-agreement.png","evidence/neon-onboarding.png"]},
+    {"id":"git-methodology-2026","title":"Agree a branch-and-integration Git methodology","date":"2026-08-13","sprint":1,"category":"Methodology","summary":"The group explicitly raised when to commit, how to write commits and when to branch. A proposed working rule was that each member commits work to a branch and one integration owner brings completed, working changes into the main branch.","outcomes":"Use short-lived branches for reviewable work, verify changes before integration and give one person responsibility for controlled merges. The screenshot proves the discussion; repository branches, commits and pull requests must prove continued use.","proofs":["evidence/git-methodology-discussion.png"]},
+    {"id":"meeting-cadence-2026","title":"Plan two team meetings per week","date":"2026-08-13","sprint":1,"category":"Methodology","summary":"The team discussed a regular cadence consisting of a client-input meeting and an internal progress check. Members proposed meeting twice a week, with once a week as the minimum when availability is limited.","outcomes":"Aim for two meetings each week: one stakeholder/client touchpoint where available and one internal tracking meeting. Record attendance, decisions, actions and proof in the Meeting Record section after each meeting.","proofs":["evidence/twice-weekly-meeting-plan.png","evidence/twice-weekly-confirmation.png"]}
+  ],
   "documents": [
     {"id":"brief","title":"COMS3011A Project Brief","summary":"Official milestones, project requirements, dates and rubrics for Sprints 1–4.","url":"documents/project-brief.pdf"},
     {"id":"handbook","title":"Tutor Mx Sprint Handbook","summary":"Team implementation handbook and planned sprint guidance. Plans must not be presented as completed evidence.","url":"documents/tutor-mx-sprint-handbook.pdf"},
     {"id":"ai-policy","title":"COMS3011A AI Policy","summary":"Required AI-use transparency, attribution and verification rules.","url":"documents/ai-policy.pdf"},
-    {"id":"readme","title":"Repository README","summary":"Exact README from the uploaded member6-database branch.","url":"documents/README.md"}
+    {"id":"readme","title":"Repository README","summary":"Exact README from the uploaded member6-database branch.","url":"documents/README.md"},
+    {"id":"database-decision-pdf","title":"PostgreSQL and Express Decision Record","summary":"Short technical motivation for choosing a handwritten Express API with PostgreSQL instead of generated Supabase endpoints.","url":"documents/postgresql-express-decision.pdf"}
   ],
   "rubric": {}
 }
