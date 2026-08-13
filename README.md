@@ -13,6 +13,8 @@ Static, editable-in-browser documentation for GitHub Pages. Open `index.html` lo
 
 Browser edits are drafts. GitHub Pages is static and cannot write directly to the repository.
 
+The prefilled evidence log includes the four-sprint/six-role allocation method, pre-sprint role polls, protected Git branch flow, local testing and Codecov/CI decisions, the React–Express–Neon architecture decision, and the PostgreSQL/Express comparison. The supporting PDFs remain accessible under `documents/`, and AI-assisted material is labelled with its verification requirements.
+
 ## AI declaration
 
 Initial site structure and copy were generated with assistance from Codex (GPT-5) for code and editing. The Tutor Mx group must verify the content and preserve the course-required AI attribution in commits and repository declarations.
