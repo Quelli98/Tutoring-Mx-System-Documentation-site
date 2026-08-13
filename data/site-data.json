@@ -1,0 +1,11 @@
+{
+  "meetings": [],
+  "planning": [],
+  "documents": [
+    {"id":"brief","title":"COMS3011A Project Brief","summary":"Official milestones, project requirements, dates and rubrics for Sprints 1–4.","url":"documents/project-brief.pdf"},
+    {"id":"handbook","title":"Tutor Mx Sprint Handbook","summary":"Team implementation handbook and planned sprint guidance. Plans must not be presented as completed evidence.","url":"documents/tutor-mx-sprint-handbook.pdf"},
+    {"id":"ai-policy","title":"COMS3011A AI Policy","summary":"Required AI-use transparency, attribution and verification rules.","url":"documents/ai-policy.pdf"},
+    {"id":"readme","title":"Repository README","summary":"Exact README from the uploaded member6-database branch.","url":"documents/README.md"}
+  ],
+  "rubric": {}
+}
