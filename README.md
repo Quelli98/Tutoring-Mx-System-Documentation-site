@@ -1,20 +1,24 @@
-# Tutor Mx documentation site
+# Tutor MX documentation site
 
-Static, editable-in-browser documentation for GitHub Pages. Open `index.html` locally or serve the folder with any static web server.
+Wiki-style public documentation for the Tutor MX System. It includes the development guide, technology decisions, current main-only Git workflow, architecture, database, API, security, testing, deployment, stakeholder decisions, sprint evidence, supporting documents and AI attribution.
 
-## Publishing an edit
+## Run locally
 
-1. Open the public site and add meeting, planning and rubric records.
-2. Select **Export site data**.
-3. Replace `data/site-data.json` with the downloaded file.
-4. If a new PDF was added, copy it into `documents/` and use `documents/filename.pdf` as its link.
-5. Commit the change on a short documentation branch and open a pull request.
-6. After merge to `main`, the included workflow deploys the site to GitHub Pages.
+```bash
+npm install
+npm run dev
+```
 
-Browser edits are drafts. GitHub Pages is static and cannot write directly to the repository.
+## Publish
 
-The prefilled evidence log includes the four-sprint/six-role allocation method, pre-sprint role polls, protected Git branch flow, local testing and Codecov/CI decisions, the React–Express–Neon architecture decision, and the PostgreSQL/Express comparison. The supporting PDFs remain accessible under `documents/`, and AI-assisted material is labelled with its verification requirements.
+1. Replace the existing documentation repository contents with these files.
+2. Commit and push them to `main`.
+3. In GitHub, open **Settings → Pages** and select **GitHub Actions** as the source.
+4. Open the **Actions** tab and wait for **Deploy documentation to GitHub Pages** to pass.
+5. Refresh the existing public documentation URL.
+
+The repository name and Vite base path are configured for `Tutoring-Mx-System-Documentation-site`.
 
 ## AI declaration
 
-Initial site structure and copy were generated with assistance from Codex (GPT-5) for code and editing. The Tutor Mx group must verify the content and preserve the course-required AI attribution in commits and repository declarations.
+ChatGPT Work using Codex (GPT-5.6) was used for documentation restructuring, copy editing and website implementation on 21 August 2026. The Tutor MX team must review the result against the project brief and current repository before submission.
