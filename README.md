@@ -1,6 +1,6 @@
 # Tutor MX documentation site
 
-Wiki-style public documentation for the Tutor MX System. It includes the development guide, technology decisions, current main-only Git workflow, architecture, database, API, security, testing, deployment, stakeholder decisions, sprint evidence, supporting documents and AI attribution.
+Wiki-style public documentation for the Tutor MX System. It reflects the 23 August 2026 integrated workflow: Gitea main as source of truth, automatic Auth0 role/Profile onboarding, registered-Tutor organiser management, the current npm run check/local verification process, Sprint 2–4 carry-forward rules, GitHub deployment mirror and manual Cloudflare Production deployment.
 
 ## Run locally
 
@@ -21,4 +21,4 @@ The repository name and Vite base path are configured for `Tutoring-Mx-System-Do
 
 ## AI declaration
 
-ChatGPT Work using Codex (GPT-5.6) was used for documentation restructuring, copy editing and website implementation on 21 August 2026. The Tutor MX team must review the result against the project brief and current repository before submission.
+ChatGPT [GPT-5.6 Sol] was used on 23 August 2026 to update the Sprint handbook alignment, testing/local-verification guidance, Auth0 onboarding documentation, deployment instructions and documentation website implementation. The Tutor MX team must review the result against the project brief and current repository before submission.

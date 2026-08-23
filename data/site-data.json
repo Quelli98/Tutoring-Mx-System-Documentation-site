@@ -12,19 +12,142 @@
     }
   ],
   "planning": [
-    {"id":"four-sprints-six-roles-2026","title":"Divide the project into four sprints and six rotating member roles","date":"2026-08-08","sprint":1,"category":"Methodology","summary":"The planning handbook divides delivery into the four assessed sprints and defines six equal technical roles for each sprint. Before every sprint, the coordinator circulates a poll so each team member can select an available Member 1–6 role. This makes ownership visible, distributes work fairly and allows roles to rotate instead of becoming permanent silos.","outcomes":"At the start of each sprint: confirm the sprint goal, run and preserve the role-selection poll, assign one person to each of the six roles, create the role-linked issues and dependencies, and record the final allocation. The handbook is the decision record; dated polls, assigned issues, commits and PRs are the implementation evidence.","proofs":["evidence/role-selection.jpg","evidence/sprint-planning.jpg","evidence/handbook-sprint-method.png"]},
-    {"id":"database-decision-2026","title":"Select PostgreSQL, Express and Neon instead of Supabase-generated endpoints","date":"2026-08-08","sprint":1,"category":"Database","summary":"The team questioned whether Supabase-generated endpoints would conflict with the brief's requirement to design and implement its own API. After consultation and comparison, the proposed architecture became React + Vite → a team-written Node.js/Express API → Prisma → Neon PostgreSQL. The SQL/Express PDF records why this option provides a clearer handwritten API boundary, front/back separation, demonstrable routes and CI-friendly structure.","outcomes":"Use Express for team-owned routes and business logic, Prisma for server-side data access and Neon for PostgreSQL hosting. The browser must never connect directly to Neon. This PDF and discussion prove the decision process; schema, migrations, API commits, integration tests and a deployed database must later prove implementation. The database PDF is AI-assisted, but its original author must confirm the exact tool, model and purpose before submission.","proofs":["evidence/database-consultation.png","evidence/database-alternative.png","evidence/database-team-agreement.png","evidence/neon-onboarding.png","evidence/database-decision-stack.png","evidence/database-decision-comparison.png","evidence/handbook-react-express-neon-architecture.png"]},
-    {"id":"git-methodology-2026","title":"Agree a protected branch, pull-request and integration methodology","date":"2026-08-13","sprint":1,"category":"Methodology","summary":"The team discussed when to branch and commit, then documented a controlled flow: one short-lived issue branch per reviewable change, a pull request into protected develop, and a release pull request from develop into protected main. Review, tests, resolved conversations and successful status checks are required before integration.","outcomes":"Members do not push directly to develop or main. The Integration Lead merges only reviewed work that satisfies the issue acceptance tests. The discussion and handbook pages prove the agreed method; the repository branch rules, issue-linked commits, reviews and merged PRs must prove consistent use.","proofs":["evidence/git-methodology-discussion.png","evidence/handbook-git-branch-flow.png","evidence/handbook-sprint-method.png"]},
-    {"id":"testing-ci-codecov-2026","title":"Define local testing, CI and Codecov evidence rules","date":"2026-08-13","sprint":1,"category":"Testing","summary":"The handbook distinguishes the test runner from Codecov: local npm tests create coverage reports, GitHub Actions runs frontend and backend tests on pushes and pull requests, and Codecov uploads and displays those reports. Members must run local tests before opening a PR and inspect both required checks and coverage results.","outcomes":"Configure CI for both applications, upload their lcov reports, protect integration branches with required checks and record a sensible team coverage target only after a stable baseline exists. Coverage percentage does not replace acceptance, boundary, permission and failure tests. These pages document the decision; green Actions runs, Codecov reports and test output are required as later proof.","proofs":["evidence/handbook-tests-codecov.png","evidence/handbook-codecov-actions.png"]},
-    {"id":"ai-policy-documentation-2026","title":"Apply the course AI policy to planning documents and code","date":"2026-08-13","sprint":1,"category":"Methodology","summary":"The team adopted the course rule that AI use is allowed only with transparent attribution and human accountability. The handbook declares that this revision was generated and reviewed with Codex[GPT-5]. Every submitted document must declare use or non-use, while AI-generated code commits require an Assisted-by footer.","outcomes":"Keep the tool, model and purpose declaration with each AI-assisted document; verify every claim, command and code fragment; remove secrets and personal data before prompting; and keep repository declarations current. For the SQL/Express PDF, confirm and add the exact tool/model/purpose before assessment because its file metadata does not identify them.","proofs":["evidence/handbook-ai-policy.png"]},
-    {"id":"meeting-cadence-2026","title":"Plan two team meetings per week","date":"2026-08-13","sprint":1,"category":"Methodology","summary":"The team discussed a regular cadence consisting of a client-input meeting and an internal progress check. Members proposed meeting twice a week, with once a week as the minimum when availability is limited.","outcomes":"Aim for two meetings each week: one stakeholder/client touchpoint where available and one internal tracking meeting. Record attendance, decisions, actions and proof in the Meeting Record section after each meeting.","proofs":["evidence/twice-weekly-meeting-plan.png","evidence/twice-weekly-confirmation.png"]}
+    {
+      "id": "four-sprints-six-roles-2026",
+      "title": "Divide the project into four sprints and six rotating member roles",
+      "date": "2026-08-08",
+      "sprint": 1,
+      "category": "Methodology",
+      "summary": "The planning handbook divides delivery into the four assessed sprints and defines six equal technical roles for each sprint. Before every sprint, the coordinator circulates a poll so each team member can select an available Member 1–6 role. This makes ownership visible, distributes work fairly and allows roles to rotate instead of becoming permanent silos.",
+      "outcomes": "At the start of each sprint: confirm the sprint goal, run and preserve the role-selection poll, assign one person to each of the six roles, create the role-linked issues and dependencies, and record the final allocation. The handbook is the decision record; dated polls, assigned issues, commits and PRs are the implementation evidence.",
+      "proofs": [
+        "evidence/role-selection.jpg",
+        "evidence/sprint-planning.jpg",
+        "evidence/handbook-sprint-method.png"
+      ]
+    },
+    {
+      "id": "database-decision-2026",
+      "title": "Select PostgreSQL, Express and Neon instead of Supabase-generated endpoints",
+      "date": "2026-08-08",
+      "sprint": 1,
+      "category": "Database",
+      "summary": "The team questioned whether Supabase-generated endpoints would conflict with the brief's requirement to design and implement its own API. After consultation and comparison, the proposed architecture became React + Vite → a team-written Node.js/Express API → Prisma → Neon PostgreSQL. The SQL/Express PDF records why this option provides a clearer handwritten API boundary, front/back separation, demonstrable routes and CI-friendly structure.",
+      "outcomes": "Use Express for team-owned routes and business logic, Prisma for server-side data access and Neon for PostgreSQL hosting. The browser must never connect directly to Neon. This PDF and discussion prove the decision process; schema, migrations, API commits, integration tests and a deployed database must later prove implementation. The database PDF is AI-assisted, but its original author must confirm the exact tool, model and purpose before submission.",
+      "proofs": [
+        "evidence/database-consultation.png",
+        "evidence/database-alternative.png",
+        "evidence/database-team-agreement.png",
+        "evidence/neon-onboarding.png",
+        "evidence/database-decision-stack.png",
+        "evidence/database-decision-comparison.png",
+        "evidence/handbook-react-express-neon-architecture.png"
+      ]
+    },
+    {
+      "id": "git-methodology-2026",
+      "title": "Use Gitea main as the source of truth with Member branches and Integration Lead handoff",
+      "date": "2026-08-23",
+      "sprint": 1,
+      "category": "Methodology",
+      "summary": "The current team workflow no longer uses a shared develop branch. Every Member starts from the latest Gitea main, works on a focused issue branch, runs local browser checks and automated tests, pushes the branch, and hands it to the reviewer/Integration Lead. The Integration Lead integrates approved work into main and reruns regression.",
+      "outcomes": "Gitea main is authoritative. Members do not commit normal feature work directly to main. Before handoff they follow the handbook pages for npm run check, coverage, local browser verification and honest lecturer-runner evidence. Approved Gitea main is synced deliberately to the separate GitHub deployment mirror.",
+      "proofs": [
+        "evidence/git-methodology-discussion.png",
+        "evidence/handbook-git-branch-flow.png",
+        "evidence/handbook-sprint-method.png"
+      ]
+    },
+    {
+      "id": "testing-ci-codecov-2026",
+      "title": "Standardise npm run check, local browser verification and honest runner evidence",
+      "date": "2026-08-23",
+      "sprint": 1,
+      "category": "Testing",
+      "summary": "The current repository full local gate is npm run check. It performs Prisma generation, linting, backend type-checking, backend and frontend tests, production builds and the repository security check. Members also run the affected flow locally before handoff and generate coverage.",
+      "outcomes": "Local testing is mandatory regardless of remote runner state. If the lecturer-managed Gitea Actions runner is queued/offline, record it as an external blocker and attach local evidence; never claim CI/Codecov is green when it did not run. Codecov displays coverage generated by the test runner; it does not run the tests.",
+      "proofs": [
+        "evidence/handbook-tests-codecov.png",
+        "evidence/handbook-codecov-actions.png"
+      ]
+    },
+    {
+      "id": "ai-policy-documentation-2026",
+      "title": "Apply the course AI policy to planning documents and code",
+      "date": "2026-08-13",
+      "sprint": 1,
+      "category": "Methodology",
+      "summary": "The team adopted the course rule that AI use is allowed only with transparent attribution and human accountability. The handbook declares that this revision was generated and reviewed with Codex[GPT-5]. Every submitted document must declare use or non-use, while AI-generated code commits require an Assisted-by footer.",
+      "outcomes": "Keep the tool, model and purpose declaration with each AI-assisted document; verify every claim, command and code fragment; remove secrets and personal data before prompting; and keep repository declarations current. For the SQL/Express PDF, confirm and add the exact tool/model/purpose before assessment because its file metadata does not identify them.",
+      "proofs": [
+        "evidence/handbook-ai-policy.png"
+      ]
+    },
+    {
+      "id": "meeting-cadence-2026",
+      "title": "Plan two team meetings per week",
+      "date": "2026-08-13",
+      "sprint": 1,
+      "category": "Methodology",
+      "summary": "The team discussed a regular cadence consisting of a client-input meeting and an internal progress check. Members proposed meeting twice a week, with once a week as the minimum when availability is limited.",
+      "outcomes": "Aim for two meetings each week: one stakeholder/client touchpoint where available and one internal tracking meeting. Record attendance, decisions, actions and proof in the Meeting Record section after each meeting.",
+      "proofs": [
+        "evidence/twice-weekly-meeting-plan.png",
+        "evidence/twice-weekly-confirmation.png"
+      ]
+    },
+    {
+      "id": "automatic-onboarding-2026-08-23",
+      "title": "Adopt automatic Auth0 role/Profile onboarding and direct saved-role routing",
+      "date": "2026-08-23",
+      "sprint": 1,
+      "category": "Authentication",
+      "summary": "New users choose Student, Tutor or Organiser before Auth0. After authentication, React calls POST /api/auth/onboarding and the Express backend verifies identity and creates/links the matching Neon Profile through Prisma. Existing linked users use /api/me and go directly to their saved workspace without a second role choice.",
+      "outcomes": "Normal sign-up no longer requires manually creating Neon Profile rows or assigning individual Tutor Mx roles by hand. Use separate test accounts for different roles. Email verification remains part of Auth0 identity handling.",
+      "proofs": []
+    },
+    {
+      "id": "registered-tutor-management-2026-08-23",
+      "title": "Use registered Tutor accounts in Organiser Tutor Management",
+      "date": "2026-08-23",
+      "sprint": 1,
+      "category": "Organiser",
+      "summary": "Tutor accounts appear after tutors use the normal self-service Tutor sign-up flow. Organisers search by name/email and edit the database-backed Tutor record. Technical Auth0 subject/User ID fields were removed from the normal organiser interface.",
+      "outcomes": "Later sprints harden and extend this registered-Tutor flow. They must not reintroduce a manual Auth0-subject tutor-create form.",
+      "proofs": []
+    }
   ],
   "documents": [
-    {"id":"brief","title":"COMS3011A Project Brief","summary":"Official milestones, project requirements, dates and rubrics for Sprints 1–4.","url":"documents/project-brief.pdf"},
-    {"id":"handbook","title":"Tutor Mx Sprint Handbook","summary":"AI-assisted planning and implementation handbook for four sprints, six roles, Git flow, CI/Codecov, architecture and handoffs. Declares Codex[GPT-5] assistance; the team must verify it. Plans are not completed proof.","url":"documents/tutor-mx-sprint-handbook.pdf"},
-    {"id":"ai-policy","title":"COMS3011A AI Policy","summary":"Required AI-use transparency, attribution and verification rules.","url":"documents/ai-policy.pdf"},
-    {"id":"readme","title":"Repository README","summary":"Exact README from the uploaded member6-database branch.","url":"documents/README.md"},
-    {"id":"database-decision-pdf","title":"PostgreSQL and Express Decision Record","summary":"AI-assisted technical motivation for a handwritten Express API with PostgreSQL instead of generated Supabase endpoints. Exact tool/model/purpose must be confirmed by the author before submission.","url":"documents/postgresql-express-decision.pdf"}
+    {
+      "id": "brief",
+      "title": "COMS3011A Project Brief",
+      "summary": "Official milestones, project requirements, dates and rubrics for Sprints 1–4.",
+      "url": "documents/project-brief.pdf"
+    },
+    {
+      "id": "handbook",
+      "title": "Tutor Mx Gitea Sprint Handbook — Fully Updated 23 Aug 2026",
+      "summary": "Current 46-page beginner guide for Sprints 1–4. Covers Gitea main workflow, automatic Auth0 onboarding, registered-Tutor management, local browser verification, npm run check/coverage, lecturer-runner evidence and manual Cloudflare Production deployment. Sprints 2–4 explicitly build on earlier integrated work rather than repeating Sprint 1.",
+      "url": "documents/tutor-mx-sprint-handbook.pdf"
+    },
+    {
+      "id": "ai-policy",
+      "title": "COMS3011A AI Policy",
+      "summary": "Required AI-use transparency, attribution and verification rules.",
+      "url": "documents/ai-policy.pdf"
+    },
+    {
+      "id": "readme",
+      "title": "Repository README",
+      "summary": "Exact README from the uploaded member6-database branch.",
+      "url": "documents/README.md"
+    },
+    {
+      "id": "database-decision-pdf",
+      "title": "PostgreSQL and Express Decision Record",
+      "summary": "AI-assisted technical motivation for a handwritten Express API with PostgreSQL instead of generated Supabase endpoints. Exact tool/model/purpose must be confirmed by the author before submission.",
+      "url": "documents/postgresql-express-decision.pdf"
+    }
   ],
   "rubric": {}
 }
