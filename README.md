@@ -1,6 +1,6 @@
 # Tutor MX documentation site
 
-Rubric-aligned public documentation for the Tutor MX System. The site reflects the **23 August 2026 Sprint Handbook** and was reorganised for the **Sprint 1 review on 25 August 2026**.
+Rubric-aligned public documentation for the Tutor MX System. The site reflects the **25 August 2026 Sprint Handbook** and was reorganised for the **Sprint 1 review on 25 August 2026**.
 
 The documentation now has explicit coverage for every Sprint 1 rubric criterion:
 
@@ -43,8 +43,12 @@ npm run build
 
 ## Source note
 
-The rubric-aligned content was updated using `Tutor_Mx_Sprint_Handbook_FULLY_UPDATED_23_Aug_2026.pdf` as the current project workflow/implementation source. Where the handbook records a Sprint 1 boundary (Student mock API and allocation Save placeholder), this site keeps that limitation visible rather than claiming later-sprint work is complete.
+The rubric-aligned content was updated using the updated 25 August 2026 Tutor MX Sprint Handbook as the current project workflow/implementation source. Where the handbook records a Sprint 1 boundary (Student mock API and allocation Save placeholder), this site keeps that limitation visible rather than claiming later-sprint work is complete.
 
 ## AI declaration
 
 ChatGPT [GPT-5.6 Sol] was used on 25 August 2026 to reorganise and update the documentation website for Sprint 1 rubric alignment using the supplied project rubric screenshots and current Tutor MX Sprint Handbook. The Tutor MX team remains responsible for checking the site against the live repository, project brief and actual evidence before assessment.
+
+## Codecov handbook update - 25 August 2026
+
+The handbook now contains a three-page beginner Codecov addendum (pages 47–49). It explains that Codecov does not run tests; GitHub Actions generates backend/frontend LCOV files and uploads them with `codecov/codecov-action@v5`. The existing workflow uses `id-token: write` plus `use_oidc: true`, with separate `backend` and `frontend` flags. The handbook also gives the repeatable end-of-sprint process for rerunning CI, checking both upload steps, recording the current percentages and keeping dated screenshots from earlier sprints.

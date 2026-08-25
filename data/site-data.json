@@ -174,8 +174,8 @@
     },
     {
       "id": "handbook",
-      "title": "Tutor Mx Gitea Sprint Handbook — Fully Updated 23 Aug 2026",
-      "summary": "Current 46-page beginner guide for Sprints 1–4. Covers Gitea main workflow, automatic Auth0 onboarding, registered-Tutor management, local browser verification, npm run check/coverage, lecturer-runner evidence and manual Cloudflare Production deployment. Sprints 2–4 explicitly build on earlier integrated work rather than repeating Sprint 1.",
+      "title": "Tutor Mx Gitea Sprint Handbook — Fully Updated 25 Aug 2026",
+      "summary": "Current 49-page beginner guide for Sprints 1–4. Covers Gitea main workflow, automatic Auth0 onboarding, registered-Tutor management, local browser verification, npm run check/coverage, lecturer-runner evidence, the GitHub deployment-mirror Codecov workflow and manual Cloudflare Production deployment. Pages 47–49 explain Codecov in beginner terms and give the repeatable per-sprint evidence process.",
       "url": "documents/tutor-mx-sprint-handbook.pdf"
     },
     {
