@@ -19,6 +19,8 @@ It also keeps the current architecture and release facts clear: **Gitea main is 
 
 Sprint 1 evidence now also includes dated meeting proof: an internal Scrum coordination meeting on **17 August** (reported duration: approximately **15 minutes**), a **client/tutor requirements meeting on 18 August**, and a **Daily Scrum/progress checkpoint on 21 August**. These are documented under Project Methodology / Sprint Evidence rather than Git Methodology, because they demonstrate Scrum-style planning, blocker discussion and stakeholder interaction rather than branch/commit rules.
 
+Sprint 1 testing evidence now also includes a dated **25 August 2026 Codecov snapshot** from the GitHub deployment mirror. The GitHub Actions rerun passed backend quality/coverage, frontend quality/coverage and the clean PostgreSQL migration/API smoke job. Backend and frontend LCOV reports were uploaded to Codecov through OIDC. The snapshot records **81.58% frontend source coverage** and **86.37% backend source coverage**. Later sprint screenshots should be appended as new dated snapshots rather than replacing the Sprint 1 evidence. This remains separate from the lecturer-managed Gitea runner status; Gitea main is still the official source of truth.
+
 ## Run locally
 
 ```bash
