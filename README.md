@@ -17,6 +17,8 @@ The documentation now has explicit coverage for every Sprint 1 rubric criterion:
 
 It also keeps the current architecture and release facts clear: **Gitea main is the official source of truth**, GitHub is a **deployment mirror**, Cloudflare hosts the React/Vite frontend, Render hosts the handwritten Express API, Auth0 handles identity, and Prisma accesses Neon PostgreSQL from the backend only.
 
+Sprint 1 evidence now also includes dated meeting proof: an internal Scrum coordination meeting on **17 August** (reported duration: approximately **15 minutes**), a **client/tutor requirements meeting on 18 August**, and a **Daily Scrum/progress checkpoint on 21 August**. These are documented under Project Methodology / Sprint Evidence rather than Git Methodology, because they demonstrate Scrum-style planning, blocker discussion and stakeholder interaction rather than branch/commit rules.
+
 ## Run locally
 
 ```bash
