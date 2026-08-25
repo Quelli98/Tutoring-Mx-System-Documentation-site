@@ -18,7 +18,7 @@
       "date": "2026-08-08",
       "sprint": 1,
       "category": "Methodology",
-      "summary": "The planning handbook divides delivery into the four assessed sprints and defines six equal technical roles for each sprint. Before every sprint, the coordinator circulates a poll so each team member can select an available Member 1–6 role. This makes ownership visible, distributes work fairly and allows roles to rotate instead of becoming permanent silos.",
+      "summary": "The planning handbook divides delivery into the four assessed sprints and defines six equal technical roles for each sprint. Before every sprint, the coordinator circulates a poll so each team member can select an available Member 1\u20136 role. This makes ownership visible, distributes work fairly and allows roles to rotate instead of becoming permanent silos.",
       "outcomes": "At the start of each sprint: confirm the sprint goal, run and preserve the role-selection poll, assign one person to each of the six roles, create the role-linked issues and dependencies, and record the final allocation. The handbook is the decision record; dated polls, assigned issues, commits and PRs are the implementation evidence.",
       "proofs": [
         "evidence/role-selection.jpg",
@@ -32,7 +32,7 @@
       "date": "2026-08-08",
       "sprint": 1,
       "category": "Database",
-      "summary": "The team questioned whether Supabase-generated endpoints would conflict with the brief's requirement to design and implement its own API. After consultation and comparison, the proposed architecture became React + Vite → a team-written Node.js/Express API → Prisma → Neon PostgreSQL. The SQL/Express PDF records why this option provides a clearer handwritten API boundary, front/back separation, demonstrable routes and CI-friendly structure.",
+      "summary": "The team questioned whether Supabase-generated endpoints would conflict with the brief's requirement to design and implement its own API. After consultation and comparison, the proposed architecture became React + Vite \u2192 a team-written Node.js/Express API \u2192 Prisma \u2192 Neon PostgreSQL. The SQL/Express PDF records why this option provides a clearer handwritten API boundary, front/back separation, demonstrable routes and CI-friendly structure.",
       "outcomes": "Use Express for team-owned routes and business logic, Prisma for server-side data access and Neon for PostgreSQL hosting. The browser must never connect directly to Neon. This PDF and discussion prove the decision process; schema, migrations, API commits, integration tests and a deployed database must later prove implementation. The database PDF is AI-assisted, but its original author must confirm the exact tool, model and purpose before submission.",
       "proofs": [
         "evidence/database-consultation.png",
@@ -121,13 +121,13 @@
     {
       "id": "brief",
       "title": "COMS3011A Project Brief",
-      "summary": "Official milestones, project requirements, dates and rubrics for Sprints 1–4.",
+      "summary": "Official milestones, project requirements, dates and rubrics for Sprints 1\u20134.",
       "url": "documents/project-brief.pdf"
     },
     {
       "id": "handbook",
-      "title": "Tutor Mx Gitea Sprint Handbook — Fully Updated 23 Aug 2026",
-      "summary": "Current 46-page beginner guide for Sprints 1–4. Covers Gitea main workflow, automatic Auth0 onboarding, registered-Tutor management, local browser verification, npm run check/coverage, lecturer-runner evidence and manual Cloudflare Production deployment. Sprints 2–4 explicitly build on earlier integrated work rather than repeating Sprint 1.",
+      "title": "Tutor Mx Gitea Sprint Handbook \u2014 Fully Updated 23 Aug 2026",
+      "summary": "Current 46-page beginner guide for Sprints 1\u20134. Covers Gitea main workflow, automatic Auth0 onboarding, registered-Tutor management, local browser verification, npm run check/coverage, lecturer-runner evidence and manual Cloudflare Production deployment. Sprints 2\u20134 explicitly build on earlier integrated work rather than repeating Sprint 1.",
       "url": "documents/tutor-mx-sprint-handbook.pdf"
     },
     {
@@ -149,5 +149,59 @@
       "url": "documents/postgresql-express-decision.pdf"
     }
   ],
-  "rubric": {}
+  "rubric": {
+    "updated": "2026-08-25",
+    "criteria": [
+      {
+        "name": "Version Control",
+        "weight": "10%",
+        "page": "#version-control"
+      },
+      {
+        "name": "Documentation Site",
+        "weight": "10%",
+        "page": "#home"
+      },
+      {
+        "name": "Getting Started / Dev Guides",
+        "weight": "5%",
+        "page": "#getting-started"
+      },
+      {
+        "name": "Work Tracker",
+        "weight": "5%",
+        "page": "#work-tracker"
+      },
+      {
+        "name": "Git Methodology",
+        "weight": "5%",
+        "page": "#git-methodology"
+      },
+      {
+        "name": "Project Methodology",
+        "weight": "10%",
+        "page": "#project-methodology"
+      },
+      {
+        "name": "Tech Stack",
+        "weight": "5%",
+        "page": "#tech-stack"
+      },
+      {
+        "name": "Stakeholder Interaction",
+        "weight": "10%",
+        "page": "#stakeholder-decisions"
+      },
+      {
+        "name": "Initial Design & Dev Plan",
+        "weight": "20%",
+        "page": "#initial-design-plan"
+      },
+      {
+        "name": "Implementation",
+        "weight": "20%",
+        "page": "#implementation"
+      }
+    ]
+  }
 }
