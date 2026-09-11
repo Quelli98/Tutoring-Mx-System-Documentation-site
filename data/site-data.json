@@ -40,6 +40,17 @@
       "summary": "The team discussed current blockers and what information/evidence should be included in the documentation website. The Teams record shows the meeting took place and lasted approximately 26 minutes.",
       "outcomes": "Surface blockers early and strengthen the documentation website with rubric-relevant project evidence.",
       "proof": "evidence/daily-scrum-2026-08-21.png"
+    },
+    {
+      "id": "scrum-workflow-retrospective-2026-09-11",
+      "title": "Sprint workflow retrospective and Sprint 3–4 reorganisation",
+      "date": "2026-09-11",
+      "type": "Internal Scrum / process retrospective",
+      "attendees": "6 Tutor MX team members attended",
+      "summary": "Microsoft Teams records the Scrum meeting from 16:58 to 17:17, with a meeting duration of 18m 42s and average attendance of 15m 56s. The team reviewed the Sprint 2 working method and recorded that it was not working well enough for the group.",
+      "duration": "18m 42s (Teams attendance report)",
+      "outcomes": "For Sprint 3 and Sprint 4, work proceeds sequentially Member 1 → Member 2 → Member 3 → Member 4 → Member 5 → Member 6. Each Member starts Branch 1 from the latest main after the previous Member is integrated, creates Branch 2 from their own Branch 1 and Branch 3 from their own Branch 2, and hands over only the cumulative Branch 3 for merging to main.",
+      "proof": "evidence/scrum-meeting-2026-09-11.png"
     }
   ],
   "planning": [
@@ -163,6 +174,18 @@
       "summary": "Tutor accounts appear after tutors use the normal self-service Tutor sign-up flow. Organisers search by name/email and edit the database-backed Tutor record. Technical Auth0 subject/User ID fields were removed from the normal organiser interface.",
       "outcomes": "Later sprints harden and extend this registered-Tutor flow. They must not reintroduce a manual Auth0-subject tutor-create form.",
       "proofs": []
+    },
+    {
+      "id": "sprint34-sequential-branch-chain-2026-09-11",
+      "title": "Adopt sequential Member handoffs and cumulative branch chains for Sprint 3–4",
+      "date": "2026-09-11",
+      "sprint": 3,
+      "category": "Methodology",
+      "summary": "The Sprint 2 organisation created excessive coordination and merge overhead. The team agreed not to repeat it for the remaining sprints.",
+      "outcomes": "Members work strictly in order 1 through 6. Within each Member, task Branch 2 is created from Branch 1 and task Branch 3 from Branch 2. Branch 3 is cumulative and is the only branch merged to main. The next Member begins only after that merge and regression check.",
+      "proofs": [
+        "evidence/scrum-meeting-2026-09-11.png"
+      ]
     }
   ],
   "documents": [

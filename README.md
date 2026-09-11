@@ -52,3 +52,17 @@ ChatGPT [GPT-5.6 Sol] was used on 25 August 2026 to reorganise and update the do
 ## Codecov handbook update - 25 August 2026
 
 The handbook now places the three-page beginner Codecov testing and coverage guide on pages 13–15, directly after the main test, local-check and Definition-of-Done pages. It explains that Codecov does not run tests; GitHub Actions generates backend/frontend LCOV files and uploads them with `codecov/codecov-action@v5`. The existing workflow uses `id-token: write` plus `use_oidc: true`, with separate `backend` and `frontend` flags. The handbook also gives the repeatable end-of-sprint process for rerunning CI, checking both upload steps, recording the current percentages and keeping dated screenshots from earlier sprints.
+
+## 11 September 2026 Sprint 3–4 workflow amendment
+
+The team used a Scrum retrospective on **11 September 2026** to change the remaining Sprint 3 and Sprint 4 working method. The Microsoft Teams attendance report records **6 attendees**, a **16:58–17:17** meeting window, **18m 42s** meeting duration and **15m 56s** average attendance. The team recorded that the previous Sprint 2 organisation was not working well enough.
+
+For Sprint 3 and Sprint 4 only:
+
+- Members work in strict order: **Member 1 → Member 2 → Member 3 → Member 4 → Member 5 → Member 6**.
+- A Member starts only after the previous Member's final work has been merged into Gitea `main`.
+- Within one Member, **Branch 1** starts from the latest main, **Branch 2** is created from that Member's Branch 1, and **Branch 3** is created from Branch 2.
+- Branch 3 therefore contains the Member's cumulative work, so the Integration Lead merges **only Branch 3** into main.
+- Sprint 1 and Sprint 2 remain documented using the methods actually used at the time; the new process is not applied retroactively.
+
+Evidence: `evidence/scrum-meeting-2026-09-11.png`.
