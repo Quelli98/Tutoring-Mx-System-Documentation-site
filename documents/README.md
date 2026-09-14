@@ -2,7 +2,7 @@
 
 Tutor Mx is a tutoring-management system built around a handwritten Node.js and Express API, Prisma migrations, and Neon PostgreSQL. Browser code must call the Express API; it must never connect directly to Neon or receive external-service credentials.
 
-This branch contains the implementable Sprint 2 Member 6 work: the Basic workflow database, safe demo data, allocation queries, a production-ready external API adapter contract, PostgreSQL verification, deployment smoke tooling, and Gitea Actions quality gates.
+The integrated Sprint 2 source contains the Basic workflow database, safe demo data, allocation queries and mutations, organiser/Tutor/Student workflow routes, the production public-holiday adapter, PostgreSQL verification, deployment smoke tooling, and Gitea Actions quality gates.
 
 ## Requirements
 
@@ -61,17 +61,17 @@ PostgreSQL enforces:
 
 Member 5 can call these functions with the exported `queryClient` from `src/database.ts`. Member 5 remains responsible for authentication, role/ownership middleware, transactions and HTTP routes.
 
-## External API adapter handoff
+## External public-holiday integration
 
-`src/integrations/external-api.ts` is server-only. It provides timeout cancellation, JSON decoding into an explicitly safe shape, source timestamps, and controlled fallback reasons for invalid payloads, rate limits, upstream unavailability, other HTTP failures and network errors. It deliberately has no cache, because no approved freshness rule was supplied.
+`src/integrations/public-holidays.ts` is server-only. It provides timeout cancellation, safe response decoding, caching/freshness behaviour and controlled fallback reasons for invalid payloads, rate limits, upstream unavailability, HTTP failures and network errors. Express exposes only the approved Tutor MX response; browser code does not call the provider directly.
 
-A domain-specific service and Express endpoint have not been invented: the required Sprint 1 service approval and Member 5 route are absent from this repository. After approval, create a decoder that selects only agreed public fields, instantiate `createJsonExternalApiAdapter` in backend code, and expose its result through the authenticated handwritten API.
+Unit tests mock the upstream response and time so test reliability does not depend on the live provider. Before assessment, the public API documentation must also identify the provider, terms/rate limits, exact hosted route and a dated success-or-fallback smoke result.
 
 ## CI, coverage and deployment
 
-`.gitea/workflows/ci.yml` runs backend quality/coverage plus a clean PostgreSQL 17 migration, seed, constraint/query verification and local API smoke. Backend LCOV uploads under the `backend` Codecov flag. `codecov.yml` reserves a separate `frontend` flag; the frontend owner must upload that report when the frontend project is added.
+`.gitea/workflows/ci.yml` runs backend and frontend quality/coverage plus a clean PostgreSQL migration, seed, constraint/query verification and local API smoke. Coverage is uploaded under separate `backend` and `frontend` flags. The shared lecturer runners may queue; wait for completion and retain the run link/status.
 
-`.gitea/workflows/deployment-smoke.yml` is a manual deployed-health job. A repository administrator must configure `CODECOV_TOKEN` and `DEPLOYMENT_URL`, enable the Gitea Actions runner, and mark the two CI jobs as required checks on `develop` and `main`. No secret belongs in the repository.
+The GitHub deployment mirror runs supplementary quality and PostgreSQL smoke jobs and uploads the two reports to Codecov. `.gitea/workflows/deployment-smoke.yml` verifies deployed health when its administrator-managed URL is configured. No secret belongs in the repository, and Gitea main remains the official source of truth.
 
 See `docs/member-6-handoff.md` for completed evidence and dependency-owned follow-ups.
 

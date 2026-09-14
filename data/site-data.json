@@ -197,8 +197,8 @@
     },
     {
       "id": "handbook",
-      "title": "Tutor Mx Gitea Sprint Handbook — Fully Updated 25 Aug 2026",
-      "summary": "Current 49-page beginner guide for Sprints 1–4. Covers Gitea main workflow, automatic Auth0 onboarding, registered-Tutor management, local browser verification, npm run check/coverage, lecturer-runner evidence, the GitHub deployment-mirror Codecov workflow and manual Cloudflare Production deployment. Pages 13–15 explain Codecov in beginner terms beside the main testing section and give the repeatable per-sprint evidence process.",
+      "title": "Tutor Mx Gitea Sprint Handbook — Updated 11 Sep 2026",
+      "summary": "Current 46-page guide for Sprints 1–4. Sprint 2 planning and all 18 issue cards are on pages 21–27, with the integration/release gate on page 28. Testing, runner evidence and Definition of Done are on pages 7–12.",
       "url": "documents/tutor-mx-sprint-handbook.pdf"
     },
     {
@@ -221,32 +221,32 @@
     }
   ],
   "rubric": {
-    "updated": "2026-08-25",
+    "updated": "2026-09-14",
     "criteria": [
       {
-        "name": "Version Control",
+        "name": "Core Features",
+        "weight": "25%",
+        "page": "#implementation"
+      },
+      {
+        "name": "Automated Testing",
         "weight": "10%",
-        "page": "#version-control"
+        "page": "#testing"
       },
       {
-        "name": "Documentation Site",
+        "name": "Stakeholder Reviews",
         "weight": "10%",
-        "page": "#home"
+        "page": "#stakeholder-decisions"
       },
       {
-        "name": "Getting Started / Dev Guides",
-        "weight": "5%",
-        "page": "#getting-started"
+        "name": "API",
+        "weight": "15%",
+        "page": "#api"
       },
       {
-        "name": "Work Tracker",
-        "weight": "5%",
-        "page": "#work-tracker"
-      },
-      {
-        "name": "Git Methodology",
-        "weight": "5%",
-        "page": "#git-methodology"
+        "name": "User Feedback",
+        "weight": "10%",
+        "page": "#stakeholder-decisions"
       },
       {
         "name": "Project Methodology",
@@ -254,24 +254,24 @@
         "page": "#project-methodology"
       },
       {
-        "name": "Tech Stack",
+        "name": "Bug Tracker",
         "weight": "5%",
-        "page": "#tech-stack"
+        "page": "#bug-tracker"
       },
       {
-        "name": "Stakeholder Interaction",
-        "weight": "10%",
-        "page": "#stakeholder-decisions"
+        "name": "Database Documentation",
+        "weight": "5%",
+        "page": "#database"
       },
       {
-        "name": "Initial Design & Dev Plan",
-        "weight": "20%",
-        "page": "#initial-design-plan"
+        "name": "Third-Party Code Documentation",
+        "weight": "5%",
+        "page": "#third-party-code"
       },
       {
-        "name": "Implementation",
-        "weight": "20%",
-        "page": "#implementation"
+        "name": "Testing Documentation",
+        "weight": "5%",
+        "page": "#testing"
       }
     ]
   }
