@@ -17,7 +17,7 @@ The website gives each Milestone 2 criterion one evidence owner:
 - Third-Party Code Documentation
 - Testing Documentation
 
-The review map distinguishes documented evidence from items that still need a direct record. Before claiming the Advanced band, attach the current public API URL/health result, final hosted three-role smoke test, completed formal user-feedback records, latest stakeholder follow-up and live Gitea bug/issue links.
+The review map distinguishes verified evidence from documented process. The public Render API is now linked with dated health/readiness evidence. Where a Sprint 2 stakeholder/user-feedback session or direct tracker link was not retained, the site does not display a missing-proof warning or manufacture retrospective evidence; it simply limits the claim to what is actually documented.
 
 ## Current testing snapshot
 
@@ -57,7 +57,7 @@ npm run build
 - `public/documents/tutor-mx-sprint-handbook.pdf` is the current 11 September 2026 handbook.
 - `public/evidence/sprint2-rubric-*.png` contains the supplied Milestone 2 rubric source.
 - `public/evidence/codecov-*-sprint2-2026-09-14.png` contains the current coverage snapshot.
-- Do not invent stakeholder comments, user-test participants, issue IDs, test results, public URLs or deployment success.
+- Do not invent stakeholder comments, user-test participants, issue IDs or test results. The verified public API is `https://tutor-mx-api.onrender.com`; its 14 September 2026 health/readiness screenshots are stored under `public/evidence/`.
 - Redact personal data, tokens, database addresses and service credentials from public evidence.
 
 ## AI declaration

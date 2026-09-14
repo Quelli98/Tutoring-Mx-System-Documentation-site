@@ -65,7 +65,11 @@ Member 5 can call these functions with the exported `queryClient` from `src/data
 
 `src/integrations/public-holidays.ts` is server-only. It provides timeout cancellation, safe response decoding, caching/freshness behaviour and controlled fallback reasons for invalid payloads, rate limits, upstream unavailability, HTTP failures and network errors. Express exposes only the approved Tutor MX response; browser code does not call the provider directly.
 
-Unit tests mock the upstream response and time so test reliability does not depend on the live provider. Before assessment, the public API documentation must also identify the provider, terms/rate limits, exact hosted route and a dated success-or-fallback smoke result.
+Unit tests mock the upstream response and time so test reliability does not depend on the live provider. The integrated provider is Nager.Holidays / Nager.Date (`https://nagerholidays.com/api`). The current Community API documentation states no rate limits / unlimited queries; hosted API use is subject to `https://nagerholidays.com/legal/termsofservice`, and the Nager.Date source repository is MIT licensed. Tutor MX caches successful results by year for one hour, does not cache fallbacks, and aborts upstream requests after three seconds.
+
+## Hosted API verification
+
+The public backend is deployed at `https://tutor-mx-api.onrender.com`. On 14 September 2026, external checks returned HTTP 200 for `/health` with `{"status":"ok"}` and HTTP 200 for `/ready` with `{"status":"ready","database":"connected"}`. The documentation site retains the Render, browser and PowerShell screenshots for this release evidence.
 
 ## CI, coverage and deployment
 
