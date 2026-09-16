@@ -4,6 +4,10 @@ Tutor Mx is a tutoring-management system built around a handwritten Node.js and 
 
 The integrated Sprint 2 source contains the Basic workflow database, safe demo data, allocation queries and mutations, organiser/Tutor/Student workflow routes, the production public-holiday adapter, PostgreSQL verification, deployment smoke tooling, and Gitea Actions quality gates.
 
+## 16 September 2026 documentation update
+
+The canonical handbook in this documentation site now preserves Sprint 1-2 as historical evidence and records the post-Sprint 2 production stabilisation completed on 15-16 September. The new baseline includes Tutor-owned weekly capacity and unavailable schedules, shared weekly calendar views, independent mark/schedule loading, corrected `clashDetails` candidate responses, post-save self-conflict protection, and a clear no-eligible-tutor state. Sprint 3-4 planning is revised to extend these behaviours rather than rebuild them. Week-by-week future capacity navigation is recorded as the next Sprint 3 refinement.
+
 ## Requirements
 
 - Node.js 24

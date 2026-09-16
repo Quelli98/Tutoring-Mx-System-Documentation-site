@@ -1,6 +1,6 @@
 # Tutor MX documentation site
 
-Public, rubric-aligned documentation for COMS3011A Tutor MX. This edition is organised for the Sprint 2 review on 15 September 2026 and uses the updated 11 September handbook plus the supplied main-branch Codecov evidence.
+Public, rubric-aligned documentation for COMS3011A Tutor MX. This edition preserves the Sprint 2 review record and adds the 15-16 September production-stabilisation changes that form the Sprint 3 baseline. The handbook is updated through 16 September 2026, while Sprint 1 and Sprint 2 history remain intact.
 
 ## Sprint 2 coverage
 
@@ -50,11 +50,11 @@ npm run build
 2. Run `npm run build` and inspect the result.
 3. Commit and push to `main`.
 4. The Pages workflow runs `npm ci`, builds `dist`, and deploys it.
-5. Open the public site and review the Sprint 2 Rubric Map first.
+5. Open the public site and review Post-Sprint 2 Stabilisation, then the Sprint 2 Rubric Map or the Sprint 3 roadmap as needed.
 
 ## Source and evidence rules
 
-- `public/documents/tutor-mx-sprint-handbook.pdf` is the current 11 September 2026 handbook.
+- `public/documents/tutor-mx-sprint-handbook.pdf` is the current 16 September 2026 handbook. It preserves Sprint 1-2 history, records the post-Sprint 2 production fixes and revises Sprint 3-4 planning.
 - `public/evidence/sprint2-rubric-*.png` contains the supplied Milestone 2 rubric source.
 - `public/evidence/codecov-*-sprint2-2026-09-14.png` contains the current coverage snapshot.
 - Do not invent stakeholder comments, user-test participants, issue IDs or test results. The verified public API is `https://tutor-mx-api.onrender.com`; its 14 September 2026 health/readiness screenshots are stored under `public/evidence/`.

@@ -186,6 +186,16 @@
       "proofs": [
         "evidence/scrum-meeting-2026-09-11.png"
       ]
+    },
+    {
+      "id": "post-sprint2-stabilisation-2026-09-16",
+      "title": "Stabilise Tutor ownership, weekly schedules and allocation candidate state before Sprint 3",
+      "date": "2026-09-16",
+      "sprint": 3,
+      "category": "Integration / user feedback",
+      "summary": "Live testing after Sprint 2 exposed cross-layer clarity and state defects: Tutor work preferences were still partly organiser-owned, schedule/mark loading could fail together, candidate responses omitted clash details, and a newly saved allocation could conflict with itself on refresh. Focused fix branches corrected these issues without rewriting Sprint 1 or Sprint 2 history.",
+      "outcomes": "Sprint 3 starts from a clearer baseline: Tutors own weekly capacity and unavailable Class/Study/Busy periods; Organisers view those details read-only through a shared weekly calendar; mark/timetable/capacity remain separate hard rules; only fully eligible Tutors are selectable; candidate API clash details are preserved; successful allocations exclude themselves from post-save clash refresh. Week-by-week capacity navigation is the next planned refinement so organisers can inspect future confirmed workload.",
+      "proofs": []
     }
   ],
   "documents": [
@@ -197,8 +207,8 @@
     },
     {
       "id": "handbook",
-      "title": "Tutor Mx Gitea Sprint Handbook — Updated 11 Sep 2026",
-      "summary": "Current 46-page guide for Sprints 1–4. Sprint 2 planning and all 18 issue cards are on pages 21–27, with the integration/release gate on page 28. Testing, runner evidence and Definition of Done are on pages 7–12.",
+      "title": "Tutor Mx Gitea Sprint Handbook — Updated 16 Sep 2026",
+      "summary": "Updated Sprint 1–4 guide. Sprint 1–2 history is preserved; a 15–16 September production-stabilisation note records the live fixes; Sprint 3–4 planning is revised to build on Tutor-owned schedules, weekly calendars and the corrected allocation contract.",
       "url": "documents/tutor-mx-sprint-handbook.pdf"
     },
     {
@@ -221,7 +231,7 @@
     }
   ],
   "rubric": {
-    "updated": "2026-09-14",
+    "updated": "2026-09-16",
     "criteria": [
       {
         "name": "Core Features",
