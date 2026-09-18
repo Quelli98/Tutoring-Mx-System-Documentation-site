@@ -232,6 +232,16 @@
         "documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf",
         "UPDATE_NOTES_2026-09-18.md"
       ]
+    },
+    {
+      "id": "unified-four-sprint-evolution-2026-09-18",
+      "title": "Consolidate project-wide navigation and the Sprint 1-4 evolution record",
+      "date": "2026-09-18",
+      "sprint": 3,
+      "category": "Documentation / Methodology / Report traceability",
+      "summary": "The group wanted the public documentation to represent Tutor MX as one four-sprint system rather than leaving product pages and change history framed around Sprint 2. Sprint 1 rubric links were also made directly navigable like the Sprint 2 rubric map.",
+      "outcomes": "Keep Sprint 1 and Sprint 2 as milestone-specific roadmap pages; use Tutor MX System for project-wide Core Features and Reviews; replace the separate post-Sprint 2 stabilisation and Sprint 3-4 plan pages with one living Sprint 1-4 Plans & Evolution record; retain Stand-out Product Improvements as a dedicated rationale page; update the evolution record as Sprint 3 and 4 work is actually integrated.",
+      "proofs": []
     }
   ],
   "documents": [
