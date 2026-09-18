@@ -49,7 +49,7 @@
       "attendees": "6 Tutor MX team members attended",
       "summary": "Microsoft Teams records the Scrum meeting from 16:58 to 17:17, with a meeting duration of 18m 42s and average attendance of 15m 56s. The team reviewed the Sprint 2 working method and recorded that it was not working well enough for the group.",
       "duration": "18m 42s (Teams attendance report)",
-      "outcomes": "For Sprint 3 and Sprint 4, work proceeds sequentially Member 1 → Member 2 → Member 3 → Member 4 → Member 5 → Member 6. Each Member starts Branch 1 from the latest main after the previous Member is integrated, creates Branch 2 from their own Branch 1 and Branch 3 from their own Branch 2, and hands over only the cumulative Branch 3 for merging to main.",
+      "outcomes": "The group agreed that Sprint 3 and Sprint 4 should progress sequentially Member 1 → Member 2 → Member 3 → Member 4 → Member 5 → Member 6. The first recorded implementation of that idea used a cumulative three-branch chain; this remains historical evidence and was later simplified on 18 September to one branch per Member while preserving the same sequential handoff principle.",
       "proof": "evidence/scrum-meeting-2026-09-11.png"
     }
   ],
@@ -177,12 +177,12 @@
     },
     {
       "id": "sprint34-sequential-branch-chain-2026-09-11",
-      "title": "Adopt sequential Member handoffs and cumulative branch chains for Sprint 3–4",
+      "title": "Adopt sequential Member handoffs for Sprint 3-4",
       "date": "2026-09-11",
       "sprint": 3,
       "category": "Methodology",
-      "summary": "The Sprint 2 organisation created excessive coordination and merge overhead. The team agreed not to repeat it for the remaining sprints.",
-      "outcomes": "Members work strictly in order 1 through 6. Within each Member, task Branch 2 is created from Branch 1 and task Branch 3 from Branch 2. Branch 3 is cumulative and is the only branch merged to main. The next Member begins only after that merge and regression check.",
+      "summary": "The Sprint 2 organisation created excessive coordination and merge overhead. The team agreed that the remaining sprints should run in strict Member order so each person starts from an accepted main baseline.",
+      "outcomes": "The initial 11 September version also proposed a cumulative three-branch chain inside each Member turn. This is retained as historical process evidence. The final 18 September roadmap kept the sequential Member 1→6 rule but simplified each turn to one branch per Member and explicitly separated Integration Lead work from Member feature work.",
       "proofs": [
         "evidence/scrum-meeting-2026-09-11.png"
       ]
@@ -196,6 +196,16 @@
       "summary": "Live testing after Sprint 2 exposed cross-layer clarity and state defects: Tutor work preferences were still partly organiser-owned, schedule/mark loading could fail together, candidate responses omitted clash details, and a newly saved allocation could conflict with itself on refresh. Focused fix branches corrected these issues without rewriting Sprint 1 or Sprint 2 history.",
       "outcomes": "Sprint 3 starts from a clearer baseline: Tutors own weekly capacity and unavailable Class/Study/Busy periods; Organisers view those details read-only through a shared weekly calendar; mark/timetable/capacity remain separate hard rules; only fully eligible Tutors are selectable; candidate API clash details are preserved; successful allocations exclude themselves from post-save clash refresh. Week-by-week capacity navigation is the next planned refinement so organisers can inspect future confirmed workload.",
       "proofs": []
+    },
+    {
+      "id": "sprint34-final-roadmap-2026-09-18",
+      "title": "Audit and rebalance the final Sprint 3-4 roadmap",
+      "date": "2026-09-18",
+      "sprint": 3,
+      "category": "Methodology / Planning",
+      "summary": "The group reviewed current main against the project brief and found duplicated future scope plus Integration Lead-style work sitting inside Member 6 responsibilities.",
+      "outcomes": "Final method: one branch per Member, strict Member 1→6 order, no forward dependencies, Integration Lead-only review/merge/regression/deployment governance, and substantive Member 6 Command Centre/explainable proposal feature work.",
+      "proofs": []
     }
   ],
   "documents": [
@@ -207,9 +217,9 @@
     },
     {
       "id": "handbook",
-      "title": "Tutor Mx Gitea Sprint Handbook — Updated 16 Sep 2026",
-      "summary": "Updated Sprint 1–4 guide. Sprint 1–2 history is preserved; a 15–16 September production-stabilisation note records the live fixes; Sprint 3–4 planning is revised to build on Tutor-owned schedules, weekly calendars and the corrected allocation contract.",
-      "url": "documents/tutor-mx-sprint-handbook.pdf"
+      "title": "Tutor Mx Gitea Sprint Handbook — Final 18 Sep 2026 planning baseline",
+      "summary": "Authoritative remaining-sprint plan. Preserves Sprint 1-2 history and post-Sprint 2 stabilisation; pages 30-50 contain the audited one-branch-per-Member Sprint 3-4 roadmap, Integration Lead separation and Command Centre/explainable allocation work.",
+      "url": "documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf"
     },
     {
       "id": "ai-policy",
@@ -228,6 +238,18 @@
       "title": "PostgreSQL and Express Decision Record",
       "summary": "AI-assisted technical motivation for a handwritten Express API with PostgreSQL instead of generated Supabase endpoints. Exact tool/model/purpose must be confirmed by the author before submission.",
       "url": "documents/postgresql-express-decision.pdf"
+    },
+    {
+      "id": "report-rubric-1",
+      "title": "Group + Individual Report Rubric (part 1)",
+      "summary": "Lecturer rubric screenshot covering all Group Report criteria and the first Individual Report criteria.",
+      "url": "evidence/report-rubric-group-and-individual-part1.png"
+    },
+    {
+      "id": "report-rubric-2",
+      "title": "Individual Report Rubric (part 2)",
+      "summary": "Lecturer rubric screenshot covering Technical Challenges & Solutions, Learning & Development, Collaboration & Teamwork, General Discussion, Conclusion and Supporting Documents.",
+      "url": "evidence/report-rubric-individual-part2.png"
     }
   ],
   "rubric": {
@@ -284,5 +306,17 @@
         "page": "#testing"
       }
     ]
-  }
+  },
+  "decisions": [
+    {
+      "id": "sprint34-final-roadmap-2026-09-18",
+      "title": "Audit and rebalance the final Sprint 3-4 roadmap",
+      "date": "2026-09-18",
+      "sprint": 3,
+      "category": "Methodology / Planning",
+      "summary": "The group reviewed current main against the project brief and found that parts of the earlier future roadmap duplicated implemented work and that Member 6 carried Integration Lead-style release duties rather than enough genuine feature scope.",
+      "outcomes": "The final plan uses one branch per Member in strict order 1→6; feature owners include any small backend/schema work needed for their vertical slice; Integration Lead review/merge/regression/deployment remains separate; Member 6 receives substantive Command Centre and explainable proposal work; report-ready decision rationale is documented throughout the website.",
+      "proofs": []
+    }
+  ]
 }
