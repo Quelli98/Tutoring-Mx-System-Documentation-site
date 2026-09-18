@@ -206,6 +206,32 @@
       "summary": "The group reviewed current main against the project brief and found duplicated future scope plus Integration Lead-style work sitting inside Member 6 responsibilities.",
       "outcomes": "Final method: one branch per Member, strict Member 1→6 order, no forward dependencies, Integration Lead-only review/merge/regression/deployment governance, and substantive Member 6 Command Centre/explainable proposal feature work.",
       "proofs": []
+    },
+    {
+      "id": "sprint1-roadmap-documentation-2026-09-18",
+      "title": "Create a dedicated Sprint 1 roadmap mapped to the official Milestone 1 rubric",
+      "date": "2026-09-18",
+      "sprint": 1,
+      "category": "Documentation / assessment traceability",
+      "summary": "The public site already retained Sprint 1 evidence, but the group wanted Sprint 1 to have the same clear roadmap treatment as later milestones. The roadmap therefore maps every official Milestone 1 criterion to the project foundation, chronological decisions, Member 1–6 ownership and retained evidence without changing the existing Sprint 2 roadmap/rubric page.",
+      "outcomes": "Add a dedicated Sprint 1 Roadmap page, preserve the supplied rubric screenshots, link each rubric area to one evidence owner, document honest Sprint 1 boundaries and make the page usable as Group Report methodology/history evidence and Individual Report contribution context.",
+      "proofs": [
+        "evidence/sprint1-rubric-part1.png",
+        "evidence/sprint1-rubric-part2.png"
+      ]
+    },
+    {
+      "id": "standout-product-improvements-2026-09-18",
+      "title": "Add project-specific stand-out improvements instead of unrelated feature creep",
+      "date": "2026-09-18",
+      "sprint": 3,
+      "category": "Product strategy / UX / advanced allocation",
+      "summary": "The group discussed how the final Tutor MX product could feel like a professional university operations platform rather than a basic CRUD assignment. The team selected additional improvements only when they strengthened staffing decisions, speed, explainability, collaboration or auditability and reused the same trusted allocation data/rules.",
+      "outcomes": "Document the Allocation Command Centre, shortage/budget/workload visualisation, Ctrl/Cmd+K, timetable import preview, requirement-to-overflow flow, scenario comparison/live presence, explainable proposal strategy comparison and audit timeline/restore preview. Planned improvements remain labelled planned until integrated and tested.",
+      "proofs": [
+        "documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf",
+        "UPDATE_NOTES_2026-09-18.md"
+      ]
     }
   ],
   "documents": [
