@@ -1,0 +1,11 @@
+{
+  "source": "30 September 2026 archive cited by the updated handbook",
+  "routes": 82,
+  "models": 20,
+  "migrations": 25,
+  "enums": 14,
+  "backendTestFiles": 43,
+  "frontendTestFiles": 63,
+  "schemaSHA256": "c2e4d94b07a08deabed1f8ed730b5c9fa8c3c0a9d0644e46b18c186b7029c29f",
+  "routesSHA256": "ac4a10451b3292976d0eda1a1d72735cfc7e00dc7314b6a6a25c2bcbb542dbd6"
+}

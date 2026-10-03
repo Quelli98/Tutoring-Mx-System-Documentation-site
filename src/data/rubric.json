@@ -1,0 +1,222 @@
+[
+  {
+    "category": "Database",
+    "criterion": "Data",
+    "weight": 3,
+    "status": "Source + evidence gap",
+    "link": "database",
+    "answer": "Twenty models are documented with all fields/relations. Seed/demo data is distinguishable in the source, but the production real/test split is not established.",
+    "evidence": "Table dictionary, read-only SQL and retained Neon screenshot.",
+    "remaining": "Run exact current branch counts and classify demo/real/unclassified data using the team register.",
+    "provisional": false
+  },
+  {
+    "category": "Database",
+    "criterion": "Deployment",
+    "weight": 2,
+    "status": "Dated live evidence",
+    "link": "deployment",
+    "answer": "Neon hosts PostgreSQL separately from Render. The API uses a server-only connection and the earlier readiness check reported a connected database.",
+    "evidence": "Deployment map, Neon link and /ready contract.",
+    "remaining": "Record final database availability and applied migrations for the deployed release.",
+    "provisional": false
+  },
+  {
+    "category": "Database",
+    "criterion": "Structure",
+    "weight": 5,
+    "status": "Source verified",
+    "link": "database",
+    "answer": "Profiles, courses, allocations and workflow records use keys, foreign keys, unique constraints, indexes and versioned migrations. Scalar fields and Prisma relations are shown separately.",
+    "evidence": "Twenty model dictionaries, 14 enums, ER map and 25 source migrations.",
+    "remaining": "Verify production migration state and query plans at realistic data volume.",
+    "provisional": false
+  },
+  {
+    "category": "API",
+    "criterion": "Availability",
+    "weight": 3,
+    "status": "Dated live evidence",
+    "link": "api",
+    "answer": "The Render HTTPS API is independent of the frontend. Anonymous probes can read health/readiness; protected Tutor reads use an Auth0 API access token and role/ownership checks.",
+    "evidence": "External curl commands and preserved 29 September 200/200/401 results.",
+    "remaining": "Run an authorised role read on the final release; no private token was supplied here.",
+    "provisional": false
+  },
+  {
+    "category": "API",
+    "criterion": "Architecture",
+    "weight": 5,
+    "status": "Source verified",
+    "link": "backend",
+    "answer": "Handwritten layered Express routes apply authentication, profile/role resolution, validation and domain rules before Prisma/pg persistence. Dependencies are wired in server.ts.",
+    "evidence": "Architecture explanation, component/composite diagrams and source bundle.",
+    "remaining": "Demonstrate one request end to end on the final release.",
+    "provisional": false
+  },
+  {
+    "category": "API",
+    "criterion": "Deployment",
+    "weight": 2,
+    "status": "Source + dated evidence",
+    "link": "deployment",
+    "answer": "Render runs Node/Express separately from Cloudflare. Server-only secrets and database migration order are documented.",
+    "evidence": "Render screenshot, service link and deployment diagram.",
+    "remaining": "Attach current release SHA and successful smoke evidence; old 5b426af screenshot is historical.",
+    "provisional": false
+  },
+  {
+    "category": "API",
+    "criterion": "Performance",
+    "weight": 5,
+    "status": "Historical benchmark",
+    "link": "testing",
+    "answer": "The Member 5 audit measures warm local operations; request/result limits and grouped queries are source-backed. No claim of measured production load or crash rate is made.",
+    "evidence": "Benchmark table with dataset, medians, maxima and scope.",
+    "remaining": "Measure cold/warm latency, concurrent staging load, throughput/errors and an observation window.",
+    "provisional": false
+  },
+  {
+    "category": "API",
+    "criterion": "Design",
+    "weight": 10,
+    "status": "Source verified",
+    "link": "api",
+    "answer": "The complete 82-operation catalogue documents verbs, paths, access, success codes and handler/validation references. Workflow actions and compatibility aliases are explained.",
+    "evidence": "Filterable catalogue, safe error table, OpenAPI inventory and worked reads.",
+    "remaining": "Capture representative authenticated success/failure contracts and extend docs only when Sprint 4 routes actually exist.",
+    "provisional": false
+  },
+  {
+    "category": "App",
+    "criterion": "Accessibility",
+    "weight": 5,
+    "status": "Documented + test gap",
+    "link": "frontend",
+    "answer": "Labelled controls, focus, textual status, keyboard workflows and equivalent table/list views are required. Existing shared UI is retained; S4-M4-3 covers new dense screens.",
+    "evidence": "Frontend guidance, historical feedback and Sprint 4 acceptance requirements.",
+    "remaining": "Record actual contrast, keyboard, screen-reader/focus and long-text checks on the application.",
+    "provisional": false
+  },
+  {
+    "category": "App",
+    "criterion": "Aesthetics",
+    "weight": 5,
+    "status": "Documentation rebuilt",
+    "link": "frontend",
+    "answer": "The documentation uses a consistent navy/blue layout, clear hierarchy, readable tables and responsive navigation. Application design consistency remains a separate final review.",
+    "evidence": "This site and retained UI/feedback evidence.",
+    "remaining": "Capture current application screens across all roles and resolve inconsistent visual states.",
+    "provisional": false
+  },
+  {
+    "category": "App",
+    "criterion": "User Experience",
+    "weight": 5,
+    "status": "Source + target checks",
+    "link": "frontend",
+    "answer": "Loading, empty/error, conflict and refresh states are described. Current token caching is local storage; expiry and stale targets still require validation, rather than assuming persistence always works.",
+    "evidence": "Frontend/API client explanation, Master registration guide and user feedback.",
+    "remaining": "Time representative tasks and test old tabs, logout, role changes and retry/focus recovery.",
+    "provisional": false
+  },
+  {
+    "category": "App",
+    "criterion": "Deployment",
+    "weight": 2,
+    "status": "Dated evidence",
+    "link": "deployment",
+    "answer": "Cloudflare Pages serves the built frontend; VITE configuration is embedded at build time. This documentation is independently hosted on GitHub Pages.",
+    "evidence": "Public application link, hosting map and release procedure.",
+    "remaining": "Verify current production artifact/SHA and role journeys in a normal browser.",
+    "provisional": false
+  },
+  {
+    "category": "App",
+    "criterion": "Performance",
+    "weight": 5,
+    "status": "Measurement gap",
+    "link": "testing",
+    "answer": "The site distinguishes API timing from browser load/render/interaction. Shared calendar and bounded responses reduce duplication; no fabricated browser score is claimed.",
+    "evidence": "Performance measurement plan and shared frontend design.",
+    "remaining": "Record device/network, initial load and interaction timings on the final application.",
+    "provisional": false
+  },
+  {
+    "category": "App",
+    "criterion": "Features",
+    "weight": 10,
+    "status": "Baseline + targets",
+    "link": "features",
+    "answer": "Current source includes Master approval, Tutor sickness and completed Sprint 3. Student scheduling and Advanced scenario/swap/audit/proposal work are explicitly target features.",
+    "evidence": "Feature register, updated handbook, eight UML diagrams and Member acceptance map.",
+    "remaining": "Complete/integrate target work and record the full final demo before claiming all features delivered.",
+    "provisional": false
+  },
+  {
+    "category": "App",
+    "criterion": "Responsiveness",
+    "weight": 5,
+    "status": "Provisional weight",
+    "link": "frontend",
+    "answer": "Responsive navigation and contained tables are built into this documentation. The handbook requires phone/tablet/desktop application checks and alternative tables for dense visuals.",
+    "evidence": "Documentation layout verification and S4-M4-3 acceptance requirements.",
+    "remaining": "Confirm the current rubric weight and capture application common-width/long-text evidence.",
+    "provisional": true
+  },
+  {
+    "category": "App",
+    "criterion": "Structure",
+    "weight": 5,
+    "status": "Provisional weight",
+    "link": "architecture",
+    "answer": "One repository separates React frontend, Express/backend services and Prisma schema/migrations. The documentation repository is independent. Large bootstrap modules are acknowledged as a maintainability trade-off.",
+    "evidence": "Folder/responsibility table and component/deployment diagrams.",
+    "remaining": "Confirm current rubric weight and review final feature module boundaries.",
+    "provisional": true
+  },
+  {
+    "category": "Misc",
+    "criterion": "Git Methodology",
+    "weight": 5,
+    "status": "Written + historical evidence",
+    "link": "git-methodology",
+    "answer": "Gitea main is official, with no develop branch. One branch per Member/sprint is reviewed/merged by the Lead in M1\u2192M6 order; next Member pulls updated main. Mirror/release follows approval.",
+    "evidence": "Full written methodology, branch table, handbook and historical Git evidence.",
+    "remaining": "Confirm current rubric weight and attach actual final PR/merge/CI links and SHA.",
+    "provisional": true
+  },
+  {
+    "category": "Misc",
+    "criterion": "Integration",
+    "weight": 3,
+    "status": "Source verified",
+    "link": "integration",
+    "answer": "Nager.Date is called through a validated backend holiday adapter with timeout, successful-result cache and a non-blocking fallback. The UI uses the same protected API path.",
+    "evidence": "Integration chapter and adapter/test source.",
+    "remaining": "Capture one successful provider result and a controlled fallback in the final app.",
+    "provisional": false
+  },
+  {
+    "category": "Misc",
+    "criterion": "Testing",
+    "weight": 10,
+    "status": "Source + dated results",
+    "link": "testing",
+    "answer": "Current archive contains 43 backend and 63 frontend test files. Historical test/coverage results retain their dates; final source passing counts and coverage are not invented.",
+    "evidence": "Testing commands, regression matrix, historical audits and Codecov evidence.",
+    "remaining": "Run final check/coverage/db verification, inspect gaps and attach completed CI/Codecov for exact release.",
+    "provisional": false
+  },
+  {
+    "category": "Misc",
+    "criterion": "Tools",
+    "weight": 5,
+    "status": "Documented",
+    "link": "process",
+    "answer": "Gitea issues/branches/reviews, shared Actions, Codecov, source checks, Prisma migrations, Auth0, Render and Neon have defined purposes. Tracker and bug evidence are preserved.",
+    "evidence": "Process, Git, deployment and historical work/bug tracker pages.",
+    "remaining": "Attach current issue status, defects/retests and tool-enforced release gates.",
+    "provisional": false
+  }
+]

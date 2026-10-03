@@ -1,0 +1,171 @@
+{
+  "info": {
+    "name": "Tutor MX read-only evidence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://tutor-mx-api.onrender.com"
+    },
+    {
+      "key": "access_token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "GET /health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/health",
+        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /ready",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/ready",
+        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/me",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/me",
+        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/courses",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/courses",
+        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/tutors",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/tutors",
+        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/tutor/dashboard",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/tutor/dashboard",
+        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/tutor/time-slots",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/tutor/time-slots",
+        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/student/open-work",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/student/open-work",
+        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/student/volunteer-requests",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/student/volunteer-requests",
+        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/auth/organiser-application/me",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/auth/organiser-application/me",
+        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/master-organiser/organiser-applications",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/master-organiser/organiser-applications",
+        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+      }
+    }
+  ]
+}

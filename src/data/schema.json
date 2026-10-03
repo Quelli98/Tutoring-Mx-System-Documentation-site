@@ -1,0 +1,1804 @@
+{
+  "models": [
+    {
+      "name": "Profile",
+      "fields": [
+        {
+          "name": "apiWriteReceipts",
+          "type": "ApiWriteReceipt[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "auth0Id",
+          "type": "String",
+          "attributes": "@unique",
+          "relation": false
+        },
+        {
+          "name": "email",
+          "type": "String",
+          "attributes": "@unique",
+          "relation": false
+        },
+        {
+          "name": "fullName",
+          "type": "String",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "role",
+          "type": "UserRole",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "tutorMarks",
+          "type": "TutorMark[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "timeSlots",
+          "type": "TimeSlot[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "hourLimit",
+          "type": "TutorHourLimit?",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "allocations",
+          "type": "Allocation[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "reviewedAllocations",
+          "type": "Allocation[]",
+          "attributes": "@relation(\"AllocationReviewer\")",
+          "relation": true
+        },
+        {
+          "name": "workLogs",
+          "type": "WorkLog[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "timesheets",
+          "type": "Timesheet[]",
+          "attributes": "@relation(\"TutorTimesheets\")",
+          "relation": true
+        },
+        {
+          "name": "reviewedTimesheets",
+          "type": "Timesheet[]",
+          "attributes": "@relation(\"TimesheetReviewer\")",
+          "relation": true
+        },
+        {
+          "name": "excuses",
+          "type": "Excuse[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "reviewedExcuses",
+          "type": "Excuse[]",
+          "attributes": "@relation(\"ExcuseReviewer\")",
+          "relation": true
+        },
+        {
+          "name": "volunteerClaims",
+          "type": "VolunteerClaim[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "notifications",
+          "type": "Notification[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "staffingRequirements",
+          "type": "StaffingRequirement[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "timesheetRevisions",
+          "type": "TimesheetRevision[]",
+          "attributes": "@relation(\"TimesheetRevisionAuthor\")",
+          "relation": true
+        },
+        {
+          "name": "raisedDisputes",
+          "type": "TimesheetDispute[]",
+          "attributes": "@relation(\"TimesheetDisputeRaisedBy\")",
+          "relation": true
+        },
+        {
+          "name": "resolvedDisputes",
+          "type": "TimesheetDispute[]",
+          "attributes": "@relation(\"TimesheetDisputeResolvedBy\")",
+          "relation": true
+        },
+        {
+          "name": "reviewedOrganiserApplications",
+          "type": "OrganiserApplication[]",
+          "attributes": "@relation(\"OrganiserApplicationReviewer\")",
+          "relation": true
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "attributes": "@updatedAt",
+          "relation": false
+        }
+      ],
+      "constraints": []
+    },
+    {
+      "name": "OrganiserApplication",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "auth0Id",
+          "type": "String",
+          "attributes": "@unique",
+          "relation": false
+        },
+        {
+          "name": "email",
+          "type": "String",
+          "attributes": "@unique",
+          "relation": false
+        },
+        {
+          "name": "fullName",
+          "type": "String",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "motivation",
+          "type": "String?",
+          "attributes": "@db.VarChar(1000)",
+          "relation": false
+        },
+        {
+          "name": "status",
+          "type": "OrganiserApplicationStatus",
+          "attributes": "@default(PENDING)",
+          "relation": false
+        },
+        {
+          "name": "reviewReason",
+          "type": "String?",
+          "attributes": "@db.VarChar(500)",
+          "relation": false
+        },
+        {
+          "name": "reviewedAt",
+          "type": "DateTime?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "reviewerProfileId",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "reviewer",
+          "type": "Profile?",
+          "attributes": "@relation(\"OrganiserApplicationReviewer\", fields: [reviewerProfileId], references: [id], onDelete: SetNull)",
+          "relation": true
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "attributes": "@updatedAt",
+          "relation": false
+        }
+      ],
+      "constraints": [
+        "@@index([status, createdAt])",
+        "@@index([reviewerProfileId])"
+      ]
+    },
+    {
+      "name": "Notification",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "recipientProfileId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "type",
+          "type": "NotificationType",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "body",
+          "type": "String",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "linkPath",
+          "type": "String",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "targetType",
+          "type": "String",
+          "attributes": "@db.VarChar(64)",
+          "relation": false
+        },
+        {
+          "name": "targetId",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "eventKey",
+          "type": "String",
+          "attributes": "@unique",
+          "relation": false
+        },
+        {
+          "name": "readAt",
+          "type": "DateTime?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "recipient",
+          "type": "Profile",
+          "attributes": "@relation(fields: [recipientProfileId], references: [id], onDelete: Cascade)",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@index([recipientProfileId, readAt, createdAt])"
+      ]
+    },
+    {
+      "name": "Course",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "code",
+          "type": "String",
+          "attributes": "@unique",
+          "relation": false
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "hourlyRate",
+          "type": "Decimal?",
+          "attributes": "@db.Decimal(8, 2)",
+          "relation": false
+        },
+        {
+          "name": "budget",
+          "type": "Decimal?",
+          "attributes": "@db.Decimal(12, 2)",
+          "relation": false
+        },
+        {
+          "name": "tutorMarks",
+          "type": "TutorMark[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "allocations",
+          "type": "Allocation[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "overflowWork",
+          "type": "OverflowWork[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "staffingRequirements",
+          "type": "StaffingRequirement[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "attributes": "@updatedAt",
+          "relation": false
+        }
+      ],
+      "constraints": []
+    },
+    {
+      "name": "TutorMark",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "tutorId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "courseId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "mark",
+          "type": "Decimal",
+          "attributes": "@db.Decimal(5, 2)",
+          "relation": false
+        },
+        {
+          "name": "tutor",
+          "type": "Profile",
+          "attributes": "@relation(fields: [tutorId], references: [id], onDelete: Cascade)",
+          "relation": true
+        },
+        {
+          "name": "course",
+          "type": "Course",
+          "attributes": "@relation(fields: [courseId], references: [id], onDelete: Cascade)",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@unique([tutorId, courseId])",
+        "@@index([courseId, mark])"
+      ]
+    },
+    {
+      "name": "AcademicTerm",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "attributes": "@unique @db.VarChar(120)",
+          "relation": false
+        },
+        {
+          "name": "startsOn",
+          "type": "DateTime",
+          "attributes": "@db.Date",
+          "relation": false
+        },
+        {
+          "name": "endsOn",
+          "type": "DateTime",
+          "attributes": "@db.Date",
+          "relation": false
+        },
+        {
+          "name": "year",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "termNumber",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "published",
+          "type": "Boolean",
+          "attributes": "@default(false)",
+          "relation": false
+        },
+        {
+          "name": "teachingBreaks",
+          "type": "Json",
+          "attributes": "@default(\"[]\")",
+          "relation": false
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "attributes": "@updatedAt",
+          "relation": false
+        },
+        {
+          "name": "timeSlots",
+          "type": "TimeSlot[]",
+          "attributes": "",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@unique([year, termNumber])"
+      ]
+    },
+    {
+      "name": "TimeSlot",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "tutorId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "type",
+          "type": "TimeSlotType",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "startsAt",
+          "type": "DateTime",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "endsAt",
+          "type": "DateTime",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "recurrence",
+          "type": "String?",
+          "attributes": "@db.VarChar(32)",
+          "relation": false
+        },
+        {
+          "name": "label",
+          "type": "String?",
+          "attributes": "@db.VarChar(255)",
+          "relation": false
+        },
+        {
+          "name": "recurrenceUntil",
+          "type": "DateTime?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "category",
+          "type": "String",
+          "attributes": "@default(\"UNAVAILABLE\") @db.VarChar(32)",
+          "relation": false
+        },
+        {
+          "name": "seriesId",
+          "type": "String?",
+          "attributes": "@db.VarChar(36)",
+          "relation": false
+        },
+        {
+          "name": "termId",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "dedupeKey",
+          "type": "String?",
+          "attributes": "@unique @db.VarChar(64)",
+          "relation": false
+        },
+        {
+          "name": "tutor",
+          "type": "Profile",
+          "attributes": "@relation(fields: [tutorId], references: [id], onDelete: Cascade)",
+          "relation": true
+        },
+        {
+          "name": "term",
+          "type": "AcademicTerm?",
+          "attributes": "@relation(fields: [termId], references: [id], onDelete: SetNull)",
+          "relation": true
+        },
+        {
+          "name": "exceptions",
+          "type": "OccurrenceException[]",
+          "attributes": "",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@index([tutorId, type, startsAt, endsAt])",
+        "@@index([tutorId, category, startsAt])",
+        "@@index([seriesId])"
+      ]
+    },
+    {
+      "name": "OccurrenceException",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "timeSlotId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "occurrenceDate",
+          "type": "DateTime",
+          "attributes": "@db.Date",
+          "relation": false
+        },
+        {
+          "name": "exceptionType",
+          "type": "String",
+          "attributes": "@default(\"CANCELLED\") @db.VarChar(16)",
+          "relation": false
+        },
+        {
+          "name": "newStartsAt",
+          "type": "DateTime?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "newEndsAt",
+          "type": "DateTime?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "timeSlot",
+          "type": "TimeSlot",
+          "attributes": "@relation(fields: [timeSlotId], references: [id], onDelete: Cascade)",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@index([timeSlotId, occurrenceDate])"
+      ]
+    },
+    {
+      "name": "TutorHourLimit",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "tutorId",
+          "type": "Int",
+          "attributes": "@unique",
+          "relation": false
+        },
+        {
+          "name": "weeklyHours",
+          "type": "Decimal",
+          "attributes": "@db.Decimal(5, 2)",
+          "relation": false
+        },
+        {
+          "name": "tutor",
+          "type": "Profile",
+          "attributes": "@relation(fields: [tutorId], references: [id], onDelete: Cascade)",
+          "relation": true
+        }
+      ],
+      "constraints": []
+    },
+    {
+      "name": "Allocation",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "tutorId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "courseId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "startsAt",
+          "type": "DateTime",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "endsAt",
+          "type": "DateTime",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "allocatedHours",
+          "type": "Decimal",
+          "attributes": "@db.Decimal(5, 2)",
+          "relation": false
+        },
+        {
+          "name": "status",
+          "type": "AllocationStatus",
+          "attributes": "@default(PROPOSED)",
+          "relation": false
+        },
+        {
+          "name": "tutor",
+          "type": "Profile",
+          "attributes": "@relation(fields: [tutorId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "course",
+          "type": "Course",
+          "attributes": "@relation(fields: [courseId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "reviewedBy",
+          "type": "Profile?",
+          "attributes": "@relation(\"AllocationReviewer\", fields: [reviewedById], references: [id], onDelete: SetNull)",
+          "relation": true
+        },
+        {
+          "name": "reviewedById",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "reviewedAt",
+          "type": "DateTime?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "overrideReason",
+          "type": "String?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "workLogs",
+          "type": "WorkLog[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "excuses",
+          "type": "Excuse[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "overflowWork",
+          "type": "OverflowWork?",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "attributes": "@updatedAt",
+          "relation": false
+        }
+      ],
+      "constraints": [
+        "@@unique([id, tutorId])",
+        "@@index([reviewedById])",
+        "@@index([tutorId, status, startsAt, endsAt])",
+        "@@index([courseId, status, startsAt])"
+      ]
+    },
+    {
+      "name": "Timesheet",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "tutorId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "weekStart",
+          "type": "DateTime",
+          "attributes": "@db.Date",
+          "relation": false
+        },
+        {
+          "name": "status",
+          "type": "TimesheetStatus",
+          "attributes": "@default(DRAFT)",
+          "relation": false
+        },
+        {
+          "name": "submittedAt",
+          "type": "DateTime?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "reviewedAt",
+          "type": "DateTime?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "reviewedById",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "reviewReason",
+          "type": "String?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "tutor",
+          "type": "Profile",
+          "attributes": "@relation(\"TutorTimesheets\", fields: [tutorId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "reviewedBy",
+          "type": "Profile?",
+          "attributes": "@relation(\"TimesheetReviewer\", fields: [reviewedById], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "workLogs",
+          "type": "WorkLog[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "revisions",
+          "type": "TimesheetRevision[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "declarations",
+          "type": "TimesheetDeclaration[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "disputes",
+          "type": "TimesheetDispute[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "attributes": "@updatedAt",
+          "relation": false
+        }
+      ],
+      "constraints": [
+        "@@unique([tutorId, weekStart])",
+        "@@unique([id, tutorId])",
+        "@@index([status, submittedAt])",
+        "@@index([tutorId, status, weekStart])"
+      ]
+    },
+    {
+      "name": "TimesheetRevision",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "timesheetId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "tutorId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "kind",
+          "type": "TimesheetRevisionKind",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "workLogId",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "authorProfileId",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "reason",
+          "type": "String?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "previousHours",
+          "type": "Decimal?",
+          "attributes": "@db.Decimal(5, 2)",
+          "relation": false
+        },
+        {
+          "name": "previousDescription",
+          "type": "String?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "newHours",
+          "type": "Decimal?",
+          "attributes": "@db.Decimal(5, 2)",
+          "relation": false
+        },
+        {
+          "name": "newDescription",
+          "type": "String?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "timesheet",
+          "type": "Timesheet",
+          "attributes": "@relation(fields: [timesheetId, tutorId], references: [id, tutorId], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "workLog",
+          "type": "WorkLog?",
+          "attributes": "@relation(fields: [workLogId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "author",
+          "type": "Profile?",
+          "attributes": "@relation(\"TimesheetRevisionAuthor\", fields: [authorProfileId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        }
+      ],
+      "constraints": [
+        "@@index([timesheetId, createdAt])"
+      ]
+    },
+    {
+      "name": "TimesheetDeclaration",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "timesheetId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "tutorId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "statementVersion",
+          "type": "String",
+          "attributes": "@db.VarChar(32)",
+          "relation": false
+        },
+        {
+          "name": "timesheet",
+          "type": "Timesheet",
+          "attributes": "@relation(fields: [timesheetId, tutorId], references: [id, tutorId], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "declaredAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        }
+      ],
+      "constraints": [
+        "@@index([timesheetId, declaredAt])"
+      ]
+    },
+    {
+      "name": "TimesheetDispute",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "timesheetId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "tutorId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "reason",
+          "type": "String",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "status",
+          "type": "TimesheetDisputeStatus",
+          "attributes": "@default(OPEN)",
+          "relation": false
+        },
+        {
+          "name": "raisedByProfileId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "resolvedByProfileId",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "resolutionReason",
+          "type": "String?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "resolvedAt",
+          "type": "DateTime?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "timesheet",
+          "type": "Timesheet",
+          "attributes": "@relation(fields: [timesheetId, tutorId], references: [id, tutorId], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "raisedBy",
+          "type": "Profile",
+          "attributes": "@relation(\"TimesheetDisputeRaisedBy\", fields: [raisedByProfileId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "resolvedBy",
+          "type": "Profile?",
+          "attributes": "@relation(\"TimesheetDisputeResolvedBy\", fields: [resolvedByProfileId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "attributes": "@updatedAt",
+          "relation": false
+        }
+      ],
+      "constraints": [
+        "@@index([timesheetId, status])",
+        "@@index([status, createdAt])"
+      ]
+    },
+    {
+      "name": "WorkLog",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "tutorId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "allocationId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "timesheetId",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "workDate",
+          "type": "DateTime",
+          "attributes": "@db.Date",
+          "relation": false
+        },
+        {
+          "name": "hours",
+          "type": "Decimal",
+          "attributes": "@db.Decimal(5, 2)",
+          "relation": false
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "approvedHourlyRate",
+          "type": "Decimal?",
+          "attributes": "@db.Decimal(8, 2)",
+          "relation": false
+        },
+        {
+          "name": "tutor",
+          "type": "Profile",
+          "attributes": "@relation(fields: [tutorId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "allocation",
+          "type": "Allocation",
+          "attributes": "@relation(fields: [allocationId, tutorId], references: [id, tutorId], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "timesheet",
+          "type": "Timesheet?",
+          "attributes": "@relation(fields: [timesheetId, tutorId], references: [id, tutorId], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "revisions",
+          "type": "TimesheetRevision[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "attributes": "@updatedAt",
+          "relation": false
+        }
+      ],
+      "constraints": [
+        "@@unique([tutorId, allocationId, workDate])",
+        "@@index([tutorId, workDate])",
+        "@@index([timesheetId])"
+      ]
+    },
+    {
+      "name": "Excuse",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "tutorId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "allocationId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "reason",
+          "type": "String",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "status",
+          "type": "ExcuseStatus",
+          "attributes": "@default(PENDING)",
+          "relation": false
+        },
+        {
+          "name": "reviewReason",
+          "type": "String?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "occurrenceStatus",
+          "type": "SickOccurrenceStatus?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "absenceReason",
+          "type": "AbsenceReason",
+          "attributes": "@default(SICK)",
+          "relation": false
+        },
+        {
+          "name": "reviewedAt",
+          "type": "DateTime?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "reviewedById",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "reviewedBy",
+          "type": "Profile?",
+          "attributes": "@relation(\"ExcuseReviewer\", fields: [reviewedById], references: [id], onDelete: SetNull)",
+          "relation": true
+        },
+        {
+          "name": "tutor",
+          "type": "Profile",
+          "attributes": "@relation(fields: [tutorId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "allocation",
+          "type": "Allocation",
+          "attributes": "@relation(fields: [allocationId, tutorId], references: [id, tutorId], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "attributes": "@updatedAt",
+          "relation": false
+        }
+      ],
+      "constraints": [
+        "@@unique([tutorId, allocationId])",
+        "@@index([status, createdAt])",
+        "@@index([tutorId, status])"
+      ]
+    },
+    {
+      "name": "OverflowWork",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "courseId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "sourceAllocationId",
+          "type": "Int?",
+          "attributes": "@unique",
+          "relation": false
+        },
+        {
+          "name": "sourceRequirementId",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "slotIndex",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "startsAt",
+          "type": "DateTime",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "endsAt",
+          "type": "DateTime",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "hours",
+          "type": "Decimal",
+          "attributes": "@db.Decimal(5, 2)",
+          "relation": false
+        },
+        {
+          "name": "status",
+          "type": "OverflowWorkStatus",
+          "attributes": "@default(OPEN)",
+          "relation": false
+        },
+        {
+          "name": "closesAt",
+          "type": "DateTime?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "course",
+          "type": "Course",
+          "attributes": "@relation(fields: [courseId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "sourceAllocation",
+          "type": "Allocation?",
+          "attributes": "@relation(fields: [sourceAllocationId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "sourceRequirement",
+          "type": "StaffingRequirement?",
+          "attributes": "@relation(fields: [sourceRequirementId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "volunteerClaims",
+          "type": "VolunteerClaim[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "attributes": "@updatedAt",
+          "relation": false
+        }
+      ],
+      "constraints": [
+        "@@unique([sourceRequirementId, slotIndex])",
+        "@@index([status, startsAt, closesAt])",
+        "@@index([courseId, status, startsAt])",
+        "@@index([sourceRequirementId, status])"
+      ]
+    },
+    {
+      "name": "VolunteerClaim",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "overflowWorkId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "studentId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "status",
+          "type": "VolunteerClaimStatus",
+          "attributes": "@default(PENDING)",
+          "relation": false
+        },
+        {
+          "name": "reviewReason",
+          "type": "String?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "overflowWork",
+          "type": "OverflowWork",
+          "attributes": "@relation(fields: [overflowWorkId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "student",
+          "type": "Profile",
+          "attributes": "@relation(fields: [studentId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "attributes": "@updatedAt",
+          "relation": false
+        }
+      ],
+      "constraints": [
+        "@@unique([overflowWorkId, studentId])",
+        "@@index([overflowWorkId, status])",
+        "@@index([studentId, status, createdAt])"
+      ]
+    },
+    {
+      "name": "StaffingRequirement",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "courseId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "startsAt",
+          "type": "DateTime",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "endsAt",
+          "type": "DateTime",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "tutorsNeeded",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "status",
+          "type": "StaffingRequirementStatus",
+          "attributes": "@default(OPEN)",
+          "relation": false
+        },
+        {
+          "name": "notes",
+          "type": "String?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "createdById",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "course",
+          "type": "Course",
+          "attributes": "@relation(fields: [courseId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "createdBy",
+          "type": "Profile?",
+          "attributes": "@relation(fields: [createdById], references: [id], onDelete: SetNull)",
+          "relation": true
+        },
+        {
+          "name": "overflowWork",
+          "type": "OverflowWork[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "attributes": "@updatedAt",
+          "relation": false
+        }
+      ],
+      "constraints": [
+        "@@index([courseId, status, startsAt])",
+        "@@index([createdById])"
+      ]
+    },
+    {
+      "name": "ApiWriteReceipt",
+      "fields": [
+        {
+          "name": "profileId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "key",
+          "type": "String",
+          "attributes": "@db.VarChar(128)",
+          "relation": false
+        },
+        {
+          "name": "fingerprint",
+          "type": "String",
+          "attributes": "@db.Char(64)",
+          "relation": false
+        },
+        {
+          "name": "result",
+          "type": "Json?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now()) @db.Timestamp(3)",
+          "relation": false
+        },
+        {
+          "name": "profile",
+          "type": "Profile",
+          "attributes": "@relation(fields: [profileId], references: [id], onDelete: Cascade)",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@id([profileId, key])"
+      ]
+    }
+  ],
+  "enums": [
+    {
+      "name": "UserRole",
+      "values": [
+        "ORGANISER",
+        "TUTOR",
+        "STUDENT"
+      ]
+    },
+    {
+      "name": "OrganiserApplicationStatus",
+      "values": [
+        "PENDING",
+        "APPROVED",
+        "REJECTED"
+      ]
+    },
+    {
+      "name": "TimeSlotType",
+      "values": [
+        "AVAILABLE",
+        "BUSY"
+      ]
+    },
+    {
+      "name": "AllocationStatus",
+      "values": [
+        "PROPOSED",
+        "CONFIRMED",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "TimesheetStatus",
+      "values": [
+        "DRAFT",
+        "SUBMITTED",
+        "APPROVED",
+        "RETURNED"
+      ]
+    },
+    {
+      "name": "TimesheetRevisionKind",
+      "values": [
+        "RETURN",
+        "CORRECTION"
+      ]
+    },
+    {
+      "name": "TimesheetDisputeStatus",
+      "values": [
+        "OPEN",
+        "RESOLVED"
+      ]
+    },
+    {
+      "name": "SickOccurrenceStatus",
+      "values": [
+        "EXCUSED",
+        "SKIPPED"
+      ]
+    },
+    {
+      "name": "AbsenceReason",
+      "values": [
+        "SICK"
+      ]
+    },
+    {
+      "name": "ExcuseStatus",
+      "values": [
+        "PENDING",
+        "APPROVED",
+        "REJECTED"
+      ]
+    },
+    {
+      "name": "OverflowWorkStatus",
+      "values": [
+        "OPEN",
+        "FILLED",
+        "CLOSED",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "VolunteerClaimStatus",
+      "values": [
+        "PENDING",
+        "ACCEPTED",
+        "REJECTED",
+        "WITHDRAWN"
+      ]
+    },
+    {
+      "name": "NotificationType",
+      "values": [
+        "ALLOCATION_CREATED",
+        "ALLOCATION_CHANGED",
+        "TIMESHEET_SUBMITTED",
+        "TIMESHEET_RETURNED",
+        "TIMESHEET_APPROVED",
+        "EXCUSE_SUBMITTED",
+        "EXCUSE_DECIDED",
+        "VOLUNTEER_OUTCOME",
+        "TIMESHEET_REVIEW_DUE",
+        "TIMESHEET_RESUBMIT_DUE",
+        "VOLUNTEER_CLAIM_DUE",
+        "EXCUSE_REVIEW_DUE",
+        "TIMESHEET_DISPUTED",
+        "TIMESHEET_DISPUTE_RESOLVED"
+      ]
+    },
+    {
+      "name": "StaffingRequirementStatus",
+      "values": [
+        "OPEN",
+        "CLOSED",
+        "CANCELLED"
+      ]
+    }
+  ],
+  "migrations": [
+    "20260809133139_initial_schema",
+    "20260809190000_basic_workflows",
+    "20260816083000_tutor_availability_recurrence",
+    "20260911000000_sprint2_allocation_organiser_audit",
+    "20260915000000_sprint2_stability_fixes",
+    "20260916000000_tutor_self_service_schedule",
+    "20260917000000_support_once_schedule",
+    "20260920000000_s3_m1_notifications",
+    "20260921000000_s3_m2_staffing_requirement",
+    "20260922000000_s3_m2_tutors_needed",
+    "20260923000000_s3_m2_allocation_hours_within_window",
+    "20260924000000_s3_m2_2_allocation_override_reason",
+    "20260925000000_s3_m2_3_course_budget_and_rate",
+    "20260926000000_s3_m2_allocation_maximum_session_length",
+    "20260927000000_s3_m3_academic_term",
+    "20260928000000_s3_m3_timesheet_corrections",
+    "20260929000000_s3_integration_approved_rate_snapshot",
+    "20260930000000_s3_m4_overflow_source_requirement",
+    "20261001000000_s3_m4_overflow_shortage_model",
+    "20261002000000_s3_m5_api_hardening",
+    "20261003000000_shared_timetable",
+    "20261004000000_support_fortnightly_schedule",
+    "20261005000000_sick_occurrences_and_schedule_identity",
+    "20261006000000_master_organiser_approval",
+    "20261006010000_lecturer_organiser_registration"
+  ]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "url": "https://tutor-mx-api.onrender.com/health",
+    "status": 200,
+    "date": "29 Sep 2026",
+    "meaning": "API answered; historical check."
+  },
+  {
+    "url": "https://tutor-mx-api.onrender.com/ready",
+    "status": 200,
+    "date": "29 Sep 2026",
+    "meaning": "Configured database connected; historical check."
+  },
+  {
+    "url": "https://tutor-mx-api.onrender.com/api/tutors",
+    "status": 401,
+    "date": "29 Sep 2026",
+    "meaning": "Expected anonymous rejection; no private rows returned."
+  },
+  {
+    "url": "https://tutor-mx.pages.dev",
+    "status": 403,
+    "date": "29 Sep 2026",
+    "meaning": "Cloudflare 1010 blocked the automated check; normal-browser verification needed."
+  },
+  {
+    "url": "https://tutor-mx-api.onrender.com/api/auth/organiser-application/me",
+    "status": 401,
+    "date": "3 Oct 2026 \u00b7 09:53 SAST",
+    "meaning": "New read route reachable; expected anonymous rejection. Authenticated results not tested."
+  },
+  {
+    "url": "https://tutor-mx-api.onrender.com/api/master-organiser/organiser-applications",
+    "status": 401,
+    "date": "3 Oct 2026 \u00b7 09:53 SAST",
+    "meaning": "New read route reachable; expected anonymous rejection. Authenticated results not tested."
+  }
+]

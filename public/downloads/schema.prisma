@@ -1,0 +1,496 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ORGANISER
+  TUTOR
+  STUDENT
+}
+
+enum OrganiserApplicationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum TimeSlotType {
+  AVAILABLE
+  BUSY
+}
+
+enum AllocationStatus {
+  PROPOSED
+  CONFIRMED
+  CANCELLED
+}
+
+enum TimesheetStatus {
+  DRAFT
+  SUBMITTED
+  APPROVED
+  RETURNED
+}
+
+/// RETURN rows record an organiser sending a timesheet back; CORRECTION rows
+/// record the tutor amending a work log while the sheet is still editable.
+enum TimesheetRevisionKind {
+  RETURN
+  CORRECTION
+}
+
+enum TimesheetDisputeStatus {
+  OPEN
+  RESOLVED
+}
+
+enum SickOccurrenceStatus {
+  EXCUSED
+  SKIPPED
+}
+
+enum AbsenceReason {
+  SICK
+}
+
+enum ExcuseStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum OverflowWorkStatus {
+  OPEN
+  FILLED
+  CLOSED
+  CANCELLED
+}
+
+enum VolunteerClaimStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  WITHDRAWN
+}
+
+enum NotificationType {
+  ALLOCATION_CREATED
+  ALLOCATION_CHANGED
+  TIMESHEET_SUBMITTED
+  TIMESHEET_RETURNED
+  TIMESHEET_APPROVED
+  EXCUSE_SUBMITTED
+  EXCUSE_DECIDED
+  VOLUNTEER_OUTCOME
+  TIMESHEET_REVIEW_DUE
+  TIMESHEET_RESUBMIT_DUE
+  VOLUNTEER_CLAIM_DUE
+  EXCUSE_REVIEW_DUE
+  // Appended by the timesheet correction work so the stored enum order matches
+  // the order PostgreSQL actually holds after ALTER TYPE ... ADD VALUE.
+  TIMESHEET_DISPUTED
+  TIMESHEET_DISPUTE_RESOLVED
+}
+
+enum StaffingRequirementStatus {
+  OPEN
+  CLOSED
+  CANCELLED
+}
+
+model Profile {
+  apiWriteReceipts ApiWriteReceipt[]
+  id                  Int              @id @default(autoincrement())
+  auth0Id             String           @unique
+  email               String           @unique
+  fullName            String
+  role                UserRole
+  tutorMarks          TutorMark[]
+  timeSlots           TimeSlot[]
+  hourLimit           TutorHourLimit?
+  allocations         Allocation[]
+  reviewedAllocations Allocation[]     @relation("AllocationReviewer")
+  workLogs            WorkLog[]
+  timesheets          Timesheet[]      @relation("TutorTimesheets")
+  reviewedTimesheets  Timesheet[]      @relation("TimesheetReviewer")
+  excuses             Excuse[]
+  reviewedExcuses     Excuse[] @relation("ExcuseReviewer")
+  volunteerClaims     VolunteerClaim[]
+  notifications       Notification[]
+  staffingRequirements StaffingRequirement[]
+  timesheetRevisions  TimesheetRevision[] @relation("TimesheetRevisionAuthor")
+  raisedDisputes      TimesheetDispute[]  @relation("TimesheetDisputeRaisedBy")
+  resolvedDisputes    TimesheetDispute[]  @relation("TimesheetDisputeResolvedBy")
+  reviewedOrganiserApplications OrganiserApplication[] @relation("OrganiserApplicationReviewer")
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+}
+
+/// A lecturer registration request for organiser access. Pending applicants do
+/// not receive a Tutor MX Profile or Auth0 ORGANISER role until a Master
+/// Organiser approves the request.
+model OrganiserApplication {
+  id                 Int                        @id @default(autoincrement())
+  auth0Id            String                     @unique
+  email              String                     @unique
+  fullName           String
+  motivation         String?                    @db.VarChar(1000)
+  status             OrganiserApplicationStatus @default(PENDING)
+  reviewReason       String?                    @db.VarChar(500)
+  reviewedAt         DateTime?
+  reviewerProfileId  Int?
+  reviewer           Profile?                   @relation("OrganiserApplicationReviewer", fields: [reviewerProfileId], references: [id], onDelete: SetNull)
+  createdAt          DateTime                   @default(now())
+  updatedAt          DateTime                   @updatedAt
+
+  @@index([status, createdAt])
+  @@index([reviewerProfileId])
+}
+
+model Notification {
+  id                 Int              @id @default(autoincrement())
+  recipientProfileId Int
+  type               NotificationType
+  title              String
+  body               String
+  linkPath           String
+  targetType         String           @db.VarChar(64)
+  targetId           Int?
+  eventKey           String           @unique
+  readAt             DateTime?
+  createdAt          DateTime         @default(now())
+  recipient          Profile          @relation(fields: [recipientProfileId], references: [id], onDelete: Cascade)
+
+  @@index([recipientProfileId, readAt, createdAt])
+}
+
+model Course {
+  id           Int            @id @default(autoincrement())
+  code         String         @unique
+  name         String
+  /** What one tutor-hour on this course costs. Every tutor is paid the same. */
+  hourlyRate   Decimal?       @db.Decimal(8, 2)
+  budget       Decimal?       @db.Decimal(12, 2)
+  tutorMarks   TutorMark[]
+  allocations  Allocation[]
+  overflowWork OverflowWork[]
+  staffingRequirements StaffingRequirement[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model TutorMark {
+  id       Int     @id @default(autoincrement())
+  tutorId  Int
+  courseId Int
+  mark     Decimal @db.Decimal(5, 2)
+  tutor    Profile @relation(fields: [tutorId], references: [id], onDelete: Cascade)
+  course   Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([tutorId, courseId])
+  @@index([courseId, mark])
+}
+
+/// An academic teaching period. It bounds how far a recurring schedule entry
+/// may repeat, so an imported timetable always stops at the end of the term it
+/// was imported against. Terms belong to the institution, not to a profile, so
+/// there is no owner column. Dates are stored as DATE (not timestamps) because
+/// a term boundary is a calendar day, not an instant, and must not shift with
+/// the reader's timezone.
+model AcademicTerm {
+  id             Int      @id @default(autoincrement())
+  name           String   @unique @db.VarChar(120)
+  startsOn       DateTime @db.Date
+  endsOn         DateTime @db.Date
+  year           Int?
+  termNumber     Int?
+  published      Boolean  @default(false)
+  teachingBreaks Json     @default("[]")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  timeSlots      TimeSlot[]
+
+  @@unique([year, termNumber])
+}
+
+model TimeSlot {
+  id               Int          @id @default(autoincrement())
+  tutorId          Int
+  type             TimeSlotType
+  startsAt         DateTime
+  endsAt           DateTime
+  recurrence       String?      @db.VarChar(32)
+  label            String?      @db.VarChar(255)
+  recurrenceUntil  DateTime?
+  category         String       @default("UNAVAILABLE") @db.VarChar(32)
+  seriesId         String?      @db.VarChar(36)
+  termId           Int?
+  dedupeKey        String? @unique @db.VarChar(64)
+  tutor            Profile      @relation(fields: [tutorId], references: [id], onDelete: Cascade)
+  term             AcademicTerm? @relation(fields: [termId], references: [id], onDelete: SetNull)
+  exceptions       OccurrenceException[]
+
+  @@index([tutorId, type, startsAt, endsAt])
+  @@index([tutorId, category, startsAt])
+  @@index([seriesId])
+}
+
+/// Per-occurrence override for a recurring time slot: cancel one date or move it
+/// to a different time. The parent slot's recurrence is never inferred from its
+/// label; exceptions are the only way to alter individual occurrences.
+model OccurrenceException {
+  id             Int      @id @default(autoincrement())
+  timeSlotId     Int
+  occurrenceDate DateTime @db.Date
+  exceptionType  String   @default("CANCELLED") @db.VarChar(16)
+  newStartsAt    DateTime?
+  newEndsAt      DateTime?
+  createdAt      DateTime @default(now())
+  timeSlot       TimeSlot @relation(fields: [timeSlotId], references: [id], onDelete: Cascade)
+
+  @@index([timeSlotId, occurrenceDate])
+}
+
+model TutorHourLimit {
+  id          Int     @id @default(autoincrement())
+  tutorId     Int     @unique
+  weeklyHours Decimal @db.Decimal(5, 2)
+  tutor       Profile @relation(fields: [tutorId], references: [id], onDelete: Cascade)
+}
+
+model Allocation {
+  id             Int              @id @default(autoincrement())
+  tutorId        Int
+  courseId       Int
+  startsAt       DateTime
+  endsAt         DateTime
+  allocatedHours Decimal          @db.Decimal(5, 2)
+  status         AllocationStatus @default(PROPOSED)
+  tutor          Profile          @relation(fields: [tutorId], references: [id], onDelete: Restrict)
+  course         Course           @relation(fields: [courseId], references: [id], onDelete: Restrict)
+  reviewedBy     Profile?         @relation("AllocationReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+  reviewedById   Int?
+  reviewedAt     DateTime?
+  /** Why an organiser chose a tutor other than the one bulk allocation proposed. */
+  overrideReason String?
+  workLogs       WorkLog[]
+  excuses        Excuse[]
+  overflowWork   OverflowWork?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  @@unique([id, tutorId])
+  @@index([reviewedById])
+  @@index([tutorId, status, startsAt, endsAt])
+  @@index([courseId, status, startsAt])
+}
+
+model Timesheet {
+  id           Int             @id @default(autoincrement())
+  tutorId      Int
+  weekStart    DateTime        @db.Date
+  status       TimesheetStatus @default(DRAFT)
+  submittedAt  DateTime?
+  reviewedAt   DateTime?
+  reviewedById Int?
+  reviewReason String?
+  tutor        Profile         @relation("TutorTimesheets", fields: [tutorId], references: [id], onDelete: Restrict)
+  reviewedBy   Profile?        @relation("TimesheetReviewer", fields: [reviewedById], references: [id], onDelete: Restrict)
+  workLogs     WorkLog[]
+  revisions    TimesheetRevision[]
+  declarations TimesheetDeclaration[]
+  disputes     TimesheetDispute[]
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  @@unique([tutorId, weekStart])
+  @@unique([id, tutorId])
+  @@index([status, submittedAt])
+  @@index([tutorId, status, weekStart])
+}
+
+/// Append-only history of a timesheet's evidence. A correction never overwrites
+/// the work log it replaces: the prior hours and description are kept here
+/// beside the new ones, together with the reason that prompted the change.
+model TimesheetRevision {
+  id                  Int                   @id @default(autoincrement())
+  timesheetId         Int
+  tutorId             Int
+  kind                TimesheetRevisionKind
+  workLogId           Int?
+  /// Nullable for the same reason as Timesheet.reviewedById: deleting the account
+  /// that wrote a line of history clears who wrote it and keeps the history.
+  authorProfileId     Int?
+  reason              String?
+  previousHours       Decimal?              @db.Decimal(5, 2)
+  previousDescription String?
+  newHours            Decimal?              @db.Decimal(5, 2)
+  newDescription      String?
+  timesheet           Timesheet             @relation(fields: [timesheetId, tutorId], references: [id, tutorId], onDelete: Restrict)
+  workLog             WorkLog?              @relation(fields: [workLogId], references: [id], onDelete: Restrict)
+  author              Profile?              @relation("TimesheetRevisionAuthor", fields: [authorProfileId], references: [id], onDelete: Restrict)
+  createdAt           DateTime              @default(now())
+
+  @@index([timesheetId, createdAt])
+}
+
+/// The tutor's explicit acknowledgement of the submission statement, stored per
+/// resubmission. Resubmitting a returned timesheet requires one recorded after
+/// both the return and the last correction, so the declaration always covers the
+/// figures actually being sent.
+model TimesheetDeclaration {
+  id               Int       @id @default(autoincrement())
+  timesheetId      Int
+  tutorId          Int
+  statementVersion String    @db.VarChar(32)
+  timesheet        Timesheet @relation(fields: [timesheetId, tutorId], references: [id, tutorId], onDelete: Restrict)
+  declaredAt       DateTime  @default(now())
+
+  @@index([timesheetId, declaredAt])
+}
+
+/// A tutor's formal objection to a timesheet decision. An open dispute is a
+/// payroll hold: the affected work must not be paid while it stands.
+model TimesheetDispute {
+  id                  Int                    @id @default(autoincrement())
+  timesheetId         Int
+  tutorId             Int
+  reason              String
+  status              TimesheetDisputeStatus @default(OPEN)
+  raisedByProfileId   Int
+  resolvedByProfileId Int?
+  resolutionReason    String?
+  resolvedAt          DateTime?
+  timesheet           Timesheet              @relation(fields: [timesheetId, tutorId], references: [id, tutorId], onDelete: Restrict)
+  raisedBy            Profile                @relation("TimesheetDisputeRaisedBy", fields: [raisedByProfileId], references: [id], onDelete: Restrict)
+  resolvedBy          Profile?               @relation("TimesheetDisputeResolvedBy", fields: [resolvedByProfileId], references: [id], onDelete: Restrict)
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @updatedAt
+
+  @@index([timesheetId, status])
+  @@index([status, createdAt])
+}
+
+model WorkLog {
+  id                 Int        @id @default(autoincrement())
+  tutorId            Int
+  allocationId       Int
+  timesheetId        Int?
+  workDate           DateTime   @db.Date
+  hours              Decimal    @db.Decimal(5, 2)
+  description        String
+  /// Snapshot of the course hourly rate at the moment the timesheet was approved.
+  /// Null until approval; once set it never changes, so historical spend stays
+  /// reproducible even if the course rate is later adjusted.
+  approvedHourlyRate Decimal?   @db.Decimal(8, 2)
+  tutor              Profile    @relation(fields: [tutorId], references: [id], onDelete: Restrict)
+  allocation         Allocation @relation(fields: [allocationId, tutorId], references: [id, tutorId], onDelete: Restrict)
+  timesheet          Timesheet? @relation(fields: [timesheetId, tutorId], references: [id, tutorId], onDelete: Restrict)
+  revisions          TimesheetRevision[]
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+
+  @@unique([tutorId, allocationId, workDate])
+  @@index([tutorId, workDate])
+  @@index([timesheetId])
+}
+
+model Excuse {
+  id           Int           @id @default(autoincrement())
+  tutorId      Int
+  allocationId Int
+  reason       String
+  status       ExcuseStatus  @default(PENDING)
+  reviewReason String?
+  // Allocation is already one concrete occurrence. This request also stores its
+  // attendance exception, without removing or cancelling the allocation.
+  occurrenceStatus SickOccurrenceStatus?
+  absenceReason AbsenceReason @default(SICK)
+  reviewedAt DateTime?
+  reviewedById Int?
+  reviewedBy Profile? @relation("ExcuseReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+  tutor        Profile       @relation(fields: [tutorId], references: [id], onDelete: Restrict)
+  allocation   Allocation    @relation(fields: [allocationId, tutorId], references: [id, tutorId], onDelete: Restrict)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@unique([tutorId, allocationId])
+  @@index([status, createdAt])
+  @@index([tutorId, status])
+}
+
+model OverflowWork {
+  id                  Int                   @id @default(autoincrement())
+  courseId            Int
+  sourceAllocationId  Int?                  @unique
+  sourceRequirementId Int?
+  slotIndex           Int?
+  startsAt            DateTime
+  endsAt              DateTime
+  hours               Decimal               @db.Decimal(5, 2)
+  status              OverflowWorkStatus    @default(OPEN)
+  closesAt            DateTime?
+  course              Course                @relation(fields: [courseId], references: [id], onDelete: Restrict)
+  sourceAllocation    Allocation?           @relation(fields: [sourceAllocationId], references: [id], onDelete: Restrict)
+  sourceRequirement   StaffingRequirement?  @relation(fields: [sourceRequirementId], references: [id], onDelete: Restrict)
+  volunteerClaims     VolunteerClaim[]
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+
+  @@unique([sourceRequirementId, slotIndex])
+  @@index([status, startsAt, closesAt])
+  @@index([courseId, status, startsAt])
+  @@index([sourceRequirementId, status])
+}
+
+model VolunteerClaim {
+  id             Int                  @id @default(autoincrement())
+  overflowWorkId Int
+  studentId      Int
+  status         VolunteerClaimStatus @default(PENDING)
+  reviewReason   String?
+  overflowWork   OverflowWork         @relation(fields: [overflowWorkId], references: [id], onDelete: Restrict)
+  student        Profile              @relation(fields: [studentId], references: [id], onDelete: Restrict)
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+
+  @@unique([overflowWorkId, studentId])
+  @@index([overflowWorkId, status])
+  @@index([studentId, status, createdAt])
+}
+
+model StaffingRequirement {
+  id            Int                       @id @default(autoincrement())
+  courseId      Int
+  startsAt      DateTime
+  endsAt        DateTime
+  tutorsNeeded  Int
+  status        StaffingRequirementStatus @default(OPEN)
+  notes         String?
+  createdById   Int?
+  course        Course                    @relation(fields: [courseId], references: [id], onDelete: Restrict)
+  createdBy     Profile?                  @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  overflowWork  OverflowWork[]
+  createdAt     DateTime                  @default(now())
+  updatedAt     DateTime                  @updatedAt
+
+  @@index([courseId, status, startsAt])
+  @@index([createdById])
+}
+
+// Internal retry receipts; no public read endpoint.
+model ApiWriteReceipt {
+  profileId   Int
+  key         String   @db.VarChar(128)
+  fingerprint String   @db.Char(64)
+  result      Json?
+  createdAt   DateTime @default(now()) @db.Timestamp(3)
+  profile     Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@id([profileId, key])
+}

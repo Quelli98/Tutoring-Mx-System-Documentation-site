@@ -1,0 +1,1537 @@
+[
+  {
+    "id": "get-health",
+    "method": "GET",
+    "path": "/health",
+    "access": "PUBLIC",
+    "success": [
+      200
+    ],
+    "services": [],
+    "line": 2367,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-ready",
+    "method": "GET",
+    "path": "/ready",
+    "access": "PUBLIC",
+    "success": [
+      200
+    ],
+    "services": [],
+    "line": 2371,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-auth-password-reset",
+    "method": "POST",
+    "path": "/api/auth/password-reset",
+    "access": "PUBLIC",
+    "success": [
+      202
+    ],
+    "services": [
+      "requestPasswordReset"
+    ],
+    "line": 2386,
+    "query": [],
+    "body": [
+      "email"
+    ],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-auth-onboarding",
+    "method": "POST",
+    "path": "/api/auth/onboarding",
+    "access": "IDENTITY",
+    "success": [
+      200
+    ],
+    "services": [
+      "onboardUser"
+    ],
+    "line": 2415,
+    "query": [],
+    "body": [
+      "role"
+    ],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-auth-organiser-registration",
+    "method": "POST",
+    "path": "/api/auth/organiser-registration",
+    "access": "IDENTITY",
+    "success": [
+      200
+    ],
+    "services": [
+      "registerOrganiserApplication"
+    ],
+    "line": 2434,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-auth-organiser-application-status",
+    "method": "POST",
+    "path": "/api/auth/organiser-application-status",
+    "access": "PUBLIC",
+    "success": [
+      200
+    ],
+    "services": [
+      "getOrganiserApplicationStatusByEmail"
+    ],
+    "line": 2452,
+    "query": [],
+    "body": [
+      "email"
+    ],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-auth-resend-verification",
+    "method": "POST",
+    "path": "/api/auth/resend-verification",
+    "access": "IDENTITY",
+    "success": [
+      202
+    ],
+    "services": [
+      "requestVerificationEmail"
+    ],
+    "line": 2473,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-me",
+    "method": "GET",
+    "path": "/api/me",
+    "access": "ALL ROLES",
+    "success": [
+      200
+    ],
+    "services": [],
+    "line": 2498,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-profile-current",
+    "method": "GET",
+    "path": "/api/profile/current",
+    "access": "ALL ROLES",
+    "success": [
+      200
+    ],
+    "services": [],
+    "line": 2502,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-auth-organiser-application-me",
+    "method": "GET",
+    "path": "/api/auth/organiser-application/me",
+    "access": "IDENTITY",
+    "success": [
+      200
+    ],
+    "services": [
+      "getOwnOrganiserApplication"
+    ],
+    "line": 2510,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-master-organiser-organiser-applications",
+    "method": "GET",
+    "path": "/api/master-organiser/organiser-applications",
+    "access": "MASTER ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "listOrganiserApplications"
+    ],
+    "line": 2527,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-master-organiser-organiser-applications-id-approve",
+    "method": "POST",
+    "path": "/api/master-organiser/organiser-applications/:id/approve",
+    "access": "MASTER ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "approveOrganiserApplication"
+    ],
+    "line": 2546,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-master-organiser-organiser-applications-id-reject",
+    "method": "POST",
+    "path": "/api/master-organiser/organiser-applications/:id/reject",
+    "access": "MASTER ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "rejectOrganiserApplication"
+    ],
+    "line": 2572,
+    "query": [],
+    "body": [
+      "reviewReason"
+    ],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-public-holidays",
+    "method": "GET",
+    "path": "/api/public-holidays",
+    "access": "ALL ROLES",
+    "success": [
+      200
+    ],
+    "services": [
+      "getPublicHolidays"
+    ],
+    "line": 2612,
+    "query": [
+      "year"
+    ],
+    "body": [],
+    "validators": [
+      "parsePublicHolidayYear"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-courses",
+    "method": "GET",
+    "path": "/api/courses",
+    "access": "ALL ROLES",
+    "success": [
+      200
+    ],
+    "services": [
+      "listCourses"
+    ],
+    "line": 2645,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-courses",
+    "method": "POST",
+    "path": "/api/courses",
+    "access": "ORGANISER",
+    "success": [
+      201
+    ],
+    "services": [
+      "createCourse"
+    ],
+    "line": 2660,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseCourseInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "patch-api-courses-courseid",
+    "method": "PATCH",
+    "path": "/api/courses/:courseId",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "updateCourse"
+    ],
+    "line": 2686,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseCourseInput",
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "delete-api-courses-courseid",
+    "method": "DELETE",
+    "path": "/api/courses/:courseId",
+    "access": "ORGANISER",
+    "success": [
+      204
+    ],
+    "services": [
+      "deleteCourse"
+    ],
+    "line": 2727,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-tutors",
+    "method": "GET",
+    "path": "/api/tutors",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "listTutors"
+    ],
+    "line": 2754,
+    "query": [
+      "weekStart"
+    ],
+    "body": [],
+    "validators": [
+      "parseWeekStart"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-allocations",
+    "method": "GET",
+    "path": "/api/allocations",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "listOrganiserAllocations"
+    ],
+    "line": 2783,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-allocations-candidates",
+    "method": "GET",
+    "path": "/api/allocations/candidates",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "listAllocationCandidates"
+    ],
+    "line": 2798,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseAllocationCandidateQuery"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-allocations",
+    "method": "POST",
+    "path": "/api/allocations",
+    "access": "ORGANISER",
+    "success": [
+      201
+    ],
+    "services": [
+      "createAllocation"
+    ],
+    "line": 2827,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseAllocationWriteInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "patch-api-allocations-allocationid",
+    "method": "PATCH",
+    "path": "/api/allocations/:allocationId",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "updateAllocation"
+    ],
+    "line": 2856,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseAllocationWriteInput",
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "delete-api-allocations-allocationid",
+    "method": "DELETE",
+    "path": "/api/allocations/:allocationId",
+    "access": "ORGANISER",
+    "success": [
+      204
+    ],
+    "services": [
+      "removeAllocation"
+    ],
+    "line": 2901,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-reports-workload",
+    "method": "GET",
+    "path": "/api/reports/workload",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "workloadReport"
+    ],
+    "line": 2934,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseWorkloadReportQuery"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-reports-payroll-export",
+    "method": "GET",
+    "path": "/api/reports/payroll-export",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "payrollExportCsv"
+    ],
+    "line": 2968,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseWorkloadReportQuery"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-allocations-bulk-preview",
+    "method": "POST",
+    "path": "/api/allocations/bulk-preview",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "previewBulkAllocations"
+    ],
+    "line": 3010,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseBulkPreviewQuery"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-allocations-bulk-commit",
+    "method": "POST",
+    "path": "/api/allocations/bulk-commit",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "commitBulkAllocations"
+    ],
+    "line": 3040,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseBulkCommitInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-staffing-requirements",
+    "method": "GET",
+    "path": "/api/staffing-requirements",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "listStaffingRequirements"
+    ],
+    "line": 3074,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseStaffingRequirementListQuery"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-staffing-requirements",
+    "method": "POST",
+    "path": "/api/staffing-requirements",
+    "access": "ORGANISER",
+    "success": [
+      201
+    ],
+    "services": [
+      "createStaffingRequirement"
+    ],
+    "line": 3105,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseStaffingRequirementInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "patch-api-staffing-requirements-requirementid",
+    "method": "PATCH",
+    "path": "/api/staffing-requirements/:requirementId",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "updateStaffingRequirement"
+    ],
+    "line": 3138,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId",
+      "parseStaffingRequirementInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "patch-api-staffing-requirements-requirementid-status",
+    "method": "PATCH",
+    "path": "/api/staffing-requirements/:requirementId/status",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "setStaffingRequirementStatus"
+    ],
+    "line": 3186,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId",
+      "parseStaffingRequirementStatusInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-organiser-command-centre",
+    "method": "GET",
+    "path": "/api/organiser/command-centre",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "commandCentreSummary"
+    ],
+    "line": 3234,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseWorkloadReportQuery"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-organiser-approvals",
+    "method": "GET",
+    "path": "/api/organiser/approvals",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "listOrganiserApprovals"
+    ],
+    "line": 3274,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "patch-api-timesheets-timesheetid-decision",
+    "method": "PATCH",
+    "path": "/api/timesheets/:timesheetId/decision",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "decideTimesheet"
+    ],
+    "line": 3289,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId",
+      "parseTimesheetDecisionInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "patch-api-volunteer-claims-claimid-decision",
+    "method": "PATCH",
+    "path": "/api/volunteer-claims/:claimId/decision",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "decideVolunteerClaim"
+    ],
+    "line": 3335,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId",
+      "parseVolunteerClaimDecisionInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-organiser-overflow-work",
+    "method": "GET",
+    "path": "/api/organiser/overflow-work",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "listOrganiserOverflowWork"
+    ],
+    "line": 3382,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-organiser-overflow-work",
+    "method": "POST",
+    "path": "/api/organiser/overflow-work",
+    "access": "ORGANISER",
+    "success": [
+      201
+    ],
+    "services": [
+      "createOrganiserOverflowWork"
+    ],
+    "line": 3400,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseOverflowWorkCreateInput"
+    ],
+    "idempotency": true
+  },
+  {
+    "id": "patch-api-organiser-overflow-work-overflowworkid",
+    "method": "PATCH",
+    "path": "/api/organiser/overflow-work/:overflowWorkId",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "updateOrganiserOverflowWork"
+    ],
+    "line": 3433,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId",
+      "parseOverflowWorkUpdateInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "patch-api-organiser-overflow-work-overflowworkid-close",
+    "method": "PATCH",
+    "path": "/api/organiser/overflow-work/:overflowWorkId/close",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "closeOrganiserOverflowWork"
+    ],
+    "line": 3480,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId",
+      "parseOverflowWorkCloseInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-organiser-timesheet-disputes",
+    "method": "GET",
+    "path": "/api/organiser/timesheet-disputes",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "listTimesheetDisputes"
+    ],
+    "line": 3532,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "patch-api-timesheet-disputes-disputeid",
+    "method": "PATCH",
+    "path": "/api/timesheet-disputes/:disputeId",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "resolveTimesheetDispute"
+    ],
+    "line": 3556,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId",
+      "parseTimesheetDisputeResolutionInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-tutors-tutorid-marks",
+    "method": "GET",
+    "path": "/api/tutors/:tutorId/marks",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "listTutorMarks"
+    ],
+    "line": 3609,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "put-api-tutors-tutorid-marks",
+    "method": "PUT",
+    "path": "/api/tutors/:tutorId/marks",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "upsertTutorMark"
+    ],
+    "line": 3635,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId",
+      "parseTutorMarkInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "delete-api-tutors-tutorid-marks-courseid",
+    "method": "DELETE",
+    "path": "/api/tutors/:tutorId/marks/:courseId",
+    "access": "ORGANISER",
+    "success": [
+      204
+    ],
+    "services": [
+      "deleteTutorMark"
+    ],
+    "line": 3675,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-tutors-tutorid-time-slots",
+    "method": "GET",
+    "path": "/api/tutors/:tutorId/time-slots",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "listTutorTimeSlots"
+    ],
+    "line": 3702,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-tutor-dashboard",
+    "method": "GET",
+    "path": "/api/tutor/dashboard",
+    "access": "TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "getTutorDashboard"
+    ],
+    "line": 3728,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-tutor-time-slots",
+    "method": "POST",
+    "path": "/api/tutor/time-slots",
+    "access": "TUTOR",
+    "success": [
+      201
+    ],
+    "services": [
+      "createTutorTimeSlot"
+    ],
+    "line": 3744,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseTutorTimeSlotInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-tutor-time-slots",
+    "method": "GET",
+    "path": "/api/tutor/time-slots",
+    "access": "TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "listOwnTutorTimeSlots"
+    ],
+    "line": 3774,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "patch-api-tutor-time-slots-timeslotid",
+    "method": "PATCH",
+    "path": "/api/tutor/time-slots/:timeSlotId",
+    "access": "TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "updateTutorTimeSlot"
+    ],
+    "line": 3791,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId",
+      "parseTutorTimeSlotInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "delete-api-tutor-time-slots-timeslotid",
+    "method": "DELETE",
+    "path": "/api/tutor/time-slots/:timeSlotId",
+    "access": "TUTOR",
+    "success": [
+      204
+    ],
+    "services": [
+      "deleteTutorTimeSlot"
+    ],
+    "line": 3814,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-academic-terms",
+    "method": "GET",
+    "path": "/api/academic-terms",
+    "access": "PROFILE",
+    "success": [
+      200
+    ],
+    "services": [
+      "listAcademicTerms"
+    ],
+    "line": 3836,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-organiser-academic-terms",
+    "method": "POST",
+    "path": "/api/organiser/academic-terms",
+    "access": "ORGANISER",
+    "success": [
+      201
+    ],
+    "services": [
+      "createAcademicTerm"
+    ],
+    "line": 3860,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseAcademicTermInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-academic-terms-published",
+    "method": "GET",
+    "path": "/api/academic-terms/published",
+    "access": "PROFILE",
+    "success": [
+      200
+    ],
+    "services": [
+      "listPublishedAcademicTerms"
+    ],
+    "line": 3893,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "patch-api-organiser-academic-terms-id",
+    "method": "PATCH",
+    "path": "/api/organiser/academic-terms/:id",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "updateAcademicTerm"
+    ],
+    "line": 3914,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseAcademicTermInput",
+      "parseInt"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "delete-api-organiser-academic-terms-id",
+    "method": "DELETE",
+    "path": "/api/organiser/academic-terms/:id",
+    "access": "ORGANISER",
+    "success": [
+      204
+    ],
+    "services": [
+      "deleteAcademicTerm"
+    ],
+    "line": 3954,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseInt"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-tutor-time-slots-import-preview",
+    "method": "POST",
+    "path": "/api/tutor/time-slots/import/preview",
+    "access": "TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "previewTutorTimetableImport"
+    ],
+    "line": 3983,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseTimetableImportRequest"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-tutor-time-slots-import-commit",
+    "method": "POST",
+    "path": "/api/tutor/time-slots/import/commit",
+    "access": "TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "commitTutorTimetableImport"
+    ],
+    "line": 4019,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseTimetableImportRequest"
+    ],
+    "idempotency": true
+  },
+  {
+    "id": "patch-api-tutor-weekly-capacity",
+    "method": "PATCH",
+    "path": "/api/tutor/weekly-capacity",
+    "access": "TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "updateTutorWeeklyCapacity"
+    ],
+    "line": 4061,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseTutorWeeklyCapacity"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-tutor-work-logs",
+    "method": "POST",
+    "path": "/api/tutor/work-logs",
+    "access": "TUTOR",
+    "success": [
+      201
+    ],
+    "services": [
+      "createTutorWorkLog"
+    ],
+    "line": 4083,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseTutorWorkLogInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-tutor-timesheets-timesheetid-history",
+    "method": "GET",
+    "path": "/api/tutor/timesheets/:timesheetId/history",
+    "access": "TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "getTutorTimesheetHistory"
+    ],
+    "line": 4118,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "patch-api-tutor-timesheets-timesheetid-work-logs-worklogid",
+    "method": "PATCH",
+    "path": "/api/tutor/timesheets/:timesheetId/work-logs/:workLogId",
+    "access": "TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "correctTutorTimesheetWorkLog"
+    ],
+    "line": 4165,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId",
+      "parseTutorWorkLogCorrectionInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-tutor-timesheets-timesheetid-declaration",
+    "method": "POST",
+    "path": "/api/tutor/timesheets/:timesheetId/declaration",
+    "access": "TUTOR",
+    "success": [
+      201
+    ],
+    "services": [
+      "declareTutorTimesheet"
+    ],
+    "line": 4238,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId",
+      "parseTimesheetDeclarationInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-tutor-timesheets-timesheetid-disputes",
+    "method": "POST",
+    "path": "/api/tutor/timesheets/:timesheetId/disputes",
+    "access": "TUTOR",
+    "success": [
+      201
+    ],
+    "services": [
+      "raiseTutorTimesheetDispute"
+    ],
+    "line": 4296,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId",
+      "parseTimesheetDisputeInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-tutor-excuses",
+    "method": "POST",
+    "path": "/api/tutor/excuses",
+    "access": "TUTOR",
+    "success": [
+      201
+    ],
+    "services": [
+      "createTutorExcuse"
+    ],
+    "line": 4349,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseTutorExcuseInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-student-open-work",
+    "method": "GET",
+    "path": "/api/student/open-work",
+    "access": "STUDENT",
+    "success": [
+      200
+    ],
+    "services": [
+      "listStudentOpenWork"
+    ],
+    "line": 4379,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-student-volunteer-requests",
+    "method": "GET",
+    "path": "/api/student/volunteer-requests",
+    "access": "STUDENT",
+    "success": [
+      200
+    ],
+    "services": [
+      "listStudentVolunteerRequests"
+    ],
+    "line": 4395,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-student-volunteer-requests",
+    "method": "POST",
+    "path": "/api/student/volunteer-requests",
+    "access": "STUDENT",
+    "success": [
+      201
+    ],
+    "services": [
+      "createStudentVolunteerRequest"
+    ],
+    "line": 4412,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseStudentVolunteerRequestInput"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-student-volunteer-requests-requestid",
+    "method": "GET",
+    "path": "/api/student/volunteer-requests/:requestId",
+    "access": "STUDENT",
+    "success": [
+      200
+    ],
+    "services": [
+      "getStudentVolunteerRequest"
+    ],
+    "line": 4443,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "patch-api-student-volunteer-requests-requestid-withdraw",
+    "method": "PATCH",
+    "path": "/api/student/volunteer-requests/:requestId/withdraw",
+    "access": "STUDENT",
+    "success": [
+      200
+    ],
+    "services": [
+      "withdrawStudentVolunteerRequest"
+    ],
+    "line": 4478,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-tutor-timesheets-timesheetid-status",
+    "method": "GET",
+    "path": "/api/tutor/timesheets/:timesheetId/status",
+    "access": "TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "getTutorTimesheetStatus"
+    ],
+    "line": 4513,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-tutor-timesheets-timesheetid-submit",
+    "method": "POST",
+    "path": "/api/tutor/timesheets/:timesheetId/submit",
+    "access": "TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "submitTutorTimesheet"
+    ],
+    "line": 4547,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-tutor-excuses-excuseid-status",
+    "method": "GET",
+    "path": "/api/tutor/excuses/:excuseId/status",
+    "access": "TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "getTutorExcuseStatus"
+    ],
+    "line": 4581,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "patch-api-excuses-excuseid-decision",
+    "method": "PATCH",
+    "path": "/api/excuses/:excuseId/decision",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "decideExcuse"
+    ],
+    "line": 4611,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseExcuseDecisionInput",
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-search",
+    "method": "GET",
+    "path": "/api/search",
+    "access": "ALL ROLES",
+    "success": [
+      200
+    ],
+    "services": [
+      "search"
+    ],
+    "line": 4652,
+    "query": [
+      "categories",
+      "page",
+      "pageSize",
+      "q"
+    ],
+    "body": [],
+    "validators": [
+      "parsePage"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-notifications",
+    "method": "GET",
+    "path": "/api/notifications",
+    "access": "ALL ROLES",
+    "success": [
+      200
+    ],
+    "services": [
+      "listNotifications"
+    ],
+    "line": 4686,
+    "query": [
+      "page",
+      "pageSize"
+    ],
+    "body": [],
+    "validators": [
+      "parseNotificationListQuery",
+      "parsePage"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-notifications-unread-count",
+    "method": "GET",
+    "path": "/api/notifications/unread-count",
+    "access": "ALL ROLES",
+    "success": [
+      200
+    ],
+    "services": [
+      "countUnreadNotifications"
+    ],
+    "line": 4707,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-notifications-id",
+    "method": "GET",
+    "path": "/api/notifications/:id",
+    "access": "ALL ROLES",
+    "success": [
+      200
+    ],
+    "services": [
+      "getNotification"
+    ],
+    "line": 4724,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "patch-api-notifications-id-read",
+    "method": "PATCH",
+    "path": "/api/notifications/:id/read",
+    "access": "ALL ROLES",
+    "success": [
+      200
+    ],
+    "services": [
+      "markNotificationRead"
+    ],
+    "line": 4752,
+    "query": [],
+    "body": [],
+    "validators": [
+      "parseNumericId"
+    ],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-notifications-read-all",
+    "method": "POST",
+    "path": "/api/notifications/read-all",
+    "access": "ALL ROLES",
+    "success": [
+      200
+    ],
+    "services": [
+      "markAllNotificationsRead"
+    ],
+    "line": 4775,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-notifications-reminders-run",
+    "method": "POST",
+    "path": "/api/notifications/reminders/run",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "runDueReminders"
+    ],
+    "line": 4791,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "delete-api-auth-delete-account",
+    "method": "DELETE",
+    "path": "/api/auth/delete-account",
+    "access": "ALL ROLES",
+    "success": [
+      204
+    ],
+    "services": [
+      "deleteAccount"
+    ],
+    "line": 4806,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  }
+]

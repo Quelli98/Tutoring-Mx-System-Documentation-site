@@ -1,0 +1,141 @@
+{
+  "errors": [],
+  "badFiles": [],
+  "badHashes": [],
+  "filter": "Showing 1 of 82 operations",
+  "masterFilter": "Showing 3 of 82 operations",
+  "modelOpened": true,
+  "searchMatches": 2,
+  "searchClosed": true,
+  "mobile": [
+    {
+      "route": "home",
+      "overflow": {
+        "window": 390,
+        "document": 390
+      }
+    },
+    {
+      "route": "api",
+      "overflow": {
+        "window": 390,
+        "document": 390
+      }
+    },
+    {
+      "route": "database",
+      "overflow": {
+        "window": 390,
+        "document": 390
+      }
+    },
+    {
+      "route": "diagrams",
+      "overflow": {
+        "window": 390,
+        "document": 390
+      }
+    },
+    {
+      "route": "milestone4",
+      "overflow": {
+        "window": 390,
+        "document": 390
+      }
+    },
+    {
+      "route": "user-feedback",
+      "overflow": {
+        "window": 390,
+        "document": 390
+      }
+    },
+    {
+      "route": "git-methodology",
+      "overflow": {
+        "window": 390,
+        "document": 390
+      }
+    },
+    {
+      "route": "references",
+      "overflow": {
+        "window": 390,
+        "document": 390
+      }
+    },
+    {
+      "route": "master-organiser",
+      "overflow": {
+        "window": 390,
+        "document": 390
+      }
+    },
+    {
+      "route": "student-scheduling",
+      "overflow": {
+        "window": 390,
+        "document": 390
+      }
+    }
+  ],
+  "mobileMenu": true,
+  "menuCloses": true,
+  "narrow": 320,
+  "finalTargetedCheck": {
+    "date": "2026-10-03",
+    "searchMatches": 2,
+    "searchClosed": true,
+    "columns": [
+      {
+        "text": "Column",
+        "width": 198
+      },
+      {
+        "text": "Prisma type",
+        "width": 206
+      },
+      {
+        "text": "Null?",
+        "width": 69
+      },
+      {
+        "text": "Key / storage / default",
+        "width": 387
+      },
+      {
+        "text": "Relation",
+        "width": 198
+      },
+      {
+        "text": "Target",
+        "width": 206
+      },
+      {
+        "text": "Foreign key / behaviour",
+        "width": 456
+      }
+    ],
+    "databaseOverflow": false,
+    "liveCheckVisible": true,
+    "apiLiveJSON": [
+      {
+        "url": "https://tutor-mx-api.onrender.com/api/auth/organiser-application/me",
+        "checkedAt": "2026-10-03T07:53:44.108542+00:00",
+        "status": 401,
+        "body": "{\"error\":{\"code\":\"AUTHENTICATION_REQUIRED\",\"message\":\"A valid bearer token is required.\"}}",
+        "elapsedMs": 21324
+      },
+      {
+        "url": "https://tutor-mx-api.onrender.com/api/master-organiser/organiser-applications",
+        "checkedAt": "2026-10-03T07:53:44.337171+00:00",
+        "status": 401,
+        "body": "{\"error\":{\"code\":\"AUTHENTICATION_REQUIRED\",\"message\":\"A valid bearer token is required.\"}}",
+        "elapsedMs": 229
+      }
+    ],
+    "mobileDatabaseWidth": 390,
+    "errors": []
+  },
+  "scope": "Broad navigation and interaction checks retained; targeted fixes rechecked on 3 October 2026."
+}

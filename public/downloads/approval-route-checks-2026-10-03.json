@@ -1,0 +1,16 @@
+[
+  {
+    "url": "https://tutor-mx-api.onrender.com/api/auth/organiser-application/me",
+    "checkedAt": "2026-10-03T07:53:44.108542+00:00",
+    "status": 401,
+    "body": "{\"error\":{\"code\":\"AUTHENTICATION_REQUIRED\",\"message\":\"A valid bearer token is required.\"}}",
+    "elapsedMs": 21324
+  },
+  {
+    "url": "https://tutor-mx-api.onrender.com/api/master-organiser/organiser-applications",
+    "checkedAt": "2026-10-03T07:53:44.337171+00:00",
+    "status": 401,
+    "body": "{\"error\":{\"code\":\"AUTHENTICATION_REQUIRED\",\"message\":\"A valid bearer token is required.\"}}",
+    "elapsedMs": 229
+  }
+]
