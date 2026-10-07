@@ -1,3 +1,5 @@
+> **Sprint 4 update:** Start with [START-HERE-SPRINT4-MEMBERS1-TO3.md](START-HERE-SPRINT4-MEMBERS1-TO3.md) for the combined Members 1–3 code, migration steps and handoff.
+
 # Tutor Mx System
 
 Tutor Mx is one integrated React + Vite, Auth0, handwritten Express, Prisma and Neon PostgreSQL project. Browser code calls only the Express API; it never connects to Neon, Prisma or an Auth0 Management API.
@@ -188,3 +190,14 @@ The preceding document was generated and reviewed with the assistance of the fol
 See [Member 5 handoff](MEMBER5_HANDOFF.md) for setup and the new migration, and [API audit and evidence](docs/sprint3-member5-completion.md) for S3-M5-1/2/3. The documentation website includes [Member 5 evidence](docs-site/member5-sprint3.html). This is a locally verified source handoff; production integration and deployment remain with the Integration Lead.
 
 The revised archive includes a [follow-up bug audit](docs/sprint3-member5-followup-audit.md) covering payroll exports, timesheet history recovery and import refresh errors.
+
+
+## Sprint 4 Member 1 update - 3 October 2026
+
+Codex assisted with AI code generation, AI in-line editing and AI code review for shared Student/Tutor schedules, session hardening, permission-checked navigation, notifications and recent/favourite destinations. It also generated regression tests and the handoff notes. The final integrator should review the changes and run project CI before merging. See `START-HERE-SPRINT4-MEMBER1.md` and `docs/sprint4-member1-handoff.md`. No live production deployment or stakeholder validation is claimed.
+
+## Sprint 4 final Member 6 completion
+
+The final Sprint 4 Member 6 planning-intelligence layer is included in this archive. Organisers now have an **Allocation proposal lab** at `/organiser/proposals` with deterministic Balanced, Strongest Match, Fair Workload and Budget Aware strategies, explainable Why this Tutor?/Why not? results, impact comparison, reasoned eligible manual adjustment, and normal draft-Scenario handoff to Compare with Live/Publish. The engine reuses existing allocation eligibility, timetable/clash/capacity rules and confirmed Student tutoring bookings; it does not write directly to live allocations.
+
+See `START-HERE-SPRINT4-FINAL.md` for the final Members 1–6 handover and verification steps.

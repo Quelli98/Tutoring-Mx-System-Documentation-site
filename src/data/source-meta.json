@@ -1,11 +1,22 @@
 {
-  "source": "30 September 2026 archive cited by the updated handbook",
-  "routes": 82,
-  "models": 20,
-  "migrations": 25,
+  "source": "Final Sprint 4 main supplied 7 October 2026",
+  "releaseSHA": "361954ec510c624c5f2a0f3d0940c2f7cb769d2e",
+  "releaseShortSHA": "361954e",
+  "routes": 120,
+  "models": 30,
+  "migrations": 30,
   "enums": 14,
-  "backendTestFiles": 43,
-  "frontendTestFiles": 63,
-  "schemaSHA256": "c2e4d94b07a08deabed1f8ed730b5c9fa8c3c0a9d0644e46b18c186b7029c29f",
-  "routesSHA256": "ac4a10451b3292976d0eda1a1d72735cfc7e00dc7314b6a6a25c2bcbb542dbd6"
+  "backendTestFiles": 52,
+  "frontendTestFiles": 77,
+  "schemaSHA256": "525ec714fe27b8a0c5005a3a17b3ce5b3b0108a729bce93cdd6e8013d4e7b389",
+  "routesSHA256": "d72d855616c0fda812c36471b7342e7cecd94e8abf100c2f6fd2b68cbb62cadf",
+  "coverage": {
+    "frontendSrc": 80.96,
+    "backendSrc": 85.29,
+    "combinedTrackedLines": 10333,
+    "combinedCoveredLines": 8568,
+    "combinedCoverage": 82.92,
+    "commit": "361954e",
+    "date": "2026-10-07"
+  }
 }

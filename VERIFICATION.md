@@ -1,46 +1,49 @@
-# Documentation verification — 3 October 2026
+# Documentation verification — final Sprint 4 update, 7 October 2026
 
-This report describes the documentation website delivered in this archive. It is not a certification of the Tutor MX application's production data or completed Sprint 4 functionality.
+This report records what was checked while adding the final Sprint 4 source and release evidence to the existing documentation website. Earlier 3 October documentation evidence remains historical; Sprint 1–3 material was not rewritten.
 
-## Sources and retained work
+## Final sources added
 
-The maintained chapters use the supplied updated README, the 30 September 2026 handbook and its referenced `tutor-mx-system-main (5)(2).zip` source archive. Earlier sprint and project evidence remains accessible in the website's archive. The current source snapshot has no Git history, so no current commit SHA is claimed.
+- Final Tutor MX Git repository ZIP supplied on 7 October 2026.
+- Final source branch state: `main`, `origin/main` and deployment mirror at `361954e` (`361954ec510c624c5f2a0f3d0940c2f7cb769d2e`).
+- Final application `README.md` and `START-HERE-SPRINT4-FINAL.md` / Member handoff guides.
+- Updated 30 September Sprint 4 handbook.
+- Render deployment screenshot showing commit `361954e` Live.
+- Codecov screenshots for commit `361954e`: frontend/src 80.96%, backend src 85.29%.
+- Gitea Actions screenshot for reviewed Member 6 commit `2f62311`, a parent of final merge `361954e`.
+- Neon production overview/table screenshots and the supplied production DDL export.
+- Auth0 role-list screenshot.
+- Public live application plus responsive Student captures.
+- `/health` and `/ready` first/warm timing and light-load screenshots.
 
-The revision incorporates the Master Organiser approval implementation, changed schema and sickness rules, and the revised Student scheduling and Member delivery requirements. Implemented behaviour and planned Sprint 4 work are explicitly labelled. The full README and handbook remain downloadable.
-
-## Completed checks
+## Checks completed for this documentation update
 
 | Check | Result |
 | --- | --- |
-| Production build | `npm run build` passed, including TypeScript checking and Vite compilation. |
-| Content validation | `npm run validate` passed: 82 unique HTTP operations, three Master-protected operations, 20 models, 14 enums, 25 source migrations, 20 rubric responses and nine SVG diagrams. Current chapter asset references resolve. |
-| Navigation | All 54 current and retained pages opened in Chromium. No JavaScript page errors, broken images or desktop document overflow were observed. |
-| Links | 91 local asset links and 335 internal hash links passed the navigation sweep. The subsequently added external-probe JSON download also loaded successfully. |
-| API filters | Searching for dashboard returned one operation; selecting Master Organiser returned three. |
-| Model navigation | A direct OrganiserApplication link opened the correct table. Its column layout was checked after adjustment. |
-| Search | Searching for curl returned two chapter matches. Escape closed the dialog after the final fix. |
-| Mobile layout | Ten representative routes were checked at 390 px with no document overflow; the home page also passed at 320 px. Menu opening and route-selection closing worked. The final database-table adjustment was rechecked at 390 px. |
-| Visual review | Desktop and mobile page captures and all eight UML diagrams plus the database relationship map were reviewed. Diagram dependency directions, connectors and label overlap were corrected. |
+| Final Git/source identity | `git log` in the supplied application repository confirms final main at `361954e` and the Member 1→6 merge sequence. |
+| Source inventory | Final source contains 120 registered HTTP operations, 30 Prisma application models, 14 enums, 30 migration directories, 52 backend test files and 77 frontend test files. |
+| Documentation content validation | `node scripts/validate-content.mjs` passes with 120 unique operations, 3 Master-protected operations, 30 models, 14 enums, 30 migrations, 20 rubric criteria, 9 SVG diagrams and valid current chapter asset links. |
+| TypeScript/TSX syntax | `src/App.tsx`, `LegacyContent.tsx`, `OriginalReadme.tsx` and `main.tsx` were transpile-checked with zero syntax diagnostics. |
+| UML assets | The diagram generator was rerun for the final Sprint 4 state, including the updated database relationship map. |
+| Evidence files | Final Render/Codecov, Gitea CI, Neon, Auth0, public app, responsive and performance screenshots are copied into both documentation evidence locations with descriptive final-release filenames. |
+| API/schema downloads | `src/app.ts`, `src/server.ts`, `README.md`, Prisma schema, endpoint inventory, OpenAPI inventory and read-only Postman collection were refreshed from the final supplied source. |
 
-The final production build's main JavaScript bundle is approximately 479 kB uncompressed / 124 kB gzip. Historical page content and the complete original README load in separate chunks. These are build sizes, not measured production page-load timings.
+A fresh documentation `npm ci && npm run build` could not be completed in this artifact environment because package installation did not finish successfully. The source-level content validator and TypeScript/TSX transpile syntax checks pass, and the generated `src/data/content.json` was refreshed for the changed chapters. The preserved GitHub Pages workflow should still perform its normal clean `npm ci` and build before publishing.
 
-Machine-readable observations are included in `verification/`. The final interaction report records the search correction; the broad navigation sweep was retained rather than repeated.
+## Final release evidence now documented
 
-## External API observations
+The documentation now records:
 
-Read-only requests without bearer tokens on **3 October 2026** returned HTTP **401** with `AUTHENTICATION_REQUIRED` from:
+- final application source SHA `361954e`;
+- Render backend deployment Live on the same commit;
+- final Cloudflare stable URL `https://tutor-mx.pages.dev` and the supplied final manual deployment URL `https://06d22424.tutor-mx.pages.dev`;
+- Codecov final values for the same commit: frontend/src 80.96% and backend src 85.29%;
+- a successful reviewed-Member-6 Gitea Actions run on `2f62311` immediately before the final merge;
+- Neon production branch/table structure and Auth0 role configuration;
+- public desktop and responsive Student application captures;
+- deployed `/health` and `/ready` first/warm timings plus 5-connection/10-second light-load samples;
+- complete Sprint 4 Member 1–6 implementation status, including Student timetable/booking/sick notes, Scenarios, swaps, audit/restore and the proposal lab.
 
-- `https://tutor-mx-api.onrender.com/api/auth/organiser-application/me`
-- `https://tutor-mx-api.onrender.com/api/master-organiser/organiser-applications`
+## Evidence still not supplied
 
-The raw responses and UTC timestamps are included in `public/downloads/approval-route-checks-2026-10-03.json`. These establish reachable authentication gates for those paths; they do not prove successful authenticated application processing.
-
-Earlier **29 September** health/readiness 200 responses and the protected Tutor read's 401 response are retained as dated observations. The earlier automated frontend request encountered Cloudflare 403/1010. Earlier raw response captures were unavailable and have not been reconstructed or presented as fresh checks.
-
-## Limits and release work
-
-- No authenticated production reads or writes were performed. Private Tutor records, exact production row counts, real-versus-demo classification and applied production migrations remain unverified. The website provides authorised curl, PowerShell, Postman and read-only SQL instructions for the team to capture that evidence.
-- The source contains 43 backend test files and 63 frontend test files. This task did not run the full Tutor MX application test suites. Application release coverage, accessibility and load/performance evidence must be recorded against the actual release.
-- Student personal scheduling, mutual availability, bookings, Student sick notes and advanced planning remain handbook targets where absent from the supplied current source.
-- Three rubric weights absent from the supplied cropped current screenshots are explicitly provisional. The website does not turn incomplete application evidence into a claim of full marks.
-- This archive has not been committed, pushed or deployed. It changes the documentation project; it does not redeploy the application or migrate Neon. Follow `START-HERE.md` to publish from the team's existing documentation checkout.
+The website deliberately does not invent: a separate green Gitea Actions run for merge commit `361954e`; exact production Neon row counts and visible `_prisma_migrations` rows; a Lighthouse/screen-reader/full keyboard audit; final stakeholder/client sign-off; or a complete known-defect register. The responsive emulator screenshots also show a horizontal scrollbar, which is documented rather than hidden.

@@ -4,6 +4,90 @@
       "name": "Profile",
       "fields": [
         {
+          "name": "auditEvents",
+          "type": "AuditEvent[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "mutationReceipts",
+          "type": "MutationReceipt[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "reviewedStudentSickNotes",
+          "type": "StudentSickNote[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "scheduleRevision",
+          "type": "Int",
+          "attributes": "@default(0)",
+          "relation": false
+        },
+        {
+          "name": "studentBookings",
+          "type": "TutoringBooking[]",
+          "attributes": "@relation(\"StudentBookings\")",
+          "relation": true
+        },
+        {
+          "name": "tutorBookings",
+          "type": "TutoringBooking[]",
+          "attributes": "@relation(\"TutorBookings\")",
+          "relation": true
+        },
+        {
+          "name": "requestedSwaps",
+          "type": "TutorSwap[]",
+          "attributes": "@relation(\"SwapRequester\")",
+          "relation": true
+        },
+        {
+          "name": "replacementSwaps",
+          "type": "TutorSwap[]",
+          "attributes": "@relation(\"SwapReplacement\")",
+          "relation": true
+        },
+        {
+          "name": "bookingEvents",
+          "type": "BookingEvent[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "swapEvents",
+          "type": "SwapEvent[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "createdScenarios",
+          "type": "Scenario[]",
+          "attributes": "@relation(\"ScenarioCreator\")",
+          "relation": true
+        },
+        {
+          "name": "editedScenarios",
+          "type": "Scenario[]",
+          "attributes": "@relation(\"ScenarioEditor\")",
+          "relation": true
+        },
+        {
+          "name": "scenarioItems",
+          "type": "ScenarioItem[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "scenarioPresence",
+          "type": "ScenarioPresence[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
           "name": "apiWriteReceipts",
           "type": "ApiWriteReceipt[]",
           "attributes": "",
@@ -321,6 +405,18 @@
       "name": "Course",
       "fields": [
         {
+          "name": "tutoringBookings",
+          "type": "TutoringBooking[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "scenarioItems",
+          "type": "ScenarioItem[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
           "name": "id",
           "type": "Int",
           "attributes": "@id @default(autoincrement())",
@@ -438,6 +534,12 @@
       "name": "AcademicTerm",
       "fields": [
         {
+          "name": "tutoringBookings",
+          "type": "TutoringBooking[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
           "name": "id",
           "type": "Int",
           "attributes": "@id @default(autoincrement())",
@@ -518,9 +620,9 @@
           "relation": false
         },
         {
-          "name": "tutorId",
+          "name": "ownerId",
           "type": "Int",
-          "attributes": "",
+          "attributes": "@map(\"tutorId\")",
           "relation": false
         },
         {
@@ -584,9 +686,9 @@
           "relation": false
         },
         {
-          "name": "tutor",
+          "name": "owner",
           "type": "Profile",
-          "attributes": "@relation(fields: [tutorId], references: [id], onDelete: Cascade)",
+          "attributes": "@relation(fields: [ownerId], references: [id], onDelete: Cascade)",
           "relation": true
         },
         {
@@ -603,8 +705,8 @@
         }
       ],
       "constraints": [
-        "@@index([tutorId, type, startsAt, endsAt])",
-        "@@index([tutorId, category, startsAt])",
+        "@@index([ownerId, type, startsAt, endsAt], map: \"TimeSlot_tutorId_type_startsAt_endsAt_idx\")",
+        "@@index([ownerId, category, startsAt], map: \"TimeSlot_category_idx\")",
         "@@index([seriesId])"
       ]
     },
@@ -697,6 +799,30 @@
     {
       "name": "Allocation",
       "fields": [
+        {
+          "name": "minimumMark",
+          "type": "Float",
+          "attributes": "@default(50)",
+          "relation": false
+        },
+        {
+          "name": "version",
+          "type": "Int",
+          "attributes": "@default(1)",
+          "relation": false
+        },
+        {
+          "name": "swapRequests",
+          "type": "TutorSwap[]",
+          "attributes": "@relation(\"SwapSource\")",
+          "relation": true
+        },
+        {
+          "name": "completedSwaps",
+          "type": "TutorSwap[]",
+          "attributes": "@relation(\"SwapResult\")",
+          "relation": true
+        },
         {
           "name": "id",
           "type": "Int",
@@ -1650,6 +1776,800 @@
       "constraints": [
         "@@id([profileId, key])"
       ]
+    },
+    {
+      "name": "Scenario",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "attributes": "@db.VarChar(120)",
+          "relation": false
+        },
+        {
+          "name": "notes",
+          "type": "String",
+          "attributes": "@default(\"\") @db.VarChar(2000)",
+          "relation": false
+        },
+        {
+          "name": "startsAt",
+          "type": "DateTime",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "endsAt",
+          "type": "DateTime",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "status",
+          "type": "String",
+          "attributes": "@default(\"DRAFT\") @db.VarChar(16)",
+          "relation": false
+        },
+        {
+          "name": "version",
+          "type": "Int",
+          "attributes": "@default(1)",
+          "relation": false
+        },
+        {
+          "name": "baseLiveRevision",
+          "type": "String",
+          "attributes": "@db.VarChar(64)",
+          "relation": false
+        },
+        {
+          "name": "createdById",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "updatedById",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "createdBy",
+          "type": "Profile?",
+          "attributes": "@relation(\"ScenarioCreator\", fields: [createdById], references: [id], onDelete: SetNull)",
+          "relation": true
+        },
+        {
+          "name": "updatedBy",
+          "type": "Profile?",
+          "attributes": "@relation(\"ScenarioEditor\", fields: [updatedById], references: [id], onDelete: SetNull)",
+          "relation": true
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "items",
+          "type": "ScenarioItem[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "presence",
+          "type": "ScenarioPresence[]",
+          "attributes": "",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@index([status, updatedAt])"
+      ]
+    },
+    {
+      "name": "ScenarioItem",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "scenarioId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "sourceAllocationId",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "tutorId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "courseId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "startsAt",
+          "type": "DateTime",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "endsAt",
+          "type": "DateTime",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "allocatedHours",
+          "type": "Decimal",
+          "attributes": "@db.Decimal(5,2)",
+          "relation": false
+        },
+        {
+          "name": "minimumMark",
+          "type": "Decimal",
+          "attributes": "@default(50) @db.Decimal(5,2)",
+          "relation": false
+        },
+        {
+          "name": "locked",
+          "type": "Boolean",
+          "attributes": "@default(false)",
+          "relation": false
+        },
+        {
+          "name": "scenario",
+          "type": "Scenario",
+          "attributes": "@relation(fields: [scenarioId], references: [id], onDelete: Cascade)",
+          "relation": true
+        },
+        {
+          "name": "tutor",
+          "type": "Profile",
+          "attributes": "@relation(fields: [tutorId], references: [id], onDelete: Restrict)",
+          "relation": true
+        },
+        {
+          "name": "course",
+          "type": "Course",
+          "attributes": "@relation(fields: [courseId], references: [id], onDelete: Restrict)",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@unique([scenarioId, sourceAllocationId])",
+        "@@index([scenarioId])"
+      ]
+    },
+    {
+      "name": "ScenarioPresence",
+      "fields": [
+        {
+          "name": "scenarioId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "profileId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "lastSeenAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "scenario",
+          "type": "Scenario",
+          "attributes": "@relation(fields: [scenarioId], references: [id], onDelete: Cascade)",
+          "relation": true
+        },
+        {
+          "name": "profile",
+          "type": "Profile",
+          "attributes": "@relation(fields: [profileId], references: [id], onDelete: Cascade)",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@id([scenarioId, profileId])",
+        "@@index([lastSeenAt])"
+      ]
+    },
+    {
+      "name": "TutoringBooking",
+      "fields": [
+        {
+          "name": "sickNotes",
+          "type": "StudentSickNote[]",
+          "attributes": "",
+          "relation": true
+        },
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "studentId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "tutorId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "courseId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "termId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "startsAt",
+          "type": "DateTime",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "endsAt",
+          "type": "DateTime",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "status",
+          "type": "String",
+          "attributes": "@default(\"CONFIRMED\") @db.VarChar(16)",
+          "relation": false
+        },
+        {
+          "name": "occurrenceStatus",
+          "type": "String",
+          "attributes": "@default(\"SCHEDULED\") @db.VarChar(16)",
+          "relation": false
+        },
+        {
+          "name": "version",
+          "type": "Int",
+          "attributes": "@default(1)",
+          "relation": false
+        },
+        {
+          "name": "requestKey",
+          "type": "String",
+          "attributes": "@db.VarChar(128)",
+          "relation": false
+        },
+        {
+          "name": "requestHash",
+          "type": "String",
+          "attributes": "@db.VarChar(64)",
+          "relation": false
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "student",
+          "type": "Profile",
+          "attributes": "@relation(\"StudentBookings\",fields:[studentId],references:[id],onDelete:Restrict)",
+          "relation": true
+        },
+        {
+          "name": "tutor",
+          "type": "Profile",
+          "attributes": "@relation(\"TutorBookings\",fields:[tutorId],references:[id],onDelete:Restrict)",
+          "relation": true
+        },
+        {
+          "name": "course",
+          "type": "Course",
+          "attributes": "@relation(fields:[courseId],references:[id],onDelete:Restrict)",
+          "relation": true
+        },
+        {
+          "name": "term",
+          "type": "AcademicTerm",
+          "attributes": "@relation(fields:[termId],references:[id],onDelete:Restrict)",
+          "relation": true
+        },
+        {
+          "name": "events",
+          "type": "BookingEvent[]",
+          "attributes": "",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@unique([studentId,requestKey])",
+        "@@index([tutorId,status,startsAt])",
+        "@@index([studentId,status,startsAt])"
+      ]
+    },
+    {
+      "name": "TutorSwap",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "allocationId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "requesterId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "replacementId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "replacementAllocationId",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "allocationRevision",
+          "type": "String",
+          "attributes": "@db.VarChar(64)",
+          "relation": false
+        },
+        {
+          "name": "snapshot",
+          "type": "Json",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "reason",
+          "type": "String",
+          "attributes": "@db.VarChar(1000)",
+          "relation": false
+        },
+        {
+          "name": "status",
+          "type": "String",
+          "attributes": "@default(\"REQUESTED\") @db.VarChar(16)",
+          "relation": false
+        },
+        {
+          "name": "version",
+          "type": "Int",
+          "attributes": "@default(1)",
+          "relation": false
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "allocation",
+          "type": "Allocation",
+          "attributes": "@relation(\"SwapSource\",fields:[allocationId],references:[id],onDelete:Restrict)",
+          "relation": true
+        },
+        {
+          "name": "replacementAllocation",
+          "type": "Allocation?",
+          "attributes": "@relation(\"SwapResult\",fields:[replacementAllocationId],references:[id],onDelete:Restrict)",
+          "relation": true
+        },
+        {
+          "name": "requester",
+          "type": "Profile",
+          "attributes": "@relation(\"SwapRequester\",fields:[requesterId],references:[id],onDelete:Restrict)",
+          "relation": true
+        },
+        {
+          "name": "replacement",
+          "type": "Profile",
+          "attributes": "@relation(\"SwapReplacement\",fields:[replacementId],references:[id],onDelete:Restrict)",
+          "relation": true
+        },
+        {
+          "name": "events",
+          "type": "SwapEvent[]",
+          "attributes": "",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@index([status,createdAt])"
+      ]
+    },
+    {
+      "name": "BookingEvent",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "bookingId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "actorId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "action",
+          "type": "String",
+          "attributes": "@db.VarChar(24)",
+          "relation": false
+        },
+        {
+          "name": "version",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "note",
+          "type": "String",
+          "attributes": "@default(\"\") @db.VarChar(1000)",
+          "relation": false
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "booking",
+          "type": "TutoringBooking",
+          "attributes": "@relation(fields:[bookingId],references:[id],onDelete:Restrict)",
+          "relation": true
+        },
+        {
+          "name": "actor",
+          "type": "Profile",
+          "attributes": "@relation(fields:[actorId],references:[id],onDelete:Restrict)",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@unique([bookingId,version])"
+      ]
+    },
+    {
+      "name": "SwapEvent",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "swapId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "actorId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "action",
+          "type": "String",
+          "attributes": "@db.VarChar(24)",
+          "relation": false
+        },
+        {
+          "name": "version",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "note",
+          "type": "String",
+          "attributes": "@default(\"\") @db.VarChar(1000)",
+          "relation": false
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "swap",
+          "type": "TutorSwap",
+          "attributes": "@relation(fields:[swapId],references:[id],onDelete:Restrict)",
+          "relation": true
+        },
+        {
+          "name": "actor",
+          "type": "Profile",
+          "attributes": "@relation(fields:[actorId],references:[id],onDelete:Restrict)",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@unique([swapId,version])"
+      ]
+    },
+    {
+      "name": "StudentSickNote",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "bookingId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "reason",
+          "type": "String",
+          "attributes": "@db.VarChar(1000)",
+          "relation": false
+        },
+        {
+          "name": "status",
+          "type": "String",
+          "attributes": "@default(\"PENDING\") @db.VarChar(16)",
+          "relation": false
+        },
+        {
+          "name": "version",
+          "type": "Int",
+          "attributes": "@default(1)",
+          "relation": false
+        },
+        {
+          "name": "reviewNote",
+          "type": "String",
+          "attributes": "@default(\"\") @db.VarChar(1000)",
+          "relation": false
+        },
+        {
+          "name": "reviewedById",
+          "type": "Int?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "reviewedAt",
+          "type": "DateTime?",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "booking",
+          "type": "TutoringBooking",
+          "attributes": "@relation(fields:[bookingId],references:[id],onDelete:Restrict)",
+          "relation": true
+        },
+        {
+          "name": "reviewedBy",
+          "type": "Profile?",
+          "attributes": "@relation(fields:[reviewedById],references:[id],onDelete:Restrict)",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@index([status,id])"
+      ]
+    },
+    {
+      "name": "AuditEvent",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "actorId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "action",
+          "type": "String",
+          "attributes": "@db.VarChar(64)",
+          "relation": false
+        },
+        {
+          "name": "targetType",
+          "type": "String",
+          "attributes": "@db.VarChar(24)",
+          "relation": false
+        },
+        {
+          "name": "targetId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "before",
+          "type": "Json",
+          "attributes": "@default(\"{}\")",
+          "relation": false
+        },
+        {
+          "name": "after",
+          "type": "Json",
+          "attributes": "@default(\"{}\")",
+          "relation": false
+        },
+        {
+          "name": "reason",
+          "type": "String",
+          "attributes": "@default(\"\") @db.VarChar(1000)",
+          "relation": false
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "actor",
+          "type": "Profile",
+          "attributes": "@relation(fields:[actorId],references:[id],onDelete:Restrict)",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@index([createdAt,id])",
+        "@@index([targetType,targetId,id])",
+        "@@index([actorId,createdAt])"
+      ]
+    },
+    {
+      "name": "MutationReceipt",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Int",
+          "attributes": "@id @default(autoincrement())",
+          "relation": false
+        },
+        {
+          "name": "actorId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "scope",
+          "type": "String",
+          "attributes": "@db.VarChar(100)",
+          "relation": false
+        },
+        {
+          "name": "requestKey",
+          "type": "String",
+          "attributes": "@db.VarChar(128)",
+          "relation": false
+        },
+        {
+          "name": "requestHash",
+          "type": "String",
+          "attributes": "@db.VarChar(64)",
+          "relation": false
+        },
+        {
+          "name": "resultId",
+          "type": "Int",
+          "attributes": "",
+          "relation": false
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "attributes": "@default(now())",
+          "relation": false
+        },
+        {
+          "name": "actor",
+          "type": "Profile",
+          "attributes": "@relation(fields:[actorId],references:[id],onDelete:Restrict)",
+          "relation": true
+        }
+      ],
+      "constraints": [
+        "@@unique([actorId,scope,requestKey])"
+      ]
     }
   ],
   "enums": [
@@ -1762,7 +2682,14 @@
         "VOLUNTEER_CLAIM_DUE",
         "EXCUSE_REVIEW_DUE",
         "TIMESHEET_DISPUTED",
-        "TIMESHEET_DISPUTE_RESOLVED"
+        "TIMESHEET_DISPUTE_RESOLVED",
+        "BOOKING_CONFIRMED",
+        "BOOKING_CANCELLED",
+        "SWAP_REQUESTED",
+        "SWAP_UPDATED",
+        "STUDENT_SICK_SUBMITTED",
+        "STUDENT_SICK_DECIDED",
+        "BOOKING_ATTENDANCE_CHANGED"
       ]
     },
     {
@@ -1799,6 +2726,11 @@
     "20261004000000_support_fortnightly_schedule",
     "20261005000000_sick_occurrences_and_schedule_identity",
     "20261006000000_master_organiser_approval",
-    "20261006010000_lecturer_organiser_registration"
+    "20261006010000_lecturer_organiser_registration",
+    "20261007000000_shared_profile_schedule",
+    "20261008000000_s4_scenario_planning",
+    "20261009000000_s4_swaps_bookings",
+    "20261010000000_s4_student_sick_notes",
+    "20261011000000_s4_audit_restore"
   ]
 }

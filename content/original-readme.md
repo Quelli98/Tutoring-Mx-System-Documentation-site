@@ -1,3 +1,5 @@
+> **Sprint 4 update:** Start with [START-HERE-SPRINT4-MEMBERS1-TO3.md](START-HERE-SPRINT4-MEMBERS1-TO3.md) for the combined Members 1–3 code, migration steps and handoff.
+
 # Tutor Mx System
 
 Tutor Mx is one integrated React + Vite, Auth0, handwritten Express, Prisma and Neon PostgreSQL project. Browser code calls only the Express API; it never connects to Neon, Prisma or an Auth0 Management API.
@@ -5,15 +7,10 @@ Tutor Mx is one integrated React + Vite, Auth0, handwritten Express, Prisma and 
 ## Demo and team repository
 
 - **Production frontend:** https://tutor-mx.pages.dev
-
 - **Latest deployment (commit 579eb35, 2026-09-20):** https://b677174c.tutor-mx.pages.dev
-
 - **Production backend:** https://tutor-mx-api.onrender.com
-
 - **Official team source repository:** Gitea `innovent/tutor-mx-system`
-
 - **Deployment mirror:** the GitHub copy can be used to trigger the hosted Cloudflare Pages / Render deployment, but team development starts from the latest Gitea `main`.
-
 - **Current integrated Sprint 2 code:** Members 1-6 are integrated into this PR-ready source.
 
 **Verification (2026-09-20):** Frontend HTTP 200 ✓ | Backend /health 200 ✓ | Protected API unauthenticated 401 ✓
@@ -21,6 +18,7 @@ Tutor Mx is one integrated React + Vite, Auth0, handwritten Express, Prisma and 
 The hosted demo follows the repository architecture: the browser loads the React/Vite frontend, Auth0 handles sign-in, React sends an Auth0 bearer token to the handwritten Express API, Express enforces role/ownership checks, and Prisma accesses Neon PostgreSQL. Team members can use the public URL for Sprint 1 demonstrations without receiving production database or Auth0 secrets.
 
 For team work, always pull the latest Gitea `main`, work on your own branch, run the relevant checks, push that branch to Gitea, and tell the Integration Lead when it is ready. The Integration Lead merges approved work into `main`. The GitHub deployment mirror should then be refreshed from the approved Gitea `main` so the public demo stays aligned with the official team repository.
+
 
 ## Project structure
 
@@ -35,31 +33,22 @@ For team work, always pull the latest Gitea `main`, work on your own branch, run
 ## Requirements and installation
 
 - Node.js 24
-
 - npm 11 or later
-
 - PostgreSQL 17 for local database verification; deployed environments use Neon
 
 From a clean checkout:
 
 ```bash
-
 npm ci
-
 npm ci --prefix frontend
-
 npm run generate
-
 ```
 
 Copy the two example environment files without committing the copies:
 
 ```bash
-
 cp .env.example .env
-
 cp frontend/.env.example frontend/.env.local
-
 ```
 
 Set the real `DATABASE_URL` only in the backend `.env`. Set matching Auth0 domain, client ID and API audience values in the backend and frontend files. Self-service onboarding and account deletion use server-only Auth0 Management API client credentials when configured; these credentials must never be placed in frontend files or committed.
@@ -67,13 +56,9 @@ Set the real `DATABASE_URL` only in the backend `.env`. Set matching Auth0 domai
 Apply and seed the database, then start both applications:
 
 ```bash
-
 npm run db:migrate
-
 npm run db:seed
-
 npm run dev
-
 ```
 
 The frontend defaults to `http://localhost:5173`; the API defaults to `http://localhost:3000`.
@@ -83,9 +68,7 @@ The frontend defaults to `http://localhost:5173`; the API defaults to `http://lo
 Create an Auth0 Single Page Application and configure these development URLs:
 
 - Allowed callback URL: `http://localhost:5173`
-
 - Allowed logout URL: `http://localhost:5173`
-
 - Allowed web origin: `http://localhost:5173`
 
 Create an Auth0 API whose identifier exactly matches `AUTH0_AUDIENCE` and `VITE_AUTH0_AUDIENCE`, using RS256 access tokens. Configure the database connection named by `AUTH0_DB_CONNECTION` and enable it for the SPA.
@@ -97,9 +80,7 @@ The access token must contain the custom claim named by `AUTH0_ROLES_CLAIM` (def
 Every protected browser request uses:
 
 ```http
-
 Authorization: Bearer <access-token>
-
 ```
 
 | Route | Access | Success | Relevant errors |
@@ -189,17 +170,13 @@ The supplied Qoder screenshot records Qoder application version 1.23.0 and VS Co
 Commits containing AI-generated code must include the actual assisting tool/model trailer(s), for example:
 
 ```text
-
 Assisted-by: ChatGPT[GPT-5.6 Sol]
-
 ```
 
 For the 14 September 2026 Member 2 Sprint 2 final integration in this source, use the truthful trailer:
 
 ```text
-
 Assisted-by: Codex[GPT-5]
-
 ```
 
 Preserve any existing truthful `Assisted-by` trailers for work generated with Codex or Qoder.
@@ -213,3 +190,14 @@ The preceding document was generated and reviewed with the assistance of the fol
 See [Member 5 handoff](MEMBER5_HANDOFF.md) for setup and the new migration, and [API audit and evidence](docs/sprint3-member5-completion.md) for S3-M5-1/2/3. The documentation website includes [Member 5 evidence](docs-site/member5-sprint3.html). This is a locally verified source handoff; production integration and deployment remain with the Integration Lead.
 
 The revised archive includes a [follow-up bug audit](docs/sprint3-member5-followup-audit.md) covering payroll exports, timesheet history recovery and import refresh errors.
+
+
+## Sprint 4 Member 1 update - 3 October 2026
+
+Codex assisted with AI code generation, AI in-line editing and AI code review for shared Student/Tutor schedules, session hardening, permission-checked navigation, notifications and recent/favourite destinations. It also generated regression tests and the handoff notes. The final integrator should review the changes and run project CI before merging. See `START-HERE-SPRINT4-MEMBER1.md` and `docs/sprint4-member1-handoff.md`. No live production deployment or stakeholder validation is claimed.
+
+## Sprint 4 final Member 6 completion
+
+The final Sprint 4 Member 6 planning-intelligence layer is included in this archive. Organisers now have an **Allocation proposal lab** at `/organiser/proposals` with deterministic Balanced, Strongest Match, Fair Workload and Budget Aware strategies, explainable Why this Tutor?/Why not? results, impact comparison, reasoned eligible manual adjustment, and normal draft-Scenario handoff to Compare with Live/Publish. The engine reuses existing allocation eligibility, timetable/clash/capacity rules and confirmed Student tutoring bookings; it does not write directly to live allocations.
+
+See `START-HERE-SPRINT4-FINAL.md` for the final Members 1–6 handover and verification steps.

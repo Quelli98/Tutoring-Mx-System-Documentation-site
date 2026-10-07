@@ -29,10 +29,10 @@ The backend is a **layered, handwritten Express service**, commonly described as
 
 The advantages are straightforward deployment, one permission contract and consistent allocation rules. The trade-off is that large route and bootstrap modules require discipline: `src/app.ts` and `src/server.ts` still contain substantial code. Extracting feature modules is a maintainability opportunity, not something this documentation pretends has already happened.
 
-## Current baseline and Sprint 4 extension
+## Final Sprint 4 architecture
 
-The 30 September source verifies Master Organiser approval, Tutor attendance handling and the shared manual/import Tutor calendar. The handbook treats Sprint 3 as completed. **Student scheduling and the Advanced Sprint 4 capabilities are target designs**, not current routes in that archive.
+The 30 September handbook defined the Sprint 4 extension on top of the completed Sprint 3 baseline. The supplied final repository at **`361954e`** now contains the Student scheduling and Advanced Sprint 4 capabilities in the same application architecture.
 
-The extension reuses `TimeSlot`, recurrence, terms, exceptions, notifications and hard rules. Member 1 generalises schedule ownership; Member 2 intersects availability; Member 3 adds `TutoringBooking`; Member 4 adds `StudentSickNote`; Members 5 and 6 add audit/restore and proposal intelligence. `Allocation` continues to mean Organiser-assigned staffing work. A Student booking does not become a payroll allocation.
+The implementation reuses `TimeSlot`, recurrence, terms, exceptions, notifications and hard rules. Member 1 generalised schedule ownership; Member 2 added mutual availability and Scenarios; Member 3 added `TutoringBooking` and swaps; Member 4 added `StudentSickNote`; Member 5 added audit/restore; Member 6 added proposal intelligence. `Allocation` continues to mean Organiser-assigned staffing work. A Student booking does not become a payroll allocation.
 
 See [the updated UML set](#diagrams), [the shared scheduling design](#student-scheduling) and [the current feature register](#features).

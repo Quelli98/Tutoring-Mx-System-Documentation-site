@@ -9,12 +9,14 @@ The newer supplied rubric screenshots set Aesthetics to 5%, Integration to 3% an
 1. Read [Architecture](#architecture) for the frontend/backend/database boundaries, then [Deployment](#deployment) for actual links and configuration.
 2. Use the [external API examples](#api) and filter the source-registered operation catalogue.
 3. Browse [all database models](#database) and the relationship map; use the read-only evidence queries for real counts.
-4. Inspect the [eight UML diagrams](#diagrams), including explicitly labelled Sprint 4 target behaviour.
-5. Read [Git methodology](#git-methodology), [project process](#process), [testing](#testing), [feature status](#features) and [the current Sprint 4 plan](#sprint4).
+4. Inspect the [eight UML workflow/structure diagrams plus the ERD](#diagrams), then use the Sprint 4 page/source catalogue for the final implemented state.
+5. Read [Git methodology](#git-methodology), [project process](#process), [testing](#testing), [feature status](#features) and the [final Sprint 4 delivery record](#sprint4).
 6. Follow the evidence links, historical feedback and source downloads; distinguish their dates and tested scope.
 
-## Final evidence still needed
+## Final evidence status after the 7 October capture
 
-The documentation covers the criteria in writing. The team still needs current production row counts/classification, final exact-release CI/coverage and browser role evidence, production performance/load measurements, accessibility results, and proof that the planned Sprint 4 features were actually merged and deployed. The 30 September source is a completed baseline for Sprint 4, not proof that all Advanced cards are finished.
+The final evidence bundle now includes the release repository at `361954e`, Render live deployment, exact-release Codecov, a successful Gitea Actions run for the reviewed Member 6 branch immediately before the final merge, Neon production-branch/table screenshots, redacted-safe Auth0 role configuration, live Student/Tutor/Organiser UI captures, responsive device-emulation captures, and deployed `/health`/`/ready` latency plus light-load measurements.
+
+The remaining gaps are narrower and are stated rather than hidden: the supplied Gitea screenshot shows the green reviewed branch commit `2f62311` rather than a separate green run for merge commit `361954e`; Neon production row counts and the actual `_prisma_migrations` rows were not captured; no standalone Lighthouse/screen-reader report or complete keyboard-test transcript was supplied; and no separate final stakeholder sign-off / unresolved-defect register was supplied. The documentation therefore does not invent those results.
 
 [Current main rubric screenshot](evidence/rubric-m4-main.png) · [Current quality fragment](evidence/rubric-m4-quality.png) · [Original project brief](documents/project-brief.pdf).

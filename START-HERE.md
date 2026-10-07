@@ -11,7 +11,7 @@ npm run validate
 npm run dev
 ```
 
-4. Open the Vite URL printed in the terminal. Review Overview, Milestone 4, API, Database, Master Organiser, Student scheduling and UML diagrams.
+4. Open the Vite URL printed in the terminal. Review Overview, Sprint 4 final, Milestone 4, API, Database, Testing, Deployment, Student scheduling and UML diagrams.
 5. To update the existing public site, copy/merge this project's contents into your **documentation Git checkout**, preserving its `.git` folder and any unrelated local work. Do not copy into the Tutor MX application checkout.
 6. Inspect and publish from that documentation checkout:
 
@@ -24,7 +24,7 @@ npm run build
 npm run validate
 git add README.md START-HERE.md VERIFICATION.md index.html package.json package-lock.json src content scripts public verification
 git diff --cached --check
-git commit -m "docs: complete Tutor MX engineering website and updated UML"
+git commit -m "docs: add final Sprint 4 implementation and release evidence"
 git push origin main
 ```
 

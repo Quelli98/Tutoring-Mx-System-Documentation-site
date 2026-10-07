@@ -2,14 +2,25 @@
 
 | Service | Public / administrative link | What runs there | Evidence boundary |
 | --- | --- | --- | --- |
-| Tutor MX frontend | [tutor-mx.pages.dev](https://tutor-mx.pages.dev) | Compiled React/Vite static assets | A browser role smoke test is needed for the final release |
-| Tutor MX backend | [tutor-mx-api.onrender.com/health](https://tutor-mx-api.onrender.com/health) | Node.js + Express | Earlier health/readiness checks passed; source archive has no release SHA |
-| Neon PostgreSQL | [Project and branch](https://console.neon.tech/app/projects/morning-rice-90086270/branches/br-rapid-term-b2gq2rx2) | Relational database | Console requires authorised access; current row counts not supplied |
-| Auth0 | [Auth0 dashboard](https://manage.auth0.com/) | Identity provider, role claims, Management API | Tenant access restricted to authorised administrators |
+| Tutor MX frontend | [tutor-mx.pages.dev](https://tutor-mx.pages.dev) | Compiled React/Vite static assets | Final deployment plus Student/Tutor/Organiser UI and responsive screenshots supplied |
+| Tutor MX backend | [health](https://tutor-mx-api.onrender.com/health) · [ready](https://tutor-mx-api.onrender.com/ready) | Node.js + Express | Render shows `361954e` Live; final public latency/light-load evidence supplied |
+| Neon PostgreSQL | Administrative console (login required; screenshot evidence retained below) | Relational database | Production branch/table evidence supplied; current row counts not supplied |
+| Auth0 | Administrative console (login required; screenshot evidence retained below) | Identity provider, role claims, Management API | Role-list evidence supplied without exposing tokens or client secrets |
 | Prisma | Schema/client inside the repository/backend | Database toolkit, migrations and typed queries | It is not a separate hosting server |
 | Documentation | [GitHub Pages](https://quelli98.github.io/Tutoring-Mx-System-Documentation-site/) | This independent static documentation build | This ZIP must be reviewed/pushed to update the public site |
 
 The deployment diagram shows managed services, browser execution and network connections. We do not invent provider physical server counts or hardware specifications.
+
+### Public marker links — no provider login required
+
+- [Open the stable Tutor MX application](https://tutor-mx.pages.dev)
+- [Open the final Cloudflare deployment captured for Sprint 4](https://06d22424.tutor-mx.pages.dev)
+- [Check the public API health endpoint](https://tutor-mx-api.onrender.com/health)
+- [Check the public API readiness endpoint](https://tutor-mx-api.onrender.com/ready)
+- [Open the public documentation site](https://quelli98.github.io/Tutoring-Mx-System-Documentation-site/)
+- [Open the public documentation source repository](https://github.com/Quelli98/Tutoring-Mx-System-Documentation-site)
+
+Gitea Actions, Neon and Auth0 are intentionally **not** offered as public verification links because they require project/tenant access. Their relevant final screenshots are embedded as evidence instead.
 
 ## Frontend configuration
 
@@ -36,12 +47,16 @@ npm run build
 npx wrangler pages deploy dist --project-name=tutor-mx --branch=main --commit-dirty=true
 ```
 
-The handbook uses `--commit-dirty=true` for the deployment tool; this does not prove that a dirty working tree is the approved release. Record `git status`, the approved source SHA and the exact build/deploy evidence. The ZIP has no `.git` metadata, so no current SHA is invented here.
+The handbook uses `--commit-dirty=true` for the deployment tool; this does not prove that a dirty working tree is the approved release. For the final supplied repository, the approved source SHA is **`361954e`**. The final frontend upload produced **`https://06d22424.tutor-mx.pages.dev`**; the stable public address remains **`https://tutor-mx.pages.dev`**.
 
 Deploy the matching backend through the team's Render workflow, then verify `/health`, `/ready`, one approved account per role and the Master queue. Keep the release SHA, migration status, logs and screenshots together. A successful frontend upload alone does not verify the backend or all role flows.
 
-## What the screenshots show
+## Final Sprint 4 release evidence — 7 October 2026
 
-The retained Render screenshot shows an earlier live deployment and commit `5b426af`. It is useful dated history, not proof that the newer Master Organiser source is the currently deployed commit. The Neon screenshot shows table structure at that time. Newer table fields and models on this site are verified from the 30 September source archive.
+The supplied Render dashboard screenshot shows `tutor-mx-api` **Live** on commit **`361954e`** with deployment message **“Merge reviewed Sprint 4 Member 6 final fixes”**. The final Codecov screenshots identify the same commit, linking the release source and coverage evidence.
 
-A redacted Auth0 tenant/role screenshot was not supplied. The site therefore explains the actual provider, claim and guard code and gives the exact demo workflow; it does not fabricate a dashboard screenshot.
+![Render final Sprint 4 deployment](evidence/sprint4-render-final-2026-10-07.png)
+
+The final release source is therefore no longer an unknown 30 September snapshot: it is the supplied Git repository `main` at `361954ec510c624c5f2a0f3d0940c2f7cb769d2e`. Historical Render/Neon screenshots remain useful for earlier milestones, but this 7 October evidence is the Sprint 4 release record.
+
+Additional final evidence was supplied after the release capture: a Neon production-branch overview/table list, Auth0 role configuration, the public landing page and a green Gitea Actions run for the reviewed Member 6 branch. These are embedded below; they are evidence screenshots rather than public administrative links.

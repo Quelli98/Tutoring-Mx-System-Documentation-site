@@ -43,14 +43,29 @@
     },
     {
       "id": "scrum-workflow-retrospective-2026-09-11",
-      "title": "Sprint workflow retrospective and Sprint 3–4 reorganisation",
+      "title": "Sprint workflow retrospective and Sprint 3\u20134 reorganisation",
       "date": "2026-09-11",
       "type": "Internal Scrum / process retrospective",
       "attendees": "6 Tutor MX team members attended",
       "summary": "Microsoft Teams records the Scrum meeting from 16:58 to 17:17, with a meeting duration of 18m 42s and average attendance of 15m 56s. The team reviewed the Sprint 2 working method and recorded that it was not working well enough for the group.",
       "duration": "18m 42s (Teams attendance report)",
-      "outcomes": "The group agreed that Sprint 3 and Sprint 4 should progress sequentially Member 1 → Member 2 → Member 3 → Member 4 → Member 5 → Member 6. The first recorded implementation of that idea used a cumulative three-branch chain; this remains historical evidence and was later simplified on 18 September to one branch per Member while preserving the same sequential handoff principle.",
+      "outcomes": "The group agreed that Sprint 3 and Sprint 4 should progress sequentially Member 1 \u2192 Member 2 \u2192 Member 3 \u2192 Member 4 \u2192 Member 5 \u2192 Member 6. The first recorded implementation of that idea used a cumulative three-branch chain; this remains historical evidence and was later simplified on 18 September to one branch per Member while preserving the same sequential handoff principle.",
       "proof": "evidence/scrum-meeting-2026-09-11.png"
+    },
+    {
+      "id": "sprint4-final-release-2026-10-07",
+      "title": "Complete and deploy Sprint 4 through Member 6",
+      "date": "2026-10-07",
+      "sprint": 4,
+      "category": "Sprint 4 / Release",
+      "summary": "Members 1\u20136 were integrated sequentially into main. The final reviewed Member 6 fixes complete the explainable proposal engine, proposal cockpit and strategy comparison on top of the Student scheduling, scenario, swap and audit work from Members 1\u20135.",
+      "outcomes": "Final supplied main is 361954e. Render shows that commit Live. Codecov for the same commit reports frontend/src 80.96% and backend src 85.29%. The documentation preserves the remaining evidence gaps rather than inventing browser, database, performance or stakeholder proof.",
+      "proofs": [
+        "evidence/sprint4-render-final-2026-10-07.png",
+        "evidence/sprint4-codecov-overview-final-2026-10-07.png",
+        "evidence/sprint4-codecov-frontend-final-2026-10-07.png",
+        "evidence/sprint4-codecov-backend-final-2026-10-07.png"
+      ]
     }
   ],
   "planning": [
@@ -60,7 +75,7 @@
       "date": "2026-08-08",
       "sprint": 1,
       "category": "Methodology",
-      "summary": "The planning handbook divides delivery into the four assessed sprints and defines six equal technical roles for each sprint. Before every sprint, the coordinator circulates a poll so each team member can select an available Member 1–6 role. This makes ownership visible, distributes work fairly and allows roles to rotate instead of becoming permanent silos.",
+      "summary": "The planning handbook divides delivery into the four assessed sprints and defines six equal technical roles for each sprint. Before every sprint, the coordinator circulates a poll so each team member can select an available Member 1\u20136 role. This makes ownership visible, distributes work fairly and allows roles to rotate instead of becoming permanent silos.",
       "outcomes": "At the start of each sprint: confirm the sprint goal, run and preserve the role-selection poll, assign one person to each of the six roles, create the role-linked issues and dependencies, and record the final allocation. The handbook is the decision record; dated polls, assigned issues, commits and PRs are the implementation evidence.",
       "proofs": [
         "evidence/role-selection.jpg",
@@ -74,7 +89,7 @@
       "date": "2026-08-08",
       "sprint": 1,
       "category": "Database",
-      "summary": "The team questioned whether Supabase-generated endpoints would conflict with the brief's requirement to design and implement its own API. After consultation and comparison, the proposed architecture became React + Vite → a team-written Node.js/Express API → Prisma → Neon PostgreSQL. The SQL/Express PDF records why this option provides a clearer handwritten API boundary, front/back separation, demonstrable routes and CI-friendly structure.",
+      "summary": "The team questioned whether Supabase-generated endpoints would conflict with the brief's requirement to design and implement its own API. After consultation and comparison, the proposed architecture became React + Vite \u2192 a team-written Node.js/Express API \u2192 Prisma \u2192 Neon PostgreSQL. The SQL/Express PDF records why this option provides a clearer handwritten API boundary, front/back separation, demonstrable routes and CI-friendly structure.",
       "outcomes": "Use Express for team-owned routes and business logic, Prisma for server-side data access and Neon for PostgreSQL hosting. The browser must never connect directly to Neon. This PDF and discussion prove the decision process; schema, migrations, API commits, integration tests and a deployed database must later prove implementation. The database PDF is AI-assisted, but its original author must confirm the exact tool, model and purpose before submission.",
       "proofs": [
         "evidence/database-consultation.png",
@@ -182,7 +197,7 @@
       "sprint": 3,
       "category": "Methodology",
       "summary": "The Sprint 2 organisation created excessive coordination and merge overhead. The team agreed that the remaining sprints should run in strict Member order so each person starts from an accepted main baseline.",
-      "outcomes": "The initial 11 September version also proposed a cumulative three-branch chain inside each Member turn. This is retained as historical process evidence. The final 18 September roadmap kept the sequential Member 1→6 rule but simplified each turn to one branch per Member and explicitly separated Integration Lead work from Member feature work.",
+      "outcomes": "The initial 11 September version also proposed a cumulative three-branch chain inside each Member turn. This is retained as historical process evidence. The final 18 September roadmap kept the sequential Member 1\u21926 rule but simplified each turn to one branch per Member and explicitly separated Integration Lead work from Member feature work.",
       "proofs": [
         "evidence/scrum-meeting-2026-09-11.png"
       ]
@@ -204,7 +219,7 @@
       "sprint": 3,
       "category": "Methodology / Planning",
       "summary": "The group reviewed current main against the project brief and found duplicated future scope plus Integration Lead-style work sitting inside Member 6 responsibilities.",
-      "outcomes": "Final method: one branch per Member, strict Member 1→6 order, no forward dependencies, Integration Lead-only review/merge/regression/deployment governance, and substantive Member 6 Command Centre/explainable proposal feature work.",
+      "outcomes": "Final method: one branch per Member, strict Member 1\u21926 order, no forward dependencies, Integration Lead-only review/merge/regression/deployment governance, and substantive Member 6 Command Centre/explainable proposal feature work.",
       "proofs": []
     },
     {
@@ -213,7 +228,7 @@
       "date": "2026-09-18",
       "sprint": 1,
       "category": "Documentation / assessment traceability",
-      "summary": "The public site already retained Sprint 1 evidence, but the group wanted Sprint 1 to have the same clear roadmap treatment as later milestones. The roadmap therefore maps every official Milestone 1 criterion to the project foundation, chronological decisions, Member 1–6 ownership and retained evidence without changing the existing Sprint 2 roadmap/rubric page.",
+      "summary": "The public site already retained Sprint 1 evidence, but the group wanted Sprint 1 to have the same clear roadmap treatment as later milestones. The roadmap therefore maps every official Milestone 1 criterion to the project foundation, chronological decisions, Member 1\u20136 ownership and retained evidence without changing the existing Sprint 2 roadmap/rubric page.",
       "outcomes": "Add a dedicated Sprint 1 Roadmap page, preserve the supplied rubric screenshots, link each rubric area to one evidence owner, document honest Sprint 1 boundaries and make the page usable as Group Report methodology/history evidence and Individual Report contribution context.",
       "proofs": [
         "evidence/sprint1-rubric-part1.png",
@@ -248,12 +263,12 @@
     {
       "id": "brief",
       "title": "COMS3011A Project Brief",
-      "summary": "Official milestones, project requirements, dates and rubrics for Sprints 1–4.",
+      "summary": "Official milestones, project requirements, dates and rubrics for Sprints 1\u20134.",
       "url": "documents/project-brief.pdf"
     },
     {
       "id": "handbook",
-      "title": "Tutor Mx Gitea Sprint Handbook — Final 18 Sep 2026 planning baseline",
+      "title": "Tutor Mx Gitea Sprint Handbook \u2014 Final 18 Sep 2026 planning baseline",
       "summary": "Authoritative remaining-sprint plan. Preserves Sprint 1-2 history and post-Sprint 2 stabilisation; pages 30-50 contain the audited one-branch-per-Member Sprint 3-4 roadmap, Integration Lead separation and Command Centre/explainable allocation work.",
       "url": "documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf"
     },
@@ -351,7 +366,7 @@
       "sprint": 3,
       "category": "Methodology / Planning",
       "summary": "The group reviewed current main against the project brief and found that parts of the earlier future roadmap duplicated implemented work and that Member 6 carried Integration Lead-style release duties rather than enough genuine feature scope.",
-      "outcomes": "The final plan uses one branch per Member in strict order 1→6; feature owners include any small backend/schema work needed for their vertical slice; Integration Lead review/merge/regression/deployment remains separate; Member 6 receives substantive Command Centre and explainable proposal work; report-ready decision rationale is documented throughout the website.",
+      "outcomes": "The final plan uses one branch per Member in strict order 1\u21926; feature owners include any small backend/schema work needed for their vertical slice; Integration Lead review/merge/regression/deployment remains separate; Member 6 receives substantive Command Centre and explainable proposal work; report-ready decision rationale is documented throughout the website.",
       "proofs": []
     }
   ]

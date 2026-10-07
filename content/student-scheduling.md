@@ -1,46 +1,44 @@
-## Sprint 4 target: extend the existing timetable
+## Sprint 4 final implementation: one shared calendar system
 
-**This chapter describes the 30 September handbook's target design.** The referenced source does not yet have a Student personal timetable route, `TutoringBooking` or `StudentSickNote`. These are assigned Sprint 4 changes. The UML diagrams use a dashed target style where they show this future work.
-
-Student and Tutor schedules must share `TimeSlot`, the manual/import validators, CSV/ICS parsers, recurrence expansion, terms, exceptions and the weekly calendar. M1 generalises the existing Tutor-named owner relationship to Profile ownership and preserves every existing Tutor row. Creating `StudentTimeSlot`, a second term table or a second calendar parser would duplicate the working system.
+The 30 September handbook specified that Student and Tutor scheduling must share the existing timetable engine. The final Sprint 4 source implements that design. Student and Tutor schedules use the same `TimeSlot`, manual/import validators, CSV/ICS parsers, recurrence expansion, academic terms, occurrence exceptions and weekly calendar. M1 generalised ownership to the signed-in `Profile` while retaining the Tutor route aliases for compatibility.
 
 | Shared concept | Tutor meaning | Student meaning |
 | --- | --- | --- |
-| Personal TimeSlot | University class / unavailable interval | University class / unavailable interval |
-| Recurrence | Once, Weekly, Fortnightly; term bounds and exceptions | The same expansion and boundary rules |
-| Organiser Allocation | Assigned staffing work; capacity/payroll rules | Not a Student personal timetable record |
-| TutoringBooking | Appointment with a Student; contributes busy time | Booked appointment with a Tutor; contributes busy time |
+| Personal `TimeSlot` | University class / unavailable interval | University class / unavailable interval |
+| Recurrence | Once, Weekly, Fortnightly; term bounds and exceptions | Same expansion and boundary rules |
+| Organiser `Allocation` | Assigned staffing work; capacity/payroll rules | Not a Student personal timetable record |
+| `TutoringBooking` | Appointment with a Student; contributes busy time | Booked appointment with a Tutor; contributes busy time |
 | Capacity | Tutor work preference/weekly limit | No Tutor-capacity setting exposed |
 
-## Mutual availability belongs on the backend
+No separate `StudentTimeSlot`, Student recurrence engine or duplicate CSV/ICS parser was introduced.
 
-M2 creates a shared busy-interval/gap service. Student busy time includes own recurring TimeSlots and existing bookings. Tutor busy time includes TimeSlots, confirmed allocations and bookings. Terms, teaching breaks and occurrence exceptions are applied before gaps are offered. Bound the future search window and result count, and ensure an interval can fit the requested session length.
+## Mutual availability runs on the backend
 
-**Bookable times = Student free intervals intersect Tutor free intervals.** For example, Student free 11:00–14:00 plus Tutor busy 12:00–13:00 produces 11:00–12:00 and 13:00–14:00. A 90-minute appointment fits neither gap. Merely being free at the start time is not enough.
+M2's shared busy-interval/gap service intersects both people's safe availability. Student busy time includes recurring own TimeSlots and existing confirmed bookings. Tutor busy time includes TimeSlots, confirmed allocations and bookings. Term bounds, breaks, recurrence exceptions, duration, future-window limits and result bounds are applied before a slot is offered.
 
-The response exposes safe bookable intervals, not the other person's private class/event labels. M2's panel is read-only. It does not save a booking or reserve a time.
+**Bookable times = Student free intervals ∩ Tutor free intervals.** If a Student is free 11:00–14:00 and the Tutor is busy 12:00–13:00, the safe gaps are 11:00–12:00 and 13:00–14:00. A 90-minute request does not fit either gap. The response exposes bookable intervals, not the other person's private class/event labels.
 
-## Booking rechecks availability
+## Booking rechecks availability transactionally
 
-M3 adds a minimal `TutoringBooking` with Student, Tutor, course, start/end and status. On confirmation, the server resolves the Student from the token and rechecks mutual availability inside the write transaction. A concurrent booking can make a previously shown slot unavailable; a stale browser preview is not permission to double-book.
+M3 added `TutoringBooking`. The Student chooses a mutual free slot, but the server checks availability again when saving. A competing booking can invalidate an earlier preview, so stale UI does not permit double-booking.
 
-A confirmed booking appears on both calendars and is included in all later busy/clash calculations. Future cancellation updates status and frees the interval; history remains. Both parties receive one de-duplicated notification. The booking stays separate from Organiser staffing `Allocation` and payroll.
+A confirmed booking appears on both Student and Tutor calendars and becomes busy time for later booking and allocation clash checks. Allowed future cancellation changes the booking status rather than deleting the record, immediately frees the interval and keeps history. Student bookings remain scheduling appointments; they do not create payroll allocations.
 
-## Student sickness and preserved history
+## Student sickness reuses the approval pattern
 
-M4 adds `StudentSickNote` or an equivalent minimal model linked to the Student's own eligible booking. The request stores a reason and `PENDING` status; Organiser Approvals supports approve/reject and review notes. Only one active request per booking is allowed.
+M4 added `StudentSickNote`, linked to the Student's own eligible booking. The request stores the reason and starts Pending. Organiser Approvals supports approve/reject and review notes. Only one active request per booking is allowed.
 
-| Decision | Intended booking effect | History |
+| Decision | Final booking effect | History |
 | --- | --- | --- |
 | Pending | Keep scheduled while waiting | Request visible |
 | Rejected | Leave booking scheduled | Decision/review note visible |
-| Approved in advance | Mark Excused and release future busy time | Booking and decision retained |
-| Approved on/after session | Show Skipped | Preserve attendance history |
+| Approved before start | Mark Excused and release active busy time | Booking and decision retained |
+| Approved at/after start | Show Skipped | Attendance history retained |
 
-“Same as Tutor” means reusing the request/decision/status pattern. The existing Tutor `Excuse` table remains intact. The handbook does not ask for medical file uploads, so no storage/upload subsystem is assumed. The exact Student timing boundary must be implemented and tested; the current Tutor code's calendar-day rule is documented separately.
+The feature does not add medical document upload. Tutors can receive attendance state without receiving the Student's private sickness reason.
 
-## How later features reuse these rules
+## How M5 and M6 reuse scheduling truth
 
-M5 instruments successful booking and sickness mutations in the shared audit timeline and hardens permission, conflict and retry behaviour. M6's proposal engine must include confirmed Student bookings in Tutor busy time. Proposal presets alter soft weights, never hard mark/clash/capacity rules. The output is a draft scenario, followed by Compare with Live and explicit Publish.
+M5 instruments successful booking/sick-note mutations through the shared audit pattern and adds retry/concurrency hardening. M6's proposal engine reuses the same clash source, so confirmed Student bookings count as Tutor busy time. Proposal presets may change soft priorities, but they never override mark, clash, selected-week capacity or Organiser locks.
 
-See [the chronological Sprint 4 plan](#sprint4) for ownership and acceptance requirements.
+See [Sprint 4 final delivery](#sprint4) for the complete Member sequence and release evidence.

@@ -1,6 +1,6 @@
 {
   "info": {
-    "name": "Tutor MX read-only evidence",
+    "name": "Tutor MX read-only evidence \u2014 final Sprint 4",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -20,7 +20,7 @@
         "method": "GET",
         "header": [],
         "url": "{{base_url}}/health",
-        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+        "description": "Read-only source route. Access: PUBLIC. Use only authorised test data and keep tokens in your local Postman environment."
       }
     },
     {
@@ -29,7 +29,7 @@
         "method": "GET",
         "header": [],
         "url": "{{base_url}}/ready",
-        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+        "description": "Read-only source route. Access: PUBLIC. Use only authorised test data and keep tokens in your local Postman environment."
       }
     },
     {
@@ -44,11 +44,11 @@
           }
         ],
         "url": "{{base_url}}/api/me",
-        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+        "description": "Read-only source route. Access: ALL ROLES. Use only authorised test data and keep tokens in your local Postman environment."
       }
     },
     {
-      "name": "GET /api/courses",
+      "name": "GET /api/profile/current",
       "request": {
         "method": "GET",
         "header": [
@@ -58,83 +58,8 @@
             "type": "text"
           }
         ],
-        "url": "{{base_url}}/api/courses",
-        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
-      }
-    },
-    {
-      "name": "GET /api/tutors",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "{{base_url}}/api/tutors",
-        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
-      }
-    },
-    {
-      "name": "GET /api/tutor/dashboard",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "{{base_url}}/api/tutor/dashboard",
-        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
-      }
-    },
-    {
-      "name": "GET /api/tutor/time-slots",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "{{base_url}}/api/tutor/time-slots",
-        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
-      }
-    },
-    {
-      "name": "GET /api/student/open-work",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "{{base_url}}/api/student/open-work",
-        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
-      }
-    },
-    {
-      "name": "GET /api/student/volunteer-requests",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "{{base_url}}/api/student/volunteer-requests",
-        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+        "url": "{{base_url}}/api/profile/current",
+        "description": "Read-only source route. Access: ALL ROLES. Use only authorised test data and keep tokens in your local Postman environment."
       }
     },
     {
@@ -149,7 +74,7 @@
           }
         ],
         "url": "{{base_url}}/api/auth/organiser-application/me",
-        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+        "description": "Read-only source route. Access: IDENTITY. Use only authorised test data and keep tokens in your local Postman environment."
       }
     },
     {
@@ -164,7 +89,667 @@
           }
         ],
         "url": "{{base_url}}/api/master-organiser/organiser-applications",
-        "description": "Read only. Use your own authorised role. Token stays in your local Postman environment."
+        "description": "Read-only source route. Access: MASTER ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/public-holidays",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/public-holidays",
+        "description": "Read-only source route. Access: ALL ROLES. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/courses",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/courses",
+        "description": "Read-only source route. Access: ALL ROLES. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/tutors",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/tutors",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/allocations",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/allocations",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/allocations/candidates",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/allocations/candidates",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/reports/workload",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/reports/workload",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/reports/payroll-export",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/reports/payroll-export",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/staffing-requirements",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/staffing-requirements",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/organiser/command-centre",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/organiser/command-centre",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/organiser/approvals",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/organiser/approvals",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/organiser/overflow-work",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/organiser/overflow-work",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/organiser/timesheet-disputes",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/organiser/timesheet-disputes",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/tutors/:tutorId/marks",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/tutors/{{tutorId}}/marks",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/tutors/:tutorId/time-slots",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/tutors/{{tutorId}}/time-slots",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/tutor/dashboard",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/tutor/dashboard",
+        "description": "Read-only source route. Access: TUTOR. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/me/time-slots",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/me/time-slots",
+        "description": "Read-only source route. Access: STUDENT / TUTOR. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/tutor/time-slots",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/tutor/time-slots",
+        "description": "Read-only source route. Access: TUTOR. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/academic-terms",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/academic-terms",
+        "description": "Read-only source route. Access: PROFILE. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/academic-terms/published",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/academic-terms/published",
+        "description": "Read-only source route. Access: PROFILE. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/tutor/timesheets/:timesheetId/history",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/tutor/timesheets/{{timesheetId}}/history",
+        "description": "Read-only source route. Access: TUTOR. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/student/open-work",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/student/open-work",
+        "description": "Read-only source route. Access: STUDENT. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/student/volunteer-requests",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/student/volunteer-requests",
+        "description": "Read-only source route. Access: STUDENT. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/student/volunteer-requests/:requestId",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/student/volunteer-requests/{{requestId}}",
+        "description": "Read-only source route. Access: STUDENT. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/tutor/timesheets/:timesheetId/status",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/tutor/timesheets/{{timesheetId}}/status",
+        "description": "Read-only source route. Access: TUTOR. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/tutor/excuses/:excuseId/status",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/tutor/excuses/{{excuseId}}/status",
+        "description": "Read-only source route. Access: TUTOR. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/organiser/audit",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/organiser/audit",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/organiser/audit/export",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/organiser/audit/export",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/organiser/audit/:id",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/organiser/audit/{{id}}",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/organiser/allocations/:id/history",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/organiser/allocations/{{id}}/history",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/organiser/student-sick-notes",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/organiser/student-sick-notes",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/me/bookings",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/me/bookings",
+        "description": "Read-only source route. Access: STUDENT / TUTOR. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/me/bookings/:id",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/me/bookings/{{id}}",
+        "description": "Read-only source route. Access: STUDENT / TUTOR. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/swaps",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/swaps",
+        "description": "Read-only source route. Access: TUTOR / ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/swaps/:id",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/swaps/{{id}}",
+        "description": "Read-only source route. Access: TUTOR / ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/tutor/allocations/:id/replacements",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/tutor/allocations/{{id}}/replacements",
+        "description": "Read-only source route. Access: TUTOR. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/organiser/proposals/:scenarioId/explanations",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/organiser/proposals/{{scenarioId}}/explanations",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/organiser/scenarios",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/organiser/scenarios",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/organiser/scenarios/:scenarioId",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/organiser/scenarios/{{scenarioId}}",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/organiser/scenarios/:scenarioId/compare",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/organiser/scenarios/{{scenarioId}}/compare",
+        "description": "Read-only source route. Access: ORGANISER. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/student/tutoring-options",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/student/tutoring-options",
+        "description": "Read-only source route. Access: STUDENT. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/search",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/search",
+        "description": "Read-only source route. Access: ALL ROLES. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/notifications",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/notifications",
+        "description": "Read-only source route. Access: ALL ROLES. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/notifications/unread-count",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/notifications/unread-count",
+        "description": "Read-only source route. Access: ALL ROLES. Use only authorised test data and keep tokens in your local Postman environment."
+      }
+    },
+    {
+      "name": "GET /api/notifications/:id",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/notifications/{{id}}",
+        "description": "Read-only source route. Access: ALL ROLES. Use only authorised test data and keep tokens in your local Postman environment."
       }
     }
   ]

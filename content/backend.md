@@ -1,6 +1,6 @@
 ## A handwritten HTTP API
 
-`src/server.ts` loads configuration and wires real dependencies. `src/app.ts` builds Express middleware and registers the 82 operations in the current source archive. Feature services implement allocation, timesheet, timetable, overflow, reporting and other domain rules. Authentication modules verify access tokens; the database module provides Prisma/pg connectivity.
+`src/server.ts` loads configuration and wires real dependencies. `src/app.ts` builds Express middleware and registers the **120 operations** in the supplied final Sprint 4 source. Feature services implement allocation, timesheet, timetable, overflow, reporting and other domain rules. Authentication modules verify access tokens; the database module provides Prisma/pg connectivity.
 
 | Boundary | Job | Why it exists |
 | --- | --- | --- |
@@ -24,13 +24,13 @@ Tutor and Student services derive the current owner from the verified subject. A
 
 Allocation eligibility keeps mark, timetable clash and selected-week capacity as separate hard checks. All required checks must pass; a strong mark cannot compensate for a real clash. A post-save candidate refresh can exclude the just-saved allocation so it does not clash with itself.
 
-Timesheet and volunteer decisions enforce legal state transitions. Import/overflow creation use durable write receipts for selected retry-prone operations. A matching idempotency key/payload replays the recorded result; reusing the key with different content returns a conflict. This is not a promise that every POST endpoint supports that header. Bulk allocation commits have item-level outcomes; they are not the future scenario all-or-nothing publish workflow.
+Timesheet and volunteer decisions enforce legal state transitions. Import/overflow creation use durable write receipts for selected retry-prone operations. A matching idempotency key/payload replays the recorded result; reusing the key with different content returns a conflict. This is not a promise that every POST endpoint supports that header. Bulk allocation commits have item-level outcomes. Sprint 4 Scenario publishing is a separate explicit workflow that rechecks the current draft/version and hard rules before live changes.
 
 ## Tutor sickness is already implemented
 
 `Excuse` now stores review metadata, `absenceReason` and `occurrenceStatus`. A successful decision preserves the allocation and attendance history. Work-log eligibility reflects approved sickness.
 
-The current helper uses Johannesburg calendar days: it returns `EXCUSED` when the request was submitted on a calendar day before the session starts **and** approval occurs before the session ends; otherwise it returns `SKIPPED`. This is more specific than the handbook's shorthand “in advance”. Student sickness remains a Sprint 4 target and must define/test its timing boundary when implemented.
+The current helper uses Johannesburg calendar days: it returns `EXCUSED` when the request was submitted on a calendar day before the session starts **and** approval occurs before the session ends; otherwise it returns `SKIPPED`. This is more specific than the handbook's shorthand “in advance”. Student sickness is now implemented separately through `StudentSickNote`: an approved request before the booking starts releases active busy time as Excused, while an approval at/after the start is retained as Skipped history.
 
 ## Master approval crosses two systems
 

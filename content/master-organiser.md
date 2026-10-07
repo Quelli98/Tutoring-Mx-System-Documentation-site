@@ -34,3 +34,8 @@ Capture request status, safe UI result and the tested release SHA. Do not captur
 The backend checks Master access even if somebody directly types the queue URL or sends curl. A missing menu alone is not proof of secure access control. Approval can fail if the application is already reviewed, email changed, identity is unverified or a provider is unavailable.
 
 Auth0 role provisioning and the Neon transaction do not share a transaction manager. Test a failed database update after the external role grant, then reconcile state through a defined administrative recovery process. Preserve this limit in the final evidence rather than claiming the entire cross-provider operation is atomic.
+
+
+## Final configuration evidence
+
+The final Auth0 role-list screenshot retained in [Security & roles](#security/auth0-role-evidence-7-october-2026) shows `MASTER_ORGANIZER` alongside `ORGANISER`, `STUDENT` and `TUTOR`. The Master role description states that it can review and approve or reject Tutor MX organiser applications. Because the Auth0 dashboard requires administrator login, the documentation embeds the screenshot instead of sending the marker to a private tenant URL.

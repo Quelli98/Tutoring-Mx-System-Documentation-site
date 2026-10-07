@@ -2,8 +2,8 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Tutor MX source operation inventory",
-    "version": "2026-09-30",
-    "description": "Static documentation inventory. Not proof of current deployment and not a complete typed request/response contract."
+    "version": "2026-10-07",
+    "description": "Static documentation inventory generated from the final Sprint 4 source. It documents registered operations but is not a substitute for the route implementation or authenticated acceptance tests."
   },
   "servers": [
     {
@@ -15,7 +15,7 @@
       "get": {
         "operationId": "get-health",
         "summary": "/health",
-        "description": "Access: PUBLIC. Source: src/app.ts line 2367. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "description": "Access: PUBLIC. Source: src/app.ts line 2385. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [],
         "responses": {
           "200": {
@@ -28,7 +28,7 @@
       "get": {
         "operationId": "get-ready",
         "summary": "/ready",
-        "description": "Access: PUBLIC. Source: src/app.ts line 2371. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "description": "Access: PUBLIC. Source: src/app.ts line 2389. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [],
         "responses": {
           "200": {
@@ -40,8 +40,8 @@
     "/api/auth/password-reset": {
       "post": {
         "operationId": "post-api-auth-password-reset",
-        "summary": "requestPasswordReset",
-        "description": "Access: PUBLIC. Source: src/app.ts line 2386. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/auth/password-reset",
+        "description": "Access: PUBLIC. Source: src/app.ts line 2404. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [],
         "responses": {
           "202": {
@@ -53,8 +53,8 @@
     "/api/auth/onboarding": {
       "post": {
         "operationId": "post-api-auth-onboarding",
-        "summary": "onboardUser",
-        "description": "Access: IDENTITY. Source: src/app.ts line 2415. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/auth/onboarding",
+        "description": "Access: IDENTITY. Source: src/app.ts line 2433. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -63,12 +63,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -76,8 +70,8 @@
     "/api/auth/organiser-registration": {
       "post": {
         "operationId": "post-api-auth-organiser-registration",
-        "summary": "registerOrganiserApplication",
-        "description": "Access: IDENTITY. Source: src/app.ts line 2434. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/auth/organiser-registration",
+        "description": "Access: IDENTITY. Source: src/app.ts line 2452. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -86,12 +80,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -99,8 +87,8 @@
     "/api/auth/organiser-application-status": {
       "post": {
         "operationId": "post-api-auth-organiser-application-status",
-        "summary": "getOrganiserApplicationStatusByEmail",
-        "description": "Access: PUBLIC. Source: src/app.ts line 2452. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/auth/organiser-application-status",
+        "description": "Access: PUBLIC. Source: src/app.ts line 2470. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [],
         "responses": {
           "200": {
@@ -112,8 +100,8 @@
     "/api/auth/resend-verification": {
       "post": {
         "operationId": "post-api-auth-resend-verification",
-        "summary": "requestVerificationEmail",
-        "description": "Access: IDENTITY. Source: src/app.ts line 2473. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/auth/resend-verification",
+        "description": "Access: IDENTITY. Source: src/app.ts line 2491. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -122,12 +110,6 @@
         "responses": {
           "202": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -136,7 +118,7 @@
       "get": {
         "operationId": "get-api-me",
         "summary": "/api/me",
-        "description": "Access: ALL ROLES. Source: src/app.ts line 2498. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "description": "Access: ALL ROLES. Source: src/app.ts line 2516. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -145,12 +127,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -159,7 +135,7 @@
       "get": {
         "operationId": "get-api-profile-current",
         "summary": "/api/profile/current",
-        "description": "Access: ALL ROLES. Source: src/app.ts line 2502. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "description": "Access: ALL ROLES. Source: src/app.ts line 2520. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -168,12 +144,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -181,8 +151,8 @@
     "/api/auth/organiser-application/me": {
       "get": {
         "operationId": "get-api-auth-organiser-application-me",
-        "summary": "getOwnOrganiserApplication",
-        "description": "Access: IDENTITY. Source: src/app.ts line 2510. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/auth/organiser-application/me",
+        "description": "Access: IDENTITY. Source: src/app.ts line 2528. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -191,12 +161,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -204,8 +168,8 @@
     "/api/master-organiser/organiser-applications": {
       "get": {
         "operationId": "get-api-master-organiser-organiser-applications",
-        "summary": "listOrganiserApplications",
-        "description": "Access: MASTER ORGANISER. Source: src/app.ts line 2527. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/master-organiser/organiser-applications",
+        "description": "Access: MASTER ORGANISER. Source: src/app.ts line 2545. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -214,21 +178,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
     },
-    "/api/master-organiser/organiser-applications/{id}/approve": {
+    "/api/master-organiser/organiser-applications/:id/approve": {
       "post": {
         "operationId": "post-api-master-organiser-organiser-applications-id-approve",
-        "summary": "approveOrganiserApplication",
-        "description": "Access: MASTER ORGANISER. Source: src/app.ts line 2546. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/master-organiser/organiser-applications/:id/approve",
+        "description": "Access: MASTER ORGANISER. Source: src/app.ts line 2564. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -237,31 +195,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/master-organiser/organiser-applications/{id}/reject": {
+    "/api/master-organiser/organiser-applications/:id/reject": {
       "post": {
         "operationId": "post-api-master-organiser-organiser-applications-id-reject",
-        "summary": "rejectOrganiserApplication",
-        "description": "Access: MASTER ORGANISER. Source: src/app.ts line 2572. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/master-organiser/organiser-applications/:id/reject",
+        "description": "Access: MASTER ORGANISER. Source: src/app.ts line 2590. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -270,31 +212,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
     "/api/public-holidays": {
       "get": {
         "operationId": "get-api-public-holidays",
-        "summary": "getPublicHolidays",
-        "description": "Access: ALL ROLES. Source: src/app.ts line 2612. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/public-holidays",
+        "description": "Access: ALL ROLES. Source: src/app.ts line 2630. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -303,12 +229,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -316,8 +236,8 @@
     "/api/courses": {
       "get": {
         "operationId": "get-api-courses",
-        "summary": "listCourses",
-        "description": "Access: ALL ROLES. Source: src/app.ts line 2645. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/courses",
+        "description": "Access: ALL ROLES. Source: src/app.ts line 2663. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -326,19 +246,13 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       },
       "post": {
         "operationId": "post-api-courses",
-        "summary": "createCourse",
-        "description": "Access: ORGANISER. Source: src/app.ts line 2660. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/courses",
+        "description": "Access: ORGANISER. Source: src/app.ts line 2678. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -347,21 +261,15 @@
         "responses": {
           "201": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
     },
-    "/api/courses/{courseId}": {
+    "/api/courses/:courseId": {
       "patch": {
         "operationId": "patch-api-courses-courseid",
-        "summary": "updateCourse",
-        "description": "Access: ORGANISER. Source: src/app.ts line 2686. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/courses/:courseId",
+        "description": "Access: ORGANISER. Source: src/app.ts line 2704. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -370,29 +278,13 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "courseId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       },
       "delete": {
         "operationId": "delete-api-courses-courseid",
-        "summary": "deleteCourse",
-        "description": "Access: ORGANISER. Source: src/app.ts line 2727. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/courses/:courseId",
+        "description": "Access: ORGANISER. Source: src/app.ts line 2745. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -401,31 +293,15 @@
         "responses": {
           "204": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "courseId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
     "/api/tutors": {
       "get": {
         "operationId": "get-api-tutors",
-        "summary": "listTutors",
-        "description": "Access: ORGANISER. Source: src/app.ts line 2754. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutors",
+        "description": "Access: ORGANISER. Source: src/app.ts line 2772. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -434,12 +310,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -447,8 +317,8 @@
     "/api/allocations": {
       "get": {
         "operationId": "get-api-allocations",
-        "summary": "listOrganiserAllocations",
-        "description": "Access: ORGANISER. Source: src/app.ts line 2783. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/allocations",
+        "description": "Access: ORGANISER. Source: src/app.ts line 2801. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -457,19 +327,13 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       },
       "post": {
         "operationId": "post-api-allocations",
-        "summary": "createAllocation",
-        "description": "Access: ORGANISER. Source: src/app.ts line 2827. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/allocations",
+        "description": "Access: ORGANISER. Source: src/app.ts line 2845. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -478,12 +342,6 @@
         "responses": {
           "201": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -491,8 +349,8 @@
     "/api/allocations/candidates": {
       "get": {
         "operationId": "get-api-allocations-candidates",
-        "summary": "listAllocationCandidates",
-        "description": "Access: ORGANISER. Source: src/app.ts line 2798. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/allocations/candidates",
+        "description": "Access: ORGANISER. Source: src/app.ts line 2816. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -501,21 +359,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
     },
-    "/api/allocations/{allocationId}": {
+    "/api/allocations/:allocationId": {
       "patch": {
         "operationId": "patch-api-allocations-allocationid",
-        "summary": "updateAllocation",
-        "description": "Access: ORGANISER. Source: src/app.ts line 2856. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/allocations/:allocationId",
+        "description": "Access: ORGANISER. Source: src/app.ts line 2874. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -524,29 +376,13 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "allocationId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       },
       "delete": {
         "operationId": "delete-api-allocations-allocationid",
-        "summary": "removeAllocation",
-        "description": "Access: ORGANISER. Source: src/app.ts line 2901. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/allocations/:allocationId",
+        "description": "Access: ORGANISER. Source: src/app.ts line 2919. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -555,31 +391,15 @@
         "responses": {
           "204": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "allocationId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
     "/api/reports/workload": {
       "get": {
         "operationId": "get-api-reports-workload",
-        "summary": "workloadReport",
-        "description": "Access: ORGANISER. Source: src/app.ts line 2934. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/reports/workload",
+        "description": "Access: ORGANISER. Source: src/app.ts line 2952. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -588,12 +408,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -601,8 +415,8 @@
     "/api/reports/payroll-export": {
       "get": {
         "operationId": "get-api-reports-payroll-export",
-        "summary": "payrollExportCsv",
-        "description": "Access: ORGANISER. Source: src/app.ts line 2968. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/reports/payroll-export",
+        "description": "Access: ORGANISER. Source: src/app.ts line 2986. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -611,12 +425,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -624,8 +432,8 @@
     "/api/allocations/bulk-preview": {
       "post": {
         "operationId": "post-api-allocations-bulk-preview",
-        "summary": "previewBulkAllocations",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3010. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/allocations/bulk-preview",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3028. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -634,12 +442,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -647,8 +449,8 @@
     "/api/allocations/bulk-commit": {
       "post": {
         "operationId": "post-api-allocations-bulk-commit",
-        "summary": "commitBulkAllocations",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3040. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/allocations/bulk-commit",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3058. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -657,12 +459,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -670,8 +466,8 @@
     "/api/staffing-requirements": {
       "get": {
         "operationId": "get-api-staffing-requirements",
-        "summary": "listStaffingRequirements",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3074. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/staffing-requirements",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3092. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -680,19 +476,13 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       },
       "post": {
         "operationId": "post-api-staffing-requirements",
-        "summary": "createStaffingRequirement",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3105. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/staffing-requirements",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3123. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -701,21 +491,15 @@
         "responses": {
           "201": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
     },
-    "/api/staffing-requirements/{requirementId}": {
+    "/api/staffing-requirements/:requirementId": {
       "patch": {
         "operationId": "patch-api-staffing-requirements-requirementid",
-        "summary": "updateStaffingRequirement",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3138. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/staffing-requirements/:requirementId",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3156. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -724,31 +508,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "requirementId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/staffing-requirements/{requirementId}/status": {
+    "/api/staffing-requirements/:requirementId/status": {
       "patch": {
         "operationId": "patch-api-staffing-requirements-requirementid-status",
-        "summary": "setStaffingRequirementStatus",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3186. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/staffing-requirements/:requirementId/status",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3204. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -757,31 +525,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "requirementId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
     "/api/organiser/command-centre": {
       "get": {
         "operationId": "get-api-organiser-command-centre",
-        "summary": "commandCentreSummary",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3234. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/organiser/command-centre",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3252. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -790,12 +542,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -803,8 +549,8 @@
     "/api/organiser/approvals": {
       "get": {
         "operationId": "get-api-organiser-approvals",
-        "summary": "listOrganiserApprovals",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3274. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/organiser/approvals",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3292. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -813,21 +559,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
     },
-    "/api/timesheets/{timesheetId}/decision": {
+    "/api/timesheets/:timesheetId/decision": {
       "patch": {
         "operationId": "patch-api-timesheets-timesheetid-decision",
-        "summary": "decideTimesheet",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3289. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/timesheets/:timesheetId/decision",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3307. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -836,31 +576,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "timesheetId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/volunteer-claims/{claimId}/decision": {
+    "/api/volunteer-claims/:claimId/decision": {
       "patch": {
         "operationId": "patch-api-volunteer-claims-claimid-decision",
-        "summary": "decideVolunteerClaim",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3335. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/volunteer-claims/:claimId/decision",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3353. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -869,51 +593,14 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "claimId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
     "/api/organiser/overflow-work": {
       "get": {
         "operationId": "get-api-organiser-overflow-work",
-        "summary": "listOrganiserOverflowWork",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3382. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
-          }
-        }
-      },
-      "post": {
-        "operationId": "post-api-organiser-overflow-work",
-        "summary": "createOrganiserOverflowWork",
+        "summary": "/api/organiser/overflow-work",
         "description": "Access: ORGANISER. Source: src/app.ts line 3400. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
@@ -921,23 +608,32 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      },
+      "post": {
+        "operationId": "post-api-organiser-overflow-work",
+        "summary": "/api/organiser/overflow-work",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3418. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
           "201": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
     },
-    "/api/organiser/overflow-work/{overflowWorkId}": {
+    "/api/organiser/overflow-work/:overflowWorkId": {
       "patch": {
         "operationId": "patch-api-organiser-overflow-work-overflowworkid",
-        "summary": "updateOrganiserOverflowWork",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3433. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/organiser/overflow-work/:overflowWorkId",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3451. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -946,31 +642,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "overflowWorkId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/organiser/overflow-work/{overflowWorkId}/close": {
+    "/api/organiser/overflow-work/:overflowWorkId/close": {
       "patch": {
         "operationId": "patch-api-organiser-overflow-work-overflowworkid-close",
-        "summary": "closeOrganiserOverflowWork",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3480. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/organiser/overflow-work/:overflowWorkId/close",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3498. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -979,31 +659,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "overflowWorkId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
     "/api/organiser/timesheet-disputes": {
       "get": {
         "operationId": "get-api-organiser-timesheet-disputes",
-        "summary": "listTimesheetDisputes",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3532. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/organiser/timesheet-disputes",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3550. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1012,21 +676,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
     },
-    "/api/timesheet-disputes/{disputeId}": {
+    "/api/timesheet-disputes/:disputeId": {
       "patch": {
         "operationId": "patch-api-timesheet-disputes-disputeid",
-        "summary": "resolveTimesheetDispute",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3556. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/timesheet-disputes/:disputeId",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3574. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1035,31 +693,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "disputeId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/tutors/{tutorId}/marks": {
+    "/api/tutors/:tutorId/marks": {
       "get": {
         "operationId": "get-api-tutors-tutorid-marks",
-        "summary": "listTutorMarks",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3609. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutors/:tutorId/marks",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3627. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1068,29 +710,13 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "tutorId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       },
       "put": {
         "operationId": "put-api-tutors-tutorid-marks",
-        "summary": "upsertTutorMark",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3635. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutors/:tutorId/marks",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3653. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1099,31 +725,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "tutorId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/tutors/{tutorId}/marks/{courseId}": {
+    "/api/tutors/:tutorId/marks/:courseId": {
       "delete": {
         "operationId": "delete-api-tutors-tutorid-marks-courseid",
-        "summary": "deleteTutorMark",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3675. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutors/:tutorId/marks/:courseId",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3693. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1132,39 +742,15 @@
         "responses": {
           "204": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "tutorId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "courseId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/tutors/{tutorId}/time-slots": {
+    "/api/tutors/:tutorId/time-slots": {
       "get": {
         "operationId": "get-api-tutors-tutorid-time-slots",
-        "summary": "listTutorTimeSlots",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3702. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutors/:tutorId/time-slots",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3720. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1173,31 +759,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "tutorId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
     "/api/tutor/dashboard": {
       "get": {
         "operationId": "get-api-tutor-dashboard",
-        "summary": "getTutorDashboard",
-        "description": "Access: TUTOR. Source: src/app.ts line 3728. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutor/dashboard",
+        "description": "Access: TUTOR. Source: src/app.ts line 3746. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1206,12 +776,38 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
+          }
+        }
+      }
+    },
+    "/api/me/time-slots": {
+      "post": {
+        "operationId": "post-api-me-time-slots",
+        "summary": "/api/me/time-slots",
+        "description": "Access: STUDENT / TUTOR. Source: src/app.ts line 3762. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      },
+      "get": {
+        "operationId": "get-api-me-time-slots",
+        "summary": "/api/me/time-slots",
+        "description": "Access: STUDENT / TUTOR. Source: src/app.ts line 3792. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
           }
         }
       }
@@ -1219,8 +815,8 @@
     "/api/tutor/time-slots": {
       "post": {
         "operationId": "post-api-tutor-time-slots",
-        "summary": "createTutorTimeSlot",
-        "description": "Access: TUTOR. Source: src/app.ts line 3744. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutor/time-slots",
+        "description": "Access: TUTOR. Source: src/app.ts line 3762. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1229,19 +825,13 @@
         "responses": {
           "201": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       },
       "get": {
         "operationId": "get-api-tutor-time-slots",
-        "summary": "listOwnTutorTimeSlots",
-        "description": "Access: TUTOR. Source: src/app.ts line 3774. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutor/time-slots",
+        "description": "Access: TUTOR. Source: src/app.ts line 3792. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1250,21 +840,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
     },
-    "/api/tutor/time-slots/{timeSlotId}": {
+    "/api/me/time-slots/:timeSlotId": {
       "patch": {
-        "operationId": "patch-api-tutor-time-slots-timeslotid",
-        "summary": "updateTutorTimeSlot",
-        "description": "Access: TUTOR. Source: src/app.ts line 3791. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "operationId": "patch-api-me-time-slots-timeslotid",
+        "summary": "/api/me/time-slots/:timeSlotId",
+        "description": "Access: STUDENT / TUTOR. Source: src/app.ts line 3809. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1273,29 +857,13 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "timeSlotId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       },
       "delete": {
-        "operationId": "delete-api-tutor-time-slots-timeslotid",
-        "summary": "deleteTutorTimeSlot",
-        "description": "Access: TUTOR. Source: src/app.ts line 3814. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "operationId": "delete-api-me-time-slots-timeslotid",
+        "summary": "/api/me/time-slots/:timeSlotId",
+        "description": "Access: STUDENT / TUTOR. Source: src/app.ts line 3832. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1304,31 +872,15 @@
         "responses": {
           "204": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "timeSlotId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/academic-terms": {
-      "get": {
-        "operationId": "get-api-academic-terms",
-        "summary": "listAcademicTerms",
-        "description": "Access: PROFILE. Source: src/app.ts line 3836. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+    "/api/tutor/time-slots/:timeSlotId": {
+      "patch": {
+        "operationId": "patch-api-tutor-time-slots-timeslotid",
+        "summary": "/api/tutor/time-slots/:timeSlotId",
+        "description": "Access: TUTOR. Source: src/app.ts line 3809. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1337,12 +889,38 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "delete-api-tutor-time-slots-timeslotid",
+        "summary": "/api/tutor/time-slots/:timeSlotId",
+        "description": "Access: TUTOR. Source: src/app.ts line 3832. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/academic-terms": {
+      "get": {
+        "operationId": "get-api-academic-terms",
+        "summary": "/api/academic-terms",
+        "description": "Access: PROFILE. Source: src/app.ts line 3854. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
           }
         }
       }
@@ -1350,8 +928,8 @@
     "/api/organiser/academic-terms": {
       "post": {
         "operationId": "post-api-organiser-academic-terms",
-        "summary": "createAcademicTerm",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3860. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/organiser/academic-terms",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3878. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1360,12 +938,6 @@
         "responses": {
           "201": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -1373,8 +945,8 @@
     "/api/academic-terms/published": {
       "get": {
         "operationId": "get-api-academic-terms-published",
-        "summary": "listPublishedAcademicTerms",
-        "description": "Access: PROFILE. Source: src/app.ts line 3893. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/academic-terms/published",
+        "description": "Access: PROFILE. Source: src/app.ts line 3911. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1383,21 +955,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
     },
-    "/api/organiser/academic-terms/{id}": {
+    "/api/organiser/academic-terms/:id": {
       "patch": {
         "operationId": "patch-api-organiser-academic-terms-id",
-        "summary": "updateAcademicTerm",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3914. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/organiser/academic-terms/:id",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3932. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1406,29 +972,13 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       },
       "delete": {
         "operationId": "delete-api-organiser-academic-terms-id",
-        "summary": "deleteAcademicTerm",
-        "description": "Access: ORGANISER. Source: src/app.ts line 3954. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/organiser/academic-terms/:id",
+        "description": "Access: ORGANISER. Source: src/app.ts line 3972. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1437,31 +987,15 @@
         "responses": {
           "204": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/tutor/time-slots/import/preview": {
+    "/api/me/time-slots/import/preview": {
       "post": {
-        "operationId": "post-api-tutor-time-slots-import-preview",
-        "summary": "previewTutorTimetableImport",
-        "description": "Access: TUTOR. Source: src/app.ts line 3983. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "operationId": "post-api-me-time-slots-import-preview",
+        "summary": "/api/me/time-slots/import/preview",
+        "description": "Access: STUDENT / TUTOR. Source: src/app.ts line 4001. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1470,12 +1004,40 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
+          }
+        }
+      }
+    },
+    "/api/tutor/time-slots/import/preview": {
+      "post": {
+        "operationId": "post-api-tutor-time-slots-import-preview",
+        "summary": "/api/tutor/time-slots/import/preview",
+        "description": "Access: TUTOR. Source: src/app.ts line 4001. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/me/time-slots/import/commit": {
+      "post": {
+        "operationId": "post-api-me-time-slots-import-commit",
+        "summary": "/api/me/time-slots/import/commit",
+        "description": "Access: STUDENT / TUTOR. Source: src/app.ts line 4037. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
           }
         }
       }
@@ -1483,8 +1045,8 @@
     "/api/tutor/time-slots/import/commit": {
       "post": {
         "operationId": "post-api-tutor-time-slots-import-commit",
-        "summary": "commitTutorTimetableImport",
-        "description": "Access: TUTOR. Source: src/app.ts line 4019. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutor/time-slots/import/commit",
+        "description": "Access: TUTOR. Source: src/app.ts line 4037. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1493,12 +1055,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -1506,8 +1062,8 @@
     "/api/tutor/weekly-capacity": {
       "patch": {
         "operationId": "patch-api-tutor-weekly-capacity",
-        "summary": "updateTutorWeeklyCapacity",
-        "description": "Access: TUTOR. Source: src/app.ts line 4061. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutor/weekly-capacity",
+        "description": "Access: TUTOR. Source: src/app.ts line 4079. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1516,12 +1072,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -1529,8 +1079,8 @@
     "/api/tutor/work-logs": {
       "post": {
         "operationId": "post-api-tutor-work-logs",
-        "summary": "createTutorWorkLog",
-        "description": "Access: TUTOR. Source: src/app.ts line 4083. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutor/work-logs",
+        "description": "Access: TUTOR. Source: src/app.ts line 4101. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1539,21 +1089,15 @@
         "responses": {
           "201": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
     },
-    "/api/tutor/timesheets/{timesheetId}/history": {
+    "/api/tutor/timesheets/:timesheetId/history": {
       "get": {
         "operationId": "get-api-tutor-timesheets-timesheetid-history",
-        "summary": "getTutorTimesheetHistory",
-        "description": "Access: TUTOR. Source: src/app.ts line 4118. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutor/timesheets/:timesheetId/history",
+        "description": "Access: TUTOR. Source: src/app.ts line 4136. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1562,31 +1106,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "timesheetId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/tutor/timesheets/{timesheetId}/work-logs/{workLogId}": {
+    "/api/tutor/timesheets/:timesheetId/work-logs/:workLogId": {
       "patch": {
         "operationId": "patch-api-tutor-timesheets-timesheetid-work-logs-worklogid",
-        "summary": "correctTutorTimesheetWorkLog",
-        "description": "Access: TUTOR. Source: src/app.ts line 4165. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutor/timesheets/:timesheetId/work-logs/:workLogId",
+        "description": "Access: TUTOR. Source: src/app.ts line 4183. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1595,39 +1123,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "timesheetId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "workLogId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/tutor/timesheets/{timesheetId}/declaration": {
+    "/api/tutor/timesheets/:timesheetId/declaration": {
       "post": {
         "operationId": "post-api-tutor-timesheets-timesheetid-declaration",
-        "summary": "declareTutorTimesheet",
-        "description": "Access: TUTOR. Source: src/app.ts line 4238. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutor/timesheets/:timesheetId/declaration",
+        "description": "Access: TUTOR. Source: src/app.ts line 4256. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1636,31 +1140,15 @@
         "responses": {
           "201": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "timesheetId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/tutor/timesheets/{timesheetId}/disputes": {
+    "/api/tutor/timesheets/:timesheetId/disputes": {
       "post": {
         "operationId": "post-api-tutor-timesheets-timesheetid-disputes",
-        "summary": "raiseTutorTimesheetDispute",
-        "description": "Access: TUTOR. Source: src/app.ts line 4296. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutor/timesheets/:timesheetId/disputes",
+        "description": "Access: TUTOR. Source: src/app.ts line 4314. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1669,31 +1157,15 @@
         "responses": {
           "201": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "timesheetId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
     "/api/tutor/excuses": {
       "post": {
         "operationId": "post-api-tutor-excuses",
-        "summary": "createTutorExcuse",
-        "description": "Access: TUTOR. Source: src/app.ts line 4349. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutor/excuses",
+        "description": "Access: TUTOR. Source: src/app.ts line 4367. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1702,12 +1174,6 @@
         "responses": {
           "201": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -1715,8 +1181,8 @@
     "/api/student/open-work": {
       "get": {
         "operationId": "get-api-student-open-work",
-        "summary": "listStudentOpenWork",
-        "description": "Access: STUDENT. Source: src/app.ts line 4379. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/student/open-work",
+        "description": "Access: STUDENT. Source: src/app.ts line 4397. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1725,12 +1191,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -1738,8 +1198,8 @@
     "/api/student/volunteer-requests": {
       "get": {
         "operationId": "get-api-student-volunteer-requests",
-        "summary": "listStudentVolunteerRequests",
-        "description": "Access: STUDENT. Source: src/app.ts line 4395. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/student/volunteer-requests",
+        "description": "Access: STUDENT. Source: src/app.ts line 4413. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1748,19 +1208,13 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       },
       "post": {
         "operationId": "post-api-student-volunteer-requests",
-        "summary": "createStudentVolunteerRequest",
-        "description": "Access: STUDENT. Source: src/app.ts line 4412. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/student/volunteer-requests",
+        "description": "Access: STUDENT. Source: src/app.ts line 4430. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1769,21 +1223,15 @@
         "responses": {
           "201": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
     },
-    "/api/student/volunteer-requests/{requestId}": {
+    "/api/student/volunteer-requests/:requestId": {
       "get": {
         "operationId": "get-api-student-volunteer-requests-requestid",
-        "summary": "getStudentVolunteerRequest",
-        "description": "Access: STUDENT. Source: src/app.ts line 4443. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/student/volunteer-requests/:requestId",
+        "description": "Access: STUDENT. Source: src/app.ts line 4461. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1792,31 +1240,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "requestId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/student/volunteer-requests/{requestId}/withdraw": {
+    "/api/student/volunteer-requests/:requestId/withdraw": {
       "patch": {
         "operationId": "patch-api-student-volunteer-requests-requestid-withdraw",
-        "summary": "withdrawStudentVolunteerRequest",
-        "description": "Access: STUDENT. Source: src/app.ts line 4478. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/student/volunteer-requests/:requestId/withdraw",
+        "description": "Access: STUDENT. Source: src/app.ts line 4496. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1825,31 +1257,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "requestId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/tutor/timesheets/{timesheetId}/status": {
+    "/api/tutor/timesheets/:timesheetId/status": {
       "get": {
         "operationId": "get-api-tutor-timesheets-timesheetid-status",
-        "summary": "getTutorTimesheetStatus",
-        "description": "Access: TUTOR. Source: src/app.ts line 4513. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutor/timesheets/:timesheetId/status",
+        "description": "Access: TUTOR. Source: src/app.ts line 4531. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1858,31 +1274,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "timesheetId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/tutor/timesheets/{timesheetId}/submit": {
+    "/api/tutor/timesheets/:timesheetId/submit": {
       "post": {
         "operationId": "post-api-tutor-timesheets-timesheetid-submit",
-        "summary": "submitTutorTimesheet",
-        "description": "Access: TUTOR. Source: src/app.ts line 4547. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutor/timesheets/:timesheetId/submit",
+        "description": "Access: TUTOR. Source: src/app.ts line 4565. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1891,31 +1291,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "timesheetId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/tutor/excuses/{excuseId}/status": {
+    "/api/tutor/excuses/:excuseId/status": {
       "get": {
         "operationId": "get-api-tutor-excuses-excuseid-status",
-        "summary": "getTutorExcuseStatus",
-        "description": "Access: TUTOR. Source: src/app.ts line 4581. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/tutor/excuses/:excuseId/status",
+        "description": "Access: TUTOR. Source: src/app.ts line 4599. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1924,31 +1308,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "excuseId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/excuses/{excuseId}/decision": {
+    "/api/excuses/:excuseId/decision": {
       "patch": {
         "operationId": "patch-api-excuses-excuseid-decision",
-        "summary": "decideExcuse",
-        "description": "Access: ORGANISER. Source: src/app.ts line 4611. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/excuses/:excuseId/decision",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4629. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1957,31 +1325,557 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
+        }
+      }
+    },
+    "/api/organiser/audit": {
+      "get": {
+        "operationId": "get-api-organiser-audit",
+        "summary": "/api/organiser/audit",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4672. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
           {
-            "name": "excuseId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "bearerAuth": []
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/audit/export": {
+      "get": {
+        "operationId": "get-api-organiser-audit-export",
+        "summary": "/api/organiser/audit/export",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4673. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/audit/:id": {
+      "get": {
+        "operationId": "get-api-organiser-audit-id",
+        "summary": "/api/organiser/audit/:id",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4674. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/allocations/:id/history": {
+      "get": {
+        "operationId": "get-api-organiser-allocations-id-history",
+        "summary": "/api/organiser/allocations/:id/history",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4675. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/allocations/:id/restore-preview": {
+      "post": {
+        "operationId": "post-api-organiser-allocations-id-restore-preview",
+        "summary": "/api/organiser/allocations/:id/restore-preview",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4676. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/allocations/:id/restore": {
+      "post": {
+        "operationId": "post-api-organiser-allocations-id-restore",
+        "summary": "/api/organiser/allocations/:id/restore",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4677. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/student/bookings/:id/sick-notes": {
+      "post": {
+        "operationId": "post-api-student-bookings-id-sick-notes",
+        "summary": "/api/student/bookings/:id/sick-notes",
+        "description": "Access: STUDENT. Source: src/app.ts line 4679. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/student-sick-notes": {
+      "get": {
+        "operationId": "get-api-organiser-student-sick-notes",
+        "summary": "/api/organiser/student-sick-notes",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4680. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/student-sick-notes/:id/decision": {
+      "post": {
+        "operationId": "post-api-organiser-student-sick-notes-id-decision",
+        "summary": "/api/organiser/student-sick-notes/:id/decision",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4681. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/me/bookings": {
+      "get": {
+        "operationId": "get-api-me-bookings",
+        "summary": "/api/me/bookings",
+        "description": "Access: STUDENT / TUTOR. Source: src/app.ts line 4685. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/student/bookings": {
+      "post": {
+        "operationId": "post-api-student-bookings",
+        "summary": "/api/student/bookings",
+        "description": "Access: STUDENT. Source: src/app.ts line 4686. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/me/bookings/:id": {
+      "get": {
+        "operationId": "get-api-me-bookings-id",
+        "summary": "/api/me/bookings/:id",
+        "description": "Access: STUDENT / TUTOR. Source: src/app.ts line 4687. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/me/bookings/:id/cancel": {
+      "post": {
+        "operationId": "post-api-me-bookings-id-cancel",
+        "summary": "/api/me/bookings/:id/cancel",
+        "description": "Access: STUDENT / TUTOR. Source: src/app.ts line 4688. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/swaps": {
+      "get": {
+        "operationId": "get-api-swaps",
+        "summary": "/api/swaps",
+        "description": "Access: TUTOR / ORGANISER. Source: src/app.ts line 4689. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/swaps/:id": {
+      "get": {
+        "operationId": "get-api-swaps-id",
+        "summary": "/api/swaps/:id",
+        "description": "Access: TUTOR / ORGANISER. Source: src/app.ts line 4690. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/tutor/allocations/:id/replacements": {
+      "get": {
+        "operationId": "get-api-tutor-allocations-id-replacements",
+        "summary": "/api/tutor/allocations/:id/replacements",
+        "description": "Access: TUTOR. Source: src/app.ts line 4691. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/tutor/swaps": {
+      "post": {
+        "operationId": "post-api-tutor-swaps",
+        "summary": "/api/tutor/swaps",
+        "description": "Access: TUTOR. Source: src/app.ts line 4692. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/swaps/:id/actions": {
+      "post": {
+        "operationId": "post-api-swaps-id-actions",
+        "summary": "/api/swaps/:id/actions",
+        "description": "Access: TUTOR / ORGANISER. Source: src/app.ts line 4693. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/proposals/preview": {
+      "post": {
+        "operationId": "post-api-organiser-proposals-preview",
+        "summary": "/api/organiser/proposals/preview",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4709. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/proposals/compare": {
+      "post": {
+        "operationId": "post-api-organiser-proposals-compare",
+        "summary": "/api/organiser/proposals/compare",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4710. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/proposals/generate": {
+      "post": {
+        "operationId": "post-api-organiser-proposals-generate",
+        "summary": "/api/organiser/proposals/generate",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4711. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/proposals/:scenarioId/explanations": {
+      "get": {
+        "operationId": "get-api-organiser-proposals-scenarioid-explanations",
+        "summary": "/api/organiser/proposals/:scenarioId/explanations",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4712. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/proposals/:scenarioId/adjust": {
+      "post": {
+        "operationId": "post-api-organiser-proposals-scenarioid-adjust",
+        "summary": "/api/organiser/proposals/:scenarioId/adjust",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4713. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/scenarios": {
+      "get": {
+        "operationId": "get-api-organiser-scenarios",
+        "summary": "/api/organiser/scenarios",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4714. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      },
+      "post": {
+        "operationId": "post-api-organiser-scenarios",
+        "summary": "/api/organiser/scenarios",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4717. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/scenarios/:scenarioId": {
+      "get": {
+        "operationId": "get-api-organiser-scenarios-scenarioid",
+        "summary": "/api/organiser/scenarios/:scenarioId",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4720. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/scenarios/:scenarioId/compare": {
+      "get": {
+        "operationId": "get-api-organiser-scenarios-scenarioid-compare",
+        "summary": "/api/organiser/scenarios/:scenarioId/compare",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4720. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/scenarios/:scenarioId/actions": {
+      "post": {
+        "operationId": "post-api-organiser-scenarios-scenarioid-actions",
+        "summary": "/api/organiser/scenarios/:scenarioId/actions",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4720. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/organiser/scenarios/:scenarioId/presence": {
+      "post": {
+        "operationId": "post-api-organiser-scenarios-scenarioid-presence",
+        "summary": "/api/organiser/scenarios/:scenarioId/presence",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4720. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/student/tutoring-options": {
+      "get": {
+        "operationId": "get-api-student-tutoring-options",
+        "summary": "/api/student/tutoring-options",
+        "description": "Access: STUDENT. Source: src/app.ts line 4734. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/student/mutual-availability": {
+      "post": {
+        "operationId": "post-api-student-mutual-availability",
+        "summary": "/api/student/mutual-availability",
+        "description": "Access: STUDENT. Source: src/app.ts line 4737. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
+      }
+    },
+    "/api/navigation/resolve": {
+      "post": {
+        "operationId": "post-api-navigation-resolve",
+        "summary": "/api/navigation/resolve",
+        "description": "Access: ALL ROLES. Source: src/app.ts line 4741. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation; see route implementation for response body."
+          }
+        }
       }
     },
     "/api/search": {
       "get": {
         "operationId": "get-api-search",
-        "summary": "search",
-        "description": "Access: ALL ROLES. Source: src/app.ts line 4652. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/search",
+        "description": "Access: ALL ROLES. Source: src/app.ts line 4756. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -1990,12 +1884,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -2003,8 +1891,8 @@
     "/api/notifications": {
       "get": {
         "operationId": "get-api-notifications",
-        "summary": "listNotifications",
-        "description": "Access: ALL ROLES. Source: src/app.ts line 4686. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/notifications",
+        "description": "Access: ALL ROLES. Source: src/app.ts line 4790. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -2013,12 +1901,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -2026,8 +1908,8 @@
     "/api/notifications/unread-count": {
       "get": {
         "operationId": "get-api-notifications-unread-count",
-        "summary": "countUnreadNotifications",
-        "description": "Access: ALL ROLES. Source: src/app.ts line 4707. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/notifications/unread-count",
+        "description": "Access: ALL ROLES. Source: src/app.ts line 4811. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -2036,21 +1918,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
     },
-    "/api/notifications/{id}": {
+    "/api/notifications/:id": {
       "get": {
         "operationId": "get-api-notifications-id",
-        "summary": "getNotification",
-        "description": "Access: ALL ROLES. Source: src/app.ts line 4724. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/notifications/:id",
+        "description": "Access: ALL ROLES. Source: src/app.ts line 4828. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -2059,31 +1935,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/api/notifications/{id}/read": {
+    "/api/notifications/:id/read": {
       "patch": {
         "operationId": "patch-api-notifications-id-read",
-        "summary": "markNotificationRead",
-        "description": "Access: ALL ROLES. Source: src/app.ts line 4752. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/notifications/:id/read",
+        "description": "Access: ALL ROLES. Source: src/app.ts line 4856. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -2092,31 +1952,15 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
     "/api/notifications/read-all": {
       "post": {
         "operationId": "post-api-notifications-read-all",
-        "summary": "markAllNotificationsRead",
-        "description": "Access: ALL ROLES. Source: src/app.ts line 4775. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/notifications/read-all",
+        "description": "Access: ALL ROLES. Source: src/app.ts line 4879. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -2125,12 +1969,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -2138,8 +1976,8 @@
     "/api/notifications/reminders/run": {
       "post": {
         "operationId": "post-api-notifications-reminders-run",
-        "summary": "runDueReminders",
-        "description": "Access: ORGANISER. Source: src/app.ts line 4791. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/notifications/reminders/run",
+        "description": "Access: ORGANISER. Source: src/app.ts line 4895. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -2148,12 +1986,6 @@
         "responses": {
           "200": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }
@@ -2161,8 +1993,8 @@
     "/api/auth/delete-account": {
       "delete": {
         "operationId": "delete-api-auth-delete-account",
-        "summary": "deleteAccount",
-        "description": "Access: ALL ROLES. Source: src/app.ts line 4806. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
+        "summary": "/api/auth/delete-account",
+        "description": "Access: ALL ROLES. Source: src/app.ts line 4910. Full validation and payload contracts are in the linked source; this inventory does not infer required body schemas.",
         "security": [
           {
             "bearerAuth": []
@@ -2171,12 +2003,6 @@
         "responses": {
           "204": {
             "description": "Successful operation; see route implementation for response body."
-          },
-          "401": {
-            "description": "Missing or invalid access token"
-          },
-          "403": {
-            "description": "Role, privilege or ownership not permitted"
           }
         }
       }

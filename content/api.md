@@ -77,6 +77,24 @@ An **Organiser** can call `GET /api/tutors`, then use an authorised returned ID 
 
 `GET /api/me` can include `data.capabilities.masterOrganiser: true`. Normal Organisers receive 403 on the Master queue. The public status route intentionally exposes application status for a supplied email; it does not grant access or return the full application. Limit screenshot evidence to designated demo applicants.
 
+
+## Sprint 4 API additions now present
+
+The final source registers **120 HTTP operations**. Sprint 4 adds the shared Student/Tutor schedule aliases plus Scenario planning, mutual availability, bookings, swaps, Student sick notes, audit/restore and proposal routes. Representative additions include:
+
+| Area | Representative routes | Access |
+| --- | --- | --- |
+| Shared schedule | `GET/POST /api/me/time-slots`, import preview/commit | Student / Tutor |
+| Scenario planning | `/api/organiser/scenarios...` | Organiser |
+| Mutual availability | `GET /api/student/tutoring-options`, `POST /api/student/mutual-availability` | Student |
+| Bookings | `POST /api/student/bookings`, `GET /api/me/bookings`, cancel/detail | Student / Tutor as appropriate |
+| Tutor swaps | `/api/tutor/swaps`, `/api/swaps...` | Tutor / Organiser as appropriate |
+| Student sick notes | `POST /api/student/bookings/:id/sick-notes`, Organiser review routes | Student / Organiser |
+| Audit/restore | `/api/organiser/audit...`, allocation history/restore routes | Organiser |
+| Proposal intelligence | `/api/organiser/proposals/preview`, `/compare`, `/generate`, explanations/adjust | Organiser |
+
+The downloadable endpoint and OpenAPI inventories below are regenerated from the final supplied `src/app.ts` and include all 120 registered operations.
+
 ## Response and error contract
 
 | Status | Meaning / client response |
@@ -105,4 +123,4 @@ GET reads resources; POST creates records or invokes explicit state transitions;
 
 Use the [GET-only Postman collection](downloads/tutor-mx-readonly.postman_collection.json), [OpenAPI inventory](downloads/openapi-inventory.json) and [route source](downloads/api-routes.ts.txt). The OpenAPI download lists all operations/access/success codes but deliberately does not invent full body schemas. It is served by this documentation site; no `/swagger` or `/openapi.json` route is claimed on Render.
 
-The updated README still lists old Tutor creation/update and Organiser schedule-write operations absent from the inspected route registrations. The catalogue below follows **actual 30 September source**, so those historical statements do not create endpoints. Sprint 4 Student booking/scenario/swap/audit routes are not invented here before their implementation is supplied.
+The catalogue below now follows the supplied **final Sprint 4 source at `361954e`**. Historical README wording remains traceable in the README chapter, but the route inventory is generated from the final `src/app.ts` registrations.

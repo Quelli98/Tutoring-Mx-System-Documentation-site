@@ -1,30 +1,36 @@
-## What is implemented versus planned
+## Final feature register
 
-“Current source” means implementation is present in the exact 30 September archive cited by the handbook. It does not independently certify the current hosted release. “Target” means assigned in the updated Sprint 4 handbook, with no matching implementation in that inspected archive.
+The site preserves earlier Sprint 1–3 history, but the status below follows the supplied **final Sprint 4 main at `361954e`**. “Implemented” means the feature exists in the supplied source. Production screenshots/role demonstrations remain a separate evidence question.
 
-| Feature area | Status | Demonstration / evidence |
+| Feature area | Final source status | Demonstration / evidence |
 | --- | --- | --- |
-| Auth0 Student/Tutor onboarding, reset/delete, profile guards | Current source | Separate accounts, valid/invalid sessions and own-role workspace |
-| Master Organiser lecturer approval | Current source; new baseline | Pending registration, protected queue, approve/reject and approved sign-in |
-| Organiser courses/Tutors/marks and allocations | Current source | Persisted writes plus mark/clash/capacity results |
-| Tutor manual/import timetable | Current source | Same calendar; Once/Weekly/Fortnightly; terms, breaks and exceptions |
-| Tutor sickness attendance | Current source; new baseline | Excuse decision, Excused/Skipped history, blocked sick work logs |
-| Timesheet correction/declaration/dispute/export | Current source | Returned/corrected/resubmitted flow and approved export rules |
-| Student overflow/volunteer/withdraw | Current source | Own eligible work, stored outcomes, safe withdrawal/conflict |
-| Notifications/search, staffing/ranking/bulk/reports, Command Centre | Current source | Existing Sprint 3 evidence and integrated workflows |
-| Student timetable via generalised TimeSlot | Target, M1 | Shared own-schedule migration/routes/UI |
-| Mutual Student/Tutor availability | Target, M2 | Backend intersection, bounded future results, no private labels |
-| Student bookings | Target, M3 | Transactional confirmation, both calendars, cancellation/history |
-| Student sick notes | Target, M4 | Own booking → Pending → decision → preserved attendance |
-| Scenarios/locks/presence/concurrency | Target, M2 | Isolated drafts, Compare with Live, atomic rechecked Publish |
-| Tutor swaps | Target, M3 | Replacement response and final Organiser rule recheck |
-| Shared audit/restore | Target, M5 | Redacted committed-change timeline and checked restore |
-| Whole-school proposals/strategy comparison | Target, M6 | Deterministic eligible draft with explanations and comparable metrics |
+| Auth0 Student/Tutor onboarding, reset/delete, profile guards | Implemented | Separate accounts, valid/invalid sessions and own-role workspace |
+| Master Organiser lecturer approval | Implemented | Pending registration, protected queue, approve/reject and approved sign-in |
+| Organiser courses/Tutors/marks and allocations | Implemented | Persisted writes plus mark/clash/capacity results |
+| Tutor manual/import timetable | Implemented | Same calendar; Once/Weekly/Fortnightly; terms, breaks and exceptions |
+| Tutor sickness attendance | Implemented | Excuse decision, Excused/Skipped history, blocked sick work logs |
+| Timesheet correction/declaration/dispute/export | Implemented | Returned/corrected/resubmitted flow and approved export rules |
+| Student overflow/volunteer/withdraw | Implemented | Own eligible work, stored outcomes, safe withdrawal/conflict |
+| Notifications/search, staffing/ranking/bulk/reports, Command Centre | Implemented | Existing Sprint 3 workflows retained through Sprint 4 |
+| Student timetable via generalised TimeSlot | **Implemented in Sprint 4 M1** | Shared own-schedule model/routes/UI; no second timetable engine |
+| Mutual Student/Tutor availability | **Implemented in Sprint 4 M2** | Backend intersection, bounded future results, private labels hidden |
+| Student bookings | **Implemented in Sprint 4 M3** | Transactional confirmation, both calendars, cancellation/history and clash blocking |
+| Student sick notes | **Implemented in Sprint 4 M4** | Own booking → Pending → Organiser decision → preserved attendance/history |
+| Scenarios/locks/presence/concurrency | **Implemented in Sprint 4 M2** | Isolated drafts, Compare with Live, version conflicts, explicit Publish |
+| Tutor swaps | **Implemented in Sprint 4 M3** | Replacement response and final Organiser rule recheck |
+| Shared audit/restore | **Implemented in Sprint 4 M5** | Redacted committed-change timeline, filters/export and checked restore |
+| Whole-school proposals/strategy comparison | **Implemented in Sprint 4 M6** | Deterministic eligible draft, explanations, four presets and comparable impact metrics |
 
-## What changed in this documentation update
+## Final source growth from the 30 September baseline
 
-The original rebuilt site was grounded in the earlier supplied code. This update changes the affected source catalogue from 76 to **82 operations**, 19 to **20 models**, 11 to **14 enums**, and 22 to **25 migrations**. Six new HTTP operations cover organiser registration/status/own application and Master list/approve/reject. The database adds OrganiserApplication and attendance/deduplication fields.
+The 30 September audited baseline contained 82 registered operations, 20 models and 25 migrations. The completed Sprint 4 source contains **120 operations, 30 models and 30 migrations**. The ten added models are `Scenario`, `ScenarioItem`, `ScenarioPresence`, `TutoringBooking`, `TutorSwap`, `BookingEvent`, `SwapEvent`, `StudentSickNote`, `AuditEvent` and `MutationReceipt`.
 
-All eight UML diagrams are revised against the updated handbook. They distinguish the current approval/deployment boundaries from the Student/Advanced target design. The Git sequence remains one Member branch at a time; the actual Sprint 4 ownership and no-rebuild baseline are updated.
+The five Sprint 4 migrations are:
 
-The current source's local-storage token cache and precise Tutor sickness timing rule take precedence over shorter or older README wording. Historical meetings, sprint evidence and feedback are preserved under the archive navigation.
+- `20261007000000_shared_profile_schedule`
+- `20261008000000_s4_scenario_planning`
+- `20261009000000_s4_swaps_bookings`
+- `20261010000000_s4_student_sick_notes`
+- `20261011000000_s4_audit_restore`
+
+The API catalogue, Prisma dictionary and source downloads on this site now follow the final supplied repository rather than presenting the Sprint 4 cards as future targets.

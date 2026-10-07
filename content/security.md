@@ -23,8 +23,16 @@ Routes use a common error envelope and deliberately safe messages. JSON size, ID
 
 Database uniqueness, constraints and transactions are complemented by state/version checks. Auth0 grant plus Neon update remains a cross-system operation with a recovery/testing boundary. Do not equate one database transaction with a distributed transaction.
 
+## Auth0 role evidence — 7 October 2026
+
+The supplied Auth0 screenshot shows four configured tenant roles: `MASTER_ORGANIZER`, `ORGANISER`, `STUDENT` and `TUTOR`. This supports the documented design: `MASTER_ORGANIZER` is an extra Auth0 privilege while the application `Profile.role` remains Organiser/Tutor/Student. The screenshot contains configuration names only; it does not expose tokens, passwords or Management API client secrets.
+
+<figure class="doc-evidence"><a href="evidence/sprint4-auth0-roles-2026-10-07.png" target="_blank" rel="noreferrer"><img src="evidence/sprint4-auth0-roles-2026-10-07.png" alt="Auth0 roles page showing MASTER_ORGANIZER, ORGANISER, STUDENT and TUTOR"></a><figcaption><strong>Auth0 role configuration.</strong> The Master privilege is configured separately from the three application workspace roles.</figcaption></figure>
+
 ## Evidence to capture before final submission
 
 Use designated demo accounts for Student, Tutor, Organiser and Master Organiser. Check anonymous 401, wrong-role 403, own-versus-other record protection, stale decision 409, invalid input 400, duplicate request behaviour and provider failure. For new Student availability, verify that responses never contain the other person's private timetable labels.
 
 Show redacted configuration names, successful checks and commit/run links. Tokens, passwords, client secrets, database URLs and raw private record dumps do not belong in public evidence. A public schema dictionary does not need Auth0 because it exposes structure rather than user data.
+
+The final evidence set now includes the Auth0 role list and responsive application captures. It does not include a dedicated Lighthouse/screen-reader report or a full cross-role 401/403/409 transcript, so those are not claimed here.

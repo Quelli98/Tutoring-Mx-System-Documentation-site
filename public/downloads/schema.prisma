@@ -95,6 +95,13 @@ enum NotificationType {
   // the order PostgreSQL actually holds after ALTER TYPE ... ADD VALUE.
   TIMESHEET_DISPUTED
   TIMESHEET_DISPUTE_RESOLVED
+  BOOKING_CONFIRMED
+  BOOKING_CANCELLED
+  SWAP_REQUESTED
+  SWAP_UPDATED
+  STUDENT_SICK_SUBMITTED
+  STUDENT_SICK_DECIDED
+  BOOKING_ATTENDANCE_CHANGED
 }
 
 enum StaffingRequirementStatus {
@@ -104,6 +111,20 @@ enum StaffingRequirementStatus {
 }
 
 model Profile {
+  auditEvents AuditEvent[]
+  mutationReceipts MutationReceipt[]
+  reviewedStudentSickNotes StudentSickNote[]
+  scheduleRevision Int @default(0)
+  studentBookings TutoringBooking[] @relation("StudentBookings")
+  tutorBookings TutoringBooking[] @relation("TutorBookings")
+  requestedSwaps TutorSwap[] @relation("SwapRequester")
+  replacementSwaps TutorSwap[] @relation("SwapReplacement")
+  bookingEvents BookingEvent[]
+  swapEvents SwapEvent[]
+  createdScenarios Scenario[] @relation("ScenarioCreator")
+  editedScenarios Scenario[] @relation("ScenarioEditor")
+  scenarioItems ScenarioItem[]
+  scenarioPresence ScenarioPresence[]
   apiWriteReceipts ApiWriteReceipt[]
   id                  Int              @id @default(autoincrement())
   auth0Id             String           @unique
@@ -170,6 +191,8 @@ model Notification {
 }
 
 model Course {
+  tutoringBookings TutoringBooking[]
+  scenarioItems ScenarioItem[]
   id           Int            @id @default(autoincrement())
   code         String         @unique
   name         String
@@ -203,6 +226,7 @@ model TutorMark {
 /// a term boundary is a calendar day, not an instant, and must not shift with
 /// the reader's timezone.
 model AcademicTerm {
+  tutoringBookings TutoringBooking[]
   id             Int      @id @default(autoincrement())
   name           String   @unique @db.VarChar(120)
   startsOn       DateTime @db.Date
@@ -220,7 +244,7 @@ model AcademicTerm {
 
 model TimeSlot {
   id               Int          @id @default(autoincrement())
-  tutorId          Int
+  ownerId          Int          @map("tutorId")
   type             TimeSlotType
   startsAt         DateTime
   endsAt           DateTime
@@ -231,12 +255,12 @@ model TimeSlot {
   seriesId         String?      @db.VarChar(36)
   termId           Int?
   dedupeKey        String? @unique @db.VarChar(64)
-  tutor            Profile      @relation(fields: [tutorId], references: [id], onDelete: Cascade)
+  owner            Profile      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   term             AcademicTerm? @relation(fields: [termId], references: [id], onDelete: SetNull)
   exceptions       OccurrenceException[]
 
-  @@index([tutorId, type, startsAt, endsAt])
-  @@index([tutorId, category, startsAt])
+  @@index([ownerId, type, startsAt, endsAt], map: "TimeSlot_tutorId_type_startsAt_endsAt_idx")
+  @@index([ownerId, category, startsAt], map: "TimeSlot_category_idx")
   @@index([seriesId])
 }
 
@@ -264,6 +288,10 @@ model TutorHourLimit {
 }
 
 model Allocation {
+  minimumMark Float @default(50)
+  version Int @default(1)
+  swapRequests TutorSwap[] @relation("SwapSource")
+  completedSwaps TutorSwap[] @relation("SwapResult")
   id             Int              @id @default(autoincrement())
   tutorId        Int
   courseId       Int
@@ -493,4 +521,166 @@ model ApiWriteReceipt {
   profile     Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
   @@id([profileId, key])
+}
+
+/// A bounded, versioned planning context. Publishing is handled transactionally.
+model Scenario {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(120)
+  notes String @default("") @db.VarChar(2000)
+  startsAt DateTime
+  endsAt DateTime
+  status String @default("DRAFT") @db.VarChar(16)
+  version Int @default(1)
+  baseLiveRevision String @db.VarChar(64)
+  createdById Int?
+  updatedById Int?
+  createdBy Profile? @relation("ScenarioCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy Profile? @relation("ScenarioEditor", fields: [updatedById], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  items ScenarioItem[]
+  presence ScenarioPresence[]
+  @@index([status, updatedAt])
+}
+
+model ScenarioItem {
+  id Int @id @default(autoincrement())
+  scenarioId Int
+  sourceAllocationId Int?
+  tutorId Int
+  courseId Int
+  startsAt DateTime
+  endsAt DateTime
+  allocatedHours Decimal @db.Decimal(5,2)
+  minimumMark Decimal @default(50) @db.Decimal(5,2)
+  locked Boolean @default(false)
+  scenario Scenario @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
+  tutor Profile @relation(fields: [tutorId], references: [id], onDelete: Restrict)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Restrict)
+  @@unique([scenarioId, sourceAllocationId])
+  @@index([scenarioId])
+}
+
+/// Presence is a TTL activity hint, never an authorization or editing lock.
+model ScenarioPresence {
+  scenarioId Int
+  profileId Int
+  lastSeenAt DateTime @default(now())
+  scenario Scenario @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  @@id([scenarioId, profileId])
+  @@index([lastSeenAt])
+}
+
+model TutoringBooking {
+ sickNotes StudentSickNote[]
+ id Int @id @default(autoincrement())
+ studentId Int
+ tutorId Int
+ courseId Int
+ termId Int
+ startsAt DateTime
+ endsAt DateTime
+ status String @default("CONFIRMED") @db.VarChar(16)
+ occurrenceStatus String @default("SCHEDULED") @db.VarChar(16)
+ version Int @default(1)
+ requestKey String @db.VarChar(128)
+ requestHash String @db.VarChar(64)
+ createdAt DateTime @default(now())
+ updatedAt DateTime @default(now())
+ student Profile @relation("StudentBookings",fields:[studentId],references:[id],onDelete:Restrict)
+ tutor Profile @relation("TutorBookings",fields:[tutorId],references:[id],onDelete:Restrict)
+ course Course @relation(fields:[courseId],references:[id],onDelete:Restrict)
+ term AcademicTerm @relation(fields:[termId],references:[id],onDelete:Restrict)
+ events BookingEvent[]
+ @@unique([studentId,requestKey])
+ @@index([tutorId,status,startsAt])
+ @@index([studentId,status,startsAt])
+}
+model TutorSwap {
+ id Int @id @default(autoincrement())
+ allocationId Int
+ requesterId Int
+ replacementId Int
+ replacementAllocationId Int?
+ allocationRevision String @db.VarChar(64)
+ snapshot Json
+ reason String @db.VarChar(1000)
+ status String @default("REQUESTED") @db.VarChar(16)
+ version Int @default(1)
+ createdAt DateTime @default(now())
+ updatedAt DateTime @default(now())
+ allocation Allocation @relation("SwapSource",fields:[allocationId],references:[id],onDelete:Restrict)
+ replacementAllocation Allocation? @relation("SwapResult",fields:[replacementAllocationId],references:[id],onDelete:Restrict)
+ requester Profile @relation("SwapRequester",fields:[requesterId],references:[id],onDelete:Restrict)
+ replacement Profile @relation("SwapReplacement",fields:[replacementId],references:[id],onDelete:Restrict)
+ events SwapEvent[]
+ @@index([status,createdAt])
+}
+model BookingEvent {
+ id Int @id @default(autoincrement())
+ bookingId Int
+ actorId Int
+ action String @db.VarChar(24)
+ version Int
+ note String @default("") @db.VarChar(1000)
+ createdAt DateTime @default(now())
+ booking TutoringBooking @relation(fields:[bookingId],references:[id],onDelete:Restrict)
+ actor Profile @relation(fields:[actorId],references:[id],onDelete:Restrict)
+ @@unique([bookingId,version])
+}
+model SwapEvent {
+ id Int @id @default(autoincrement())
+ swapId Int
+ actorId Int
+ action String @db.VarChar(24)
+ version Int
+ note String @default("") @db.VarChar(1000)
+ createdAt DateTime @default(now())
+ swap TutorSwap @relation(fields:[swapId],references:[id],onDelete:Restrict)
+ actor Profile @relation(fields:[actorId],references:[id],onDelete:Restrict)
+ @@unique([swapId,version])
+}
+
+model StudentSickNote {
+ id Int @id @default(autoincrement())
+ bookingId Int
+ reason String @db.VarChar(1000)
+ status String @default("PENDING") @db.VarChar(16)
+ version Int @default(1)
+ reviewNote String @default("") @db.VarChar(1000)
+ reviewedById Int?
+ reviewedAt DateTime?
+ createdAt DateTime @default(now())
+ booking TutoringBooking @relation(fields:[bookingId],references:[id],onDelete:Restrict)
+ reviewedBy Profile? @relation(fields:[reviewedById],references:[id],onDelete:Restrict)
+ @@index([status,id])
+}
+
+model AuditEvent {
+ id Int @id @default(autoincrement())
+ actorId Int
+ action String @db.VarChar(64)
+ targetType String @db.VarChar(24)
+ targetId Int
+ before Json @default("{}")
+ after Json @default("{}")
+ reason String @default("") @db.VarChar(1000)
+ createdAt DateTime @default(now())
+ actor Profile @relation(fields:[actorId],references:[id],onDelete:Restrict)
+ @@index([createdAt,id])
+ @@index([targetType,targetId,id])
+ @@index([actorId,createdAt])
+}
+model MutationReceipt {
+ id Int @id @default(autoincrement())
+ actorId Int
+ scope String @db.VarChar(100)
+ requestKey String @db.VarChar(128)
+ requestHash String @db.VarChar(64)
+ resultId Int
+ createdAt DateTime @default(now())
+ actor Profile @relation(fields:[actorId],references:[id],onDelete:Restrict)
+ @@unique([actorId,scope,requestKey])
 }

@@ -8,7 +8,7 @@
       200
     ],
     "services": [],
-    "line": 2367,
+    "line": 2385,
     "query": [],
     "body": [],
     "validators": [],
@@ -23,7 +23,7 @@
       200
     ],
     "services": [],
-    "line": 2371,
+    "line": 2389,
     "query": [],
     "body": [],
     "validators": [],
@@ -40,7 +40,7 @@
     "services": [
       "requestPasswordReset"
     ],
-    "line": 2386,
+    "line": 2404,
     "query": [],
     "body": [
       "email"
@@ -59,7 +59,7 @@
     "services": [
       "onboardUser"
     ],
-    "line": 2415,
+    "line": 2433,
     "query": [],
     "body": [
       "role"
@@ -78,7 +78,7 @@
     "services": [
       "registerOrganiserApplication"
     ],
-    "line": 2434,
+    "line": 2452,
     "query": [],
     "body": [],
     "validators": [],
@@ -95,7 +95,7 @@
     "services": [
       "getOrganiserApplicationStatusByEmail"
     ],
-    "line": 2452,
+    "line": 2470,
     "query": [],
     "body": [
       "email"
@@ -114,7 +114,7 @@
     "services": [
       "requestVerificationEmail"
     ],
-    "line": 2473,
+    "line": 2491,
     "query": [],
     "body": [],
     "validators": [],
@@ -129,7 +129,7 @@
       200
     ],
     "services": [],
-    "line": 2498,
+    "line": 2516,
     "query": [],
     "body": [],
     "validators": [],
@@ -144,7 +144,7 @@
       200
     ],
     "services": [],
-    "line": 2502,
+    "line": 2520,
     "query": [],
     "body": [],
     "validators": [],
@@ -161,7 +161,7 @@
     "services": [
       "getOwnOrganiserApplication"
     ],
-    "line": 2510,
+    "line": 2528,
     "query": [],
     "body": [],
     "validators": [],
@@ -178,7 +178,7 @@
     "services": [
       "listOrganiserApplications"
     ],
-    "line": 2527,
+    "line": 2545,
     "query": [],
     "body": [],
     "validators": [],
@@ -195,7 +195,7 @@
     "services": [
       "approveOrganiserApplication"
     ],
-    "line": 2546,
+    "line": 2564,
     "query": [],
     "body": [],
     "validators": [
@@ -214,7 +214,7 @@
     "services": [
       "rejectOrganiserApplication"
     ],
-    "line": 2572,
+    "line": 2590,
     "query": [],
     "body": [
       "reviewReason"
@@ -235,7 +235,7 @@
     "services": [
       "getPublicHolidays"
     ],
-    "line": 2612,
+    "line": 2630,
     "query": [
       "year"
     ],
@@ -256,7 +256,7 @@
     "services": [
       "listCourses"
     ],
-    "line": 2645,
+    "line": 2663,
     "query": [],
     "body": [],
     "validators": [],
@@ -273,7 +273,7 @@
     "services": [
       "createCourse"
     ],
-    "line": 2660,
+    "line": 2678,
     "query": [],
     "body": [],
     "validators": [
@@ -292,7 +292,7 @@
     "services": [
       "updateCourse"
     ],
-    "line": 2686,
+    "line": 2704,
     "query": [],
     "body": [],
     "validators": [
@@ -312,7 +312,7 @@
     "services": [
       "deleteCourse"
     ],
-    "line": 2727,
+    "line": 2745,
     "query": [],
     "body": [],
     "validators": [
@@ -331,7 +331,7 @@
     "services": [
       "listTutors"
     ],
-    "line": 2754,
+    "line": 2772,
     "query": [
       "weekStart"
     ],
@@ -352,7 +352,7 @@
     "services": [
       "listOrganiserAllocations"
     ],
-    "line": 2783,
+    "line": 2801,
     "query": [],
     "body": [],
     "validators": [],
@@ -369,7 +369,7 @@
     "services": [
       "listAllocationCandidates"
     ],
-    "line": 2798,
+    "line": 2816,
     "query": [],
     "body": [],
     "validators": [
@@ -388,7 +388,7 @@
     "services": [
       "createAllocation"
     ],
-    "line": 2827,
+    "line": 2845,
     "query": [],
     "body": [],
     "validators": [
@@ -407,7 +407,7 @@
     "services": [
       "updateAllocation"
     ],
-    "line": 2856,
+    "line": 2874,
     "query": [],
     "body": [],
     "validators": [
@@ -427,7 +427,7 @@
     "services": [
       "removeAllocation"
     ],
-    "line": 2901,
+    "line": 2919,
     "query": [],
     "body": [],
     "validators": [
@@ -446,7 +446,7 @@
     "services": [
       "workloadReport"
     ],
-    "line": 2934,
+    "line": 2952,
     "query": [],
     "body": [],
     "validators": [
@@ -465,7 +465,7 @@
     "services": [
       "payrollExportCsv"
     ],
-    "line": 2968,
+    "line": 2986,
     "query": [],
     "body": [],
     "validators": [
@@ -484,7 +484,7 @@
     "services": [
       "previewBulkAllocations"
     ],
-    "line": 3010,
+    "line": 3028,
     "query": [],
     "body": [],
     "validators": [
@@ -503,7 +503,7 @@
     "services": [
       "commitBulkAllocations"
     ],
-    "line": 3040,
+    "line": 3058,
     "query": [],
     "body": [],
     "validators": [
@@ -522,7 +522,7 @@
     "services": [
       "listStaffingRequirements"
     ],
-    "line": 3074,
+    "line": 3092,
     "query": [],
     "body": [],
     "validators": [
@@ -541,7 +541,7 @@
     "services": [
       "createStaffingRequirement"
     ],
-    "line": 3105,
+    "line": 3123,
     "query": [],
     "body": [],
     "validators": [
@@ -560,7 +560,7 @@
     "services": [
       "updateStaffingRequirement"
     ],
-    "line": 3138,
+    "line": 3156,
     "query": [],
     "body": [],
     "validators": [
@@ -580,7 +580,7 @@
     "services": [
       "setStaffingRequirementStatus"
     ],
-    "line": 3186,
+    "line": 3204,
     "query": [],
     "body": [],
     "validators": [
@@ -600,7 +600,7 @@
     "services": [
       "commandCentreSummary"
     ],
-    "line": 3234,
+    "line": 3252,
     "query": [],
     "body": [],
     "validators": [
@@ -619,7 +619,7 @@
     "services": [
       "listOrganiserApprovals"
     ],
-    "line": 3274,
+    "line": 3292,
     "query": [],
     "body": [],
     "validators": [],
@@ -636,7 +636,7 @@
     "services": [
       "decideTimesheet"
     ],
-    "line": 3289,
+    "line": 3307,
     "query": [],
     "body": [],
     "validators": [
@@ -656,7 +656,7 @@
     "services": [
       "decideVolunteerClaim"
     ],
-    "line": 3335,
+    "line": 3353,
     "query": [],
     "body": [],
     "validators": [
@@ -676,7 +676,7 @@
     "services": [
       "listOrganiserOverflowWork"
     ],
-    "line": 3382,
+    "line": 3400,
     "query": [],
     "body": [],
     "validators": [],
@@ -693,7 +693,7 @@
     "services": [
       "createOrganiserOverflowWork"
     ],
-    "line": 3400,
+    "line": 3418,
     "query": [],
     "body": [],
     "validators": [
@@ -712,7 +712,7 @@
     "services": [
       "updateOrganiserOverflowWork"
     ],
-    "line": 3433,
+    "line": 3451,
     "query": [],
     "body": [],
     "validators": [
@@ -732,7 +732,7 @@
     "services": [
       "closeOrganiserOverflowWork"
     ],
-    "line": 3480,
+    "line": 3498,
     "query": [],
     "body": [],
     "validators": [
@@ -752,7 +752,7 @@
     "services": [
       "listTimesheetDisputes"
     ],
-    "line": 3532,
+    "line": 3550,
     "query": [],
     "body": [],
     "validators": [],
@@ -769,7 +769,7 @@
     "services": [
       "resolveTimesheetDispute"
     ],
-    "line": 3556,
+    "line": 3574,
     "query": [],
     "body": [],
     "validators": [
@@ -789,7 +789,7 @@
     "services": [
       "listTutorMarks"
     ],
-    "line": 3609,
+    "line": 3627,
     "query": [],
     "body": [],
     "validators": [
@@ -808,7 +808,7 @@
     "services": [
       "upsertTutorMark"
     ],
-    "line": 3635,
+    "line": 3653,
     "query": [],
     "body": [],
     "validators": [
@@ -828,7 +828,7 @@
     "services": [
       "deleteTutorMark"
     ],
-    "line": 3675,
+    "line": 3693,
     "query": [],
     "body": [],
     "validators": [
@@ -847,7 +847,7 @@
     "services": [
       "listTutorTimeSlots"
     ],
-    "line": 3702,
+    "line": 3720,
     "query": [],
     "body": [],
     "validators": [
@@ -866,7 +866,24 @@
     "services": [
       "getTutorDashboard"
     ],
-    "line": 3728,
+    "line": 3746,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-me-time-slots",
+    "method": "POST",
+    "path": "/api/me/time-slots",
+    "access": "STUDENT / TUTOR",
+    "success": [
+      201
+    ],
+    "services": [
+      "shared own-schedule service"
+    ],
+    "line": 3762,
     "query": [],
     "body": [],
     "validators": [],
@@ -883,12 +900,29 @@
     "services": [
       "createTutorTimeSlot"
     ],
-    "line": 3744,
+    "line": 3762,
     "query": [],
     "body": [],
     "validators": [
       "parseTutorTimeSlotInput"
     ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-me-time-slots",
+    "method": "GET",
+    "path": "/api/me/time-slots",
+    "access": "STUDENT / TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "shared own-schedule service"
+    ],
+    "line": 3792,
+    "query": [],
+    "body": [],
+    "validators": [],
     "idempotency": false
   },
   {
@@ -902,7 +936,24 @@
     "services": [
       "listOwnTutorTimeSlots"
     ],
-    "line": 3774,
+    "line": 3792,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "patch-api-me-time-slots-timeslotid",
+    "method": "PATCH",
+    "path": "/api/me/time-slots/:timeSlotId",
+    "access": "STUDENT / TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "shared own-schedule service"
+    ],
+    "line": 3809,
     "query": [],
     "body": [],
     "validators": [],
@@ -919,13 +970,30 @@
     "services": [
       "updateTutorTimeSlot"
     ],
-    "line": 3791,
+    "line": 3809,
     "query": [],
     "body": [],
     "validators": [
       "parseNumericId",
       "parseTutorTimeSlotInput"
     ],
+    "idempotency": false
+  },
+  {
+    "id": "delete-api-me-time-slots-timeslotid",
+    "method": "DELETE",
+    "path": "/api/me/time-slots/:timeSlotId",
+    "access": "STUDENT / TUTOR",
+    "success": [
+      204
+    ],
+    "services": [
+      "shared own-schedule service"
+    ],
+    "line": 3832,
+    "query": [],
+    "body": [],
+    "validators": [],
     "idempotency": false
   },
   {
@@ -939,7 +1007,7 @@
     "services": [
       "deleteTutorTimeSlot"
     ],
-    "line": 3814,
+    "line": 3832,
     "query": [],
     "body": [],
     "validators": [
@@ -958,7 +1026,7 @@
     "services": [
       "listAcademicTerms"
     ],
-    "line": 3836,
+    "line": 3854,
     "query": [],
     "body": [],
     "validators": [],
@@ -975,7 +1043,7 @@
     "services": [
       "createAcademicTerm"
     ],
-    "line": 3860,
+    "line": 3878,
     "query": [],
     "body": [],
     "validators": [
@@ -994,7 +1062,7 @@
     "services": [
       "listPublishedAcademicTerms"
     ],
-    "line": 3893,
+    "line": 3911,
     "query": [],
     "body": [],
     "validators": [],
@@ -1011,7 +1079,7 @@
     "services": [
       "updateAcademicTerm"
     ],
-    "line": 3914,
+    "line": 3932,
     "query": [],
     "body": [],
     "validators": [
@@ -1031,12 +1099,29 @@
     "services": [
       "deleteAcademicTerm"
     ],
-    "line": 3954,
+    "line": 3972,
     "query": [],
     "body": [],
     "validators": [
       "parseInt"
     ],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-me-time-slots-import-preview",
+    "method": "POST",
+    "path": "/api/me/time-slots/import/preview",
+    "access": "STUDENT / TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "previewTutorTimetableImport"
+    ],
+    "line": 4001,
+    "query": [],
+    "body": [],
+    "validators": [],
     "idempotency": false
   },
   {
@@ -1050,12 +1135,29 @@
     "services": [
       "previewTutorTimetableImport"
     ],
-    "line": 3983,
+    "line": 4001,
     "query": [],
     "body": [],
     "validators": [
       "parseTimetableImportRequest"
     ],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-me-time-slots-import-commit",
+    "method": "POST",
+    "path": "/api/me/time-slots/import/commit",
+    "access": "STUDENT / TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "commitTutorTimetableImport"
+    ],
+    "line": 4037,
+    "query": [],
+    "body": [],
+    "validators": [],
     "idempotency": false
   },
   {
@@ -1069,7 +1171,7 @@
     "services": [
       "commitTutorTimetableImport"
     ],
-    "line": 4019,
+    "line": 4037,
     "query": [],
     "body": [],
     "validators": [
@@ -1088,7 +1190,7 @@
     "services": [
       "updateTutorWeeklyCapacity"
     ],
-    "line": 4061,
+    "line": 4079,
     "query": [],
     "body": [],
     "validators": [
@@ -1107,7 +1209,7 @@
     "services": [
       "createTutorWorkLog"
     ],
-    "line": 4083,
+    "line": 4101,
     "query": [],
     "body": [],
     "validators": [
@@ -1126,7 +1228,7 @@
     "services": [
       "getTutorTimesheetHistory"
     ],
-    "line": 4118,
+    "line": 4136,
     "query": [],
     "body": [],
     "validators": [
@@ -1145,7 +1247,7 @@
     "services": [
       "correctTutorTimesheetWorkLog"
     ],
-    "line": 4165,
+    "line": 4183,
     "query": [],
     "body": [],
     "validators": [
@@ -1165,7 +1267,7 @@
     "services": [
       "declareTutorTimesheet"
     ],
-    "line": 4238,
+    "line": 4256,
     "query": [],
     "body": [],
     "validators": [
@@ -1185,7 +1287,7 @@
     "services": [
       "raiseTutorTimesheetDispute"
     ],
-    "line": 4296,
+    "line": 4314,
     "query": [],
     "body": [],
     "validators": [
@@ -1205,7 +1307,7 @@
     "services": [
       "createTutorExcuse"
     ],
-    "line": 4349,
+    "line": 4367,
     "query": [],
     "body": [],
     "validators": [
@@ -1224,7 +1326,7 @@
     "services": [
       "listStudentOpenWork"
     ],
-    "line": 4379,
+    "line": 4397,
     "query": [],
     "body": [],
     "validators": [],
@@ -1241,7 +1343,7 @@
     "services": [
       "listStudentVolunteerRequests"
     ],
-    "line": 4395,
+    "line": 4413,
     "query": [],
     "body": [],
     "validators": [],
@@ -1258,7 +1360,7 @@
     "services": [
       "createStudentVolunteerRequest"
     ],
-    "line": 4412,
+    "line": 4430,
     "query": [],
     "body": [],
     "validators": [
@@ -1277,7 +1379,7 @@
     "services": [
       "getStudentVolunteerRequest"
     ],
-    "line": 4443,
+    "line": 4461,
     "query": [],
     "body": [],
     "validators": [
@@ -1296,7 +1398,7 @@
     "services": [
       "withdrawStudentVolunteerRequest"
     ],
-    "line": 4478,
+    "line": 4496,
     "query": [],
     "body": [],
     "validators": [
@@ -1315,7 +1417,7 @@
     "services": [
       "getTutorTimesheetStatus"
     ],
-    "line": 4513,
+    "line": 4531,
     "query": [],
     "body": [],
     "validators": [
@@ -1334,7 +1436,7 @@
     "services": [
       "submitTutorTimesheet"
     ],
-    "line": 4547,
+    "line": 4565,
     "query": [],
     "body": [],
     "validators": [
@@ -1353,7 +1455,7 @@
     "services": [
       "getTutorExcuseStatus"
     ],
-    "line": 4581,
+    "line": 4599,
     "query": [],
     "body": [],
     "validators": [
@@ -1372,13 +1474,557 @@
     "services": [
       "decideExcuse"
     ],
-    "line": 4611,
+    "line": 4629,
     "query": [],
     "body": [],
     "validators": [
       "parseExcuseDecisionInput",
       "parseNumericId"
     ],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-organiser-audit",
+    "method": "GET",
+    "path": "/api/organiser/audit",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "auditService.list"
+    ],
+    "line": 4672,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-organiser-audit-export",
+    "method": "GET",
+    "path": "/api/organiser/audit/export",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "auditService.export"
+    ],
+    "line": 4673,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-organiser-audit-id",
+    "method": "GET",
+    "path": "/api/organiser/audit/:id",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "auditService.get"
+    ],
+    "line": 4674,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-organiser-allocations-id-history",
+    "method": "GET",
+    "path": "/api/organiser/allocations/:id/history",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "allocationRestoreService.history"
+    ],
+    "line": 4675,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-organiser-allocations-id-restore-preview",
+    "method": "POST",
+    "path": "/api/organiser/allocations/:id/restore-preview",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "allocationRestoreService.preview"
+    ],
+    "line": 4676,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-organiser-allocations-id-restore",
+    "method": "POST",
+    "path": "/api/organiser/allocations/:id/restore",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "allocationRestoreService.restore"
+    ],
+    "line": 4677,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-student-bookings-id-sick-notes",
+    "method": "POST",
+    "path": "/api/student/bookings/:id/sick-notes",
+    "access": "STUDENT",
+    "success": [
+      201
+    ],
+    "services": [
+      "studentSickNoteService.submit"
+    ],
+    "line": 4679,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-organiser-student-sick-notes",
+    "method": "GET",
+    "path": "/api/organiser/student-sick-notes",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "studentSickNoteService"
+    ],
+    "line": 4680,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-organiser-student-sick-notes-id-decision",
+    "method": "POST",
+    "path": "/api/organiser/student-sick-notes/:id/decision",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "studentSickNoteService"
+    ],
+    "line": 4681,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-me-bookings",
+    "method": "GET",
+    "path": "/api/me/bookings",
+    "access": "STUDENT / TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "bookingService"
+    ],
+    "line": 4685,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-student-bookings",
+    "method": "POST",
+    "path": "/api/student/bookings",
+    "access": "STUDENT",
+    "success": [
+      201
+    ],
+    "services": [
+      "bookingService"
+    ],
+    "line": 4686,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-me-bookings-id",
+    "method": "GET",
+    "path": "/api/me/bookings/:id",
+    "access": "STUDENT / TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "bookingService"
+    ],
+    "line": 4687,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-me-bookings-id-cancel",
+    "method": "POST",
+    "path": "/api/me/bookings/:id/cancel",
+    "access": "STUDENT / TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "bookingService"
+    ],
+    "line": 4688,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-swaps",
+    "method": "GET",
+    "path": "/api/swaps",
+    "access": "TUTOR / ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "swapService"
+    ],
+    "line": 4689,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-swaps-id",
+    "method": "GET",
+    "path": "/api/swaps/:id",
+    "access": "TUTOR / ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "swapService"
+    ],
+    "line": 4690,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-tutor-allocations-id-replacements",
+    "method": "GET",
+    "path": "/api/tutor/allocations/:id/replacements",
+    "access": "TUTOR",
+    "success": [
+      200
+    ],
+    "services": [
+      "swapService"
+    ],
+    "line": 4691,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-tutor-swaps",
+    "method": "POST",
+    "path": "/api/tutor/swaps",
+    "access": "TUTOR",
+    "success": [
+      201
+    ],
+    "services": [
+      "swapService"
+    ],
+    "line": 4692,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-swaps-id-actions",
+    "method": "POST",
+    "path": "/api/swaps/:id/actions",
+    "access": "TUTOR / ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "swapService"
+    ],
+    "line": 4693,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-organiser-proposals-preview",
+    "method": "POST",
+    "path": "/api/organiser/proposals/preview",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "proposalService"
+    ],
+    "line": 4709,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-organiser-proposals-compare",
+    "method": "POST",
+    "path": "/api/organiser/proposals/compare",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "proposalService"
+    ],
+    "line": 4710,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-organiser-proposals-generate",
+    "method": "POST",
+    "path": "/api/organiser/proposals/generate",
+    "access": "ORGANISER",
+    "success": [
+      201
+    ],
+    "services": [
+      "proposalService"
+    ],
+    "line": 4711,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-organiser-proposals-scenarioid-explanations",
+    "method": "GET",
+    "path": "/api/organiser/proposals/:scenarioId/explanations",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "proposalService"
+    ],
+    "line": 4712,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-organiser-proposals-scenarioid-adjust",
+    "method": "POST",
+    "path": "/api/organiser/proposals/:scenarioId/adjust",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "proposalService"
+    ],
+    "line": 4713,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-organiser-scenarios",
+    "method": "GET",
+    "path": "/api/organiser/scenarios",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "scenarioService"
+    ],
+    "line": 4714,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-organiser-scenarios",
+    "method": "POST",
+    "path": "/api/organiser/scenarios",
+    "access": "ORGANISER",
+    "success": [
+      201
+    ],
+    "services": [
+      "scenarioService"
+    ],
+    "line": 4717,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-organiser-scenarios-scenarioid",
+    "method": "GET",
+    "path": "/api/organiser/scenarios/:scenarioId",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "scenarioService"
+    ],
+    "line": 4720,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-organiser-scenarios-scenarioid-compare",
+    "method": "GET",
+    "path": "/api/organiser/scenarios/:scenarioId/compare",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "scenarioService"
+    ],
+    "line": 4720,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-organiser-scenarios-scenarioid-actions",
+    "method": "POST",
+    "path": "/api/organiser/scenarios/:scenarioId/actions",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "scenarioService"
+    ],
+    "line": 4720,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-organiser-scenarios-scenarioid-presence",
+    "method": "POST",
+    "path": "/api/organiser/scenarios/:scenarioId/presence",
+    "access": "ORGANISER",
+    "success": [
+      200
+    ],
+    "services": [
+      "scenarioService"
+    ],
+    "line": 4720,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "get-api-student-tutoring-options",
+    "method": "GET",
+    "path": "/api/student/tutoring-options",
+    "access": "STUDENT",
+    "success": [
+      200
+    ],
+    "services": [
+      "mutualAvailabilityService"
+    ],
+    "line": 4734,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-student-mutual-availability",
+    "method": "POST",
+    "path": "/api/student/mutual-availability",
+    "access": "STUDENT",
+    "success": [
+      200
+    ],
+    "services": [
+      "mutualAvailabilityService"
+    ],
+    "line": 4737,
+    "query": [],
+    "body": [],
+    "validators": [],
+    "idempotency": false
+  },
+  {
+    "id": "post-api-navigation-resolve",
+    "method": "POST",
+    "path": "/api/navigation/resolve",
+    "access": "ALL ROLES",
+    "success": [
+      200
+    ],
+    "services": [
+      "resolveNavigation"
+    ],
+    "line": 4741,
+    "query": [],
+    "body": [],
+    "validators": [],
     "idempotency": false
   },
   {
@@ -1392,7 +2038,7 @@
     "services": [
       "search"
     ],
-    "line": 4652,
+    "line": 4756,
     "query": [
       "categories",
       "page",
@@ -1416,7 +2062,7 @@
     "services": [
       "listNotifications"
     ],
-    "line": 4686,
+    "line": 4790,
     "query": [
       "page",
       "pageSize"
@@ -1439,7 +2085,7 @@
     "services": [
       "countUnreadNotifications"
     ],
-    "line": 4707,
+    "line": 4811,
     "query": [],
     "body": [],
     "validators": [],
@@ -1456,7 +2102,7 @@
     "services": [
       "getNotification"
     ],
-    "line": 4724,
+    "line": 4828,
     "query": [],
     "body": [],
     "validators": [
@@ -1475,7 +2121,7 @@
     "services": [
       "markNotificationRead"
     ],
-    "line": 4752,
+    "line": 4856,
     "query": [],
     "body": [],
     "validators": [
@@ -1494,7 +2140,7 @@
     "services": [
       "markAllNotificationsRead"
     ],
-    "line": 4775,
+    "line": 4879,
     "query": [],
     "body": [],
     "validators": [],
@@ -1511,7 +2157,7 @@
     "services": [
       "runDueReminders"
     ],
-    "line": 4791,
+    "line": 4895,
     "query": [],
     "body": [],
     "validators": [],
@@ -1528,7 +2174,7 @@
     "services": [
       "deleteAccount"
     ],
-    "line": 4806,
+    "line": 4910,
     "query": [],
     "body": [],
     "validators": [],

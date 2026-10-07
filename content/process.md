@@ -21,10 +21,10 @@ The work tracker records status and ownership; the bug tracker records reproduci
 
 Sprint 1 built foundations. Sprint 2 connected the Basic workflows. Post-Sprint-2 testing corrected ownership, calendar presentation, candidate mapping and post-save self-conflicts. Sprint 3 completed notifications/search, staffing/ranking/bulk, reports, timetable import, timesheet correction/dispute/export, overflow management and the Command Centre.
 
-The 30 September handbook makes Tutor sickness and Master Organiser approval part of the completed baseline. Sprint 4 extends those foundations with Student scheduling and Advanced planning. Historical cards remain evidence of their time; current chapters and the updated handbook supersede conflicting old sign-up/roadmap wording.
+The 30 September handbook makes Tutor sickness and Master Organiser approval part of the completed baseline. Sprint 4 completed those extensions with Student scheduling and Advanced planning in the supplied final source. Historical cards remain evidence of their time; current chapters and the updated handbook supersede conflicting old sign-up/roadmap wording.
 
 ## Definition of Done
 
 A feature meets its acceptance criteria, passes relevant automated and browser checks, handles role/ownership and failure cases, contains no committed secrets, carries truthful AI attribution, is reviewed, is integrated and passes the affected combined behaviour. Evidence must identify what was tested and where. Remote CI is only green when the run actually completed successfully.
 
-Preserve stakeholder feedback and explain which change it caused. The retained [user-feedback page](#user-feedback) contains the original evidence; do not invent new comments or participant counts. The [Sprint 4 plan](#sprint4) turns the updated handbook into written website content rather than merely linking its PDF.
+Preserve stakeholder feedback and explain which change it caused. The retained [user-feedback page](#user-feedback) contains the original evidence; do not invent new comments or participant counts. The [Sprint 4 final delivery record](#sprint4) now connects the handbook plan to the implemented final source and retained release evidence.

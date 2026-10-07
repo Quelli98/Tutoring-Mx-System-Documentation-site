@@ -1,0 +1,42 @@
+Final Sprint 4 main: 361954ec510c624c5f2a0f3d0940c2f7cb769d2e
+
+361954e (HEAD -> main, origin/main, origin/HEAD, deployment/main, deployment/HEAD) Merge reviewed Sprint 4 Member 6 final fixes
+2f62311 (origin/s4-member-6-final-reviewed-20261007, s4-member-6-final-reviewed-20261007) fix: complete reviewed Sprint 4 Member 6
+446f5cc ci: retrigger actions after gitea outage
+2d0b30b Merge Sprint 4 Member 6 redo
+b1cc219 (origin/s4-member-6-redo, s4-member-6-redo) fix: redo Sprint 4 Member 6
+1cec436 Merge Sprint 4 Member 6 coverage fix
+1b00e87 (origin/s4-member-6, s4-member-6) Add Sprint 4 Member 6 proposal coverage tests
+439d1a0 Merge fixed Sprint 4 Member 6 work
+313bcbd Fix Sprint 4 Member 6 proposal service CI errors
+77cebea Merge Sprint 4 Member 6 work
+cd8d01c Complete Sprint 4 Member 6 work
+d920879 Merge Sprint 4 Member 5 work
+e6b875c (origin/s4-member-5, s4-member-5) Complete Sprint 4 Member 5 work
+83f3289 Merge Sprint 4 Member 4 work
+b8d6795 (origin/s4-member-4, s4-member-4) Complete Sprint 4 Member 4 work
+5e9680c Merge Member 3 Sprint 4 work
+cf7991a (origin/member-3, member-3) Complete Member 3 Sprint 4 work
+62c2fb6 Merge Member 2 Sprint 4 work
+4565ee6 (origin/member-2, member-2) Complete Member 2 Sprint 4 work
+02887af Merge updated complete Member 1
+3ce7361 (origin/updated-complete-member-1, updated-complete-member-1) Complete updated Member 1 Sprint 4 work
+24d8f7a feat: add lecturer organiser approval workflow
+9107313 fix: session expiry, login persistence, term actions and budget layout
+9f10ad6 feat: integrate sick timetable and schedule identity updates
+5b426af Merge pull request 'fix: stabilise CI and fortnightly schedule support' (#78) from fix/final-ci-validation into main
+dac70b0 (origin/fix/final-ci-validation, fix/final-ci-validation) fix: stabilise CI and fortnightly schedule support
+0edeebf fix(ci): stabilise timetable coverage and state refresh
+b7df3fd fix(test): increase PGlite hook timeout for CI runners
+944e493 test(backend): add academic-terms service tests for coverage
+21092bb fix(test): correct repeat label selector in accessibility test
+06e07e2 feat(ui): unify timetable import and manual entry
+3e92267 fix(test): align timetable import test expectations with payload shape
+88a168d fix(lint): correct eslint-disable placement for data loading effects
+7ed38e0 feat(ui): unify timetable import and manual entry into tabbed interface
+e5f1e1e feat: implement shared timetable with categories, terms and import
+3d968f3 test(auth): add full role-match and mismatch regression coverage
+4f884cb fix(auth): enforce sign-in role, improve verification and password-reset flows
+72ac923 Merge pull request 'feat(ui): integrate final complete Tutor MX redesign' (#77) from design/final-complete-ui into main
+c04f588 (origin/design/final-complete-ui, design/final-complete-ui) feat(ui): integrate final complete Tutor MX redesign
+b9d2c29 Merge pull request 'feat(ui): complete Tutor MX full role redesign' (#76) from design/ui-redesign into main

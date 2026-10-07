@@ -8,10 +8,10 @@ The updated README is included in full below, with pasted escape formatting repa
 | Repository folders | [Architecture](#architecture) | `frontend/`, `src/` and `prisma/` are separate layers in one repo |
 | Setup and commands | This chapter | Install both workspaces, configure environments, generate and migrate |
 | Auth0 roles | [Security](#security) and [Master Organiser](#master-organiser) | Three stored roles; extra Master privilege; lecturer approval required |
-| HTTP contracts | [API reference](#api) | 82 source-registered operations and external read examples |
-| Database | [Tables](#database) | 20 current models, fields, relations and migration evidence |
+| HTTP contracts | [API reference](#api) | 120 source-registered operations and external read examples |
+| Database | [Tables](#database) | 30 current models, fields, relations and migration evidence |
 | Quality and deployment | [Testing](#testing) and [Git method](#git-methodology) | Local gates plus completed remote CI and approved release |
-| Future scope | [Sprint 4](#sprint4) | Shared Student scheduling plus Advanced planning |
+| Sprint 4 final scope | [Sprint 4](#sprint4) | Shared Student scheduling plus Advanced planning are implemented in final main |
 
 ## Application setup
 
@@ -50,12 +50,12 @@ Use the exact variable names from the source `.env.example` files for fields not
 | README statement | Current documentation treatment |
 | --- | --- |
 | “Token cache explicitly in memory” | Source sets local storage; documented in Frontend and Security |
-| Older production commit/deployment proof | Retained as historical, not claimed as current release |
-| Legacy Tutor create/edit and Organiser schedule writes | Not in the current 82-route registrations; catalogue follows source |
+| Older production commit/deployment proof | Retained as historical; final Sprint 4 release is `361954e` |
+| Route inventory | Final catalogue follows the 120 operations registered in the supplied Sprint 4 `src/app.ts` |
 | Sprint 2/Member 5 handoff wording | Historical; handbook marks Sprint 3 complete and updates Sprint 4 |
 | Linked root `MEMBER5_HANDOFF.md` | Absent from the archive; use the supplied `docs/sprint3-member5-completion.md` evidence instead |
 
-The original text is retained for traceability. The linked chapter and catalogue are the maintained explanation of the verified source and updated handbook.
+The final application README supplied inside the Sprint 4 repository is retained in the original README panel and download. The linked chapters and catalogues are the maintained explanation of the final source plus the 30 September handbook.
 
 ## Run this documentation website
 
