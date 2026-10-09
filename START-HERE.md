@@ -1,4 +1,4 @@
-# Open and publish the final documentation website
+# Open and publish the Tutor MX project documentation
 
 1. Extract this ZIP.
 2. Open `Tutoring-Mx-System-Documentation-site-main` in VS Code.
@@ -11,7 +11,7 @@ npm run validate
 npm run dev
 ```
 
-4. Open the Vite URL printed in the terminal. Review Overview, Sprint 4 final, Milestone 4, API, Database, Testing, Deployment, Student scheduling and UML diagrams.
+4. Open the Vite URL printed in the terminal. Review the new Overview, Purpose & how to use, all four Sprint roadmaps, Milestone 4 rubric, API, Database, Testing, Deployment, scheduling and UML diagrams.
 5. To update the existing public site, copy/merge this project's contents into your **documentation Git checkout**, preserving its `.git` folder and any unrelated local work. Do not copy into the Tutor MX application checkout.
 6. Inspect and publish from that documentation checkout:
 
@@ -24,7 +24,7 @@ npm run build
 npm run validate
 git add README.md START-HERE.md VERIFICATION.md index.html package.json package-lock.json src content scripts public verification
 git diff --cached --check
-git commit -m "docs: add final Sprint 4 implementation and release evidence"
+git commit -m "docs: reorganise complete project site and four-sprint rubric roadmaps"
 git push origin main
 ```
 

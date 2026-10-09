@@ -28,6 +28,13 @@ These links are useful to a marker because they do not require access to the tea
 
 Private provider consoles are documented through screenshots rather than links that would lead an unauthorised viewer to a login page.
 
+## Updated official brief and project-specific scope
+
+- [2026 COMS3011A project brief and Milestone 1–4 rubrics](documents/coms3011a-2026-official-brief.pdf) — the uploaded University assessment criteria and milestone dates.
+- [Tutor Management System project-specific brief](documents/tutor-management-project-brief.pdf) — the Basic, Intermediate and Advanced feature requirements for this project.
+- [Four-sprint linked rubrics](#roadmap) — the editable, criterion-by-criterion development traceability index.
+- [Historical project documentation archive](#history-index) — original pages preserved even where modern chapters consolidate their subjects.
+
 ## Read the handbook and original materials
 
 - [Updated 30 September handbook PDF](documents/tutor-mx-handbook-30-september-2026.pdf)

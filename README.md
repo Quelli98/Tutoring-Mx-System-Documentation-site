@@ -1,8 +1,13 @@
-# Tutor MX engineering documentation — final rebuild
+# Tutor MX | Complete project documentation
 
-A professional React/Vite documentation website, updated through **7 October 2026** using the final supplied Sprint 4 repository, its README, the 30 September handbook and the final release, CI, database-role, responsive and performance evidence.
+A professional, public React/Vite documentation website for the **Tutor MX System (Wits COMS3011A, Team 6)**. The project-wide homepage explains the product and the role of this site. Four dedicated Sprint 1–4 roadmap chapters link every official rubric criterion to the existing implementation and evidence. Current technical content is grounded in the supplied 7 October 2026 final application source; historical material remains intact.
 
 ## What is included
+
+- A complete new homepage, purpose/reading guide, six logically grouped documentation sections and collapsible sidebar navigation.
+- A separate **Sprint Roadmaps** area: Sprint 1 (10 rubric criteria), Sprint 2 (10), Sprint 3 (8) and Sprint 4 (20), each linked to the relevant source/evidence chapters.
+- A dedicated history archive so old repeated sections remain available but do not compete with canonical reference pages.
+- A clearly identified final-release user-feedback section to fill without discarding the five genuine historical responses.
 
 - A new responsive website layout, search, contained tables, code-copy controls and printable chapters.
 - All **120 final Sprint 4 API operations**, with method/access filters, source references and external curl/PowerShell guidance.
@@ -40,7 +45,7 @@ The ZIP has not been pushed to a remote repository or deployed by this task. Thi
 
 | Path | Purpose |
 | --- | --- |
-| `content/*.md` | Written current chapters and display-cleaned supplied README |
+| `content/*.md` | Written current chapters, the four linked milestone roadmaps and supplied README |
 | `scripts/compile-content.mjs` | Trusted Markdown-to-page compilation |
 | `src/App.tsx` | Navigation, API/table explorers, evidence map and page composition |
 | `src/styles.css` | Responsive design and print styling |
@@ -68,3 +73,9 @@ Three unseen current rubric weights are retained provisionally from the older pr
 ## AI attribution
 
 This documentation was restored and updated with ChatGPT/Codex assistance. Preserve existing truthful declarations and commit trailers. Record the actual model visible in the session and the required course transcript/attribution; do not infer a model name from an application version.
+
+## Documentation restructure — 9 October 2026
+
+The homepage and navigation are no longer oriented around Sprint 4. Open **Overview → Purpose & how to use** or the independent **Sprint roadmaps** group. All original legacy React pages, evidence images, 2026 handbook, and original README remain available. The latest 2026 official project brief and the project-specific Tutor Management System brief have been added under `public/documents/`. Only new **final-release user feedback** needs the team’s actual survey/retest content; earlier feedback is retained.
+
+The documentation’s production-data-count, final-main CI and accessibility audit limitations remain explicitly stated in the final rubric rather than being falsely reported as verified.

@@ -1,0 +1,46 @@
+# Sprint 1 — foundation and project setup
+
+**3–25 August 2026 · Milestone 1 · foundational delivery**
+
+Sprint 1 established the project’s shared direction. The priority was not to complete every Advanced feature: it was to make identity, roles, the handwritten API, database schema, frontend workspaces, source control and a public development path work together. Later sprints extended this foundation rather than rebuilding it.
+
+## Delivered scope and intentional boundaries
+
+- **Authentication:** Auth0 identity and role-linked application profiles, protected role workspaces, password/account lifecycle and security contracts.
+- **Organiser:** course and registered-Tutor management plus the initial allocation board and visible eligibility rules.
+- **Tutor:** own-data dashboard, timetable/availability, work-log and excuse forms.
+- **Student:** protected overflow/volunteer interface, initially supported by a deliberately temporary mock boundary.
+- **Platform:** separate React/Vite frontend and handwritten Express backend, Prisma migrations/Neon data, initial external-holiday research, CI and public hosting.
+- **Carried into Sprint 2:** real allocation writes and persisted Student volunteer/approval state, rather than presenting those early placeholders as complete.
+
+## Milestone 1 — every official rubric criterion
+
+| Official criterion | Weight | Evidence / reference | What to inspect |
+| --- | ---: | --- | --- |
+| Version Control | 10% | [Open version control evidence](#git-methodology) | Branching, reviewed commits, main integration and repository evidence. |
+| Documentation Site | 10% | [Open documentation site evidence](#home) | Publicly hosted documentation, meaningful technical and project history. |
+| Getting Started / Dev Guides | 5% | [Open getting started / dev guides evidence](#readme) | Repository setup, commands, required environment and dev instructions. |
+| Work Tracker | 5% | [Open work tracker evidence](#work-tracker) | Owned issues, work states and completed handover records. |
+| Git Methodology | 5% | [Open git methodology evidence](#git-methodology) | Rationale and use of the branch, review and merge process. |
+| Project Methodology | 10% | [Open project methodology evidence](#process) | Scrum-style coordination, Definition of Done and retrospective decisions. |
+| Tech Stack | 5% | [Open tech stack evidence](#architecture) | Selection and motivation of React/Vite, Node/Express, Auth0, Prisma, Neon and hosting. |
+| Stakeholder Interaction | 10% | [Open stakeholder interaction evidence](#stakeholder-decisions) | Client requirements and dated decision evidence. |
+| Initial Design & Dev Plan | 20% | [Open initial design & dev plan evidence](#diagrams) | Requirements, initial user journeys, architecture, UI planning and sprint sequencing. |
+| Implementation | 20% | [Open implementation evidence](#features) | Working first-sprint foundation and clearly labelled mock/placeholder boundaries. |
+
+## Responsibility and handover roadmap
+
+| Member | Sprint 1 responsibility | Where it is described |
+| --- | --- | --- |
+| 1 | Auth0 onboarding, route protection, account lifecycle and token contracts. | [Security](#security) · [Frontend](#frontend) |
+| 2 | Organiser board, course/Tutor management and immediate mark/clash/capacity guidance. | [Features](#features) · [Backend](#backend) |
+| 3 | Tutor dashboard, own schedule, work logs, excuse forms and accessible regression checks. | [Features](#features) · [Testing](#testing) |
+| 4 | Student overflow prototype and consistent shared responsive navigation. | [Frontend](#frontend) · [Features](#features) |
+| 5 | Separate handwritten Express API, bearer-token/role enforcement and allocation rules. | [Backend](#backend) · [API](#api) |
+| 6 | Prisma/Neon migrations, CI and deployment baseline, external public-holiday spike. | [Database](#database) · [Integration](#integration) |
+
+## Sprint 1 source evidence
+
+The 30 September team handbook retains the original Member 1–6 cards on **pages 13–20**. The original dated roadmap is preserved, not replaced: [Read historical Sprint 1 roadmap](#sprint1-roadmap). The [Sprint 1 evidence archive](#sprint-evidence-archive) preserves original screenshots, while the [Source library](#references) provides the official documents.
+
+[Read Sprint 2: completing the Basic journeys →](#sprint2)
