@@ -2,7 +2,7 @@
 
 The frontend is React with Vite. `frontend/src/main.jsx` mounts the app inside `Auth0Provider`. Role-specific screens collect user input, display server results and keep loading, empty, success and failure states understandable. The API helper in `frontend/src/api/client.js` centralises the backend base URL, bearer token and error handling.
 
-| Workspace | Current source behaviour | Sprint 4 addition |
+| User workspace | Foundation and Intermediate workflows (Sprints 1–3) | Advanced additions (Sprint 4) |
 | --- | --- | --- |
 | Student | Open overflow work, submit/view/withdraw own volunteer requests | Own timetable, shared availability, booking and sickness workflow |
 | Tutor | Dashboard, personal availability/import/calendar, work logs, timesheets, corrections/disputes and excuses | Swap workflow and shared Student bookings |
@@ -19,13 +19,13 @@ The helper calls `getAccessTokenSilently` for `VITE_AUTH0_AUDIENCE`, attaches th
 
 The updated README says the token cache is in memory. **The actual 30 September `frontend/src/main.jsx` sets `cacheLocation="localstorage"` and `useRefreshTokens={false}`.** This is the setting documented here. It helps preserve cached authentication across reloads; it does not guarantee that an expired, revoked or changed-role token will remain valid. Auth0 session renewal and backend verification still apply.
 
-Because tokens are accessible to JavaScript in this configuration, preventing script injection and clearing intended protected state on sign-out matter. The handbook's S4-M1-2 explicitly requires production session, 401/403 and stale-target tests. Do not claim those final hardening tests are complete from the presence of a provider setting alone.
+Because tokens are accessible to JavaScript in this configuration, preventing script injection and clearing intended protected state on sign-out matter. Sprint 4 tested hardening of production sessions, 401/403 responses and stale targets; the presence of an Auth0 setting by itself is not a substitute for regression evidence. See [Testing](#testing).
 
 ## One calendar, shared components
 
 Tutor manual and import entry feed the same persisted schedule and calendar. The current baseline includes Class/Unavailable categories, Once/Weekly/Fortnightly recurrence, academic terms, teaching breaks and occurrence exceptions. Import preview, duplicate handling and commit belong to this existing flow.
 
-Sprint 4 must reuse this engine for Students. The Student does not get Tutor weekly work-capacity controls. Student private event labels stay private; mutual availability exposes only safe intervals. Both calendars later project the same confirmed `TutoringBooking` record.
+Sprint 4 reused this engine for Students. The Student does not get Tutor weekly work-capacity controls. Student private event labels stay private; mutual availability exposes only safe intervals. Both calendars project the same confirmed `TutoringBooking` record.
 
 ## Interaction and accessibility
 

@@ -26,7 +26,7 @@ It is **not the login screen of the tutoring application**: [Open the Tutor MX a
 
 ## Documentation principles
 
-- One **canonical technical chapter** per subject. Historical wording stays in clearly labelled archives rather than competing with current implementation.
+- One **canonical technical chapter** per subject. Earlier plans and unique evidence have been consolidated into the relevant roadmap, engineering and source chapters, rather than repeated in an archive menu.
 - One **roadmap per milestone**, each pointing to rubric criteria, delivery history, features and test evidence.
 - Source-derived facts, measured results, past plans and untested assumptions are kept separate, with dates where relevant.
 - The architecture and diagrams must explain the actual system. Private credentials, personal records and unredacted protected endpoints are never published.

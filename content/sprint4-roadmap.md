@@ -71,3 +71,29 @@ The site gives separate, scoped evidence for the [API catalogue](#api), [Prisma 
 **User feedback:** The final post-release feedback, response analysis and resulting improvements remain the outstanding content round. [Open the existing record and finish this section](#user-feedback).
 
 [Return to the four-sprint roadmap](#roadmap) · [Read official milestone source](documents/coms3011a-2026-official-brief.pdf)
+
+## Member user stories, acceptance checks and assigned tasks
+
+The following index links **every Member's three issue cards** to its specific page in the approved handbook. Each linked page explains the user story, acceptance criteria, tasks, reviewer and handover. These are the team's planned acceptance criteria; actual implementation and release verification are documented separately. Use the [Gitea project boards](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects) to inspect issue tracking with authorised access.
+
+| Issue ID | Task / user story title | Full acceptance specification |
+| --- | --- | --- |
+| `S4-M1-1` | Shared TimeSlot ownership + Student My Timetable | [User story, acceptance tests & tasks — handbook p. 35](documents/tutor-mx-handbook-30-september-2026.pdf#page=35) |
+| `S4-M1-2` | Production account/session + stale-target hardening | [User story, acceptance tests & tasks — handbook p. 35](documents/tutor-mx-handbook-30-september-2026.pdf#page=35) |
+| `S4-M1-3` | Actionable notifications + Ctrl/Cmd+K recent/favourites | [User story, acceptance tests & tasks — handbook p. 35](documents/tutor-mx-handbook-30-september-2026.pdf#page=35) |
+| `S4-M2-1` | Draft scenarios, locks, Compare with Live and Publish | [User story, acceptance tests & tasks — handbook p. 36](documents/tutor-mx-handbook-30-september-2026.pdf#page=36) |
+| `S4-M2-2` | Optimistic concurrency, visible Organiser presence + scenario library | [User story, acceptance tests & tasks — handbook p. 36](documents/tutor-mx-handbook-30-september-2026.pdf#page=36) |
+| `S4-M2-3` | Mutual Student/Tutor availability service + booking-time panel | [User story, acceptance tests & tasks — handbook p. 36](documents/tutor-mx-handbook-30-september-2026.pdf#page=36) |
+| `S4-M3-1` | Tutor swap request -> replacement decision -> Organiser decision | [User story, acceptance tests & tasks — handbook p. 37](documents/tutor-mx-handbook-30-september-2026.pdf#page=37) |
+| `S4-M3-2` | Student tutoring booking from a mutual free slot | [User story, acceptance tests & tasks — handbook p. 37](documents/tutor-mx-handbook-30-september-2026.pdf#page=37) |
+| `S4-M3-3` | Booking detail, cancellation, history and notifications | [User story, acceptance tests & tasks — handbook p. 37](documents/tutor-mx-handbook-30-september-2026.pdf#page=37) |
+| `S4-M4-1` | Student sick note + Organiser approval/status | [User story, acceptance tests & tasks — handbook p. 38](documents/tutor-mx-handbook-30-september-2026.pdf#page=38) |
+| `S4-M4-2` | Two-session race/conflict + notification polish | [User story, acceptance tests & tasks — handbook p. 38](documents/tutor-mx-handbook-30-september-2026.pdf#page=38) |
+| `S4-M4-3` | Final responsive/accessibility polish + table/list alternatives | [User story, acceptance tests & tasks — handbook p. 38](documents/tutor-mx-handbook-30-september-2026.pdf#page=38) |
+| `S4-M5-1` | Cross-system audit trail + Command Centre timeline | [User story, acceptance tests & tasks — handbook p. 39](documents/tutor-mx-handbook-30-september-2026.pdf#page=39) |
+| `S4-M5-2` | Allocation restore preview -> restore as a new change | [User story, acceptance tests & tasks — handbook p. 39](documents/tutor-mx-handbook-30-september-2026.pdf#page=39) |
+| `S4-M5-3` | Audit filters/export + new Student API hardening | [User story, acceptance tests & tasks — handbook p. 39](documents/tutor-mx-handbook-30-september-2026.pdf#page=39) |
+| `S4-M6-1` | Whole-school explainable proposal engine + objective presets | [User story, acceptance tests & tasks — handbook p. 40](documents/tutor-mx-handbook-30-september-2026.pdf#page=40) |
+| `S4-M6-2` | Proposal cockpit: Why this Tutor? / Why not? | [User story, acceptance tests & tasks — handbook p. 40](documents/tutor-mx-handbook-30-september-2026.pdf#page=40) |
+| `S4-M6-3` | Strategy comparison + proposal impact lab | [User story, acceptance tests & tasks — handbook p. 40](documents/tutor-mx-handbook-30-september-2026.pdf#page=40) |
+

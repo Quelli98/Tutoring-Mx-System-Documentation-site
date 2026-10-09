@@ -1,5 +1,10 @@
 ## Gitea main is the official integration branch
 
+**Source and project tracking:** [Tutor MX Gitea repository and project boards](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects). Gitea is our actual development system; the public GitHub repository is a separate documentation/deployment mirror. The boards contain the issue cards, assigned Members, subtask checklists, user stories and acceptance results. Wits credentials or repository membership may be required.
+
+The group **read the candidate roles and tasks together, selected preferred responsibilities and voted on who would perform each Member role**. Our [Team methodology](#process) explains that decision-making and why Sprints 1–2 used a less-ordered process before the group adopted chronological integration for Sprints 3–4.
+
+
 The team uses a reviewed branch-to-main workflow. **There is no develop branch.** Gitea `main` is the shared source of truth; a GitHub mirror supports deployment. The documentation website has its own GitHub repository and Pages build. A deployment mirror is not a second independent development history.
 
 Feature work happens on Member branches. Focused commits make a change understandable, reviewable and reversible. The Integration Lead reviews/tests/integrates approved work into main and reruns the affected regression. The handbook permits the Lead's reviewed repository-maintenance/integration work through their integration workflow; that exception does not make main a normal Member working branch.
@@ -57,4 +62,4 @@ After M6, the Lead runs the combined automated gate, coverage, clean-browser rol
 
 Evidence should include Member commits, PR/review links, the chronological merge history, CI/Codecov runs, release SHA and screenshots tied to that release. The supplied source ZIP has no `.git`, so this website explains the method and preserves historical evidence without manufacturing current commit or PR IDs.
 
-[30 September handbook, pages 3, 7–12, 34–41](documents/tutor-mx-handbook-30-september-2026.pdf) · [Historical Git evidence](#version-control-history).
+[30 September handbook, pages 3, 7–12, 34–41](documents/tutor-mx-handbook-30-september-2026.pdf) · [Team planning and voting](#process).

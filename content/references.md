@@ -5,7 +5,7 @@
 | 30 September 2026 handbook, supplied on 3 October | Current baseline, role onboarding, Sprint 4 owners and no-rebuild rule | Pages 4–6 and 30–44 supersede older conflicting material; pages 13–29 are historical |
 | Final supplied Git repository ZIP, 7 October 2026 | Final Sprint 4 routes, schema, tests, README and Git history | `main`/`origin/main` at `361954e`; supersedes the 30 September source snapshot for final implementation status |
 | Final application `README.md` from the supplied repository | README and organised setup/contract chapters | Retained as the current source README; older README claims remain historical |
-| Original documentation archive | Sprint history, meetings, feedback and prior evidence | Preserved under history navigation |
+| Historical source PDFs and evidence assets | Early sprint history, decisions and retained dated proof | Integrated into current roadmap, process and evidence chapters; source files retained in downloads |
 | 29 September rubric/platform screenshots | Marking questions and dated provider evidence | Not proof of newer deployment or production row counts |
 | 3 October approval-route HTTP checks | External anonymous requests to the two new read routes | Both returned 401; no token or private data used |
 | Earlier 29 September HTTP check | Health/readiness and anonymous rejection | Dated result retained from the prior work; not rerun as October uptime evidence |
@@ -26,14 +26,14 @@ These links are useful to a marker because they do not require access to the tea
 - [Published documentation](https://quelli98.github.io/Tutoring-Mx-System-Documentation-site/)
 - [Documentation source on GitHub](https://github.com/Quelli98/Tutoring-Mx-System-Documentation-site)
 
-Private provider consoles are documented through screenshots rather than links that would lead an unauthorised viewer to a login page.
+Private consoles may be helpful **when a reviewer is authorised**, but they do not become public through a hyperlink. [Gitea issue boards](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects) may require Wits project membership; the [production Neon console](https://console.neon.tech/app/projects/morning-rice-90086270/branches/br-rapid-term-b2gq2rx2/tables) requires Neon sign-in and access to this project. For everyone else, use the public [database dictionary](#database) and the dated screenshots. Do not grant broad production database access to publish marking evidence.
 
 ## Updated official brief and project-specific scope
 
 - [2026 COMS3011A project brief and Milestone 1–4 rubrics](documents/coms3011a-2026-official-brief.pdf) — the uploaded University assessment criteria and milestone dates.
 - [Tutor Management System project-specific brief](documents/tutor-management-project-brief.pdf) — the Basic, Intermediate and Advanced feature requirements for this project.
 - [Four-sprint linked rubrics](#roadmap) — the editable, criterion-by-criterion development traceability index.
-- [Historical project documentation archive](#history-index) — original pages preserved even where modern chapters consolidate their subjects.
+- [Four sprint roadmaps](#roadmap) — historical requirements and key decisions are consolidated under the maintained chapters rather than duplicated in an archive menu.
 
 ## Read the handbook and original materials
 
@@ -46,7 +46,7 @@ Private provider consoles are documented through screenshots rather than links t
 - [Final Sprint 4 Git log excerpt](downloads/sprint4-final-git-log.txt)
 - [Current schema](downloads/schema.prisma) and [route source](downloads/api-routes.ts.txt)
 - [API bootstrap/service wiring](downloads/api-bootstrap.ts.txt)
-- [Historical user feedback](#user-feedback) and [document archive](#documents)
+- [Historical user feedback](#user-feedback) and [official handbook and documents](#references)
 
 ## Official technical references
 

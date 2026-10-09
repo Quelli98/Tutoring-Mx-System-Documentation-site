@@ -74,7 +74,15 @@ The device-emulation screenshots also show a horizontal scrollbar at the bottom 
 <figure><a href="evidence/sprint4-responsive-student-availability-757x645-2026-10-07.png" target="_blank" rel="noreferrer"><img src="evidence/sprint4-responsive-student-availability-757x645-2026-10-07.png" alt="Student tutoring availability page at 757 by 645 with visible focus ring"></a><figcaption><strong>Availability screen and visible focus state</strong><span>The Menu button has a visible keyboard-style focus outline; this is useful evidence but not a substitute for a complete accessibility audit.</span></figcaption></figure>
 </div>
 
-## Final Sprint 4 Codecov evidence
+## Codecov: how automated test coverage was measured
+
+**Codecov** is the reporting service used alongside the automated backend and frontend test suites. When tests run with coverage instrumentation, the tools record which source-code lines were exercised. Gitea Actions can upload these results to Codecov, where a marker can inspect the date, commit and coverage of each codebase. This complements our unit/integration tests: it helps identify **untested areas**, but a high percentage alone does **not** demonstrate correct feature behaviour, secure authorisation, mobile accessibility or production performance.
+
+**How to read the figures below:** *Tracked* is the total measured lines in that codebase; *Covered* means executed by tests; *Partial* means only part of a measured line/branch was exercised; *Missed* means the run did not exercise it. The displayed percentages are those shown by Codecov for the specified Git commit, **not** an invented total of passed tests and not evidence that every user story passed its browser acceptance test.
+
+For every code change the team also ran the relevant local frontend and backend Vitest suites, checked error/permission boundaries, then used the Gitea Actions/shared-runner workflow. CI/Codecov evidence should be matched to the reviewed commit rather than assumed from a prior screenshot. This is how Codecov supports **Sprint 2 automated-testing**, **Sprint 3 coverage**, and the **final Milestone 4 Testing** rubric.
+
+### Final recorded coverage snapshot — 7 October 2026
 
 | Coverage root | Tracked | Covered | Partial | Missed | Coverage |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -101,4 +109,4 @@ Both screenshots identify **latest commit `361954e`**, matching the final merged
 
 Local tests run before push. Gitea Actions runs on shared lecturer runners; queueing is expected. Save a **completed** run and Codecov output for the exact reviewed branch/release. The Integration Lead verifies combined main after sequential merges. Do not weaken tests or claim green remote CI when only local commands ran.
 
-[Original automated-testing history](#testing-history) · [Member 5 audit/source bundle](downloads/technical-source-evidence.zip) · [Git handover](#git-methodology).
+[Sprint 1–4 testing roadmap](#roadmap) · [Member 5 audit/source bundle](downloads/technical-source-evidence.zip) · [Git handover](#git-methodology).

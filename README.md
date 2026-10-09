@@ -6,7 +6,7 @@ A professional, public React/Vite documentation website for the **Tutor MX Syste
 
 - A complete new homepage, purpose/reading guide, six logically grouped documentation sections and collapsible sidebar navigation.
 - A separate **Sprint Roadmaps** area: Sprint 1 (10 rubric criteria), Sprint 2 (10), Sprint 3 (8) and Sprint 4 (20), each linked to the relevant source/evidence chapters.
-- A dedicated history archive so old repeated sections remain available but do not compete with canonical reference pages.
+- The historical-chapters menu has been removed. Unique historical evidence is linked from the relevant current subject and sprint chapters, with original handbook/source files still available for audit.
 - A clearly identified final-release user-feedback section to fill without discarding the five genuine historical responses.
 
 - A new responsive website layout, search, contained tables, code-copy controls and printable chapters.
@@ -17,7 +17,7 @@ A professional, public React/Vite documentation website for the **Tutor MX Syste
 - The completed Student timetable/availability/booking/sick-note workflows and chronological Sprint 4 Member 1–6 delivery record.
 - A criterion-by-criterion Milestone 4 response with final CI, Neon/Auth0, responsive and deployed performance evidence plus clearly stated remaining verification gaps.
 - Full written Git methodology, team process, testing/performance context and the organised/full supplied README.
-- Preserved historical sprint, meeting, Codecov, bug-tracker and user-feedback pages.
+- Consolidated historical sprint material, meetings, Codecov, bug tracking and user feedback into the appropriate maintained chapters.
 - Read-only SQL, PowerShell and Postman tools, OpenAPI/route inventories and a safe technical source bundle.
 
 ## Start locally
@@ -64,7 +64,7 @@ The ZIP has not been pushed to a remote repository or deployed by this task. Thi
 
 ## Source precedence and limits
 
-The final supplied Git repository supersedes the 30 September source snapshot for implementation status. Its `main` and `origin/main` point to **`361954e`**, the final reviewed Sprint 4 merge. The 30 September handbook remains the acceptance/design baseline and historical Sprint 1–3 pages remain unchanged.
+The final supplied Git repository supersedes the 30 September source snapshot for implementation status. Its `main` and `origin/main` point to **`361954e`**, the final reviewed Sprint 4 merge. The 30 September handbook remains the acceptance/design baseline and historical Sprint 1–3 source records remain available through the handbook and supporting evidence.
 
 The final evidence supplied on 7 October shows Render live on `361954e`, Codecov for the same commit (frontend/src 80.96%, backend src 85.29%), a green Gitea Actions run for reviewed Member 6 commit `2f62311` before the final merge, Neon production structure, Auth0 role configuration, responsive application captures, and deployed `/health`/`/ready` timing/light-load measurements. The documentation still does not invent exact production row counts, `_prisma_migrations` rows, a separate green Actions run for merge commit `361954e`, a Lighthouse/screen-reader/full keyboard audit, stakeholder sign-off or a complete unresolved-defect register.
 
@@ -76,6 +76,16 @@ This documentation was restored and updated with ChatGPT/Codex assistance. Prese
 
 ## Documentation restructure — 9 October 2026
 
-The homepage and navigation are no longer oriented around Sprint 4. Open **Overview → Purpose & how to use** or the independent **Sprint roadmaps** group. All original legacy React pages, evidence images, 2026 handbook, and original README remain available. The latest 2026 official project brief and the project-specific Tutor Management System brief have been added under `public/documents/`. Only new **final-release user feedback** needs the team’s actual survey/retest content; earlier feedback is retained.
+The homepage and navigation are no longer oriented around Sprint 4. Open **Overview → Purpose & how to use** or the independent **Sprint roadmaps** group. Original source assets and legacy evidence components remain in the repository, but duplicated historical chapters are no longer exposed as separate navigation pages. Current roadmaps link directly to the original handbook and evidence. The latest 2026 official project brief and the project-specific Tutor Management System brief have been added under `public/documents/`. Only new **final-release user feedback** needs the team’s actual survey/retest content; earlier feedback is retained.
 
 The documentation’s production-data-count, final-main CI and accessibility audit limitations remain explicitly stated in the final rubric rather than being falsely reported as verified.
+
+## 9 October consolidation follow-up
+
+The updated navigation presents Tutor MX as a **complete four-sprint product**, not a Sprint 4-only project. The former Historical Chapters menu has been removed. Team methodology documents how Members read the assigned stories, discuss preferred tasks, vote on responsibilities and evolve from non-chronological integration in Sprints 1–2 to the sequential reviewed-merge process in Sprints 3–4.
+
+The database reference covers **all 30 source-derived Prisma models** and explains why `MASTER_ORGANIZER` is an Auth0 permission rather than a standalone database table. The optional production Neon Console link requires access to the project; no credentials are embedded. The Codecov page explains percentage meaning and assessment limitations. Sprint 1/2/4 roadmaps link all 18 corresponding Member handbook cards; Sprint 3 links the team's actual internal Gitea board.
+
+Updated Gitea tracker: https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects
+
+Full specifics: `REORGANISATION_FOLLOW_UP_2026-10-09.md`.

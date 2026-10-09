@@ -1,6 +1,6 @@
-## An extra permission inside the Organiser workspace
+## Organiser approval and its trusted Master permission
 
-A Master Organiser is an approved Organiser whose Auth0 token also carries `MASTER_ORGANIZER`. This is **not a fourth `Profile.role` and not a public registration option**. Organisers are lecturers. Students do not become Organisers through ordinary Student onboarding.
+A Master Organiser is an approved Organiser whose Auth0 token also carries `MASTER_ORGANIZER`. This is **not a fourth `Profile.role`, not a separate database table, and not a public registration option**. [See how `Profile` and `OrganiserApplication` are stored](#database). Organisers are lecturers. Students do not become Organisers through ordinary Student onboarding.
 
 | Stage | What the user sees | What the backend stores or checks |
 | --- | --- | --- |

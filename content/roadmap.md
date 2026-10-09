@@ -11,6 +11,16 @@ The project was delivered in four assessed milestones. Each roadmap links the **
 
 The Sprint 4 handbook records the **planned acceptance criteria**, while the [final source-based delivery record](#sprint4), [feature register](#features) and [rubric evidence map](#milestone4) describe the state of the supplied final code. A planned task is not automatically proof that a production demonstration or external sign-off happened.
 
+## Live issue boards and the original acceptance tests
+
+All four sprint roadmaps link their official rubric requirements to the most relevant technical and evidence pages. The team's **stories, acceptance checks and task checklists** are preserved in the [30 September handbook](documents/tutor-mx-handbook-30-september-2026.pdf); the Gitea project boards record issue ownership and tracking status.
+
+- [Gitea — all Tutor MX project boards](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects) (access to the internal Wits Gitea project may be required)
+- [Sprint 2 Gitea project board](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/39)
+- [Sprint 3 Gitea project board](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/42)
+
+The Sprint 1 and Sprint 4 projects are linked through the **all-projects** landing page because the supplied screenshots do not establish a reliable board-specific URL. The individual roadmaps include the *exact handbook pages* for Member stories, acceptance checks and tasks. This public documentation remains readable even for a marker who cannot sign in to Wits Gitea.
+
 ## How to follow a rubric link
 
 1. Choose the sprint and criterion below.
@@ -32,6 +42,6 @@ The Sprint 4 handbook records the **planned acceptance criteria**, while the [fi
 - [Tutor Management System project-specific requirements](documents/tutor-management-project-brief.pdf)
 - [Updated team handbook, Sprint 1–4 responsibilities and acceptance tests](documents/tutor-mx-handbook-30-september-2026.pdf)
 - [Full rubric-by-rubric final submission mapping](#milestone4)
-- [Historical plans, evidence and decisions](#history-index)
+- [Historical plans, evidence and decisions](#references)
 
 **Open evidence boundary:** the site retains five earlier user-feedback responses and their original screenshots. A final post-release user-feedback round and its resulting decisions are the deliberately unfinished item in [User feedback](#user-feedback).

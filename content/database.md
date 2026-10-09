@@ -4,6 +4,49 @@ The supplied final Sprint 4 Prisma schema contains **30 application models, 14 e
 
 A **model** describes an application entity. A **column** is a stored scalar value such as `email` or `courseId`. A Prisma **relation field** such as `tutor` or `allocations` describes navigation between records; it is not an extra JSON column. The dictionary below makes that distinction explicit.
 
+## Schema development across Sprint 1–4
+
+The database is a single PostgreSQL database managed on Neon and accessed through **Prisma on the backend only**. It grew over the full project rather than being introduced in Sprint 4:
+
+| Sprint | Database purpose | Representative tables |
+| --- | --- | --- |
+| **1 — foundation** | Role identity, courses, marks, Tutor capacity, availability, allocations and initial work tracking. | `Profile`, `Course`, `TutorMark`, `TimeSlot`, `Allocation`, `WorkLog` |
+| **2 — Basic journeys** | Persisted volunteer/overflow outcomes, timesheet submission, review state and integration safeguards. | `VolunteerClaim`, `OverflowWork`, `Timesheet`, `Excuse`, `ApiWriteReceipt` |
+| **3 — Intermediate workflows** | Staffing demand, term/recurrence exceptions, reporting, timesheet correction/declaration/dispute and notification state. | `StaffingRequirement`, `AcademicTerm`, `OccurrenceException`, `TimesheetRevision`, `TimesheetDispute`, `Notification` |
+| **4 — Advanced completion** | Scenario collaboration, two-party bookings, Tutor swaps, Student sickness, audit and replay-safe mutations. | `Scenario`, `ScenarioItem`, `ScenarioPresence`, `TutoringBooking`, `TutorSwap`, `StudentSickNote`, `AuditEvent`, `MutationReceipt` |
+
+This is a functional grouping of the **final schema**, not a claim that each table was first created on an exact date without checking its migration. The expanded, searchable **30-model dictionary below** remains the authoritative definition of columns, keys, relations and stored enums.
+
+## What every table is for
+
+| Domain | Prisma models in the final application |
+| --- | --- |
+| Identity, applications and messaging | `Profile`, `OrganiserApplication`, `Notification` |
+| Courses, availability and staffing | `Course`, `TutorMark`, `AcademicTerm`, `TimeSlot`, `OccurrenceException`, `TutorHourLimit`, `Allocation`, `StaffingRequirement` |
+| Timesheets, absences and work logs | `Timesheet`, `TimesheetRevision`, `TimesheetDeclaration`, `TimesheetDispute`, `WorkLog`, `Excuse` |
+| Student overflow | `OverflowWork`, `VolunteerClaim` |
+| Planning and collaboration | `Scenario`, `ScenarioItem`, `ScenarioPresence` |
+| Student bookings, swaps and history | `TutoringBooking`, `TutorSwap`, `BookingEvent`, `SwapEvent`, `StudentSickNote` |
+| Tracking and retry safety | `ApiWriteReceipt`, `AuditEvent`, `MutationReceipt` |
+
+Use the interactive/searchable **Complete table dictionary** later on this page to open any of these models, view the exact fields and foreign keys, or search by a column name.
+
+## Master Organiser: which tables are involved?
+
+**There is no separate `MasterOrganiser` table in the supplied final Prisma schema.** The Master Organiser is an existing approved Organiser with the **additional `MASTER_ORGANIZER` privilege in Auth0**. A new SQL table would falsely describe how the application actually works.
+
+- **[`Profile`](#database/model-profile)** — stores the application's linked user, Auth0 subject, email, name and normal `UserRole` (`ORGANISER`, `TUTOR` or `STUDENT`). A Master Organiser uses an Organiser Profile; the extra permission comes from Auth0, not another `Profile.role` value.
+- **[`OrganiserApplication`](#database/model-organiserapplication)** — records the lecturer's registration request and `PENDING`, `APPROVED` or `REJECTED` status, along with `motivation`, `reviewReason`, `reviewedAt` and the optional `reviewerProfileId` foreign key to the reviewing Organiser's `Profile`.
+- **Auth0 permissions** — the backend requires a signed-in Organiser **and** the trusted Master claim before allowing approval/rejection. Pending applicants do not receive an Organiser Profile merely by submitting an application.
+
+**The screenshot supplied on 9 October shows a single approved application record in `OrganiserApplication`**, which is evidence of that specific visible record, not a complete count of all database tables. [See the user-facing Master Organiser workflow](#master-organiser) and [security/roles](#security).
+
+## Production Neon access for lecturers and markers
+
+[**Open Tutor MX's production tables in Neon — authorised users only**](https://console.neon.tech/app/projects/morning-rice-90086270/branches/br-rapid-term-b2gq2rx2/tables). This is the exact console link provided by the team, but **it redirects unauthenticated users to Neon sign-in** and only people granted access to this Neon project can inspect it. Adding the URL to the public website does *not* make the production database public. An authorised owner would need to invite an appropriate reviewer or demonstrate the console during marking. **Never publish database passwords, an admin connection string or identifiable student records** to make this easier.
+
+For markers without Neon access, this public page offers the full 30-model/field dictionary, indexed constraints, ER diagram, migration list, safe SQL queries for authorised use and redacted screenshots. Those are publicly readable evidence of the **structure**; production row counts and real-versus-test classification require a separate read-only database check.
+
 ## How to show tables professionally
 
 | Audience / need | Recommended view | Does this need Auth0? |
@@ -31,9 +74,9 @@ Run the [read-only evidence SQL](downloads/database-evidence.sql) through an aut
 | Database available | Earlier `/ready` check returned 200 | Repeat as part of the actual final release gate |
 | All current migrations applied | Final source contains 30; production migration screenshot/status not yet supplied | Compare `_prisma_migrations` with the source list |
 
-## Production Neon evidence — 7 October 2026
+## Production Neon evidence — 7 and 9 October 2026
 
-The supplied Neon screenshots identify project **`tutor-mx-system`**, default branch **`production`**, one PostgreSQL database/compute and the production table browser. The table list visibly includes Sprint 4 structures such as `AuditEvent`, `BookingEvent`, `OrganiserApplication` and `OccurrenceException`, alongside established entities such as `AcademicTerm`, `Allocation`, `Course`, `Excuse` and `Notification`. This proves the production branch exposes the expected relational schema; it does **not** establish row counts.
+The previously supplied Neon screenshots identify project **`tutor-mx-system`**, default branch **`production`**, one PostgreSQL database/compute and the production table browser. The table list visibly includes Sprint 4 structures such as `AuditEvent`, `BookingEvent`, `OrganiserApplication` and `OccurrenceException`, alongside established entities such as `AcademicTerm`, `Allocation`, `Course`, `Excuse` and `Notification`. This proves the production branch exposes the expected relational schema; it does **not** establish row counts.
 
 The production DDL supplied with the screenshots stores the physical `TimeSlot` ownership column as `tutorId`. The final Prisma model deliberately maps its generic field as `ownerId @map("tutorId")`. That preserves the existing database column while letting Student and Tutor schedules use the same Profile-owned model; the naming difference is therefore intentional compatibility, not a second Student table.
 
@@ -48,18 +91,3 @@ The production DDL supplied with the screenshots stores the physical `TimeSlot` 
 
 The source uses restrictive deletion where historical workflow evidence needs protection and cascade/set-null where the declared relationship allows it. The exact `@relation`, `@@unique` and `@@index` annotations are shown in the dictionary. Migrations add further PostgreSQL constraints/triggers; the Prisma schema alone is not the entire database integrity story.
 
-## Sprint 4 tables now implemented
-
-| Entity | Final status | Meaning |
-| --- | --- | --- |
-| `OrganiserApplication` | Implemented baseline | Pending/approved/rejected lecturer request; identity and email unique; reviewer points to Profile |
-| General Profile-owned `TimeSlot` | **Implemented M1** | One shared schedule model for Student/Tutor; legacy Tutor aliases retained |
-| `Scenario`, `ScenarioItem`, `ScenarioPresence` | **Implemented M2** | Draft plans, assignments/locks and short-lived collaboration presence |
-| `TutoringBooking` | **Implemented M3** | Student/Tutor scheduling appointment, separate from Allocation/payroll |
-| `TutorSwap`, `SwapEvent` | **Implemented M3** | Replacement workflow and preserved swap history |
-| `BookingEvent` | **Implemented M3** | Booking state/history support |
-| `StudentSickNote` | **Implemented M4** | Student absence request/review linked to own booking |
-| `AuditEvent` | **Implemented M5** | Redacted committed-change history for important mutations |
-| `MutationReceipt` | **Implemented M5** | Retry/idempotency support for mutation workflows |
-
-The five Sprint 4 migrations are `20261007000000_shared_profile_schedule`, `20261008000000_s4_scenario_planning`, `20261009000000_s4_swaps_bookings`, `20261010000000_s4_student_sick_notes` and `20261011000000_s4_audit_restore`.

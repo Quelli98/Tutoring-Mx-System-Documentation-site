@@ -40,10 +40,16 @@ Sprint 3 extended the Basic system into a more effective Tutor-management produc
 
 ## Integration and quality evidence
 
-Sprint 3 was handed over one Member branch at a time to the Integration Lead, then integrated and verified against updated main. Historical Codecov screenshots and test observations are retained as **dated snapshots**, not silently relabelled as final Sprint 4 measurements. See [Git workflow](#git-methodology), [Testing and Codecov](#testing), [original Sprint 3 roadmap/rubric](#sprint3-roadmap) and [historic project evolution](#project-evolution).
+Sprint 3 was handed over one Member branch at a time to the Integration Lead, then integrated and verified against updated main. Historical Codecov screenshots and test observations are retained as **dated snapshots**, not silently relabelled as final Sprint 4 measurements. See [Git workflow](#git-methodology), [Testing and Codecov](#testing), [Sprint 3 project board](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/42) and [project evolution](#roadmap).
 
 ## Feedback boundary
 
 The [user-feedback record](#user-feedback) includes a prior five-response survey and at least one recorded change. An additional final-release user-feedback round has not been supplied; this is deliberately marked outstanding rather than presented as verified.
 
 [Read Sprint 4: Advanced and full-project submission →](#sprint4-roadmap)
+
+## Sprint 3 stories, acceptance and completed tasks on Gitea
+
+[Sprint 3 project board — Gitea](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/42) holds the completed cards, including the original member assignments, checklist progress and issue discussions. The **30 September handbook explicitly marks Sprint 3 as a completed baseline**, summarising its delivered capabilities on page 31. This edition does not invent a verbatim Sprint 3 issue list absent from that handbook: consult the actual Gitea cards for the precise acceptance checks, user stories and task-level discussion.
+
+For review without internal account access, the [Sprint 3 feature register](#features), [testing evidence](#testing), [work tracker](#work-tracker) and [Source/evidence library](#references) document the integrated outcomes.

@@ -41,6 +41,32 @@ Sprint 1 established the project’s shared direction. The priority was not to c
 
 ## Sprint 1 source evidence
 
-The 30 September team handbook retains the original Member 1–6 cards on **pages 13–20**. The original dated roadmap is preserved, not replaced: [Read historical Sprint 1 roadmap](#sprint1-roadmap). The [Sprint 1 evidence archive](#sprint-evidence-archive) preserves original screenshots, while the [Source library](#references) provides the official documents.
+The 30 September team handbook retains the original Member 1–6 cards on **pages 13–20**. The original dated plans and evidence are linked directly from this maintained Sprint 1 roadmap. [Open the historical Sprint 1 handbook pages](documents/tutor-mx-handbook-30-september-2026.pdf#page=13), or review [source documents and screenshots](#references).
 
 [Read Sprint 2: completing the Basic journeys →](#sprint2)
+
+## Member user stories, acceptance checks and assigned tasks
+
+The following index links **every Member's three issue cards** to its specific page in the approved handbook. Each linked page explains the user story, acceptance criteria, tasks, reviewer and handover. These are the team's planned acceptance criteria; actual implementation and release verification are documented separately. Use the [Gitea project boards](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects) to inspect issue tracking with authorised access.
+
+| Issue ID | Task / user story title | Full acceptance specification |
+| --- | --- | --- |
+| `S1-M1-1` | Self-service Auth0 sign-up, role onboarding and direct routing | [User story, acceptance tests & tasks — handbook p. 14](documents/tutor-mx-handbook-30-september-2026.pdf#page=14) |
+| `S1-M1-2` | Account settings, password reset, deletion and route protection | [User story, acceptance tests & tasks — handbook p. 14](documents/tutor-mx-handbook-30-september-2026.pdf#page=14) |
+| `S1-M1-3` | Authentication contract and permission tests | [User story, acceptance tests & tasks — handbook p. 14](documents/tutor-mx-handbook-30-september-2026.pdf#page=14) |
+| `S1-M2-1` | Organiser workspace and allocation-board foundation | [User story, acceptance tests & tasks — handbook p. 15](documents/tutor-mx-handbook-30-september-2026.pdf#page=15) |
+| `S1-M2-2` | Course management and registered-tutor management UI | [User story, acceptance tests & tasks — handbook p. 15](documents/tutor-mx-handbook-30-september-2026.pdf#page=15) |
+| `S1-M2-3` | Immediate allocation-rule messages and organiser UI tests | [User story, acceptance tests & tasks — handbook p. 15](documents/tutor-mx-handbook-30-september-2026.pdf#page=15) |
+| `S1-M3-1` | Tutor dashboard using the signed-in tutor identity | [User story, acceptance tests & tasks — handbook p. 16](documents/tutor-mx-handbook-30-september-2026.pdf#page=16) |
+| `S1-M3-2` | Tutor availability, work-log and excuse forms on real API routes | [User story, acceptance tests & tasks — handbook p. 16](documents/tutor-mx-handbook-30-september-2026.pdf#page=16) |
+| `S1-M3-3` | Tutor UI contract, responsiveness and accessibility tests | [User story, acceptance tests & tasks — handbook p. 16](documents/tutor-mx-handbook-30-september-2026.pdf#page=16) |
+| `S1-M4-1` | Student overflow protected UI shell (Sprint 1 mock boundary) | [User story, acceptance tests & tasks — handbook p. 17](documents/tutor-mx-handbook-30-september-2026.pdf#page=17) |
+| `S1-M4-2` | Shared role navigation and status components | [User story, acceptance tests & tasks — handbook p. 17](documents/tutor-mx-handbook-30-september-2026.pdf#page=17) |
+| `S1-M4-3` | Student volunteer confirmation and shared UI tests (Sprint 1 mock boundary) | [User story, acceptance tests & tasks — handbook p. 17](documents/tutor-mx-handbook-30-september-2026.pdf#page=17) |
+| `S1-M5-1` | Separate handwritten Express backend and health endpoint | [User story, acceptance tests & tasks — handbook p. 18](documents/tutor-mx-handbook-30-september-2026.pdf#page=18) |
+| `S1-M5-2` | Auth middleware and core profile/course/tutor/tutor-workflow routes | [User story, acceptance tests & tasks — handbook p. 18](documents/tutor-mx-handbook-30-september-2026.pdf#page=18) |
+| `S1-M5-3` | Three allocation-rule functions and boundary tests | [User story, acceptance tests & tasks — handbook p. 18](documents/tutor-mx-handbook-30-september-2026.pdf#page=18) |
+| `S1-M6-1` | Neon PostgreSQL schema, Prisma migrations and safe seed data | [User story, acceptance tests & tasks — handbook p. 19](documents/tutor-mx-handbook-30-september-2026.pdf#page=19) |
+| `S1-M6-2` | Gitea integration checks, public deployment and shared Sprint 1 URL | [User story, acceptance tests & tasks — handbook p. 19](documents/tutor-mx-handbook-30-september-2026.pdf#page=19) |
+| `S1-M6-3` | South African public-holiday API spike and fallback contract | [User story, acceptance tests & tasks — handbook p. 19](documents/tutor-mx-handbook-30-september-2026.pdf#page=19) |
+

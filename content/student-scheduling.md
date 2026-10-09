@@ -1,6 +1,6 @@
-## Sprint 4 final implementation: one shared calendar system
+## One timetable engine for both Students and Tutors
 
-The 30 September handbook specified that Student and Tutor scheduling must share the existing timetable engine. The final Sprint 4 source implements that design. Student and Tutor schedules use the same `TimeSlot`, manual/import validators, CSV/ICS parsers, recurrence expansion, academic terms, occurrence exceptions and weekly calendar. M1 generalised ownership to the signed-in `Profile` while retaining the Tutor route aliases for compatibility.
+The scheduling system grew across the project: early Tutors recorded busy times; Sprint 3 added timetable import, recurrence, term data and exceptions; Sprint 4 extended that same engine for Students and mutual bookings. The final code therefore uses one shared design. Student and Tutor schedules use the same `TimeSlot`, manual/import validators, CSV/ICS parsers, recurrence expansion, academic terms, occurrence exceptions and weekly calendar. M1 generalised ownership to the signed-in `Profile` while retaining the Tutor route aliases for compatibility.
 
 | Shared concept | Tutor meaning | Student meaning |
 | --- | --- | --- |
