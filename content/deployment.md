@@ -1,3 +1,30 @@
+## Deployment design, release method and assessment evidence
+
+Tutor MX has **two separate running deployments**: a React/Vite frontend served through Cloudflare Pages and a handwritten Express API served through Render. The API accesses Neon PostgreSQL via Prisma, while Auth0 owns identity. This public documentation site is independently hosted through GitHub Pages. Keeping these environments separate is important to the project's non-monolithic architecture and external API access requirements.
+
+## What the final rubric requires deployment evidence to establish
+
+| Assessed area | Architecture and evidence | Observation / interpretation | Limit |
+| --- | --- | --- | --- |
+| **Database deployed and accessible (2%)** | Neon production branch screenshot and application/backend readiness checks; Prisma migration history. | Relational persistence lives outside the browser and is reached through Express. | Admin-console screenshot is not a production-row census; `/ready` at one time is not 24/7 availability. |
+| **Database structure (5%) and production/test data (3%)** | [30-model schema and ERD](#database), constraints/migrations and table listing. | Model relationships support real allocation, timesheets, booking and audit rather than independent flat tables. | Exact production vs test row totals have not been independently supplied. |
+| **API deployed (2%), external availability (3%)** | Public `/health` and `/ready`, Render Live screenshot tied to release SHA. | HTTP endpoints are reachable independently of React. | Public health does not grant unauthenticated access to protected API resources. |
+| **API performance (5%)** | Dated first/warm probes and small concurrent-load samples in [Testing](#testing). | First requests are slower than subsequent warm health checks in the captured sample. | Small samples cannot establish stress capacity or uninterrupted uptime. |
+| **App deployed (2%) and responsive/usable (other criteria)** | Stable Cloudflare URL plus captured Student/role layouts and smoke scenarios. | The built frontend is publicly accessible and calls the Render API. | An uploaded `dist` bundle does not alone prove all authenticated actions work. |
+| **Git methodology and tools** | Reviewed Gitea `main`, Actions/Codecov checks, deployment mirror and source SHA. | Publication is intended to follow completed integration rather than a Member's unchecked feature branch. | Private Gitea runs require an authorised viewer; screenshots are dated evidence. |
+
+## Release topology
+
+![Separate public frontend and backend hosting, Auth0 identity and Neon storage](diagrams/deployment.svg)
+
+The diagram illustrates the browser → Cloudflare frontend → Render HTTPS API → Prisma/Neon request path, with Auth0 as a separate identity provider. **Deployment means code and assets are hosted and responsive**; verified business functionality additionally requires role-based smoke tests. A database/identity administrator's login is not required to read this architectural explanation.
+
+## Release procedure and safeguards
+
+The Integration Lead selects reviewed Gitea `main`, runs the complete local/test gate and confirms the completed Gitea Actions outcome. Approved source is synced to the GitHub deployment mirror. Versioned Prisma migrations must be compatible with the backend being released; application secrets remain server-side. Frontend public `VITE_*` variables are compiled at build time, so any changes require a fresh Vite build. The built frontend is deployed to Cloudflare Pages; the API is deployed to Render; `/health` and `/ready` are probed; and representative Student, Tutor, Organiser and Master flows are exercised in the deployed browser.
+
+**Rollback and recovery discussion.** If a release introduces a backend failure, restore an approved compatible application revision and evaluate whether schema migrations remain compatible. Avoid destructive production resets. Auth0 privileges and the Neon database cannot be rolled back as one transaction; Organiser approval failures require a deliberate reconciliation path. Render health checks and a green UI build alone would not show that these transitions are correct.
+
 ## Deployment timeline from Sprint 1 through Sprint 4
 
 **Sprint 1** established separately hosted React/Vite and Express applications, Neon storage, Auth0 identity and Gitea CI. **Sprint 2** stabilised Basic routes, database migration checks and the review/deploy cycle. **Sprint 3** expanded tests, coverage, application reports and shared-runner handovers. **Sprint 4** released the combined Student scheduling and Advanced planning features from reviewed Gitea `main`. This chapter distinguishes architecture and dated release evidence from measurements not independently supplied. [Roadmap](#roadmap) · [Testing](#testing).
@@ -15,7 +42,7 @@
 
 The deployment diagram shows managed services, browser execution and network connections. We do not invent provider physical server counts or hardware specifications.
 
-### Public marker links — no provider login required
+### Public verification links — no provider login required
 
 - [Open the stable Tutor MX application](https://tutor-mx.pages.dev)
 - [Open the final Cloudflare deployment captured for Sprint 4](https://06d22424.tutor-mx.pages.dev)

@@ -1,44 +1,53 @@
-## The React frontend — from first prototype to the final application
+## Frontend design and its role in Tutor MX
 
-The application frontend uses **React + Vite**, `Auth0Provider` in `frontend/src/main.jsx`, role/route protection in `frontend/src/routes/` and `frontend/src/auth/`, reusable feature components in `frontend/src/features/` and an API client in `frontend/src/api/client.js`. It does not contain Prisma database access or perform authoritative allocation checks: those belong on the Express backend.
+The frontend is the user-facing **React application built with Vite**, deployed as static files through Cloudflare Pages. It provides distinct Student, Tutor and Organiser workspaces backed by shared navigation, an Auth0 session integration and a common HTTP client. The Master Organiser is an approved Organiser with an additional trusted privilege, not a fourth self-registration role.
 
-The same frontend grew through **Sprint 1, Sprint 2, Sprint 3 and Sprint 4**. The register below explains when each user journey was first available and how it was expanded. [Open all feature histories](#features).
+This separation gives the frontend responsibility for **presentation, accessible interaction and state feedback**; authoritative permission decisions, clashes, work limits and booking eligibility remain in Express. [Architecture](#architecture) · [Security](#security) · [How Tutor MX works](#student-scheduling).
 
-## Frontend delivery chronology
+## Screens and features introduced in each sprint
 
-| Sprint | Shared user interface | Student | Tutor | Organiser / Master Organiser |
+| Sprint | Student interface | Tutor interface | Organiser and administrative interface | Shared usability work |
 | --- | --- | --- | --- | --- |
-| **Sprint 1 — foundation** | Role selection, Auth0 login, protected navigation, loading/empty/error states and responsive baseline. | Protected overflow list and volunteer confirmation **prototype** (mock contract). | Personal dashboard, busy-time forms, work-log and excuse entry. | Initial board, course/registered-Tutor management and pass/fail eligibility messages. |
-| **Sprint 2 — Basic workflows** | Error recovery, account lifecycle, cross-role protection and refresh after mutations. | Live open-work and persisted volunteer requests with outcome statuses. | Live allocation refresh, timesheet submit/status and excuse decision/status. | Persistent allocation create/edit/remove, timesheet approval and volunteer decision queues. |
-| **Sprint 3 — Intermediate workflows** | Search/Ctrl+K, notifications, reminders, better keyboard/mobile behaviour and guided Tutor setup. | Volunteer withdrawal and richer open-work states. | CSV/ICS/paste timetable import, calendar/recurrence/terms, corrections, disputes and payroll. | Staffing requirements, suitability ranking, bulk allocation, reports, overflow management and Command Centre. Late stabilisation introduced Master Organiser applications. |
-| **Sprint 4 — Advanced workflows** | Safer session/stale links, notification actions, recent/favourite destinations, better conflict and focus handling. | Shared personal timetable, mutual free slots, booking/history/cancellation and sickness requests. | Appointment projections and replacement-swap workflow. | Scenarios/locks/presence, Compare with Live/Publish, audit/restore, whole-school proposal and strategy comparison. |
+| **Sprint 1** | Protected overflow and volunteer confirmation *prototype* on a mock boundary. | Own dashboard, assignments, work capacity, availability, work-log and excuse forms. | Course/Tutor management; allocation board displaying mark, clash and hour validation (save initially a placeholder). | Auth0 role routing, common navigation, labelled states and responsive layouts. |
+| **Sprint 2** | Real open-work API, persisted volunteer requests and decision statuses. | Live assignment refresh, timesheet submission and excuse outcome. | Real allocation create/edit/remove, timesheet and volunteer approvals. | Recovery from invalid, duplicate, empty, network and wrong-role conditions; public holiday information with fallback. |
+| **Sprint 3** | Withdrawal of pending volunteer requests and improved overflow usability. | CSV/ICS/paste timetable preview/import, term bounds, returned-timesheet correction, declaration/dispute and approved export. | Staffing requirements, explainable ranking, bulk allocations, budget/workload reporting, overflow management and Command Centre. | Notification inbox, global search and keyboard palette, guided setup, accessibility/response polish. Master approval followed in stabilisation. |
+| **Sprint 4** | Personal shared-engine timetable, mutual available slots, booked tutoring, cancellations/history and sick notes. | Existing calendar now also shows booked tutoring; replacement swaps and related history. | Scenarios, locks/presence/compare/publish, audit/restore and explainable whole-school proposals. Master approval queue retained. | Stale session/link handling, notification actions, table/compact alternatives, conflict and focus feedback. |
 
-An early mock or placeholder is **not** described as a completed persisted workflow: in particular Sprint 1 Student volunteering became a live database/API feature in Sprint 2, and the Sprint 1 allocation board obtained real save/edit/remove actions in Sprint 2.
+The distinction between Sprint 1 prototypes and Sprint 2 persisted features is important: the initial front-end demonstration established layouts and contracts, not a claim that every end-to-end Basic write was already live.
 
-## Complete role-specific frontend journeys
+## Role journeys in the final interface
 
-| Workspace | Primary screens/components in final source | Purpose and continuity |
+### Student
+
+A Student signs in to their own workspace, searches eligible open work, volunteers and sees a pending/approved/rejected/withdrawn outcome. The timetable uses the same `TimeSlot` recurrence and academic-term rules as a Tutor. When selecting tutoring, the Student sees **only mutually bookable intervals**, confirms a slot, and then sees the booking and its cancellation/status history. A Student may submit a sickness reason for an eligible booking; the Organiser reviews it and the outcome stays in history. Other users' private timetable labels are not exposed by mutual-availability results.
+
+### Tutor
+
+A Tutor sees their own dashboard and weekly capacity, maintains classes and unavailable periods, and views assigned sessions. They can submit work logs, timesheets and excuses; returned timesheets can be corrected and resubmitted. Timetables can be entered manually or imported. In the advanced workflow, a Tutor may request a replacement, while the proposed substitute and Organiser make the subsequent decisions. The original assignment does not change merely because a swap was requested.
+
+### Organiser and Master Organiser
+
+An Organiser manages courses and registered Tutors, views mark/clash/hour eligibility, creates and reviews allocations, responds to volunteer and timesheet requests and monitors staffing needs. Reports, bulk allocation and the Command Centre give a school-level operational view. Later planning tools keep scenarios separate from live allocations until explicit publish, with conflict detection, audit and proposal explanations. Approved trusted Master Organisers additionally review lecturer registrations through the same Organiser workspace; hidden navigation alone is not sufficient protection.
+
+## Shared frontend architecture
+
+| Interface concern | Design approach | Reason |
 | --- | --- | --- |
-| Student | `StudentOverflow.jsx`, `MyTimetable.jsx`, `MutualAvailability.jsx`, `BookingPanel.jsx`, `StudentSickNoteForm.jsx` | Progresses from volunteer prototype → live claims → student-owned schedule and bookings; access restricted to own data. |
-| Tutor | `TutorDashboard.jsx`, `AvailabilityForm.jsx`, `TimetableImport.jsx`, `TimesheetSection.jsx`, `ExcuseStatusSection.jsx`, `SwapWorkspace.jsx` | Progresses from own dashboard/forms → submitted timesheets → import/corrections → swaps and booked tutoring projections. |
-| Organiser | `CourseManagement.jsx`, `TutorManagement.jsx`, `OrganiserApprovals.jsx`, `StaffingRequirements.jsx`, `BulkAllocation.jsx`, `OrganiserReports.jsx`, `CommandCentre.jsx`, `ScenarioPlanning.jsx`, `AuditTimeline.jsx`, `ProposalLab.jsx` | Progresses from course and allocation validation → Basic approvals → Intermediate reporting/bulk → Advanced collaboration and proposals. |
-| Master Organiser | `MasterOrganiserApplications.jsx` within Organiser navigation | Additional approval capability for the trusted Organiser account, **not** a separately selectable role or workspace. |
+| Routes and navigation | Role-aware protected workspaces plus common navigation and error/empty states | Makes the application understandable without making React the authorisation authority. |
+| Data requests | `frontend/src/api/client.js` uses `VITE_API_BASE_URL` and Auth0 access tokens to call Express | All business data crosses one HTTP contract; React never holds Neon credentials. |
+| Identity | Auth0 handles login and account lifecycle; the application loads `/api/me` for the resolved profile | Returning users reopen the correct workspace without choosing a role each time. |
+| Calendar reuse | Existing `MyTimetable`, `AvailabilityForm`, import and recurrence display reused for both Student and Tutor | Avoids divergent timetable engines and contradictory clash results. |
+| Forms and server errors | Field validation and confirmation UI, followed by authoritative server responses and retry/refresh states | Prevents presenting a stale or unauthorised action as successful. |
+| Reporting | Tables, labelled cards and accessible alternatives to dense planning visuals | Makes operational values understandable independently of colour or screen width. |
 
-## HTTP connection and protected routing
+The final source's Auth0 configuration uses a `localstorage` cache with refresh tokens disabled. Reopening the browser can preserve cached Auth0 state, but an expired token, revoked role or server rejection must still be handled safely. A source configuration is not by itself proof of tested session recovery on every browser.
 
-`frontend/src/api/client.js` uses the public `VITE_API_BASE_URL`; production is `https://tutor-mx-api.onrender.com` and local development ordinarily uses `http://localhost:3000`. The client acquires a bearer token for the configured Auth0 API audience, sends requests through Express, handles HTTP failures and supports CSV response downloads. It never talks directly to Neon.
+## Accessibility, aesthetics, usability and responsiveness
 
-The supplied final `frontend/src/main.jsx` uses Auth0 `cacheLocation="localstorage"` and `useRefreshTokens={false}`; earlier documentation that said the cache is memory-only is outdated. Local storage persistence does not bypass token expiry, role changes or backend checks. The source's protected routes and access handling must still be verified independently.
+The final submission rubric assesses these as separate concerns. **Accessibility** addresses semantic controls, focus, labels, contrast and non-colour-only status. **Aesthetics** concerns consistent typography, spacing and styling. **User experience** concerns action clarity, invalid-input feedback, loading states, session continuity and recovery after errors. **Responsiveness** concerns readable phone/tablet/desktop layouts and the availability of equivalent actions across sizes.
 
-## Scheduling components reused instead of duplicated
+Documented examples include a narrow-screen collapsible Student menu, explicit Pass/Fail allocation messages, keyboard-reachable search and buttons, error/conflict notices with refresh paths, and table/list views for dense planning. The captured 400×645 and 757×645 screenshots support those particular layouts and show a visible focus state. The evidence also contains a horizontal scrollbar in emulation, so it would be inaccurate to claim a complete absence of mobile overflow. No full independent screen-reader or Lighthouse accessibility audit was supplied. [View dated evidence and limitations](#testing).
 
-The Tutor calendar and import tools came from Sprint 1–3. Sprint 4 **generalised the existing `TimeSlot` ownership** so Student entries use the same manual/import, term, recurrence and exception rules. The Student has no Tutor weekly-capacity control. The server, not React, calculates mutual bookability; a confirmed `TutoringBooking` appears on both calendars.
+## How we test the interface
 
-## Accessibility, usability and responsive behaviour across the project
-
-- **Sprint 1:** keyboard-reachable labels and navigation; explicit empty, loading, error, confirmation and colour-independent rule messages.
-- **Sprint 2:** regression of failed requests, no-work states, refresh, duplicates and wrong-role navigation.
-- **Sprint 3:** shared calendar/list accessibility, searchable workflows, guided setup and more complex reports.
-- **Sprint 4:** conflict banners with refresh/retry, focus recovery, compact responsive views and text/table alternatives for dense planning visuals.
-
-These are the documented intended behaviours and final source areas. For **dated automated results and limitations**, use [Testing & Codecov](#testing), not a blanket unverified assertion that every accessibility audit has passed. For each sprint's requirements and user stories, follow [Sprint 1](#sprint1), [Sprint 2](#sprint2), [Sprint 3](#sprint3) or [Sprint 4](#sprint4-roadmap).
+Automated React tests exercise role rendering, forms, success/failure branches and regression-critical components. Human acceptance tests should use separate Student, Tutor, Organiser and trusted Master accounts, attempt invalid and cross-role actions, refresh/reopen pages, and inspect responsive/focus states. The browser test verifies usability; the backend test verifies server permissions. Neither replaces the other. [Testing and Codecov](#testing) · [Sprint 1–4 work tracker](#work-tracker).

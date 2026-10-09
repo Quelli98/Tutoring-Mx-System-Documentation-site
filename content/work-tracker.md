@@ -11,7 +11,7 @@ The screenshots supplied by the team show the four Gitea project boards with com
 | **Sprint 3 — Intermediate** | [Sprint 3 board](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/42) | [Sprint 3 roadmap](#sprint3) · [completed baseline handbook p.31](documents/tutor-mx-handbook-30-september-2026.pdf#page=31) | Search/notifications, ranking/bulk/reports, import, timesheet corrections and Command Centre |
 | **Sprint 4 — Advanced** | [Gitea Tutor MX projects](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects) → Sprint 4 | [Sprint 4 roadmap & all 18 cards](#sprint4-roadmap) · [handbook pages 34–41](documents/tutor-mx-handbook-30-september-2026.pdf#page=34) | Student calendar/bookings/sickness; scenarios, swaps, audit, proposals |
 
-The Sprint 1 and Sprint 4 board-specific numeric URLs were not established in the supplied evidence; these links therefore open the confirmed project list rather than an invented location. The Sprint 3 handbook **summarises** its completed work rather than reproducing all original cards, so those original individual Sprint 3 issue details remain on the [real Sprint 3 board](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/42).
+The Sprint 1 and Sprint 4 board-specific numeric URLs were not established in the supplied evidence; these links therefore open the confirmed project list rather than an invented location. The **18 September Sprint 3 handbook** preserves all 18 Member issue specifications with user acceptance, tests and tasks; a separate screenshot of the project board shows 19 cards in its Done column. That board total is not identical to the number of Member-feature cards because board cards need not be limited to handbook feature cards.
 
 ## Gitea board screenshots supplied by the team
 
@@ -71,19 +71,32 @@ Sprint 2 finished the **Basic persisted journeys** on top of Sprint 1 rather tha
 | `S2-M6-2` | Production public-holiday adapter with graceful fallback | [Handbook p. 27](documents/tutor-mx-handbook-30-september-2026.pdf#page=27) |
 | `S2-M6-3` | Allocation data performance, deployment smoke and Codecov reliability | [Handbook p. 27](documents/tutor-mx-handbook-30-september-2026.pdf#page=27) |
 
-## Sprint 3 issue register — completed board and delivery areas
+## Sprint 3 issue register — 18 handbook specifications plus the completed Gitea board
 
-The supplied Gitea screenshot shows **19 cards in Done** at capture. The 30 September handbook explicitly describes Sprint 3 as a *completed baseline* but does **not** reproduce every S3 issue ID and original acceptance test. To avoid inventing issue identifiers, this table links the genuine board and the handbook's verified delivery areas. Open each Gitea card for its assignee, checklist, discussion and acceptance detail.
+The earlier **18 September Sprint 3 handbook** is retained with the documentation downloads. It contains detailed stories and acceptance tests for **three cards per Member (18 cards)**. The later 30 September handbook records Sprint 3 as completed baseline and intentionally summarises it. The screenshot of the [Sprint 3 Gitea board](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/42) shows **19 Done cards**, a snapshot of all board work rather than the 18 handbook feature cards alone. The table below is the complete planned Member-card register, not a claim that each acceptance condition was independently re-run today.
 
-| Delivery area visible in source and sprint records | Main work | Evidence |
-| --- | --- | --- |
-| Identity, discovery and reminders | Notifications, searchable targets, command palette, guided Tutor setup | [Sprint 3 board](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/42) · [Frontend](#frontend) |
-| Organiser operations | Staffing demand/shortage, ranking, bulk allocation, reports | [Sprint 3 roadmap](#sprint3) · [Backend](#backend) |
-| Tutor workflows | CSV/ICS/paste timetable import, academic terms, timesheet correction/declaration/dispute and export | [Scheduling](#student-scheduling) · [API](#api) |
-| Student/overflow | Volunteer withdrawal, Organiser post/edit/close and requirement-to-overflow | [Features](#features) · [Sprint 3 board](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/42) |
-| Reliability and reporting | API permission/validation/idempotency, race checks, Command Centre/shortage/budget visuals | [Testing](#testing) · [Sprint 3 roadmap](#sprint3) |
+| Issue | Feature / task | Acceptance focus | Original story, tests and tasks |
+| --- | --- | --- | --- |
+| `S3-M1-1` | Notification inbox and due reminders | One recipient-specific alert per event; authorised destination and deduplication. | [18 Sep handbook p. 33](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=33) |
+| `S3-M1-2` | Global search + Ctrl/Cmd+K command palette | Role-filtered bounded search, keyboard operation and safe stale targets. | [18 Sep handbook p. 33](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=33) |
+| `S3-M1-3` | Guided Tutor setup + shared regression | Visible setup needs without rewriting existing capacity and security rules. | [18 Sep handbook p. 33](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=33) |
+| `S3-M2-1` | Staffing requirements + explainable ranking + shortage calculations | Requirements, stable eligibility/ranking, shortage calculation and hard-rule explanations. | [18 Sep handbook p. 34](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=34) |
+| `S3-M2-2` | Bulk allocation preview/commit + reasoned automation override | Side-effect-free preview, transaction-safe commit and explicit override reasons. | [18 Sep handbook p. 34](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=34) |
+| `S3-M2-3` | Course hours, budget/spend, workload data + excuse queue | Reconciled summary calculations, selected period and organiser excuse decisions. | [18 Sep handbook p. 34](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=34) |
+| `S3-M3-1` | CSV/ICS/paste timetable import into existing schedule + term calendar | Preview and safe import into existing TimeSlot calendar with academic bounds. | [18 Sep handbook p. 35](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=35) |
+| `S3-M3-2` | Returned-timesheet corrections, digital declaration and disputes | Legal revision/resubmission states, declaration and independent dispute history. | [18 Sep handbook p. 35](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=35) |
+| `S3-M3-3` | Payroll-ready approved export + full Tutor regression | Approved-only export and Tutor workflow regression with reproducible totals. | [18 Sep handbook p. 35](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=35) |
+| `S3-M4-1` | Wire Student withdrawal UI to existing backend route | Own pending claim withdrawal, fresh status and wrong-owner/closed-state handling. | [18 Sep handbook p. 36](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=36) |
+| `S3-M4-2` | Organiser post/edit/close overflow work + requirement-to-overflow action | Controlled OPEN/CLOSED transitions and shortage-to-overflow linkage. | [18 Sep handbook p. 36](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=36) |
+| `S3-M4-3` | Accessible responsive polish + representative user testing | Keyboard and width checks plus recorded representative-user issues. | [18 Sep handbook p. 36](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=36) |
+| `S3-M5-1` | Integrated Sprint 3 API contract + permission audit | Route/role matrix, errors and safe validation of new Intermediate endpoints. | [18 Sep handbook p. 37](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=37) |
+| `S3-M5-2` | Transaction, idempotency and race hardening | No duplicated or half-applied changes on retries/competing requests. | [18 Sep handbook p. 37](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=37) |
+| `S3-M5-3` | Performance, limits and safe observability | Bounded queries, safe logs and focused measurements. | [18 Sep handbook p. 37](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=37) |
+| `S3-M6-1` | Live Command Centre summary + drill-downs | Source-derived headline metrics with links to supporting records. | [18 Sep handbook p. 38](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=38) |
+| `S3-M6-2` | Shortage heatmap + budget/workload/fairness visualisations | Visuals reconcile with backed reports; labels are not colour-only. | [18 Sep handbook p. 38](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=38) |
+| `S3-M6-3` | Needs Attention feed + quick actions | Actionable deduplicated priority list pointing to existing workflow screens. | [18 Sep handbook p. 38](documents/Tutor_Mx_Gitea_Sprint_Handbook_FINAL_18_Sep_2026.pdf#page=38) |
 
-The supplied screenshot visibly includes cards such as **Student withdrawal UI**, **Organiser post/edit/close overflow**, **responsive polish and representative user testing**, **CSV/ICS/paste timetable import**, **returned timesheet corrections and disputes**, **payroll-ready export** and **notification inbox/reminders**. This is a *partial visible selection*, not a fabricated complete list of 19 card titles. [Open the actual Sprint 3 board to review all 19.](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/42)
+**How to interpret this evidence.** The old handbook establishes the *acceptance criteria*; Gitea issues and their reviewer comments establish *what was worked on*; merged source and completed tests establish *implementation*. No single screenshot proves all three. Sprint 3's end-to-end outcomes are cross-referenced from [Frontend](#frontend), [Backend](#backend) and [Testing](#testing).
 
 ## Sprint 4 issue register — 18 recorded cards
 

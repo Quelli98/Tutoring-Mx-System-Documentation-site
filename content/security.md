@@ -1,42 +1,49 @@
-## Security controls introduced and expanded through Sprint 1–4
+## Identity and authorisation design across all four sprints
 
-**Sprint 1** established Auth0, role-specific workspaces and protected Express tokens. **Sprint 2** hardened account lifecycle and endpoint role/ownership tests. **Sprint 3** secured search, notifications and mutation retries and introduced Master approval during late stabilisation. **Sprint 4** added session/stale-target handling, protected bookings, scenario version checks, audit redaction and idempotent mutation safety. All apply together in the final source. [Feature register](#features) · [Master Organiser](#master-organiser) · [Security-related issue boards](#work-tracker).
+Tutor MX delegates authentication to **Auth0** and implements application authorisation in its own **Express API**. Authentication establishes *who* is making the request; authorisation decides *which Tutor MX records and actions* that person may use. The database stores a `Profile` with one normal role (`STUDENT`, `TUTOR` or `ORGANISER`) associated with the verified identity. A trusted Master Organiser is an Organiser with an additional `MASTER_ORGANIZER` Auth0 permission, not a public fourth registration role.
 
-## The trust boundaries
+This arrangement addresses the brief's account creation, sign-in, password recovery and deletion requirements without implementing custom password storage. It also prevents users from gaining permission merely by typing a protected URL or changing a record ID. [Role journeys](#student-scheduling) · [API](#api).
 
-The browser is an untrusted client. Auth0 proves identity; the API verifies the token; the database profile resolves the application role; service checks control the requested record. Changing a React route, body field or hidden button does not confer authority.
+## Authentication and security evolved with the product
 
-| Caller | Allowed scope | Important denial |
+| Sprint | Control developed or hardened | What it protects |
 | --- | --- | --- |
-| Anonymous | Health/readiness, password reset, public application-status contract | Tutor lists and private workflow records require authentication |
-| Authenticated identity without Profile | Own registration/onboarding/application paths | No automatic Student or Organiser workspace |
-| Student | Own eligible overflow requests and outcomes | Other Students' requests and Organiser administrative data |
-| Tutor | Own timetable, work logs, dashboard, sheets and excuses | Another Tutor's owned workflow through changed identifiers |
-| Organiser | Administrative courses, Tutors, allocations, approval and reports | Master queue without extra privilege |
-| Organiser + MASTER_ORGANIZER | Organiser capabilities plus lecturer application review | No client-supplied privilege elevation |
+| **1** | Auth0 onboarding, one saved role/Profile, API bearer verification, protected React routing, self-owned Tutor data and safe errors. | Core signed-in identities and the boundary between browser and database. |
+| **2** | Reset/delete/email-verification recovery, route-to-role/ownership audit, cross-role tests and duplicate/status conflict protection. | The now-persisted Student volunteering, allocations and approval workflows. |
+| **3** | Search and notification permission filtering, safer API pagination/input limits, selected idempotent writes and concurrency tests; Master Organiser pending application approval added in stabilisation. | New reports/import/bulk operations, private record discovery and authorised lecturer registration. |
+| **4** | Stale-token and removed-target handling, Student/Tutor timetable and booking ownership, Scenario versions/locks, swap/approval checks and redacted audit. | Interacting users and competing state changes in advanced workflows. |
 
-## Secrets and session storage
+## Role and permission matrix
 
-`DATABASE_URL`, `DIRECT_URL` when secret, and Auth0 Management client credentials stay in server configuration. The frontend build may include public domain/client ID/audience/base URL. Never put a client secret in a `VITE_*` variable; these values are compiled into downloadable assets.
+| Action | Student | Tutor | Organiser | Trusted Master Organiser |
+| --- | --- | --- | --- | --- |
+| View own profile/timetable | Own only | Own only | Own relevant Organiser data | Organiser permissions |
+| Volunteer for unfilled work | Own claims | No | Review/manage workflow | Organiser permissions |
+| Submit timesheet/excuse | No | Own records | Review decisions | Organiser permissions |
+| Book tutoring and submit Student sick note | Own booking | View own relevant bookings | Review sickness decisions | Organiser permissions |
+| Manage courses, allocations, bulk, reports, scenarios | No | No | Yes, under API rules | Yes |
+| Approve lecturer Organiser registration | No | No | No | **Yes, with extra Auth0 permission** |
 
-The current source caches Auth0 tokens in local storage, correcting the README's stale “memory” statement. Expiry/revocation/role mismatch must still be handled, and stale targets must be re-authorised. Local storage increases the importance of preventing XSS. This documentation site does not store or accept a visitor's application token.
+These are the intended role boundaries in the handbook and source implementation; the complete protected-route inventory is in [API & curl reference](#api). A hidden React menu item is only a usability measure. Permission enforcement is the server's responsibility.
 
-## Safe errors, limits and consistency
+## How security is enforced
 
-Routes use a common error envelope and deliberately safe messages. JSON size, IDs, pages, report sizes and import workloads are bounded. CORS reflects the configured allowed origin, while token checks apply independently. Idempotency is implemented only for declared operations; an arbitrary header is not a universal duplicate-prevention guarantee.
+1. Auth0 issues tokens for the configured issuer and API audience, with validated signature and expiry.
+2. Express verifies the token and resolves the linked application profile and permissions.
+3. Route middleware checks the required role; services check specific resource ownership and legal state transitions.
+4. Prisma executes permitted database operations under constraints and transactions where necessary.
+5. The API returns normal JSON or a safe error shape. A `401` describes missing/invalid authentication; `403` describes a signed-in user without permission; `409` is appropriate to conflicting/stale writes.
 
-Database uniqueness, constraints and transactions are complemented by state/version checks. Auth0 grant plus Neon update remains a cross-system operation with a recovery/testing boundary. Do not equate one database transaction with a distributed transaction.
+**Design observation:** this means a user with a valid token cannot automatically read or change another user's records, and concurrent actions cannot be validated solely against an old React screen state. Test evidence must include permission failures and competing-request cases, not only happy paths.
 
-## Auth0 role evidence — 7 October 2026
+## Master Organiser is a privilege, not a table or ordinary role
 
-The supplied Auth0 screenshot shows four configured tenant roles: `MASTER_ORGANIZER`, `ORGANISER`, `STUDENT` and `TUTOR`. This supports the documented design: `MASTER_ORGANIZER` is an extra Auth0 privilege while the application `Profile.role` remains Organiser/Tutor/Student. The screenshot contains configuration names only; it does not expose tokens, passwords or Management API client secrets.
+A lecturer's request is stored as `OrganiserApplication` in `PENDING` status. Approval requires an authorised `ORGANISER` user with the additional trusted `MASTER_ORGANIZER` Auth0 privilege. The backend provisions the role using server-only Auth0 credentials and creates/links the Organiser `Profile`; the application records the reviewer and decision. Rejection retains the application outcome without granting the Organiser role. These are two external systems (Auth0 and Neon), so provider failures and retries require explicit handling; a PostgreSQL transaction cannot roll back an Auth0 role grant.
 
-<figure class="doc-evidence"><a href="evidence/sprint4-auth0-roles-2026-10-07.png" target="_blank" rel="noreferrer"><img src="evidence/sprint4-auth0-roles-2026-10-07.png" alt="Auth0 roles page showing MASTER_ORGANIZER, ORGANISER, STUDENT and TUTOR"></a><figcaption><strong>Auth0 role configuration.</strong> The Master privilege is configured separately from the three application workspace roles.</figcaption></figure>
+## Secrets, browser state and failure handling
 
-## Evidence to capture before final submission
+Production `DATABASE_URL` and Auth0 Management credentials belong only to Render's backend environment. Only intended public `VITE_*` configuration is embedded in the frontend build. The final frontend uses Auth0 local-storage caching; cached state does **not** override server expiry, revocation or role verification. Avoid including credentials, access tokens or real user data in documentation screenshots or Git history. Returned errors must not expose stacks, SQL queries or service secrets.
 
-Use designated demo accounts for Student, Tutor, Organiser and Master Organiser. Check anonymous 401, wrong-role 403, own-versus-other record protection, stale decision 409, invalid input 400, duplicate request behaviour and provider failure. For new Student availability, verify that responses never contain the other person's private timetable labels.
+## Evidence and limitations
 
-Show redacted configuration names, successful checks and commit/run links. Tokens, passwords, client secrets, database URLs and raw private record dumps do not belong in public evidence. A public schema dictionary does not need Auth0 because it exposes structure rather than user data.
-
-The final evidence set now includes the Auth0 role list and responsive application captures. It does not include a dedicated Lighthouse/screen-reader report or a full cross-role 401/403/409 transcript, so those are not claimed here.
+Relevant evidence includes the final role inventory screenshot, API wrong-role tests, account lifecycle tests, Student/Tutor ownership cases, Master approval/rejection checks, secret scanning and completed CI results. An Auth0 dashboard screenshot demonstrates configured roles but **not** successful protection of every endpoint; the automated permission suite and role-specific browser checks provide that additional proof. [Testing evidence](#testing) · [Gitea Actions](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/actions).

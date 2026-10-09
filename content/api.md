@@ -1,15 +1,15 @@
-## Start here — what is an API?
+## HTTP API: purpose and engineering boundary
 
-An **Application Programming Interface (API)** is the agreed way one program asks another program for information or actions. In Tutor MX, the **React frontend** sends HTTP requests to a separately hosted **Node.js/Express backend**. The backend checks identity, validates the request, applies tutoring/allocation rules and reads or updates Neon PostgreSQL through Prisma. It sends a structured HTTP response back to the screen.
+The API defines the HTTP contracts through which the separately hosted frontend requests tutoring data and actions. In Tutor MX, the **React frontend** sends HTTP requests to a separately hosted **Node.js/Express backend**. The backend checks identity, validates the request, applies tutoring/allocation rules and reads or updates Neon PostgreSQL through Prisma. It sends a structured HTTP response back to the screen.
 
-**Why the marker should care:** the course brief requires a **handwritten, externally usable HTTP API**, not an automatically generated database endpoint. This page shows the actual public address, explains authentication and HTTP methods, gives safe copyable checks, and provides a searchable inventory of all **120 operations** in the supplied final source.
+**Design justification and rubric coverage.** The course brief requires a handwritten API that is usable from outside the frontend. Tutor MX registers its own Express routes, applies authentication, role checks and domain validation, and exposes a documented public address. The 120-operation final-source inventory below makes the method, path and protection model inspectable. It is an operation inventory, not an assertion that all route body schemas are reproduced.
 
 | Component | Address or responsibility | What it is **not** |
 | --- | --- | --- |
 | **Public API (Render)** | `https://tutor-mx-api.onrender.com` | Not the React frontend or documentation site |
 | **Application frontend (Cloudflare)** | [Open Tutor MX](https://tutor-mx.pages.dev) | Does not directly query PostgreSQL |
 | **Documentation (GitHub Pages)** | This site and the route catalogue below | Does not authenticate on behalf of its readers |
-| **Neon PostgreSQL** | Private persistence reached only by the backend | Not publicly accessible with a marker's browser URL |
+| **Neon PostgreSQL** | Private persistence reached only by the backend | Not a public browser-accessible database console |
 
 The API was introduced in **Sprint 1** and extended in **Sprints 2, 3 and 4**. [Backend explanation](#backend) · [Four-sprint roadmap](#roadmap).
 
@@ -48,7 +48,7 @@ curl.exe --max-time 90 -i -H "Authorization: Bearer $token" "$api/api/me"
 Remove-Variable token
 ```
 
-`/api/me` returns information for the **currently signed-in account**, not for an arbitrary user. Do not paste token values into an issue or hand in full private response bodies. A marker without a test account can still inspect the public health checks and the full route inventory on this page.
+`/api/me` returns information for the **currently signed-in account**, not for an arbitrary user. Do not paste token values into an issue or hand in full private response bodies. An unauthenticated reviewer can still inspect the public health checks and the full route inventory on this page.
 
 ## 3. How to read a route — HTTP methods and status codes
 
@@ -124,4 +124,4 @@ This table gives **representative routes, not the entire inventory**. The catalo
 
 The **120-operation catalogue immediately below** is generated from the supplied final `src/app.ts` route registrations. Filter it by method or access scope to inspect what is actually exposed. The evidence downloads include a [read-only Postman collection](downloads/tutor-mx-readonly.postman_collection.json), [OpenAPI-shaped inventory](downloads/openapi-inventory.json), [endpoint inventory](downloads/endpoint-inventory.json) and [captured route source](downloads/api-routes.ts.txt).
 
-These inventories help a marker review naming, access and HTTP design, but they **do not create a Swagger server on Render or promise complete hand-authored JSON request schemas**. The documentation site serves these files statically. For recorded performance and security evidence, see [Testing, accessibility & performance](#testing) and the [final assessment rubric](#milestone4).
+These inventories make it possible to review naming, access and HTTP design, but they **do not create a Swagger server on Render or promise complete hand-authored JSON request schemas**. The documentation site serves these files statically. For recorded performance and security evidence, see [Testing, accessibility & performance](#testing) and the [final assessment rubric](#milestone4).

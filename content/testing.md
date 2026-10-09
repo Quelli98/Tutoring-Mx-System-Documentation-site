@@ -1,3 +1,22 @@
+## Testing strategy and interpretation across four sprints
+
+Testing grew from the Sprint 1 identity/API/role foundations into a combined frontend, backend, database, security and deployed-product verification programme. The aim is not merely to increase a test count: **each test should show that an intended user story and boundary condition works**. This addresses the Milestone 2 UI/API automated-testing rubric, the Milestone 3 coverage and performance criteria, and Milestone 4 testing quality, coverage and untested areas.
+
+| Sprint | Quality focus | Representative behaviour checked | Evidence limitation |
+| --- | --- | --- | --- |
+| **1 — foundation** | Auth0 onboarding, role routing, Tutor's own data and allocation rule boundaries. | Correct role, invalid token, mark threshold, touching vs overlapping times and hour limit. | A passing isolated rule test does not prove a complete persisted allocation journey. |
+| **2 — Basic** | Persisted allocation/volunteer/timesheet/approval actions and cross-role smoke. | Invalid, duplicate, stale and wrong-owner requests; save/reload consistency. | Mock tests alone do not substitute for the real database and three-role walkthrough. |
+| **3 — Intermediate** | Import, bulk, reporting, notification/search, revisions, idempotency and new API security. | Duplicate imports, required term bounds, bounded search, corrected work-log states and race conditions. | Local PGlite benchmarks do not capture hosted Render/Neon concurrency or cold starts. |
+| **4 — Advanced** | Booking overlaps, illness, swaps, scenario version/locks, audit restore and proposals; accessibility and hosted load probes. | Competing Student bookings, stale scenario publish, wrong-owner access, deterministic presets, responsiveness. | A limited screenshot/sample is not a full production stress test or universal accessibility certification. |
+
+### Test levels and what each establishes
+
+**Unit tests** verify one validator, domain helper or component state against controlled inputs. **Integration tests** check cooperating services, persistence and HTTP contracts. **Role-based browser acceptance tests** check whether an end user can complete the story (including recovery). **Gitea Actions** reruns the configured automated gate on a pushed commit. **Codecov** reports what code lines and branches those tests executed. **Hosted smoke and load checks** sample the running deployment. These measurements answer different questions and must be interpreted separately.
+
+### Release gate and evidence chain
+
+`npm run check` combines Prisma generation, lint, type checking, tests, builds and security checks in the application repository; `npm run coverage` generates the test-coverage artifacts. Before merge, each Member reproduces their handbook story, a failure case and a wrong-role/empty case. After review, the Integration Lead retests combined main and checks the completed [Gitea Actions run](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/actions). A queued CI job is not green. Final user testing/feedback is a separate assessment source and should not be replaced by an automated test screenshot. [Work tracker](#work-tracker) · [User feedback](#user-feedback).
+
 ## Tests are evidence with a scope
 
 The supplied final Sprint 4 source contains **52 backend test files and 77 frontend test files**. The Codecov screenshots supplied for the final `main` commit `361954e` show **80.96%** line coverage for `frontend/src` and **85.29%** for backend `src`. These are exact-release Codecov values; they are separate from browser role smoke tests and performance/load evidence.
@@ -76,7 +95,7 @@ The device-emulation screenshots also show a horizontal scrollbar at the bottom 
 
 ## Codecov: how automated test coverage was measured
 
-**Codecov** is the reporting service used alongside the automated backend and frontend test suites. When tests run with coverage instrumentation, the tools record which source-code lines were exercised. Gitea Actions can upload these results to Codecov, where a marker can inspect the date, commit and coverage of each codebase. This complements our unit/integration tests: it helps identify **untested areas**, but a high percentage alone does **not** demonstrate correct feature behaviour, secure authorisation, mobile accessibility or production performance.
+**Codecov** is the reporting service used alongside the automated backend and frontend test suites. When tests run with coverage instrumentation, the tools record which source-code lines were exercised. Gitea Actions can upload these results to Codecov, where the date, commit and coverage of each codebase can be inspected. This complements our unit/integration tests: it helps identify **untested areas**, but a high percentage alone does **not** demonstrate correct feature behaviour, secure authorisation, mobile accessibility or production performance.
 
 **How to read the figures below:** *Tracked* is the total measured lines in that codebase; *Covered* means executed by tests; *Partial* means only part of a measured line/branch was exercised; *Missed* means the run did not exercise it. The displayed percentages are those shown by Codecov for the specified Git commit, **not** an invented total of passed tests and not evidence that every user story passed its browser acceptance test.
 

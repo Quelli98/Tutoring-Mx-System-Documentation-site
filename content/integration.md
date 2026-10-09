@@ -1,28 +1,30 @@
-## External integration from research to production
+## Why Tutor MX integrates an external service
 
-**Sprint 1** evaluated a South African public-holiday service and documented timeout/fallback expectations. **Sprint 2** connected the public-holiday adapter to the handwritten API with safe server-side responses. **Sprint 3** reused the established service while adding academic-term scheduling and timetable import. **Sprint 4** retained the integration while expanding the shared scheduling engine; neither the Student calendar nor the browser is allowed to call private backend-only service credentials. [Architecture](#architecture) · [Sprint roadmaps](#roadmap).
+The project brief requires a relevant external API integration. We selected **Nager.Date's South African public-holiday feed** to provide supplementary scheduling context. Holiday information is useful while interpreting academic and Tutor availability, but must not become a dependency for the core allocation or booking transaction. The integration is therefore routed through the handwritten Express API rather than called independently by each browser screen.
 
-## Public holidays support the workflow
+## Development history and design decisions
 
-Tutor MX calls the Nager.Date South African public-holiday service through a backend adapter. React requests `GET /api/public-holidays?year=2026` from the Tutor MX API using its normal bearer token. The browser does not call the external holiday provider directly.
-
-| Stage | Implementation | Product effect |
+| Sprint | Integration work | Explanation |
 | --- | --- | --- |
-| Validate | API accepts a year from 2000 to 2100 | Reject invalid requests before provider work |
-| Fetch | Backend contacts Nager.Date for ZA | One controlled external boundary |
-| Bound | Default provider timeout is 3 seconds | Provider failure does not hang the core flow indefinitely |
-| Validate response | Adapter returns the approved fields | UI consumes a stable local contract |
-| Cache | Successful results use a one-hour memory cache | Avoid repeated provider requests; cached timestamp retained |
-| Fallback | Return `source: fallback`, empty holidays and a reason | Supporting information unavailable; core workflow still usable |
+| **1 — feasibility** | Backend proof-of-concept for South African holidays, including failure and invalid-response expectations. | Confirmed a relevant external provider and designed a contract that could fail safely. |
+| **2 — production adapter** | API endpoint, provider response validation, bounded timeout, caching and controlled fallback; UI displays the result/status. | Converted the spike into a reusable integration without exposing external network details to React. |
+| **3 — reuse** | Academic terms, timetable import and recurrence joined the existing scheduling domain; holiday context remained a supporting service. | Avoided a separate timetable or duplicated provider integration. |
+| **4 — continuity** | Student calendars and mutual availability reuse existing scheduling structures while keeping the holiday adapter independent of core booking eligibility. | Preserved reliability when provider availability changes. |
 
-Fallback results are not cached as successful data, so a later request can try the provider again. A fallback is a deliberate usable response, not a fabricated list of holidays.
+## Request and response flow
 
-## Why this integration is cohesive
+1. A signed-in frontend screen requests `GET /api/public-holidays?year=2026` from Tutor MX.
+2. Express validates the requested year (2000–2100) before contacting the provider.
+3. The backend fetches South African (`ZA`) public holidays from Nager.Date, subject to a configured timeout (documented default: three seconds).
+4. The adapter filters/transforms the provider's data into the stable fields exposed by our HTTP contract and caches successful data for one hour.
+5. If the provider times out or returns invalid/unavailable data, Tutor MX returns a safe fallback status instead of inventing a holiday list or blocking essential workflows.
 
-Holiday context supports planning and schedule interpretation. It sits behind the same authentication, error and API-client conventions as other Tutor MX data. The design contains external latency/failure on the server and avoids making volunteer/allocation work depend on provider uptime.
+| Mechanism | Motivation | Failure behaviour |
+| --- | --- | --- |
+| Backend adapter | One auditable request and response shape | Prevents frontend code from depending on provider-specific details. |
+| Year validation | Rejects malformed and out-of-range requests | Controlled validation error before external traffic. |
+| Timeout and response checks | Limits exposure to external latency/format changes | Controlled fallback when the provider does not respond correctly. |
+| One-hour successful cache | Avoids unnecessary repeated requests | Cached successful responses can be reused; failure is not falsely cached as valid holidays. |
+| `source: fallback` | Makes degradation visible | UI can show that holiday context is unavailable while Tutor MX remains usable. |
 
-## What to demonstrate
-
-Show a successful holiday response and the related UI, then a controlled provider failure with the fallback message. Keep the year, request, returned `source`, `retrievedAt` and run evidence. Deterministic adapter tests use mocks for timeout, invalid data, caching and fallback. Do not present those mocks as a fresh live-provider reliability measurement.
-
-[Adapter and tests in the source bundle](downloads/technical-source-evidence.zip) · [API reference](#api) · [Nager.Date documentation](https://date.nager.at/Api).
+**Integration observation:** the important property is graceful degradation, not the presence of an arbitrary API call. Marking evidence should show both the expected provider-success response and the fallback, plus deterministic tests for timeouts, invalid responses and caching. A mocked timeout proves application handling of a simulated failure, **not** uptime of the real provider. [API examples](#api) · [Testing](#testing) · [Nager.Date public API](https://date.nager.at/Api).

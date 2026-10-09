@@ -1,47 +1,48 @@
-## Tutor MX architecture — built incrementally from Sprint 1 to Sprint 4
+## Architecture at a glance
 
-Tutor MX is one system with **separate, independently running frontend and backend applications** inside the application repository. React renders the UI in the browser, a handwritten Express API enforces identity, ownership and business rules, Prisma accesses PostgreSQL on Neon, and Auth0 provides identity. The frontend is deployed through Cloudflare Pages and the backend through Render. This GitHub Pages documentation website is a different repository and a separate static website.
+Tutor MX uses a **separately deployed React/Vite single-page frontend** and a **handwritten Node.js/Express HTTP backend**. Auth0 manages identities; Express validates bearer tokens and applies application-specific permissions; Prisma accesses Neon PostgreSQL. Gitea `main` is the official integrated codebase, while Cloudflare Pages and Render host the independently running browser application and API. The public documentation website is a separate static publication, not the Tutor MX application or an API server.
 
-The **original architecture was introduced in Sprint 1 and extended, not replaced, through Sprint 4**. The final source still uses the same API boundary, underlying roles, database and deployment shape. See the [full four-sprint feature register](#features) and [roadmap index](#roadmap).
+**Architectural decision.** The React application handles presentation and user interaction, while Express owns rules, authorisation and writes. This directly addresses the project brief's non-monolithic frontend/backend and handwritten-API requirements. The frontend cannot bypass mark, timetable-clash or hour-capacity rules by changing a form or URL. [API contracts](#api) · [Database and ERD](#database) · [Security](#security).
 
-## Evolution of the engineering architecture
+## Architecture diagram and request flow
 
-| Sprint | Architectural milestone | Components and important decisions | Review reference |
+![Tutor MX deployed components and their trust boundaries](diagrams/deployment.svg)
+
+The deployment diagram distinguishes five responsibilities: the browser renders the Cloudflare-served frontend; Auth0 authenticates users; Render hosts the Express API; Prisma is the backend's data-access layer; and Neon stores persistent relations. Browser-to-API traffic crosses an HTTP trust boundary, so the API independently verifies identity and permissions. Backend database credentials and Auth0 Management credentials are never sent to React.
+
+A typical allocation request takes this path:
+
+1. An Organiser signs in using Auth0 and opens the React allocation board.
+2. React calls the protected Express endpoint with an access token and proposed allocation details.
+3. The API verifies the token, resolves the Organiser role, validates course/Tutor/time inputs and checks marks, clashes and selected-week capacity.
+4. The API performs the allowed write through Prisma/Neon and returns a JSON result or a controlled error.
+5. React refreshes the affected allocation, timetable and workload displays from the server response.
+
+**Interpretation:** the same business constraints are applied regardless of whether the request originates from the UI or an external HTTP client. The sequence illustrates architectural responsibility, not a claim that every HTTP response has a measured latency.
+
+## Four-sprint architectural evolution
+
+| Sprint and tier | What was established or extended | Why this mattered | Supporting material |
 | --- | --- | --- | --- |
-| **Sprint 1 — foundation** | Decouple browser, API, identity and storage. | React/Vite entry and role pages; Auth0 Universal Login; protected Express routes and `/health`; `Profile`, course, marks, availability, allocations and initial migrations; Gitea and first deployment. | [Sprint 1](#sprint1) · [Security](#security) |
-| **Sprint 2 — complete Basic journeys** | Replace placeholders with persisted, guarded actions. | Real allocation writes and approvals; live Student overflow and volunteer outcomes; timesheet/absence state transitions; role/ownership checks, database constraints, holiday adapter and stable HTTP errors. | [Sprint 2](#sprint2) · [API](#api) |
-| **Sprint 3 — Intermediate operations** | Extend the shared domain, reporting and operational safeguards. | Staffing requirements, shortage/ranking/bulk allocation, Command Centre, notifications/search, timetable import/terms/exceptions, timesheet corrections/payroll, overflow management, idempotency and transaction checks. Late stabilisation added the Master Organiser approval workflow. | [Sprint 3](#sprint3) · [Testing](#testing) |
-| **Sprint 4 — Advanced completion** | Reuse existing services for collaborative planning and Student appointments. | Profile-owned shared TimeSlot, mutual availability, bookings and Student sick notes; scenarios, optimistic concurrency, swaps, audit/restore, proposal presets and explanations. No second Student timetable engine or database service was created. | [Sprint 4](#sprint4-roadmap) · [Scheduling](#student-scheduling) |
+| **Sprint 1 — foundation** | Role-based React navigation; Auth0 sign-up and onboarding; separate Express server with `/health`; role-checked core routes; Prisma schema/migrations for profiles, courses, marks, capacity, availability and allocation foundations; initial CI and deployment. | Created the required independently hosted frontend/backend and a single authentication and database boundary rather than a browser-to-database shortcut. Some Student and allocation actions were still mock/placeholder flows. | [Sprint 1 roadmap](#sprint1) · [Handbook pp. 13–20](documents/tutor-mx-handbook-30-september-2026.pdf#page=13) |
+| **Sprint 2 — Basic** | Real allocation create/edit/remove, Student open-work and volunteer writes, Tutor timesheet submission, Organiser approvals, persisted status and transition rules; production public-holiday adapter and more complete cross-role security tests. | Replaced Basic prototypes with persistent workflows that share the Sprint 1 API and data model. | [Sprint 2 roadmap](#sprint2) · [Handbook pp. 21–29](documents/tutor-mx-handbook-30-september-2026.pdf#page=21) |
+| **Sprint 3 — Intermediate** | Notifications and secure search, staffing demand/ranking, bulk allocation, budget/workload/report data, CSV/ICS timetable import with academic terms, timesheet corrections/disputes/export, overflow management, Command Centre, and API limits/idempotency/race hardening. Late stabilisation added shared timetable improvements and Master Organiser approval. | Added operational depth without rewriting the Core API or duplicating calendars, allocations or identity flows. | [Sprint 3 roadmap](#sprint3) · [Work tracker](#work-tracker) |
+| **Sprint 4 — Advanced** | Shared Student/Tutor `TimeSlot` ownership, mutual availability and booking, Student sickness, Tutor swaps, draft scenarios with locks/versions, audit/restore, whole-school explainable proposals and strategy comparison. | Extended the same scheduling/eligibility services into more complex cross-role transactions while protecting existing Basic and Intermediate behaviour. | [Sprint 4 roadmap](#sprint4-roadmap) · [Feature register](#features) |
 
-The handbook's **30 September snapshot** predates the later Sprint 4 implementation. The supplied **7 October source** includes the subsequent features. Where a story crosses multiple sprints, the register identifies its foundation and later extensions rather than attributing the whole system to Sprint 4.
+The September handbook was a plan and baseline audit; the implementation register and final-source catalogue record the resulting delivered code. A planned feature is not evidence of a successful deployed user journey unless accompanied by source, tests and/or a demonstration.
 
-## Final running components and trust boundaries
+## Component responsibilities and rationale
 
-| Layer | Representative source | Execution location | Role across Sprints 1–4 |
-| --- | --- | --- | --- |
-| React/Vite frontend | `frontend/src/main.jsx`, `frontend/src/routes/`, `frontend/src/features/`, `frontend/src/api/` | Browser; static assets on Cloudflare Pages | Role-aware screens, status messages, calendars, accessible actions and API requests |
-| Auth0 | `frontend/src/auth/`, `src/auth/` | Managed identity provider + verified server tokens | Passwords, email verification, bearer identity and privileged Organiser role claims |
-| Handwritten Node/Express API | `src/server.ts`, `src/app.ts`, `src/http/` | Render-hosted Node process | HTTP validation, authentication, permissions, safe responses and rate limiting |
-| Business services | `src/services/` | Render server | Mark/clash/capacity, allocation, work logs, timesheets, scheduling, proposals and audit; shared across every UI |
-| Persistence | `src/database.ts`, `prisma/schema.prisma`, `prisma/migrations/` | Prisma on server, PostgreSQL on Neon | Relations, transactions, workflow statuses, history, constraints and migrations |
-| External integration | `src/integrations/public-holidays.ts` | Render server → external provider | South African holiday data and safe cached/fallback responses |
-| CI and delivery | Gitea Actions, Codecov, Cloudflare, Render | Build and deployment systems | Tests, coverage, reviews, merge checks and release evidence throughout the four sprints |
-| Documentation | This website | GitHub Pages | Canonical explanations, original sprint stories, rubrics and public artefacts |
+| Boundary | Implemented responsibility | Design implication |
+| --- | --- | --- |
+| **React/Vite on Cloudflare** | Student, Tutor, Organiser and additional Master Organiser administration screens, calendars, tables, form validation feedback and error/loading states. | One reusable frontend; backend never trusts the visible role navigation as security. |
+| **Auth0** | Universal Login, password recovery, verification and identity/role claims. | Avoids implementing password storage and cryptographic login ourselves. |
+| **Handwritten Express on Render** | HTTP route contracts, middleware, ownership checks, business/domain services, external integration and safe errors. | Satisfies handwritten API criterion; database models do not automatically become public endpoints. |
+| **Prisma + Neon PostgreSQL** | Relational models, migrations, constraints and transactional state. | Source-controlled schema and predictable linked records for assignments, timesheets, booking and audit. |
+| **Gitea Actions + Codecov** | Branch and main CI, automated test reporting, coverage evidence and review gates. | Links quality checks to reviewed source rather than relying on unverified developer statements. |
 
-**Security boundary:** a browser never accesses Prisma/Neon or the Auth0 Management API directly. The Express API verifies tokens and permissions *before* accessing protected records. A logged-in Student cannot obtain private Tutor event labels through mutual availability.
+## Architectural trade-offs and limitations
 
-## Example request paths — foundation through advanced
+The Express API is a **modular application**, not a collection of independent microservices. That reduces deployment complexity and keeps related tutoring rules close together, but it requires discipline to avoid tightly coupling route handlers to database queries. Domain services and shared validators mitigate that risk. The Auth0 role grant and Neon database transaction are separate operations; Organiser approval needs failure handling and reconciliation rather than assuming one atomic transaction spans both providers. Confirmed bookings are scheduling appointments and do not replace Organiser-assigned `Allocation` records for workload/payroll. 
 
-1. **Sprint 1 sign-in:** a Tutor registers in Auth0; Express links their authenticated subject to a `Profile`, then the frontend opens the authorised Tutor dashboard using `/api/me`.
-2. **Sprint 2 allocation:** an Organiser selects a Tutor; React sends the action to Express, which rechecks the mark, time overlap and weekly hours, then saves through Prisma. Tutor summaries refresh from the server.
-3. **Sprint 3 timetable/import:** the Tutor previews CSV/ICS entries; backend import and recurrence services validate terms, duplicates and exception handling against the existing TimeSlot design.
-4. **Sprint 4 booking:** a Student views mutually free intervals calculated by Express; booking rechecks the time inside the mutation, persists `TutoringBooking`, then both Student and Tutor calendar projections refresh.
-5. **Sprint 4 proposal:** the Organiser compares deterministic proposals based on staffing requirements and the **same existing hard rules**. Saving creates a draft Scenario; only explicit, revalidated Publish changes live allocations.
-
-## Backend style: modular monolith, not microservices
-
-The API is one deployable Node/Express service with multiple domain modules. Its design is **layered/modular**, not a set of separately deployed microservices and not a generated database REST interface. A single service helps enforce shared allocation rules and transactional updates; its large route composition (`src/app.ts`) remains a maintainability trade-off.
-
-Auth0 authenticates; the Tutor MX API authorises. `MASTER_ORGANIZER` is an extra **Auth0 permission held by an Organiser**, not a fourth stored `Profile.role`. Auth0 provisioning plus a Neon write is not one distributed transaction, so failure/retry/reconciliation must be tested.
-
-See [Frontend across four sprints](#frontend), [Backend across four sprints](#backend), [database dictionary and ERD](#database), [UML diagrams](#diagrams), [deployment](#deployment) and [every sprint's issues](#work-tracker).
+**Verification against the final rubric:** non-monolithic components are documented above; the 120-operation inventory provides the source-derived API design record; the 30-model dictionary/ERD documents persistent structure; [Testing](#testing) analyses dated coverage, accessibility and performance results; and [Deployment](#deployment) connects release SHA, public probes and hosted services. These are distinct forms of evidence and should not be treated as interchangeable.
