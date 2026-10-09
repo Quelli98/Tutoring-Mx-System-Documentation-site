@@ -1,3 +1,7 @@
+## Source trail across all four sprints
+
+The [Sprint 1](#sprint1), [Sprint 2](#sprint2), [Sprint 3](#sprint3) and [Sprint 4](#sprint4-roadmap) roadmaps distinguish the original work, requirements and decisions. This library consolidates their **shared evidence**, including the exact handbook, final supplied source files, diagrams, dated quality reports and Gitea work boards, without making earlier sprint evidence disappear. [Four-sprint work register](#work-tracker).
+
 ## Source hierarchy and dates
 
 | Source | Used for | Scope |

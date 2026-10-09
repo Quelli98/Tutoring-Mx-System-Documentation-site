@@ -1,3 +1,7 @@
+## One complete system, four milestone roadmaps
+
+All product and engineering chapters document the **progression from Sprint 1 to Sprint 4**, with each feature labelled by its sprint of introduction and later development. The [Sprint 1](#sprint1), [Sprint 2](#sprint2), [Sprint 3](#sprint3) and [Sprint 4](#sprint4-roadmap) roadmaps link original user stories, acceptance requirements and rubric evidence to these maintained explanations. [Complete feature register](#features) · [Gitea issue boards](#work-tracker).
+
 # About this documentation website
 
 ## Purpose

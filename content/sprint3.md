@@ -53,3 +53,7 @@ The [user-feedback record](#user-feedback) includes a prior five-response survey
 [Sprint 3 project board — Gitea](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/42) holds the completed cards, including the original member assignments, checklist progress and issue discussions. The **30 September handbook explicitly marks Sprint 3 as a completed baseline**, summarising its delivered capabilities on page 31. This edition does not invent a verbatim Sprint 3 issue list absent from that handbook: consult the actual Gitea cards for the precise acceptance checks, user stories and task-level discussion.
 
 For review without internal account access, the [Sprint 3 feature register](#features), [testing evidence](#testing), [work tracker](#work-tracker) and [Source/evidence library](#references) document the integrated outcomes.
+
+## Work tracker and cross-sprint implementation map
+
+For **Sprint 3** issues and reviewer/acceptance evidence, open [the Sprint 3 work register](#work-tracker) and the original handbook specifications linked from its issue rows. The current code and final behaviours are explained cumulatively in [Features](#features), [Architecture](#architecture), [Frontend](#frontend), [Backend](#backend), [Scheduling](#student-scheduling) and [Master Organiser](#master-organiser). The [roadmap overview](#roadmap) maps each topic across all four sprints.

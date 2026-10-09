@@ -1,6 +1,6 @@
-## One timetable engine for both Students and Tutors
+## Tutor MX scheduling across Sprint 1, Sprint 2, Sprint 3 and Sprint 4
 
-The scheduling system grew across the project: early Tutors recorded busy times; Sprint 3 added timetable import, recurrence, term data and exceptions; Sprint 4 extended that same engine for Students and mutual bookings. The final code therefore uses one shared design. Student and Tutor schedules use the same `TimeSlot`, manual/import validators, CSV/ICS parsers, recurrence expansion, academic terms, occurrence exceptions and weekly calendar. M1 generalised ownership to the signed-in `Profile` while retaining the Tutor route aliases for compatibility.
+The scheduling system grew across the project: **Sprint 1** introduced Tutor busy-time forms; **Sprint 2** completed allocation/workflow persistence; **Sprint 3** added timetable import, recurrence, term data and exceptions; **Sprint 4** extended that same engine for Students and mutual bookings. The final code therefore uses one shared design. Student and Tutor schedules use the same `TimeSlot`, manual/import validators, CSV/ICS parsers, recurrence expansion, academic terms, occurrence exceptions and weekly calendar. Sprint 4 generalised ownership to the signed-in `Profile` while retaining the Tutor route aliases for compatibility.
 
 | Shared concept | Tutor meaning | Student meaning |
 | --- | --- | --- |
@@ -14,19 +14,19 @@ No separate `StudentTimeSlot`, Student recurrence engine or duplicate CSV/ICS pa
 
 ## Mutual availability runs on the backend
 
-M2's shared busy-interval/gap service intersects both people's safe availability. Student busy time includes recurring own TimeSlots and existing confirmed bookings. Tutor busy time includes TimeSlots, confirmed allocations and bookings. Term bounds, breaks, recurrence exceptions, duration, future-window limits and result bounds are applied before a slot is offered.
+The Sprint 4 shared busy-interval/gap service intersects both people's safe availability. Student busy time includes recurring own TimeSlots and existing confirmed bookings. Tutor busy time includes TimeSlots, confirmed allocations and bookings. Term bounds, breaks, recurrence exceptions, duration, future-window limits and result bounds are applied before a slot is offered.
 
 **Bookable times = Student free intervals ∩ Tutor free intervals.** If a Student is free 11:00–14:00 and the Tutor is busy 12:00–13:00, the safe gaps are 11:00–12:00 and 13:00–14:00. A 90-minute request does not fit either gap. The response exposes bookable intervals, not the other person's private class/event labels.
 
 ## Booking rechecks availability transactionally
 
-M3 added `TutoringBooking`. The Student chooses a mutual free slot, but the server checks availability again when saving. A competing booking can invalidate an earlier preview, so stale UI does not permit double-booking.
+Sprint 4 added `TutoringBooking`. The Student chooses a mutual free slot, but the server checks availability again when saving. A competing booking can invalidate an earlier preview, so stale UI does not permit double-booking.
 
 A confirmed booking appears on both Student and Tutor calendars and becomes busy time for later booking and allocation clash checks. Allowed future cancellation changes the booking status rather than deleting the record, immediately frees the interval and keeps history. Student bookings remain scheduling appointments; they do not create payroll allocations.
 
 ## Student sickness reuses the approval pattern
 
-M4 added `StudentSickNote`, linked to the Student's own eligible booking. The request stores the reason and starts Pending. Organiser Approvals supports approve/reject and review notes. Only one active request per booking is allowed.
+Sprint 4 added `StudentSickNote`, linked to the Student's own eligible booking. The request stores the reason and starts Pending. Organiser Approvals supports approve/reject and review notes. Only one active request per booking is allowed.
 
 | Decision | Final booking effect | History |
 | --- | --- | --- |
@@ -37,8 +37,8 @@ M4 added `StudentSickNote`, linked to the Student's own eligible booking. The re
 
 The feature does not add medical document upload. Tutors can receive attendance state without receiving the Student's private sickness reason.
 
-## How M5 and M6 reuse scheduling truth
+## How Sprint 4 audit and proposals reuse scheduling truth
 
-M5 instruments successful booking/sick-note mutations through the shared audit pattern and adds retry/concurrency hardening. M6's proposal engine reuses the same clash source, so confirmed Student bookings count as Tutor busy time. Proposal presets may change soft priorities, but they never override mark, clash, selected-week capacity or Organiser locks.
+Sprint 4 audit services instrument successful booking/sick-note mutations through the shared audit pattern and adds retry/concurrency hardening. The Sprint 4 proposal engine reuses the same clash source, so confirmed Student bookings count as Tutor busy time. Proposal presets may change soft priorities, but they never override mark, clash, selected-week capacity or Organiser locks.
 
-See [Sprint 4 final delivery](#sprint4) for the complete Member sequence and release evidence.
+See [the entire Sprint 1–4 feature register](#features) and the [four roadmap chapters](#roadmap) for feature origins, acceptance stories and release evidence.

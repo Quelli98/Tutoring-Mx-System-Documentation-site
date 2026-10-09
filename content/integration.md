@@ -1,3 +1,7 @@
+## External integration from research to production
+
+**Sprint 1** evaluated a South African public-holiday service and documented timeout/fallback expectations. **Sprint 2** connected the public-holiday adapter to the handwritten API with safe server-side responses. **Sprint 3** reused the established service while adding academic-term scheduling and timetable import. **Sprint 4** retained the integration while expanding the shared scheduling engine; neither the Student calendar nor the browser is allowed to call private backend-only service credentials. [Architecture](#architecture) · [Sprint roadmaps](#roadmap).
+
 ## Public holidays support the workflow
 
 Tutor MX calls the Nager.Date South African public-holiday service through a backend adapter. React requests `GET /api/public-holidays?year=2026` from the Tutor MX API using its normal bearer token. The browser does not call the external holiday provider directly.

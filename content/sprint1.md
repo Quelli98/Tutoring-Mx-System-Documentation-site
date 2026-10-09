@@ -70,3 +70,7 @@ The following index links **every Member's three issue cards** to its specific p
 | `S1-M6-2` | Gitea integration checks, public deployment and shared Sprint 1 URL | [User story, acceptance tests & tasks — handbook p. 19](documents/tutor-mx-handbook-30-september-2026.pdf#page=19) |
 | `S1-M6-3` | South African public-holiday API spike and fallback contract | [User story, acceptance tests & tasks — handbook p. 19](documents/tutor-mx-handbook-30-september-2026.pdf#page=19) |
 
+
+## Work tracker and cross-sprint implementation map
+
+For **Sprint 1** issues and reviewer/acceptance evidence, open [the Sprint 1 work register](#work-tracker) and the original handbook specifications linked from its issue rows. The current code and final behaviours are explained cumulatively in [Features](#features), [Architecture](#architecture), [Frontend](#frontend), [Backend](#backend), [Scheduling](#student-scheduling) and [Master Organiser](#master-organiser). The [roadmap overview](#roadmap) maps each topic across all four sprints.

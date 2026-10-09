@@ -1,3 +1,7 @@
+## Security controls introduced and expanded through Sprint 1–4
+
+**Sprint 1** established Auth0, role-specific workspaces and protected Express tokens. **Sprint 2** hardened account lifecycle and endpoint role/ownership tests. **Sprint 3** secured search, notifications and mutation retries and introduced Master approval during late stabilisation. **Sprint 4** added session/stale-target handling, protected bookings, scenario version checks, audit redaction and idempotent mutation safety. All apply together in the final source. [Feature register](#features) · [Master Organiser](#master-organiser) · [Security-related issue boards](#work-tracker).
+
 ## The trust boundaries
 
 The browser is an untrusted client. Auth0 proves identity; the API verifies the token; the database profile resolves the application role; service checks control the requested record. Changing a React route, body field or hidden button does not confer authority.

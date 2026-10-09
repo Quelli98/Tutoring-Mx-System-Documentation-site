@@ -1,3 +1,7 @@
+## HTTP API evolution across the four sprints
+
+**Sprint 1:** handwritten Express foundation, authentication, course/Tutor/Profile contracts and `/health`. **Sprint 2:** persisted allocation, timesheet, volunteer and approval endpoints. **Sprint 3:** reporting, search, import, staffing, correction/export and guarded retry rules. **Sprint 4:** shared scheduling, bookings, swaps, scenarios, audit and explainable proposal endpoints. This chapter catalogues their **combined final interface**; the [four roadmap chapters](#roadmap) identify the sprint of origin. [Backend architecture](#backend) · [Work tracker](#work-tracker).
+
 ## External access and the correct base URL
 
 The API is reachable independently of the frontend at **[https://tutor-mx-api.onrender.com](https://tutor-mx-api.onrender.com/health)**. The documentation URL and Cloudflare frontend URL do not serve these Express routes. Use HTTPS on the Render hostname from curl, Postman, PowerShell or another authorised application.

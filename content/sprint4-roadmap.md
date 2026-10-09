@@ -97,3 +97,7 @@ The following index links **every Member's three issue cards** to its specific p
 | `S4-M6-2` | Proposal cockpit: Why this Tutor? / Why not? | [User story, acceptance tests & tasks — handbook p. 40](documents/tutor-mx-handbook-30-september-2026.pdf#page=40) |
 | `S4-M6-3` | Strategy comparison + proposal impact lab | [User story, acceptance tests & tasks — handbook p. 40](documents/tutor-mx-handbook-30-september-2026.pdf#page=40) |
 
+
+## Work tracker and cross-sprint implementation map
+
+For **Sprint 4** issues and reviewer/acceptance evidence, open [the Sprint 4 work register](#work-tracker) and the original handbook specifications linked from its issue rows. The current code and final behaviours are explained cumulatively in [Features](#features), [Architecture](#architecture), [Frontend](#frontend), [Backend](#backend), [Scheduling](#student-scheduling) and [Master Organiser](#master-organiser). The [roadmap overview](#roadmap) maps each topic across all four sprints.

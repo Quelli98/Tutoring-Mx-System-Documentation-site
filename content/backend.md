@@ -1,3 +1,16 @@
+## The backend developed through all four sprints
+
+The backend is the **handwritten Node.js/Express application** in `src/app.ts` and `src/server.ts`, backed by Prisma and Neon. It owns HTTP contracts, Auth0 verification, roles, domain rules, safe errors, database writes and selected external integration. Its final code is not a new Sprint 4 backend: Sprint 4 extends services built in Sprints 1–3.
+
+| Sprint | Backend changes introduced | Final source locations / reference |
+| --- | --- | --- |
+| **Sprint 1 — foundation** | Separate Express API and `/health`; Auth0 bearer verification, own-profile/course/Tutor/Tutor-workflow routes; mark/clash/weekly-hour validators; Neon/Prisma structure and public-holiday spike. | `src/server.ts`, `src/app.ts`, `src/auth/`, `src/database.ts`; [Sprint 1 roadmap](#sprint1) |
+| **Sprint 2 — Basic workflows** | Real allocation save/edit/remove, timesheet submission/review, volunteer/overflow and excuse decision APIs; consistent statuses, protected ownership, safe conflict responses, live public-holiday adapter. | `src/services/timesheet-workflows.ts`, `src/services/student-workflows.ts`, allocation handlers; [Sprint 2 roadmap](#sprint2) |
+| **Sprint 3 — Intermediate workflows** | Requirements, shortages, candidate ranking/bulk allocation, reports and Command Centre; timetable import/term/recurrence, notification and search, corrections/disputes/export; stronger validation, idempotency and query handling. Master approval arrived in late stabilisation. | `src/services/staffing-requirement-service.ts`, `reporting-service.ts`, `timetable-import-service.ts`, `command-centre-service.ts`; [Sprint 3 roadmap](#sprint3) |
+| **Sprint 4 — Advanced workflows** | Shared Student/Tutor schedule ownership, mutual availability, bookings, Student sickness and Tutor swaps; scenario/version/lock/presence, audit/restore, deterministic proposals and comparison; existing permissions/rules reused. | `src/services/mutual-availability.ts`, `booking-service.ts`, `scenario-service.ts`, `swap-service.ts`, `audit-service.ts`, `proposal-service.ts`; [Sprint 4 roadmap](#sprint4-roadmap) |
+
+The source register includes **120 HTTP operations** and **30 Prisma models** in the final supplied archive. Those are final-source counts, not Sprint 1 counts. [Browse every route](#api) · [Browse every model](#database) · [See complete feature origins](#features).
+
 ## A handwritten HTTP API
 
 `src/server.ts` loads configuration and wires real dependencies. `src/app.ts` builds Express middleware and registers the **120 operations** in the supplied final Sprint 4 source. Feature services implement allocation, timesheet, timetable, overflow, reporting and other domain rules. Authentication modules verify access tokens; the database module provides Prisma/pg connectivity.

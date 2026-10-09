@@ -45,3 +45,19 @@ The Sprint 1 and Sprint 4 projects are linked through the **all-projects** landi
 - [Historical plans, evidence and decisions](#references)
 
 **Open evidence boundary:** the site retains five earlier user-feedback responses and their original screenshots. A final post-release user-feedback round and its resulting decisions are the deliberately unfinished item in [User feedback](#user-feedback).
+
+## Navigate from any sprint to the relevant implementation
+
+All six **Understand Tutor MX** chapters are written as **cumulative histories from Sprint 1 through Sprint 4**. Select a sprint's assessment rubric, then follow the named topic to see its evolution and final source location rather than a disconnected Sprint 4 description.
+
+| Topic | Sprint 1 origin | Sprint 2 completion | Sprint 3 extension | Sprint 4 continuation | Canonical chapter |
+| --- | --- | --- | --- | --- | --- |
+| Features / journeys | Workspaces and initial forms | Real allocation, volunteering and approvals | Ranking, reports and imports | Student bookings and Advanced planning | [Features](#features) |
+| System architecture | React → Express → Prisma/Neon | Persisted business workflows | Reused domain services, tracking and reporting | Shared scheduling, scenarios and audit | [Architecture](#architecture) |
+| Frontend | Role screens and prototypes | Live role actions | Calendar, search, reports and Command Centre | Booking, swaps and planning dashboards | [Frontend](#frontend) |
+| Backend/API | Handwritten routes, security, hard rules | Real protected mutations | Validated workflow services, idempotency | Transactions, proposals, audit and restore | [Backend](#backend) |
+| Scheduling | Tutor busy time | Work/timesheet states | Imports, terms, exceptions | Shared Student/Tutor calendar and bookings | [Scheduling](#student-scheduling) |
+| Master Organiser | Base Auth0/roles | Role security hardening | Lecturer approval introduced during late stabilisation | Approval retained with final security checks | [Master Organiser](#master-organiser) |
+| Gitea work tracker | 18 issue cards | 18 issue cards | 19 Done in supplied screenshot | 18 issue cards | [Work tracker](#work-tracker) |
+
+[Open complete current database schema](#database) · [Read testing and Codecov](#testing) · [View release evidence](#sprint4).

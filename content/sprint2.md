@@ -75,3 +75,7 @@ The following index links **every Member's three issue cards** to its specific p
 | `S2-M6-3` | Allocation data performance, deployment smoke and Codecov reliability | [User story, acceptance tests & tasks — handbook p. 27](documents/tutor-mx-handbook-30-september-2026.pdf#page=27) |
 
 [Sprint 2 project board on Gitea](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/39) — issue statuses, assigned members and checklists.
+
+## Work tracker and cross-sprint implementation map
+
+For **Sprint 2** issues and reviewer/acceptance evidence, open [the Sprint 2 work register](#work-tracker) and the original handbook specifications linked from its issue rows. The current code and final behaviours are explained cumulatively in [Features](#features), [Architecture](#architecture), [Frontend](#frontend), [Backend](#backend), [Scheduling](#student-scheduling) and [Master Organiser](#master-organiser). The [roadmap overview](#roadmap) maps each topic across all four sprints.

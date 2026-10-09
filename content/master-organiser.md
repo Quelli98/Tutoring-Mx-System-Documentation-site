@@ -1,3 +1,14 @@
+## How Organiser security evolved across the four sprints
+
+| Sprint | Relevant foundation or change | Consequence for the final Master Organiser workflow |
+| --- | --- | --- |
+| **Sprint 1** | Auth0 identity, Student/Tutor/Organiser role-specific navigation, protected API and linked `Profile`. | Establishes the trusted user and backend authorisation boundary. |
+| **Sprint 2** | Hardened verification, role/ownership checks, sign-in/reset/deletion and Organiser workflow permissions. | A hidden menu alone is never sufficient authorisation. |
+| **Sprint 3 (late stabilisation before Sprint 4)** | The project introduced pending lecturer applications and Master approval rather than allowing immediate Organiser access. | `OrganiserApplication` records review; the trusted account has an additional Auth0 capability. |
+| **Sprint 4** | Production session/stale-target hardening and regression across new scheduling and administrative actions. | The existing approval workflow is preserved, not rebuilt as a new Sprint 4-only feature. |
+
+The handbook treats Master Organiser as **already present before Sprint 4 development**. The sprint label here refers to late Sprint 3 stabilisation, not to a new Sprint 4 Member deliverable. [Full feature history](#features) · [Role security](#security).
+
 ## Organiser approval and its trusted Master permission
 
 A Master Organiser is an approved Organiser whose Auth0 token also carries `MASTER_ORGANIZER`. This is **not a fourth `Profile.role`, not a separate database table, and not a public registration option**. [See how `Profile` and `OrganiserApplication` are stored](#database). Organisers are lecturers. Students do not become Organisers through ordinary Student onboarding.

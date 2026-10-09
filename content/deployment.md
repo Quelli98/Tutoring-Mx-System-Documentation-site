@@ -1,3 +1,7 @@
+## Deployment timeline from Sprint 1 through Sprint 4
+
+**Sprint 1** established separately hosted React/Vite and Express applications, Neon storage, Auth0 identity and Gitea CI. **Sprint 2** stabilised Basic routes, database migration checks and the review/deploy cycle. **Sprint 3** expanded tests, coverage, application reports and shared-runner handovers. **Sprint 4** released the combined Student scheduling and Advanced planning features from reviewed Gitea `main`. This chapter distinguishes architecture and dated release evidence from measurements not independently supplied. [Roadmap](#roadmap) · [Testing](#testing).
+
 ## The deployment map
 
 | Service | Public / administrative link | What runs there | Evidence boundary |
