@@ -105,3 +105,9 @@
 .nav-subpages{padding-bottom:9px}
 .nav-accordion .nav-subpages a{margin-left:4px;font-size:12px;padding-top:7px;padding-bottom:7px}
 .nav-accordion[open]{margin-bottom:11px}
+
+/* Readable, responsive ERD for the rubric-led database guide. */
+.prose .documentation-erd{margin:26px 0 30px;border:1px solid #dfe6ee;border-radius:10px;background:#fff;padding:16px;overflow:hidden}
+.prose .documentation-erd a{display:block;max-width:100%}
+.prose .documentation-erd img{display:block;width:100%;height:auto;max-width:100%;object-fit:contain}
+.prose .documentation-erd figcaption{margin-top:12px;color:#52667d;font-size:.92rem;line-height:1.55}

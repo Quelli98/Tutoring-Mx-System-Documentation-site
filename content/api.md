@@ -1,16 +1,21 @@
-## HTTP API evolution across the four sprints
+## Start here — what is an API?
 
-**Sprint 1:** handwritten Express foundation, authentication, course/Tutor/Profile contracts and `/health`. **Sprint 2:** persisted allocation, timesheet, volunteer and approval endpoints. **Sprint 3:** reporting, search, import, staffing, correction/export and guarded retry rules. **Sprint 4:** shared scheduling, bookings, swaps, scenarios, audit and explainable proposal endpoints. This chapter catalogues their **combined final interface**; the [four roadmap chapters](#roadmap) identify the sprint of origin. [Backend architecture](#backend) · [Work tracker](#work-tracker).
+An **Application Programming Interface (API)** is the agreed way one program asks another program for information or actions. In Tutor MX, the **React frontend** sends HTTP requests to a separately hosted **Node.js/Express backend**. The backend checks identity, validates the request, applies tutoring/allocation rules and reads or updates Neon PostgreSQL through Prisma. It sends a structured HTTP response back to the screen.
 
-## External access and the correct base URL
+**Why the marker should care:** the course brief requires a **handwritten, externally usable HTTP API**, not an automatically generated database endpoint. This page shows the actual public address, explains authentication and HTTP methods, gives safe copyable checks, and provides a searchable inventory of all **120 operations** in the supplied final source.
 
-The API is reachable independently of the frontend at **[https://tutor-mx-api.onrender.com](https://tutor-mx-api.onrender.com/health)**. The documentation URL and Cloudflare frontend URL do not serve these Express routes. Use HTTPS on the Render hostname from curl, Postman, PowerShell or another authorised application.
+| Component | Address or responsibility | What it is **not** |
+| --- | --- | --- |
+| **Public API (Render)** | `https://tutor-mx-api.onrender.com` | Not the React frontend or documentation site |
+| **Application frontend (Cloudflare)** | [Open Tutor MX](https://tutor-mx.pages.dev) | Does not directly query PostgreSQL |
+| **Documentation (GitHub Pages)** | This site and the route catalogue below | Does not authenticate on behalf of its readers |
+| **Neon PostgreSQL** | Private persistence reached only by the backend | Not publicly accessible with a marker's browser URL |
 
-A public API address does not make every record public. Health/readiness checks are anonymous; Tutor, Student and Organiser data needs an appropriate access token and server-side permission. CORS limits browser origins; it is not authentication and does not prevent a command-line client from connecting.
+The API was introduced in **Sprint 1** and extended in **Sprints 2, 3 and 4**. [Backend explanation](#backend) · [Four-sprint roadmap](#roadmap).
 
-## Public checks you can run now
+## 1. First external test — no sign-in needed
 
-In Windows PowerShell use `curl.exe` so the command is unambiguous. These requests read status only:
+Open **Windows PowerShell**. Use `curl.exe` rather than PowerShell's `curl` alias so the example is reproducible:
 
 ```powershell
 curl.exe --max-time 90 -i https://tutor-mx-api.onrender.com/health
@@ -18,113 +23,105 @@ curl.exe --max-time 90 -i https://tutor-mx-api.onrender.com/ready
 curl.exe --max-time 90 -i https://tutor-mx-api.onrender.com/api/tutors
 ```
 
-| Request | Healthy/expected result | What it demonstrates |
+These commands deliberately perform **read-only HTTP GET requests**:
+
+| Endpoint | Expected result when healthy | What that result tells us |
 | --- | --- | --- |
-| `GET /health` | `200 {"status":"ok"}` | The API process can answer an external request |
-| `GET /ready` | `200 {"status":"ready","database":"connected"}` | Its configured database readiness check succeeds |
-| `GET /api/tutors` without token | `401` with `AUTHENTICATION_REQUIRED` | Protected records are withheld from anonymous callers |
+| `GET /health` | HTTP **200**, e.g. `{"status":"ok"}` | The independently deployed Express process is reachable from outside the app. |
+| `GET /ready` | HTTP **200** with database readiness information | The API's configured readiness/database check succeeded at that moment. |
+| `GET /api/tutors` **without** a token | HTTP **401** | The Organiser's protected Tutor list is not exposed to an anonymous caller. |
 
-A 200 readiness result does not count production records, prove every migration is applied or demonstrate every workflow. A first request may be much slower than a warm request. Record cold and warm measurements separately instead of reporting one as the other.
+A 200 response is a **point-in-time check**, not proof of permanent uptime, exact production data counts, all migrations or every protected workflow. Render may respond slowly to an initial cold request. The [testing chapter](#testing) separates dated measurements from conclusions about the code.
 
-The earlier 29 September check recorded both 200 results and the expected 401. It is retained as dated evidence, not a fresh October uptime claim. The frontend automated check encountered Cloudflare 403/1010; a normal-browser smoke test was still needed.
+## 2. Authentication — why some curl commands return 401
 
-## New approval route check — 3 October
+Tutor MX uses **Auth0** for account identity. After signing in to the application, React obtains an **access token for the API audience** and sends it in the `Authorization` header. Express verifies the token and checks the linked `Profile` role and ownership before returning protected data. An **ID token is not an API bearer token**; an Auth0 Management token or Neon password must never be substituted.
 
-The two new read routes, `/api/auth/organiser-application/me` and `/api/master-organiser/organiser-applications`, both returned **401 AUTHENTICATION_REQUIRED** to external requests without a token on 3 October 2026 at 09:53 SAST. This verifies external reachability and anonymous rejection for those routes. It does not prove an authenticated approval or that every current source change is deployed. [Download the dated response capture](downloads/approval-route-checks-2026-10-03.json).
+For a permitted **test account**, use the access token from an authorised application request in your own browser's developer tools. Never place a real token in this public site, screenshots, a Git commit or a shared recording. It expires and must be refreshed as appropriate.
 
-## Obtain the right access token
-
-Sign in to Tutor MX with your own approved test account. The Auth0 React SDK requests an **API access token** for the configured `VITE_AUTH0_AUDIENCE`. An ID token, application client ID, Neon connection string or Auth0 Management token is not a substitute for that bearer token. Use your own authorised browser's network inspector to inspect the token on an API request if you need to reproduce it locally; do not publish it in screenshots, commits or this site.
-
-The documentation website does not collect tokens or make authenticated requests on a visitor's behalf. Run the examples locally. Tokens expire; obtain a fresh one and sign in again after an approved role change when needed.
-
-## Read Tutor data from outside the frontend
-
-With an approved **Tutor** account, these requests return that Tutor's records. The client does not choose another Tutor's identity.
-
-```bash
-API='https://tutor-mx-api.onrender.com'
-read -rs -p 'Tutor API access token: ' TOKEN; echo
-curl --max-time 90 -H "Authorization: Bearer $TOKEN" "$API/api/me"
-curl --max-time 90 -H "Authorization: Bearer $TOKEN" "$API/api/tutor/dashboard"
-curl --max-time 90 -H "Authorization: Bearer $TOKEN" "$API/api/tutor/time-slots"
-unset TOKEN
-```
-
-For PowerShell, the [downloadable API checker](downloads/check-api.ps1) prompts privately for an optional token and prints status/timing rather than private response bodies. For manual inspection, use a temporary `$token` variable and remove it afterwards:
+**PowerShell example for an authorised tester** (the token is entered privately in the local terminal):
 
 ```powershell
 $api = 'https://tutor-mx-api.onrender.com'
-$secure = Read-Host 'Tutor API access token' -AsSecureString
-$ptr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure)
-try { $token = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($ptr) }
-finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ptr) }
-curl.exe --max-time 90 -H "Authorization: Bearer $token" "$api/api/me"
-curl.exe --max-time 90 -H "Authorization: Bearer $token" "$api/api/tutor/dashboard"
-curl.exe --max-time 90 -H "Authorization: Bearer $token" "$api/api/tutor/time-slots"
-Remove-Variable token, secure, ptr
+$token = Read-Host 'Paste YOUR approved test account API access token'
+curl.exe --max-time 90 -i -H "Authorization: Bearer $token" "$api/api/me"
+Remove-Variable token
 ```
 
-An **Organiser** can call `GET /api/tutors`, then use an authorised returned ID with `GET /api/tutors/:tutorId/marks` and `GET /api/tutors/:tutorId/time-slots`. Tutor dashboard, timesheet, allocation and absence data are separate contracts. There is no single anonymous “all Tutor data” dump. Use only the routes and scope needed for the demonstration; do not publish real names, emails or medical reasons.
+`/api/me` returns information for the **currently signed-in account**, not for an arbitrary user. Do not paste token values into an issue or hand in full private response bodies. A marker without a test account can still inspect the public health checks and the full route inventory on this page.
 
-## Organiser registration and Master review
+## 3. How to read a route — HTTP methods and status codes
 
-| Operation | Who may call it | Important contract |
+An API route consists of an **HTTP method**, a **path**, optional **input** and an **HTTP response**. Tutor MX does not directly map every database table to a public URL.
+
+| HTTP method | Meaning here | Concrete example from the final API |
 | --- | --- | --- |
-| `POST /api/auth/onboarding` | Auth0 identity | Standard role body selects `STUDENT` or `TUTOR`; `ORGANISER` is rejected |
-| `POST /api/auth/organiser-registration` | Auth0 identity | Identity/email come from Auth0; returns `{ data: { application } }`; pending applicant has no new Profile |
-| `POST /api/auth/organiser-application-status` | Public; sensitive-auth limiter | Body `{ "email": "lecturer@example.org" }`; returns only `PENDING`, `APPROVED`, `REJECTED` or `NOT_FOUND` inside `data.status` |
-| `GET /api/auth/organiser-application/me` | Auth0 identity | Own application, including before Profile exists; `data.application` can be null |
-| `GET /api/master-organiser/organiser-applications` | Organiser + Master capability | `data.applications` list |
-| `POST /api/master-organiser/organiser-applications/:id/approve` | Organiser + Master capability | Grants role and records decision/Profile; stale review is a conflict |
-| `POST /api/master-organiser/organiser-applications/:id/reject` | Organiser + Master capability | Optional `reviewReason`, up to 500 characters; no applicant Profile created |
+| **GET** | Read information without changing it | `GET /api/tutor/dashboard` |
+| **POST** | Create a record or request a named action | `POST /api/student/bookings` |
+| **PATCH** | Change part of an existing record | `PATCH /api/courses/:courseId` |
+| **DELETE** | Remove a record where deletion is permitted | `DELETE /api/courses/:courseId` |
+| **PUT** | Replace/update a value under a particular contract | Present in the full source inventory where declared |
 
-`GET /api/me` can include `data.capabilities.masterOrganiser: true`. Normal Organisers receive 403 on the Master queue. The public status route intentionally exposes application status for a supplied email; it does not grant access or return the full application. Limit screenshot evidence to designated demo applicants.
+The colon in `:courseId` means a **path parameter**: a real authorised course ID belongs there, not the literal text `:courseId`. Some actions intentionally use verbs such as `/approve`, `/submit` or `/cancel` because they represent guarded changes of workflow state.
 
-
-## Sprint 4 API additions now present
-
-The final source registers **120 HTTP operations**. Sprint 4 adds the shared Student/Tutor schedule aliases plus Scenario planning, mutual availability, bookings, swaps, Student sick notes, audit/restore and proposal routes. Representative additions include:
-
-| Area | Representative routes | Access |
-| --- | --- | --- |
-| Shared schedule | `GET/POST /api/me/time-slots`, import preview/commit | Student / Tutor |
-| Scenario planning | `/api/organiser/scenarios...` | Organiser |
-| Mutual availability | `GET /api/student/tutoring-options`, `POST /api/student/mutual-availability` | Student |
-| Bookings | `POST /api/student/bookings`, `GET /api/me/bookings`, cancel/detail | Student / Tutor as appropriate |
-| Tutor swaps | `/api/tutor/swaps`, `/api/swaps...` | Tutor / Organiser as appropriate |
-| Student sick notes | `POST /api/student/bookings/:id/sick-notes`, Organiser review routes | Student / Organiser |
-| Audit/restore | `/api/organiser/audit...`, allocation history/restore routes | Organiser |
-| Proposal intelligence | `/api/organiser/proposals/preview`, `/compare`, `/generate`, explanations/adjust | Organiser |
-
-The downloadable endpoint and OpenAPI inventories below are regenerated from the final supplied `src/app.ts` and include all 120 registered operations.
-
-## Response and error contract
-
-| Status | Meaning / client response |
+| Status | How the frontend or curl client should interpret it |
 | --- | --- |
-| 200 / 201 | Successful read/action or created record; inspect the route's `data` field |
-| 202 | Accepted non-enumerating password/reset email request; not proof that an email was delivered |
-| 204 | Successful operation with no JSON body |
-| 400 | Invalid body, malformed JSON, ID, date or query; correct the input |
-| 401 | Missing, expired or invalid API access token; authenticate again |
-| 403 | Role, Master privilege, ownership policy or role mismatch blocks the action |
-| 404 | Missing record/Profile, or intentionally non-revealing inaccessible resource |
-| 409 | Stale decision, duplicate, illegal state or idempotency conflict; reload server state |
-| 413 / 422 | Request too large / bounded result limit exceeded; narrow the request |
-| 429 | Rate limit exceeded; respect retry guidance |
-| 500 / 503 | Safe internal failure / unavailable dependency; offer a clear retry path |
+| **200 / 201 / 204** | Success (a completed read, created resource or successful action without a body). |
+| **400 / 422** | Invalid input or request outside supported bounds; correct the request. |
+| **401** | Missing/expired/invalid API access token; sign in again. |
+| **403** | Authenticated but not permitted by the user's role, Master privilege or ownership. |
+| **404** | Record not found, or hidden to avoid revealing an inaccessible resource. |
+| **409** | Duplicate, stale version, illegal transition or competing request; refresh from the server. |
+| **429** | Too many requests; use the retry guidance. |
+| **500 / 503** | Server or dependency failure; show a safe error and retry where appropriate. |
 
-Example error, not a real user's data:
+A representative **safe error envelope** is:
 
 ```json
 {"error":{"code":"AUTHENTICATION_REQUIRED","message":"A valid bearer token is required."}}
 ```
 
-GET reads resources; POST creates records or invokes explicit state transitions; PATCH changes partial values; PUT represents the declared mark-writing contract; DELETE removes/cancels only where the route defines it. Action paths such as `/submit` or `/approve` make workflow transitions explicit. `/api/me` and `/api/profile/current` intentionally expose the same profile contract for compatibility.
+This is a **format example**, not a captured private user response. [Security and roles](#security).
 
-## Downloads and contract boundaries
+## 4. Read-only examples for each Tutor MX role
 
-Use the [GET-only Postman collection](downloads/tutor-mx-readonly.postman_collection.json), [OpenAPI inventory](downloads/openapi-inventory.json) and [route source](downloads/api-routes.ts.txt). The OpenAPI download lists all operations/access/success codes but deliberately does not invent full body schemas. It is served by this documentation site; no `/swagger` or `/openapi.json` route is claimed on Render.
+The following requests illustrate how the **same handwritten API** supports different screens. First obtain a token using section 2 and sign in with a test account that has the stated role.
 
-The catalogue below now follows the supplied **final Sprint 4 source at `361954e`**. Historical README wording remains traceable in the README chapter, but the route inventory is generated from the final `src/app.ts` registrations.
+| Role | Example request | What the client learns |
+| --- | --- | --- |
+| **Student** | `GET /api/student/open-work` | Open volunteering opportunities allowed for that Student. |
+| **Student** | `GET /api/me/time-slots` | That Student's own timetable records. |
+| **Tutor** | `GET /api/tutor/dashboard` | Only that Tutor's work and hour summary. |
+| **Tutor** | `GET /api/tutor/time-slots` | That Tutor's own timetable entries (legacy-compatible route). |
+| **Organiser** | `GET /api/allocations/candidates` | Candidate suitability and reasons for allocation, subject to required query inputs. |
+| **Organiser** | `GET /api/organiser/command-centre` | School staffing and operational indicators. |
+| **Master Organiser** | `GET /api/master-organiser/organiser-applications` | Lecturer registration review queue; normal Organisers receive 403. |
+
+For a simple demonstration, change **only the final path** in the authorised PowerShell command above. Some routes require query parameters, a path ID or a defined request body; use the complete contract inventory before calling them. **Do not run mutation examples against production merely to demonstrate curl** — use approved test data and the normal application workflow.
+
+## 5. How the API changed in each sprint
+
+| Sprint | New layer of API functionality | Example contracts in the final source |
+| --- | --- | --- |
+| **Sprint 1 — Foundation** | Health, Auth0 onboarding, current Profile, courses/Tutors, Tutor dashboard/forms and server-side allocation eligibility. | `/health`, `/api/me`, `/api/tutor/dashboard`, `/api/allocations/candidates` |
+| **Sprint 2 — Basic** | Live allocation mutations, volunteer claims, timesheet submissions and Organiser decisions. | `POST /api/allocations`, `POST /api/student/volunteer-requests`, timesheet decision/submit routes |
+| **Sprint 3 — Intermediate** | Staffing, reporting, bulk work, import/term logic, timesheet dispute/export, secure search/notifications and retry protections. | `/api/allocations/bulk-preview`, `/api/reports/workload`, `/api/organiser/command-centre` |
+| **Sprint 4 — Advanced** | Shared schedule, mutual availability, bookings, Student sick notes, swaps, scenarios, audit and proposals. | `/api/me/time-slots`, `/api/student/bookings`, `/api/organiser/scenarios`, `/api/organiser/audit` |
+
+This table gives **representative routes, not the entire inventory**. The catalogue at the bottom lists the actual final 120 registrations with method, path, access level and source references. [Feature origins](#features) · [Work tracker](#work-tracker).
+
+## 6. Special workflows — how the API protects decisions
+
+**Organiser registration:** ordinary Student/Tutor onboarding uses `POST /api/auth/onboarding`; a lecturer instead requests access through `POST /api/auth/organiser-registration`. Their `OrganiserApplication` stays Pending until a Master Organiser's protected review action approves or rejects it. The additional `MASTER_ORGANIZER` claim is checked on the **backend**, not just by hiding a button. [See the entire lecturer approval journey](#student-scheduling).
+
+**Booking and sick notes:** `POST /api/student/mutual-availability` calculates safe shared free-time intervals without exposing private timetable names; `POST /api/student/bookings` rechecks before saving. Student sick-note and Organiser decision endpoints preserve status/history and enforce ownership. [Role guide](#student-scheduling).
+
+**Scenario publishing and proposals:** these are administrative planning operations. A generated proposal becomes a **draft Scenario**, not a live allocation. A separate guarded publish operation checks the current version, locks and eligibility before committing changes. [Architecture](#architecture) · [Backend rules](#backend).
+
+**External holiday integration:** the backend calls the approved South African holiday service; the frontend reads the safe result/fallback through `GET /api/public-holidays`. The app does not require direct browser access to the external provider. [Holiday integration](#integration).
+
+## 7. Verify the implementation, not just the examples
+
+The **120-operation catalogue immediately below** is generated from the supplied final `src/app.ts` route registrations. Filter it by method or access scope to inspect what is actually exposed. The evidence downloads include a [read-only Postman collection](downloads/tutor-mx-readonly.postman_collection.json), [OpenAPI-shaped inventory](downloads/openapi-inventory.json), [endpoint inventory](downloads/endpoint-inventory.json) and [captured route source](downloads/api-routes.ts.txt).
+
+These inventories help a marker review naming, access and HTTP design, but they **do not create a Swagger server on Render or promise complete hand-authored JSON request schemas**. The documentation site serves these files statically. For recorded performance and security evidence, see [Testing, accessibility & performance](#testing) and the [final assessment rubric](#milestone4).
