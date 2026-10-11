@@ -483,9 +483,9 @@ function Resources() {
             "Empty local token variable; no writes.",
           ],
           [
-            "openapi-inventory.json",
-            "OpenAPI operation inventory",
-            "All 120 final-source operations; intentionally not a complete inferred body schema.",
+            "openapi.json",
+            "OpenAPI 3 specification",
+            "All 120 operations, with request and response schemas for the main workflows.",
           ],
           [
             "endpoint-inventory.json",
@@ -790,6 +790,9 @@ export default function App() {
                             Request & response examples
                           </a>
                           <a href="#api/catalogue">Browse 120 operations</a>
+                          <a href={asset("api-reference.html")} target="_blank" rel="noreferrer">
+                            Interactive API reference ↗
+                          </a>
                         </>
                       ) : route.id === "database" ? (
                         <>

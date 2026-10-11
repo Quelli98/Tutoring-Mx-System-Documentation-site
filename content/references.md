@@ -81,7 +81,7 @@ This documentation website was written with AI assistance. The team takes respon
 | --- | --- | --- | --- |
 | 13 August 2026 | Codex | GPT-5 | Code and content for the initial documentation site, and the stakeholder, sprint, testing and architecture-decision evidence pages |
 | 14 September – 9 October 2026 | ChatGPT | GPT-5.6 Sol (as recorded in the prior documentation) | Drafting and editing the Sprint 2–4 chapters, roadmaps and rubric mapping, and code for the site redesign |
-| 11 October 2026 | Claude Code | Claude Opus 5.5 | Editing and drafting: removing internal working notes; updating the test, coverage, service-check, Lighthouse and production-data figures; drafting the bug-fix, library, Scrum, API-example and UI-design sections from the team's code, pull requests and evidence; and writing this declaration |
+| 11 October 2026 | Claude Code | Claude Opus 5.5 | Editing and drafting: removing internal working notes; updating the test, coverage, service-check, Lighthouse and production-data figures; drafting the bug-fix, library, Scrum, API-example and UI-design sections and the OpenAPI specification from the team's code, pull requests and evidence; and writing this declaration |
 | 11 October 2026, final merge and audit | ChatGPT Work / Codex | User-reported ChatGPT configuration: GPT-6 Astra (Max); exact model of this coding-agent session is not exposed | Rubric audit, evidence reconciliation, documentation UI, loading improvements, build and content validation |
 
 AI use in the Tutor MX application code is declared separately in the application repository's [AI_DECLARATION.md](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/src/branch/main/AI_DECLARATION.md).

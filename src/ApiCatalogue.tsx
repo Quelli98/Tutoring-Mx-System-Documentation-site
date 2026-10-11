@@ -21,8 +21,8 @@ export default function ApiCatalogue() {
       </div>
       <p>
         Access, success codes and input observations are generated from route
-        registrations. Field observations are not full required-body schemas.
-        Expand a route for handler and validator references.
+        registrations. Field observations are not full required-body schemas; the interactive API
+        reference adds those for the main workflows. Expand a route for handler and validator references.
       </p>
       <div className="filter-bar">
         <label>

@@ -13,6 +13,8 @@ The API defines the HTTP contracts through which the separately hosted frontend 
 
 The API was introduced in **Sprint 1** and extended in **Sprints 2, 3 and 4**. [Backend explanation](#backend) · [Four-sprint roadmap](#roadmap).
 
+**[Open the interactive API reference ↗](api-reference.html)**: every route with its parameters, request bodies and responses, generated from the [OpenAPI 3 specification](downloads/openapi.json). The main workflows include full schemas taken from the final source.
+
 ## 1. First external test — no sign-in needed
 
 Open **Windows PowerShell**. Use `curl.exe` rather than PowerShell's `curl` alias so the example is reproducible:
@@ -264,7 +266,7 @@ If the Nager.Date provider is unavailable, `source` is `"fallback"`, `retrievedA
 
 **Rate limits.** Every `/api` route allows 120 requests per minute from each client. The account routes `password-reset`, `onboarding`, `organiser-registration`, `organiser-application-status`, `resend-verification` and `delete-account` allow 10 requests per 15 minutes. Over the limit, the API returns **429** `RATE_LIMITED`, and responses carry the standard `RateLimit` and `RateLimit-Policy` headers so a client can see how many requests remain. `/health` and `/ready` are not rate limited.
 
-**Pagination.** List routes that can grow return pages: `GET /api/me/bookings`, `GET /api/swaps` and `GET /api/organiser/student-sick-notes` return 20 items per page, and `GET /api/organiser/audit` returns 50. Pass `?page=2` for the next page; the response includes `page` and `hasMore`. `GET /api/me/bookings` can instead take `startsAt` and `endsAt` for a calendar window of up to 28 days.
+**Pagination.** List routes that can grow return pages: `GET /api/me/bookings`, `GET /api/swaps` and `GET /api/organiser/student-sick-notes` return 20 items per page, and `GET /api/organiser/audit` returns 50. Pass `?page=2` for the next page; the response includes `page` and `hasMore`. `GET /api/me/bookings` can instead take `startsAt` and `endsAt` for a calendar window of up to 28 days. `GET /api/search` and `GET /api/notifications` take `page` (1–10,000) and `pageSize` (1–25, default 10).
 
 **Retry keys.** Some writes can be retried safely without creating duplicates. `POST /api/organiser/overflow-work` and `POST /api/tutor/time-slots/import/commit` accept an `Idempotency-Key` header of 8–128 letters, digits, dots, underscores, colons or hyphens: repeating the same request with the same key returns the original result, while reusing a key for different content returns **409** `IDEMPOTENCY_KEY_REUSED`. Booking, sick-note and swap requests use a `requestKey` field in the body in the same way.
 
