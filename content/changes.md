@@ -15,7 +15,7 @@
 
 ## What was retained
 
-The website keeps the full original project history, meetings, user feedback, dated coverage and platform evidence. The written architecture, external API guide, schema explorer, README organisation, rubric map and Git methodology remain part of the rebuild. No application business logic was changed by this documentation task.
+The website keeps the full original project history, meetings, the nine-response user feedback with source PDF, dated coverage and platform evidence. The written architecture, external API guide, schema explorer, README organisation, rubric map and Git methodology remain part of the rebuild. No application business logic was changed by this documentation task.
 
 `VERIFICATION.md` in the project records the checks actually completed for this documentation release. Historical deployment and coverage records retain their original dates.
 

@@ -22,72 +22,141 @@ function Status({ children, tone = "blue" }: { children: ReactNode; tone?: "blue
 
 export const legacyPages: Record<string, Page> = {
 "user-feedback": {
-    title: "Sprint 3 User Feedback",
+    title: "User Feedback & Improvements",
     label: "User feedback",
-    description: "Sprint 3 user-feedback evidence from five responses: role coverage, usability ratings, written comments, the feedback-to-improvement chain and the original Google Forms summary screenshots.",
+    description: "Nine Google Forms submissions from 26 September to 2 October 2026, interpreted question by question with original response charts, the response PDF and an evidence-based improvement tracker.",
     group: "Quality & Evidence",
-    updated: "28 September 2026",
+    updated: "11 October 2026",
     content: <>
-      <Callout title="Five user-test responses recorded" tone="success">The current Google Forms round contains five responses. The original response-summary screenshots are retained below as evidence. Feedback was reviewed individually: where a tester suggested a concrete improvement, the team recorded the action taken; where no improvement was suggested, no improvement was made.</Callout>
+      <Callout title="Nine survey submissions · 26 September–2 October 2026" tone="success">
+        This updated evidence supersedes the earlier five-response snapshot. The original Google Forms charts and a downloadable export of all nine response rows are preserved below. Nine submissions do not necessarily mean nine distinct people: the export contains matching-looking entries, so we report <strong>responses</strong>, not independently verified unique testers.
+      </Callout>
 
-      <section id="feedback-form"><h2>Feedback form</h2><p>The Sprint 3 feedback form asks testers which Tutor MX interface they used and then records ease of use, navigation, visual design, menu/button clarity, problems encountered, confidence using the system without assistance, an overall 1–5 rating, positive comments and suggested improvements.</p><p><a className="button-link" href="https://docs.google.com/forms/d/e/1FAIpQLSflTX2TOlhr3mCxU24kvfp_mMFjRLv8UaZkCO6bhqarL9mF2g/viewform" target="_blank" rel="noreferrer">Open the live Tutor MX feedback form ↗</a></p></section>
+      <section id="feedback-form">
+        <h2>Method and primary evidence</h2>
+        <p>Participants tested Tutor MX through the Student, Tutor or multiple-interface experiences and completed a ten-question Google Forms questionnaire. Seven closed questions assessed coverage, ease of use, information discovery, design, navigation, problems and overall rating; the form also requested confidence using the site independently and invited open comments. The submission dates span <strong>26 September to 2 October 2026</strong>. Results are self-reported and are not a substitute for observed task-completion testing.</p>
+        <p><a className="button-link" href="https://docs.google.com/forms/d/e/1FAIpQLSflTX2TOlhr3mCxU24kvfp_mMFjRLv8UaZkCO6bhqarL9mF2g/viewform" target="_blank" rel="noreferrer">Open the original feedback form ↗</a> <a className="button-link" href="documents/tutor-mx-user-feedback-nine-responses-2026-10-02.pdf" target="_blank" rel="noreferrer">View / download all 9 responses (PDF) ↗</a></p>
+        <p className="feedback-method-note">The PDF is the supplied Google Sheets export of individual responses, not a newly invented dataset. Questions 1–6 and 8–10 are illustrated using the updated supplied screenshots. A separate updated screenshot for Question 7 was not supplied, so its distribution is taken from the PDF and is not shown as an original chart.</p>
+        <details className="feedback-pdf-viewer"><summary>Preview the nine-response PDF in this page</summary><p>The original export is a wide spreadsheet condensed to one PDF page. Use the full-size link above to zoom into individual rows.</p><iframe src="documents/tutor-mx-user-feedback-nine-responses-2026-10-02.pdf#view=FitH" title="Original Tutor MX survey responses, nine submissions" loading="lazy" /></details>
+      </section>
 
-      <section id="feedback-snapshot"><h2>Current feedback snapshot · 5 responses</h2><div className="metric-grid">
-        <article><strong>100%</strong><span>Very easy to use</span><small>5 of 5 respondents selected “Very easy”.</small></article>
-        <article><strong>80%</strong><span>Very easy to find content</span><small>4 of 5 selected “Very easy”; 1 selected “Easy”.</small></article>
-        <article><strong>80%</strong><span>Excellent design</span><small>4 of 5 rated the look and design “Excellent”; 1 rated it “Good”.</small></article>
-      </div><div className="metric-grid" style={{marginTop:"10px"}}>
-        <article><strong>80%</strong><span>Navigation completely clear</span><small>4 of 5 selected “Yes, completely”; 1 selected “Mostly”.</small></article>
-        <article><strong>100%</strong><span>No problems</span><small>All 5 respondents reported no problems while using the website.</small></article>
-        <article><strong>100%</strong><span>Comfortable independently</span><small>All 5 said they would be comfortable using Tutor MX without someone explaining it.</small></article>
-      </div><div className="metric-grid" style={{marginTop:"10px"}}>
-        <article><strong>4.8 / 5</strong><span>Overall rating</span><small>Four respondents rated Tutor MX 5/5 and one rated it 4/5.</small></article>
-        <article><strong>40%</strong><span>More than one interface</span><small>2 of 5 tested more than one version; 2 tested Tutor and 1 tested Student.</small></article>
-        <article><strong>0%</strong><span>Organiser-only responses</span><small>No respondent selected Organiser as their only tested version in this round.</small></article>
-      </div><p style={{marginTop:"14px",fontSize:"13px",color:"var(--muted)"}}>This is a small Sprint 3 user-testing sample and is presented as project evidence, not as a statistically representative survey of all Tutor MX users.</p></section>
-
-      <section id="feedback-results"><h2>Google Form results register</h2><div className="table-wrap"><table><thead><tr><th>Round / date</th><th>Responses</th><th>Interfaces represented</th><th>Key results</th><th>Evidence</th></tr></thead><tbody>
-        <tr><td>Round 1 · updated 28 Sep 2026</td><td>5</td><td>Tutor 40% · Student 20% · More than one 40% · Organiser-only 0%</td><td>Ease 100% Very easy · Finding content 80% Very easy / 20% Easy · Design 80% Excellent / 20% Good · No problems 100% · Independent use 100% Yes · Overall mean 4.8/5</td><td><a href="https://docs.google.com/spreadsheets/d/11913IP63epVuWvKYWXq1jbnluh7zMOeRHdFDKxauVuI/edit?usp=sharing" target="_blank" rel="noreferrer">Google Sheets results ↗</a> · <Status tone="green">Screenshots retained below</Status></td></tr>
-      </tbody></table></div></section>
-
-      <section id="feedback-comments"><h2>Written feedback and improvement decisions</h2><p>The visible positive comments emphasise the look and feel, intuitive interface and ease of navigation. The improvement responses contain one concrete wording suggestion; the other visible responses state that everything was on point, there was nothing to add, or everything looked good. In accordance with the project evidence rule, no change is claimed where no improvement was requested.</p><div className="table-wrap"><table><thead><tr><th>Feedback</th><th>Decision</th><th>Improvement made</th><th>Status / evidence</th></tr></thead><tbody>
-        <tr><td>“Maybe don&apos;t use ‘Try again’ after the verification email is sent, it implies something went wrong when trying to create an account.”</td><td>Accepted. The wording could make a successful verification step sound like a failure.</td><td>Changed the post-verification action from <strong>Try again</strong> to <strong>Sign in</strong>.</td><td><Status tone="green">DONE</Status> · feedback screenshot Q10 and Sprint 3 application change.</td></tr>
-        <tr><td>“Everything was on point.”</td><td>No improvement requested.</td><td><strong>No improvement was made.</strong></td><td><Status>NO CHANGE REQUIRED</Status></td></tr>
-        <tr><td>“N/A”</td><td>No improvement requested.</td><td><strong>No improvement was made.</strong></td><td><Status>NO CHANGE REQUIRED</Status></td></tr>
-        <tr><td>“Everything looked good”</td><td>No improvement requested.</td><td><strong>No improvement was made.</strong></td><td><Status>NO CHANGE REQUIRED</Status></td></tr>
-      </tbody></table></div></section>
-
-      <section id="feedback-evidence"><h2>Original Google Forms evidence</h2><p>These are the supplied response-summary screenshots. Keeping the original charts alongside the written summary makes the documentation auditable and avoids replacing the source evidence with reconstructed charts.</p><div className="rubric-source-grid">
-        {[
-          ["user-feedback-q1-2026-09-28.png","Q1 · Version of the website tested"],
-          ["user-feedback-q2-2026-09-28.png","Q2 · Ease of use"],
-          ["user-feedback-q3-2026-09-28.png","Q3 · Ease of finding information"],
-          ["user-feedback-q4-2026-09-28.png","Q4 · Overall look and design"],
-          ["user-feedback-q5-2026-09-28.png","Q5 · Buttons, menus and navigation"],
-          ["user-feedback-q6-2026-09-28.png","Q6 · Problems experienced"],
-          ["user-feedback-q7-2026-09-28.png","Q7 · Independent-use confidence"],
-          ["user-feedback-q8-2026-09-28.png","Q8 · Overall Tutor MX rating"],
-          ["user-feedback-q9-2026-09-28.png","Q9 · What users liked most"],
-          ["user-feedback-q10-2026-09-28.png","Q10 · Improvements suggested"],
-        ].map(([file,label]) => <a key={file} href={`evidence/${file}`} target="_blank" rel="noreferrer"><img src={`evidence/${file}`} alt={label} /><span>{label} ↗</span></a>)}
-      </div></section>
-
-      <section id="feedback-integration"><h2>Feedback → Improvement tracker</h2><p>The feedback chain is recorded as <strong>response → evaluation → decision → change (when needed)</strong>. A positive response or a response containing no improvement request is not converted into an artificial change.</p><div className="table-wrap"><table><thead><tr><th>Finding</th><th>Evaluation</th><th>Action</th><th>Status</th></tr></thead><tbody>
-        <tr><td>Verification screen used “Try again” after a verification email had been sent.</td><td>Actionable clarity issue.</td><td>Replace “Try again” with “Sign in”.</td><td><Status tone="green">Implemented</Status></td></tr>
-        <tr><td>Remaining visible improvement responses did not request a change.</td><td>No actionable improvement identified.</td><td>No improvement made.</td><td><Status>Closed — no change</Status></td></tr>
-      </tbody></table></div>
-      <div className="improvement-card" style={{marginTop:"24px",padding:"22px 24px",border:"1px solid var(--line)",borderRadius:"10px",background:"linear-gradient(145deg,#f4f9ff,#f8fcfa)"}}>
-        <h3 style={{margin:"0 0 16px",color:"var(--navy)",fontSize:"18px"}}>Improvement 1 — Verification email wording</h3>
-        <div style={{display:"grid",gridTemplateColumns:"1fr auto 1fr",gap:"16px",alignItems:"center",marginBottom:"18px"}}>
-          <div style={{padding:"16px",border:"1px solid #e0c9c9",borderRadius:"8px",background:"#fff5f5"}}><small style={{display:"block",color:"#a4423a",fontSize:"10px",fontWeight:800,letterSpacing:".08em",textTransform:"uppercase",marginBottom:"6px"}}>Before</small><span style={{fontSize:"16px",fontWeight:700,color:"var(--navy)"}}>Try again</span></div>
-          <span style={{fontSize:"22px",color:"var(--blue)",fontWeight:800}}>→</span>
-          <div style={{padding:"16px",border:"1px solid #b8e1d2",borderRadius:"8px",background:"var(--green-soft)"}}><small style={{display:"block",color:"var(--green)",fontSize:"10px",fontWeight:800,letterSpacing:".08em",textTransform:"uppercase",marginBottom:"6px"}}>After</small><span style={{fontSize:"16px",fontWeight:700,color:"var(--navy)"}}>Sign in</span></div>
+      <section id="feedback-snapshot"><h2>Summary of the nine-response sample</h2>
+        <div className="metric-grid">
+          <article><strong>9</strong><span>Form submissions</span><small>26 September–2 October; uniqueness not established.</small></article>
+          <article><strong>88.9%</strong><span>Easy or very easy overall</span><small>8 of 9; 7 very easy and 1 easy.</small></article>
+          <article><strong>88.9%</strong><span>Easy or very easy to find information</span><small>8 of 9, but 1 reported very difficult.</small></article>
+          <article><strong>100%</strong><span>Positive design ratings</span><small>7 Excellent, 2 Good; no poor ratings.</small></article>
+          <article><strong>77.8%</strong><span>No problems reported</span><small>7 of 9; 1 small problem and 1 uncompleted task.</small></article>
+          <article><strong>4.67 / 5</strong><span>Mean overall product rating</span><small>7 rated 5, 1 rated 4 and 1 rated 3.</small></article>
         </div>
-        <p><strong>Reason:</strong> The tester correctly identified that “Try again” can imply a failed action. “Sign in” describes the intended next step after the verification email has been sent.</p>
-        <Status tone="green">IMPLEMENTED</Status>
-      </div></section>
+        <p className="feedback-method-note">These descriptive percentages use <strong>n = 9</strong> and round to one decimal place. The sample is small and not shown to be random or representative of all Tutor MX users.</p>
+      </section>
 
-      <section id="feedback-rubric-link"><h2>Rubric evidence</h2><div className="definition-grid"><article><strong>User Feedback — 10%</strong><p>Five real responses are documented with the original Google Forms charts, quantitative results, written comments and interface coverage. The evidence records both positive results and the one visible actionable improvement suggestion without inventing missing feedback.</p></article><article><strong>Improvement — 5%</strong><p>The actionable verification wording feedback was evaluated and implemented as “Try again” → “Sign in”. Responses that did not suggest an improvement are explicitly recorded as requiring no change, so the improvement table reflects what the users actually requested.</p></article></div></section>
+      <section id="feedback-results"><h2>What the survey actually shows</h2>
+        <div className="table-wrap"><table><thead><tr><th>Question</th><th>Distribution</th><th>Professional interpretation</th></tr></thead><tbody>
+          <tr><td>Q1 · Interface tested</td><td>3 Tutor; 3 Student; 3 multiple; 0 Organiser-only</td><td>Useful role diversity, with no standalone Organiser rating.</td></tr>
+          <tr><td>Q2 · Ease of use</td><td>7 very easy; 1 easy; 1 neutral</td><td>General usability is favourable, though not unanimously effortless.</td></tr>
+          <tr><td>Q3 · Finding information</td><td>6 very easy; 2 easy; 1 very difficult</td><td>The main discoverability issue appears in one response and is reinforced by a written search complaint.</td></tr>
+          <tr><td>Q4 · Appearance</td><td>7 excellent; 2 good</td><td>Uniformly favourable design opinions in this sample.</td></tr>
+          <tr><td>Q5 · Controls/navigation</td><td>7 yes completely; 2 mostly</td><td>Controls generally made sense; discoverability still needs scrutiny.</td></tr>
+          <tr><td>Q6 · Problems</td><td>7 none; 1 small; 1 unable to complete task</td><td>The incomplete task is a priority for reproduction, not a minor preference.</td></tr>
+          <tr><td>Q7 · Independent use</td><td>8 yes; 1 probably</td><td>Most expressed confidence without guidance; not a measured assisted/unassisted task study.</td></tr>
+          <tr><td>Q8 · Overall rating</td><td>7 five-star; 1 four-star; 1 three-star</td><td>Mean 4.67/5, with one comparatively lower score.</td></tr>
+          <tr><td>Q9 · Positive comments</td><td>6 written responses</td><td>Ease of navigation, clarity of purpose and intuitive interface recur.</td></tr>
+          <tr><td>Q10 · Improvement comments</td><td>9 form submissions; repeated/blank-like themes shown in source</td><td>Verification wording, search/discovery, Home icon and colour are explicit requests.</td></tr>
+        </tbody></table></div>
+      </section>
+
+      <section id="feedback-evidence"><h2>Original charts and question-by-question analysis</h2>
+        <p>Each chart below is from the updated Google Forms summary supplied for this documentation release. Open a chart to see it full-size. Captions explain both what the evidence supports and relevant limitations.</p>
+        <div className="feedback-charts-grid">
+        <figure key={"q1"} className="feedback-chart-card">
+          <a href={`evidence/user-feedback-q1-2026-10-11.png`} target="_blank" rel="noreferrer" aria-label="Open Q1 original chart">
+            <img src={`evidence/user-feedback-q1-2026-10-11.png`} alt={"Question 1: Interface coverage — nine-response Google Forms results"} loading="lazy" />
+          </a>
+          <figcaption><strong>Q1. Interface coverage</strong><span>Three submissions each tested Tutor, Student and more than one interface (33.3% apiece). None selected Organiser only. The sample therefore includes multiple interface perspectives but does not independently establish full Organiser workflow coverage.</span></figcaption>
+        </figure>
+        <figure key={"q2"} className="feedback-chart-card">
+          <a href={`evidence/user-feedback-q2-2026-10-11.png`} target="_blank" rel="noreferrer" aria-label="Open Q2 original chart">
+            <img src={`evidence/user-feedback-q2-2026-10-11.png`} alt={"Question 2: Overall ease of use — nine-response Google Forms results"} loading="lazy" />
+          </a>
+          <figcaption><strong>Q2. Overall ease of use</strong><span>Seven of nine rated the website “Very easy” (77.8%), one “Easy” (11.1%) and one neutral (11.1%). Eight of nine were positive; there is no difficult rating for general usability, but the neutral response merits attention.</span></figcaption>
+        </figure>
+        <figure key={"q3"} className="feedback-chart-card">
+          <a href={`evidence/user-feedback-q3-2026-10-11.png`} target="_blank" rel="noreferrer" aria-label="Open Q3 original chart">
+            <img src={`evidence/user-feedback-q3-2026-10-11.png`} alt={"Question 3: Finding information — nine-response Google Forms results"} loading="lazy" />
+          </a>
+          <figcaption><strong>Q3. Finding information</strong><span>Six of nine found information “Very easy” to locate (66.7%) and two “Easy” (22.2%). One respondent chose “Very difficult” (11.1%). This is the clearest navigation concern despite the otherwise strong usability ratings.</span></figcaption>
+        </figure>
+        <figure key={"q4"} className="feedback-chart-card">
+          <a href={`evidence/user-feedback-q4-2026-10-11.png`} target="_blank" rel="noreferrer" aria-label="Open Q4 original chart">
+            <img src={`evidence/user-feedback-q4-2026-10-11.png`} alt={"Question 4: Visual design — nine-response Google Forms results"} loading="lazy" />
+          </a>
+          <figcaption><strong>Q4. Visual design</strong><span>Seven respondents rated the appearance “Excellent” (77.8%) and two “Good” (22.2%). No negative design ratings were recorded. A request for more colour is a preference to evaluate, rather than evidence of widespread visual dissatisfaction.</span></figcaption>
+        </figure>
+        <figure key={"q5"} className="feedback-chart-card">
+          <a href={`evidence/user-feedback-q5-2026-10-11.png`} target="_blank" rel="noreferrer" aria-label="Open Q5 original chart">
+            <img src={`evidence/user-feedback-q5-2026-10-11.png`} alt={"Question 5: Buttons, menus and navigation — nine-response Google Forms results"} loading="lazy" />
+          </a>
+          <figcaption><strong>Q5. Buttons, menus and navigation</strong><span>Seven of nine said controls and navigation made complete sense (77.8%), and two chose “Mostly” (22.2%). Nobody selected the explicitly confusing or negative options, although the separate information-finding question identified one serious difficulty.</span></figcaption>
+        </figure>
+        <figure key={"q6"} className="feedback-chart-card">
+          <a href={`evidence/user-feedback-q6-2026-10-11.png`} target="_blank" rel="noreferrer" aria-label="Open Q6 original chart">
+            <img src={`evidence/user-feedback-q6-2026-10-11.png`} alt={"Question 6: Problems experienced — nine-response Google Forms results"} loading="lazy" />
+          </a>
+          <figcaption><strong>Q6. Problems experienced</strong><span>Seven respondents reported no problems (77.8%); one encountered a small problem (11.1%), and one could not complete the intended task (11.1%). The incomplete task must not be hidden by the favourable overall ratings. This chart was cropped from the supplied combined Q5/Q6 screenshot.</span></figcaption>
+        </figure>
+        <figure key={"q8"} className="feedback-chart-card">
+          <a href={`evidence/user-feedback-q8-2026-10-11.png`} target="_blank" rel="noreferrer" aria-label="Open Q8 original chart">
+            <img src={`evidence/user-feedback-q8-2026-10-11.png`} alt={"Question 8: Overall product rating — nine-response Google Forms results"} loading="lazy" />
+          </a>
+          <figcaption><strong>Q8. Overall product rating</strong><span>Seven participants gave Tutor MX 5/5 (77.8%), one gave 4/5 and one 3/5 (11.1% each). The mean rating is 4.67/5. This is positive feedback from a small sample, not a measured success rate for all workflows.</span></figcaption>
+        </figure>
+        <figure key={"q9"} className="feedback-chart-card">
+          <a href={`evidence/user-feedback-q9-2026-10-11.png`} target="_blank" rel="noreferrer" aria-label="Open Q9 original chart">
+            <img src={`evidence/user-feedback-q9-2026-10-11.png`} alt={"Question 9: What participants liked — nine-response Google Forms results"} loading="lazy" />
+          </a>
+          <figcaption><strong>Q9. What participants liked</strong><span>Six written responses were recorded. Comments repeatedly mention intuitive layout, ease of use and navigation, and a clearly explained purpose (tutor allocation, timesheets and overflow work). These are qualitative themes rather than votes from all nine respondents.</span></figcaption>
+        </figure>
+        <figure key={"q10"} className="feedback-chart-card">
+          <a href={`evidence/user-feedback-q10-2026-10-11.png`} target="_blank" rel="noreferrer" aria-label="Open Q10 original chart">
+            <img src={`evidence/user-feedback-q10-2026-10-11.png`} alt={"Question 10: Suggestions for improvement — nine-response Google Forms results"} loading="lazy" />
+          </a>
+          <figcaption><strong>Q10. Suggestions for improvement</strong><span>Responses identify three actionable themes: clarify the post-verification “Try again” wording, improve the findability/usefulness of search, and consider clearer navigation cues such as a Home icon. One participant requested more colour; other replies expressed satisfaction or made no request. Not all suggestions are confirmed as implemented.</span></figcaption>
+        </figure>
+        </div>
+        <p><a href="evidence/user-feedback-q5-q6-original-2026-10-11.png" target="_blank" rel="noreferrer">View the unmodified combined Q5/Q6 screenshot ↗</a>. The Q5 and Q6 images displayed separately above are legibility crops of this screenshot, not additional survey responses.</p>
+        <h3>Q7. Would users feel comfortable using the site independently?</h3>
+        <p>The supplied <a href="documents/tutor-mx-user-feedback-nine-responses-2026-10-02.pdf" target="_blank" rel="noreferrer">response PDF</a> records <strong>8 “Yes” and 1 “Probably”</strong> (88.9% definitely comfortable; 11.1% probably comfortable). No “No” response appears. The PDF is the direct evidence for this distribution because no updated Q7 chart image was provided.</p>
+      </section>
+
+      <section id="feedback-comments"><h2>Qualitative feedback and decisions</h2>
+        <p>Respondents highlighted an interface they found intuitive, a clear explanation of Tutor MX’s purpose and straightforward navigation. The important counterexample is one participant who struggled to find information, could not complete their task and suggested improvements to search and navigation cues. Positive aggregate scores do not invalidate that report.</p>
+        <div className="table-wrap"><table><thead><tr><th>Reported feedback</th><th>Evaluation</th><th>Action or recommendation</th><th>Evidence status</th></tr></thead><tbody>
+          <tr><td>Post-verification action labelled “Try again” could look like a signup failure.</td><td>Clear wording and recovery concern.</td><td>Earlier project documentation records changing the next action to “Sign in”. Check the deployed build to confirm the experience.</td><td><Status tone="green">Previously documented change</Status></td></tr>
+          <tr><td>“There is a search bar but I was unable to find what I was looking for” and request for a Home icon.</td><td>Potential high-impact findability failure; Q3 and Q6 corroborate difficulty for one respondent.</td><td>Reproduce with a defined Student search task; check indexing, empty results, role filtering, visible Home navigation and keyboard usability. Retest after any fix.</td><td><Status tone="amber">Follow-up needed; not verified fixed</Status></td></tr>
+          <tr><td>“Add more color”.</td><td>Subjective design preference despite 9 of 9 positive design ratings.</td><td>Consider restrained, accessible accent colour after contrast testing; do not treat as a confirmed usability defect.</td><td><Status>Design suggestion; not verified implemented</Status></td></tr>
+          <tr><td>Responses such as “Everything was on point”, “Everything looked good”, and “N/A”.</td><td>Positive or no actionable request.</td><td>No fix is inferred or claimed from these responses.</td><td><Status>No change requested</Status></td></tr>
+        </tbody></table></div>
+      </section>
+
+      <section id="feedback-integration"><h2>Feedback-to-improvement traceability</h2>
+        <p>For assessment purposes the evidence chain is <strong>survey response → observed issue → triage decision → verified change/retest</strong>. The earlier verification-wording edit is already documented; the newer search and navigation feedback is recorded as an outstanding follow-up, not presented as completed work. The survey does not establish that a participant was observed completing tasks on the final 11 October release.</p>
+        <ol>
+          <li><strong>Already recorded:</strong> verification prompt wording changed from “Try again” to “Sign in” in prior project records; the current PDF preserves the reason for this improvement.</li>
+          <li><strong>Priority to investigate:</strong> reproduce the reported search/discovery failure and failed task for the relevant Student flow, capture expected/actual results and create or link a Gitea issue.</li>
+          <li><strong>Optional polish:</strong> assess Home icon visibility and a restrained colour adjustment without weakening accessibility.</li>
+          <li><strong>Missing evidence:</strong> no post-fix usability retest or final-release stakeholder sign-off accompanies these nine responses; do not claim either.</li>
+        </ol>
+      </section>
+
+      <section id="feedback-rubric-link"><h2>Assessment evidence and limitations</h2>
+        <div className="definition-grid">
+          <article><strong>User feedback</strong><p>Nine original survey submissions, a dated raw-response PDF, question-level distributions, eight supplied screenshot panels (Q5/Q6 separately cropped) and explicit identification of the missing updated Q7 image.</p></article>
+          <article><strong>Product improvement</strong><p>The verification wording change is reported as an earlier documented improvement. The search and Home-navigation requests are genuine, actionable feedback but cannot be marked complete without a linked fix and retest.</p></article>
+        </div>
+        <p className="feedback-method-note">The Google Form asked which interface was tested, not for a Git commit or release SHA. This record cannot establish which exact application build each submission tested. Direct primary evidence: <a href="documents/tutor-mx-user-feedback-nine-responses-2026-10-02.pdf" target="_blank" rel="noreferrer">nine-row response PDF</a> and the images above.</p>
+      </section>
     </>,
   },
 "stakeholder-decisions": {

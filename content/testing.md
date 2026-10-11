@@ -127,7 +127,7 @@ For every code change the team also ran the relevant local frontend and backend 
 
 ### Final Codecov snapshot — 11 October 2026
 
-Captured at 13:32 on 11 October 2026 from Codecov for `main` commit `6b528a3`, the final frontend test fix merged that day (Codecov project `Quelli98/tutor-mx-deployment`).
+Screenshots supplied on 11 October 2026 from Codecov for `main` commit `6b528a3` (as shown in the Codecov interface) (Codecov project `Quelli98/tutor-mx-deployment`).
 
 | Coverage root | Tracked | Covered | Partial | Missed | Coverage |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -135,12 +135,16 @@ Captured at 13:32 on 11 October 2026 from Codecov for `main` commit `6b528a3`, t
 | backend `src` | 4,706 | 4,020 | 351 | 335 | **85.42%** |
 | Combined | 10,366 | 8,597 | 826 | 943 | **82.93%** |
 
-In the backend, `integrations` (94.62%), `http` (93.48%), `services` (88.81%) and `auth` (81.52%) are best covered, while the `app.ts` route wiring is lowest at 78.44%. In the frontend, `auth` (86.67%), `components` (82.30%), `api` (81.06%) and `features` (80.90%) are above 80%, while `routes` (74.07%) and `App.jsx` (69.33%) are the least tested.
+The **frontend** screenshot breaks the 5,660 tracked lines into `api` (81.06%; 445/549 covered), `auth` (86.67%; 78/90), `components` (82.30%; 753/915), `features` (80.90%; 3,168/3,916), `routes` (74.07%; 20/27) and `App.jsx` (69.33%; 113/163). The latter two have the lowest displayed percentages; the much larger `features` directory also accounts for **399 missed and 349 partial** lines and thus offers substantial opportunities for stronger scenario coverage.
+
+The **backend** screenshot breaks the 4,706 tracked lines into `auth` (81.52%; 150/184), `http` (93.48%; 43/46), `integrations` (94.62%; 88/93), `services` (88.81%; 2,579/2,904), `app.ts` (78.44%; 1,153/1,470) and `database.ts` (77.78%; 7/9). The relatively low `app.ts` percentage and its **214 missed and 103 partial** lines make it a meaningful coverage target; `database.ts` has very few tracked lines, so its percentage should not be interpreted as equally large risk by itself.
+
+These screenshots demonstrate **line execution**, not that partially covered paths, permissions or concurrent workflows have all been validated. They reflect the linked Codecov mirror (`Quelli98/tutor-mx-deployment`), not coverage of this documentation website.
 
 <div class="evidence-gallery">
-<figure><a href="evidence/codecov-overview-final-2026-10-11.jpg" target="_blank" rel="noreferrer"><img src="evidence/codecov-overview-final-2026-10-11.jpg" alt="Final Codecov overview"></a><figcaption><strong>Final Codecov overview</strong><span>frontend/src 80.87% and backend src 85.42% on main commit 6b528a3, 11 October 2026.</span></figcaption></figure>
-<figure><a href="evidence/codecov-frontend-final-2026-10-11.jpg" target="_blank" rel="noreferrer"><img src="evidence/codecov-frontend-final-2026-10-11.jpg" alt="Final frontend coverage by folder"></a><figcaption><strong>Final frontend coverage by folder</strong><span>api, auth, components and features above 80%; routes 74.07% and App.jsx 69.33%.</span></figcaption></figure>
-<figure><a href="evidence/codecov-backend-final-2026-10-11.jpg" target="_blank" rel="noreferrer"><img src="evidence/codecov-backend-final-2026-10-11.jpg" alt="Final backend coverage by folder"></a><figcaption><strong>Final backend coverage by folder</strong><span>integrations 94.62%, http 93.48%, services 88.81%, auth 81.52%; app.ts 78.44%.</span></figcaption></figure>
+<figure><a href="evidence/codecov-overview-latest-2026-10-11.png" target="_blank" rel="noreferrer"><img src="evidence/codecov-overview-latest-2026-10-11.png" alt="Final Codecov overview"></a><figcaption><strong>Final Codecov overview</strong><span>10,366 measured lines across frontend and backend: frontend/src 80.87%, backend src 85.42%, aggregate 82.93%. Commit 6b528a3 on main (11 October).</span></figcaption></figure>
+<figure><a href="evidence/codecov-frontend-latest-2026-10-11.png" target="_blank" rel="noreferrer"><img src="evidence/codecov-frontend-latest-2026-10-11.png" alt="Final frontend coverage by folder"></a><figcaption><strong>Frontend Codecov breakdown</strong><span>5,660 tracked lines, 4,577 covered, 475 partial and 608 missed. Strongest listed folder: auth 86.67%; lowest displayed file: App.jsx 69.33%. The large features folder has 399 missed lines.</span></figcaption></figure>
+<figure><a href="evidence/codecov-backend-latest-2026-10-11.png" target="_blank" rel="noreferrer"><img src="evidence/codecov-backend-latest-2026-10-11.png" alt="Final backend coverage by folder"></a><figcaption><strong>Backend Codecov breakdown</strong><span>4,706 tracked lines, 4,020 covered, 351 partial and 335 missed. Integrations 94.62%, HTTP 93.48%, services 88.81%; app.ts 78.44% has 214 missed lines.</span></figcaption></figure>
 </div>
 
 ### Codecov snapshot for release commit `361954e` — 7 October 2026
@@ -180,6 +184,6 @@ Local tests run before push. Gitea Actions runs on shared lecturer runners; queu
 | Real PostgreSQL concurrency | Migration/smoke evidence and domain conflict tests | Local PGlite tests and short public health probes do not reproduce sustained multi-connection Neon booking/publish races. |
 | Auth0 and external services | Role guards, failure paths and dated public checks | Mocked provider responses do not prove live token expiry, Management API outages or every recovery path. |
 | Accessibility | Landing-page Lighthouse reports, Organiser snapshot, focus and responsive captures | Manual keyboard and screen-reader acceptance is incomplete; dashboard contrast remains open. |
-| Product adoption | Five survey responses and production table counts | No final Advanced-workflow stakeholder sign-off, timed usability study or quantified non-test usage breakdown is included. |
+| Product adoption | Nine survey submissions (26 Sep–2 Oct) and production table counts | No final Advanced-workflow stakeholder sign-off, timed usability study or quantified non-test usage breakdown is included. |
 
 The screenshots and HTML reports are retained with their original dates. Documentation build checks validate this site's content and links; they are not new application test results.

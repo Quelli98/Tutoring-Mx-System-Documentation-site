@@ -23,7 +23,7 @@ Open the address printed by Vite. The existing `/Tutoring-Mx-System-Documentatio
 - All **20 Milestone 4 criteria**, with correct category weights totalling 100%, assessed questions, implementation answers, direct evidence links and scoped limitations.
 - The latest attached **15-page project brief**, a shared-requirements and feature-tier map, and evidence guidance for the separate reports and presentation.
 - All **120 registered API operations**, **30 Prisma models**, **14 enums**, **30 migration names** and **9 diagrams**.
-- All **32 Gitea defect records (#106–#137)**, fixing PR references, four sprint work registers, stakeholder records and the five-response user survey.
+- All **32 Gitea defect records (#106–#137)**, fixing PR references, four sprint work registers, stakeholder records and the nine-response user survey, screenshot analysis and original response PDF.
 - The member's complete seven-commit patch, including 11 October Codecov, Lighthouse and Neon evidence, API examples, library register and Scrum mapping.
 - Chapters, API/schema explorers and the search index loaded on demand. Historical source is preserved without loading every obsolete page into the current site.
 

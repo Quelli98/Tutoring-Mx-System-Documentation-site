@@ -18,7 +18,7 @@ Sprint 3 extended the Basic system into a more effective Tutor-management produc
 
 | Official criterion | Weight | Evidence / reference | What to inspect |
 | --- | ---: | --- | --- |
-| User Feedback | 10% | [Open user feedback evidence](#user-feedback) | Five survey responses (28 Sep 2026) with charts, comments and the resulting improvement. |
+| User Feedback | 10% | [Open user feedback evidence](#user-feedback) | Nine submissions (26 Sep–2 Oct 2026; the previously preserved five-response interim snapshot has been superseded) with charts, comments and the resulting improvement. |
 | Automated Testing | 10% | [Open automated testing evidence](#testing) | Backend/frontend automated tests plus Codecov, retaining dated sprint baselines. |
 | Feature Implementation | 20% | [Open feature implementation evidence](#features) | Search/notifications, ranking, bulk actions, timesheets, imports and Command Centre. |
 | API Implementation | 20% | [Open api implementation evidence](#api) | Expanded protected Express routes for Intermediate workflows. |
@@ -44,7 +44,7 @@ Sprint 3 was handed over one Member branch at a time to the Integration Lead, th
 
 ## Feedback boundary
 
-The [user-feedback record](#user-feedback) includes a prior five-response survey and at least one recorded change.
+The [user-feedback record](#user-feedback) includes nine survey submissions (including the earlier five-response snapshot) and a previously recorded wording change; further discoverability feedback requires follow-up.
 
 [Read Sprint 4: Advanced and full-project submission →](#sprint4-roadmap)
 

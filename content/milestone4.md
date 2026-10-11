@@ -32,7 +32,7 @@ The final application code is the audited merge [`a3939f8`](https://sdp.ms.wits.
 - The phone- and tablet-width device-emulation captures show a horizontal scrollbar at the bottom of the viewport.
 - The Sprint 4 features (scenarios, bookings, Tutor swaps, Student sick notes and the audit log) have automated-test evidence, but their tables were empty in the 11 October production snapshot; this does not establish final live acceptance.
 - API load testing is limited to short light-load samples (5 connections for 10 seconds); no sustained load test was run.
-- User testing consisted of one Google Forms round on 28 September 2026 with five responses ([User feedback](#user-feedback)).
+- User testing comprised nine submissions to one Google Form between 26 September and 2 October 2026; these are not verified as nine unique participants or as tests of the final deployed release ([User feedback](#user-feedback)).
 - No separate final stakeholder sign-off document is included.
 
 - The retained deployment screenshots identify the 7 October release; a later deployed commit is not established by the 10–11 October audit/coverage records.

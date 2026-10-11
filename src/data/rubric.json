@@ -336,7 +336,7 @@
     "status": "Role navigation and first-use paths documented",
     "link": "frontend",
     "answer": "Users enter a workspace for their role: Students volunteer or book tutoring, Tutors see assignments and timesheets, and Organisers reach the allocation board, approvals and reports. Shared navigation, guided setup, search/command palette and actionable notifications reduce the need to understand the underlying repository. Master approval is part of the Organiser workspace. The role-journey guide explains the task sequence for a first-time user.",
-    "evidence": "Role navigation table, walkthroughs, current application screenshots and the five-response user survey.",
+    "evidence": "Role navigation table, walkthroughs, current application screenshots and the nine-response survey (26 Sep–2 Oct).",
     "id": "app-structure",
     "question": "Can a first-time user understand the interface and navigate to a feature easily?",
     "evidenceLinks": [
@@ -349,7 +349,7 @@
         "label": "Role journeys"
       }
     ],
-    "limitation": "The recorded survey has five responses; no final timed first-use navigation study is included."
+    "limitation": "The recorded survey has nine submissions, one reported search/discovery difficulty and one uncompleted task; there is no timed first-use study or verified post-fix retest."
   },
   {
     "category": "Misc",

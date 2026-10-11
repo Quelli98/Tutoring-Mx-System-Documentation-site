@@ -44,7 +44,7 @@ The Sprint 1 and Sprint 4 projects are linked through the **all-projects** landi
 - [Full rubric-by-rubric final submission mapping](#milestone4)
 - [Historical plans, evidence and decisions](#references)
 
-**Open evidence boundary:** the site retains five earlier user-feedback responses and their original screenshots. A final post-release user-feedback round and its resulting decisions are the deliberately unfinished item in [User feedback](#user-feedback).
+**Open evidence boundary:** the site now includes nine Google Forms submissions received from 26 September to 2 October and their response PDF, superseding the earlier five-response snapshot. A post-release retest of the reported search/navigation issue and stakeholder sign-off remain unfinished items in [User feedback](#user-feedback).
 
 ## Navigate from any sprint to the relevant implementation
 
