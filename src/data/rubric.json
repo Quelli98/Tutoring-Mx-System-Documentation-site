@@ -3,23 +3,45 @@
     "category": "Database",
     "criterion": "Data",
     "weight": 3,
-    "status": "Final source + production-structure evidence",
+    "status": "Production counts (11 Oct)",
     "link": "database",
-    "answer": "Thirty application models are documented with their fields/relations. The final schema includes the complete Sprint 4 planning, booking, sick-note and audit models; the production real/test split is still not established.",
-    "evidence": "Final schema dictionary, read-only SQL, Neon production branch/table screenshots and migration list.",
-    "remaining": "Run exact current production row counts and classify demo/real/unclassified data using the team register.",
-    "provisional": false
+    "answer": "On 11 October 2026 the Neon production branch held 353 rows across 18 of the 30 tables, including 27 accounts (9 Students, 10 Tutors, 8 Organisers), 62 allocations, 35 timesheets and 43 work logs. Most of it was created by the team during development and testing, with a smaller number of accounts from people outside the team. The empty tables are mostly Sprint 4 features not yet used on the live system.",
+    "evidence": "Production row counts, accounts by role and migration screenshots (11 Oct), the read-only SQL script and the schema dictionary.",
+    "id": "database-data",
+    "question": "Is there data in production, and how much was created for testing?",
+    "evidenceLinks": [
+      {
+        "target": "database/production-data-11-october-2026",
+        "label": "Production counts"
+      },
+      {
+        "target": "database/table-dictionary",
+        "label": "All database models"
+      }
+    ],
+    "limitation": "The team describes most records as development/test data. The snapshots do not quantify an independently verified real-user/test-data split; 12 application tables were empty."
   },
   {
     "category": "Database",
     "criterion": "Deployment",
     "weight": 2,
-    "status": "Production branch evidence + migration-row gap",
+    "status": "Neon production branch, all migrations applied",
     "link": "deployment",
-    "answer": "Neon hosts PostgreSQL separately from Render. The API uses a server-only connection and the earlier readiness check reported a connected database.",
-    "evidence": "Neon production branch/table screenshots, deployment map and public /ready evidence.",
-    "remaining": "Capture the actual `_prisma_migrations` rows for final production and exact current table counts.",
-    "provisional": false
+    "answer": "Neon hosts PostgreSQL separately from Render. All 30 Prisma migrations are applied on the production branch (latest 7 October 2026), matching the 30 in the final source. The API connects with a server-only connection string, and the public /ready check reported database: connected on 11 October 2026.",
+    "evidence": "Migration and row-count screenshots (11 Oct), Neon production branch screenshots and public /ready evidence.",
+    "id": "database-deployment",
+    "question": "Is the database deployed and available?",
+    "evidenceLinks": [
+      {
+        "target": "database/migrations",
+        "label": "Migration record"
+      },
+      {
+        "target": "deployment",
+        "label": "Hosting evidence"
+      }
+    ],
+    "limitation": "A dated readiness response and migrations snapshot do not establish continuous uptime."
   },
   {
     "category": "Database",
@@ -29,19 +51,41 @@
     "link": "database",
     "answer": "Profiles, courses, allocations, Student scheduling, scenarios, swaps, audit and workflow records use keys, foreign keys, unique constraints, indexes and versioned migrations. Scalar fields and Prisma relations are shown separately.",
     "evidence": "Thirty model dictionaries, 14 enums, final ER map and 30 source migrations.",
-    "remaining": "Verify production migration state and query plans at realistic data volume.",
-    "provisional": false
+    "id": "database-structure",
+    "question": "Is the database well structured and consistent with relational database practices?",
+    "evidenceLinks": [
+      {
+        "target": "database/table-dictionary",
+        "label": "Schema dictionary"
+      },
+      {
+        "target": "database/2-entity-relationship-diagram-erd-how-the-records-connect",
+        "label": "ER diagram"
+      }
+    ],
+    "limitation": ""
   },
   {
     "category": "API",
     "criterion": "Availability",
     "weight": 3,
-    "status": "Final public probe evidence",
+    "status": "Public probe evidence",
     "link": "api",
     "answer": "The Render HTTPS API is independent of the frontend. Anonymous probes can read health/readiness; protected Tutor reads use an Auth0 API access token and role/ownership checks.",
-    "evidence": "Public /health and /ready links plus 7 October PowerShell response captures.",
-    "remaining": "Representative authenticated role reads remain useful; no private token is published here.",
-    "provisional": false
+    "evidence": "Public /health and /ready links, 7 October PowerShell response captures and service checks re-run on 11 October 2026.",
+    "id": "api-availability",
+    "question": "Is the API available to internal and external clients?",
+    "evidenceLinks": [
+      {
+        "target": "api/1-first-external-test-no-sign-in-needed",
+        "label": "External checks"
+      },
+      {
+        "target": "api/2-authentication-why-some-curl-commands-return-401",
+        "label": "Authentication"
+      }
+    ],
+    "limitation": "The public probes cover availability and anonymous rejection. Protected business operations still require an authorised role account."
   },
   {
     "category": "API",
@@ -49,10 +93,21 @@
     "weight": 5,
     "status": "Source verified",
     "link": "backend",
-    "answer": "Handwritten layered Express routes apply authentication, profile/role resolution, validation and domain rules before Prisma/pg persistence. Dependencies are wired in server.ts.",
+    "answer": "A layered HTTP API separates Express routes, identity/role middleware, request validation, domain services and PostgreSQL persistence. Resource URLs and HTTP status codes provide a consistent client boundary. Workflow decision actions are explicit where a simple resource update would hide a business transition; this is a pragmatic REST-style API, not a claim of full hypermedia-driven REST conformance.",
     "evidence": "Architecture explanation, component/composite diagrams and source bundle.",
-    "remaining": "Demonstrate one request end to end on the final release.",
-    "provisional": false
+    "id": "api-architecture",
+    "question": "Does the API follow an established architecture and its principles?",
+    "evidenceLinks": [
+      {
+        "target": "backend",
+        "label": "API layers"
+      },
+      {
+        "target": "architecture",
+        "label": "Architecture decisions"
+      }
+    ],
+    "limitation": ""
   },
   {
     "category": "API",
@@ -62,19 +117,41 @@
     "link": "deployment",
     "answer": "Render runs Node/Express separately from Cloudflare. Server-only secrets and database migration order are documented; the final Render screenshot shows main commit 361954e Live.",
     "evidence": "Final Render screenshot, release SHA, public /health + /ready measurements and deployment diagram.",
-    "remaining": "A separate Master Organiser end-to-end production smoke capture would strengthen the role evidence.",
-    "provisional": false
+    "id": "api-deployment",
+    "question": "Is the API deployed?",
+    "evidenceLinks": [
+      {
+        "target": "deployment",
+        "label": "Render deployment"
+      },
+      {
+        "target": "home/welcome-service",
+        "label": "Dated service checks"
+      }
+    ],
+    "limitation": "The retained Render deployment screenshot identifies 361954e (7 October); it does not prove that the 10\u201311 October commits were deployed."
   },
   {
     "category": "API",
     "criterion": "Performance",
     "weight": 5,
-    "status": "Final deployed measurement supplied",
+    "status": "Deployed latency + light-load measurements",
     "link": "testing",
-    "answer": "The Member 5 audit measures warm local operations; request/result limits and grouped queries are source-backed. No claim of measured production load or crash rate is made.",
+    "answer": "First-request and warm latency were measured on the deployed /health and /ready endpoints, with 5-connection, 10-second autocannon light-load samples. The Member 5 audit measured warm local timings for reports, search, ranking and import; request/result limits and grouped queries keep responses bounded.",
     "evidence": "First/warm public latency measurements plus 5-connection, 10-second /health and /ready autocannon samples.",
-    "remaining": "If the rubric expects capacity testing, add approved sustained staging load, explicit error-rate output and a longer monitoring window.",
-    "provisional": false
+    "id": "api-performance",
+    "question": "How does the API behave under significant load, including first-request time and failures?",
+    "evidenceLinks": [
+      {
+        "target": "testing/final-deployed-performance-evidence-7-october-2026",
+        "label": "Hosted timing and load"
+      },
+      {
+        "target": "testing/historical-measurements-not-new-claims",
+        "label": "Local benchmarks"
+      }
+    ],
+    "limitation": "Only health/readiness received a 5-connection, 10-second sample. Sustained load, crash frequency and authenticated business-operation throughput are not established."
   },
   {
     "category": "API",
@@ -82,65 +159,131 @@
     "weight": 10,
     "status": "Final source verified",
     "link": "api",
-    "answer": "The complete 120-operation catalogue documents verbs, paths, access, success codes and handler/validation references. Sprint 4 schedule, scenario, booking, swap, sick-note, audit/restore and proposal routes are included.",
+    "answer": "The 120 registered operations use GET for reads, POST for creation/commands, PATCH or PUT for updates, and DELETE for removal where the domain permits it. Role-specific paths make ownership and permissions explicit; decision, publish and restore commands are distinguished from ordinary CRUD. The catalogue documents methods, access and observed success codes, with worked request/response examples and bounded pagination/retry contracts.",
     "evidence": "Filterable final catalogue, safe error table, final OpenAPI inventory and worked reads.",
-    "remaining": "Capture representative authenticated success/failure responses for the final release without exposing tokens or private data.",
-    "provisional": false
+    "id": "api-design",
+    "question": "Are HTTP methods, resource organisation and endpoint responsibilities clear to an external user?",
+    "evidenceLinks": [
+      {
+        "target": "api/catalogue",
+        "label": "120-operation catalogue"
+      },
+      {
+        "target": "api/5-request-and-response-examples-for-the-main-workflows",
+        "label": "Worked contracts"
+      }
+    ],
+    "limitation": ""
   },
   {
     "category": "App",
     "criterion": "Accessibility",
     "weight": 5,
-    "status": "Responsive/focus evidence + audit gap",
+    "status": "Lighthouse audit + focus/responsive evidence",
     "link": "frontend",
-    "answer": "Sprint 4 includes labelled list/table alternatives, Compact mode, focus recovery and textual conflict/status handling in the changed screens. Final application accessibility evidence is still separate from source presence.",
-    "evidence": "Phone/tablet device-emulation screenshots and a visible focus outline on the Student availability screen.",
-    "remaining": "No dedicated Lighthouse score, screen-reader run or complete keyboard traversal transcript was supplied.",
-    "provisional": false
+    "answer": "A Lighthouse audit on 11 October 2026 scored 100 for accessibility on the landing page (mobile and desktop); on the signed-in Organiser dashboard 30 of 31 checks passed, the exception being colour contrast on muted text and role-coloured chips. Sprint 4 also includes labelled list/table alternatives, Compact mode, focus recovery and text-based conflict and status messages rather than colour-only cues.",
+    "evidence": "Lighthouse reports (11 Oct), phone/tablet device-emulation screenshots and a visible focus outline on the Student availability screen.",
+    "id": "app-accessibility",
+    "question": "Does the application support contrast, semantic HTML, ARIA and accessible interaction?",
+    "evidenceLinks": [
+      {
+        "target": "frontend/accessibility-aesthetics-usability-and-responsiveness",
+        "label": "Accessible interaction"
+      },
+      {
+        "target": "testing/lighthouse-audit-11-october-2026",
+        "label": "Lighthouse evidence"
+      }
+    ],
+    "limitation": "The Organiser snapshot has a contrast failure affecting eight elements. No complete keyboard or screen-reader acceptance record is included."
   },
   {
     "category": "App",
     "criterion": "Aesthetics",
     "weight": 5,
-    "status": "Current application screens supplied",
+    "status": "Current application screens",
     "link": "frontend",
-    "answer": "The documentation uses a consistent navy/blue layout, clear hierarchy, readable tables and responsive navigation. Application design consistency remains a separate final review.",
+    "answer": "The application has its own visual identity as CSAM Tutor Hub: bold geometric headings, role-coloured photo cards on the landing page, rounded buttons and illustrated workspace headers, applied consistently across the Student, Tutor and Organiser workspaces.",
     "evidence": "Final public landing page plus current Student, Tutor and Organiser role captures and responsive Student views.",
-    "remaining": "Keep screenshots privacy-safe and address the visible narrow-viewport horizontal overflow if the rubric requires zero overflow.",
-    "provisional": false
+    "id": "app-aesthetics",
+    "question": "Does the application have a coherent, deliberate and consistent visual design?",
+    "evidenceLinks": [
+      {
+        "target": "frontend",
+        "label": "Design system"
+      },
+      {
+        "target": "deployment/platform-evidence",
+        "label": "Application screenshots"
+      }
+    ],
+    "limitation": ""
   },
   {
     "category": "App",
     "criterion": "User Experience",
     "weight": 5,
-    "status": "Final source + browser-evidence gap",
+    "status": "Implemented in final source",
     "link": "frontend",
-    "answer": "Loading, empty/error, stale-version, conflict and refresh states are implemented across the final workflows. Session/stale-target hardening and focus recovery are present in Sprint 4 source.",
+    "answer": "Role-aware workspaces offer loading, empty, validation, network and conflict states. A stale version requires refresh/review instead of silent overwrite. The recorded Auth0 configuration caches identity state in localStorage with refresh tokens disabled: a returning user can reuse a still-valid session, while expiry or revocation can require sign-in. Saved records are reloaded from the API; this does not establish recovery of unsaved edits.",
     "evidence": "Frontend/API client explanation, Master registration guide and user feedback.",
-    "remaining": "Record clean-browser task timing and evidence for old tabs, logout, role changes, stale targets, conflict refresh and retry/focus recovery.",
-    "provisional": false
+    "id": "app-user-experience",
+    "question": "How are errors handled, and can a returning user continue after closing a tab?",
+    "evidenceLinks": [
+      {
+        "target": "frontend/returning-users-and-error-recovery",
+        "label": "Session and recovery"
+      },
+      {
+        "target": "user-feedback",
+        "label": "User feedback"
+      }
+    ],
+    "limitation": "Cached login state is implementation evidence, not a cross-browser reopen/expiry acceptance result. Unsaved form recovery is not demonstrated."
   },
   {
     "category": "App",
     "criterion": "Deployment",
     "weight": 2,
-    "status": "Final deployment + role screenshots supplied",
+    "status": "Final deployment + role screenshots",
     "link": "deployment",
     "answer": "Cloudflare Pages serves the built frontend. The final manual deployment produced 06d22424.tutor-mx.pages.dev; the stable public address remains tutor-mx.pages.dev. This documentation is independently hosted on GitHub Pages.",
     "evidence": "Stable public application, final Cloudflare deployment, Render release and Student/Tutor/Organiser screenshots.",
-    "remaining": "A separate Master Organiser in-app screenshot was not supplied; Auth0 role configuration is documented instead.",
-    "provisional": false
+    "id": "app-deployment",
+    "question": "Is the application deployed?",
+    "evidenceLinks": [
+      {
+        "target": "deployment",
+        "label": "Cloudflare deployment"
+      },
+      {
+        "target": "deployment/platform-evidence",
+        "label": "Live application captures"
+      }
+    ],
+    "limitation": "The retained Cloudflare deployment is the 7 October capture. Later availability checks do not identify the served application commit."
   },
   {
     "category": "App",
     "criterion": "Performance",
     "weight": 5,
-    "status": "Measurement gap",
+    "status": "Lighthouse measured",
     "link": "testing",
-    "answer": "The site distinguishes API timing from browser load/render/interaction. Shared calendar and bounded responses reduce duplication; no fabricated browser score is claimed.",
-    "evidence": "Performance measurement plan and shared frontend design.",
-    "remaining": "Record device/network, initial load and interaction timings on the final application.",
-    "provisional": false
+    "answer": "Lighthouse on 11 October 2026 scored the landing page 93 for performance on desktop (largest element at 1.6 s) and 79 on simulated mobile (4.6 s), with no blocking time or layout shift. The frontend is a static Vite build served by Cloudflare Pages; a shared calendar component and bounded API responses avoid duplicated rendering and oversized payloads.",
+    "evidence": "Lighthouse reports (11 Oct), shared frontend design and deployment configuration.",
+    "id": "app-performance",
+    "question": "How quickly does the application load and respond to input?",
+    "evidenceLinks": [
+      {
+        "target": "testing/lighthouse-audit-11-october-2026",
+        "label": "Lighthouse reports"
+      },
+      {
+        "target": "frontend",
+        "label": "Rendering approach"
+      }
+    ],
+    "limitation": "Landing-page audits do not measure signed-in workflow performance or interaction latency across all screens. Mobile LCP was 4.6 seconds in the supplied run."
   },
   {
     "category": "App",
@@ -150,30 +293,63 @@
     "link": "features",
     "answer": "Final main includes the completed Sprint 3 baseline plus Student timetable/mutual availability/bookings/sick notes, Scenarios/locks/presence, Tutor swaps, audit/restore and the explainable whole-school proposal/strategy lab.",
     "evidence": "Final feature register, Sprint 4 delivery page, final schema/routes, handbook acceptance map and Member 1\u20136 merge history.",
-    "remaining": "Record the full clean-browser final demo and any known unresolved defects before submission.",
-    "provisional": false
+    "id": "app-features",
+    "question": "Do implemented features meet the client and original project scope?",
+    "evidenceLinks": [
+      {
+        "target": "requirements",
+        "label": "Original scope mapping"
+      },
+      {
+        "target": "features",
+        "label": "Complete feature register"
+      }
+    ],
+    "limitation": "Source and tests document implementation; empty Advanced production tables and the absence of a final client sign-off limit evidence of live acceptance."
   },
   {
     "category": "App",
     "criterion": "Responsiveness",
     "weight": 5,
-    "status": "Common-width evidence supplied",
+    "status": "Phone and tablet captures",
     "link": "frontend",
-    "answer": "Sprint 4 source includes Compact mode, timetable list alternatives and responsive/accessibility polish for changed Student/Tutor/Organiser screens. The documentation itself is also responsive.",
+    "answer": "The Student menu collapses at narrow widths, content stacks on smaller screens, and dense scheduling/planning views provide Compact mode and table/list alternatives. Captures at 400\u00d7645 and 757\u00d7645 show these adaptations. The visible horizontal scrollbar is retained as a known product limitation.",
     "evidence": "400\u00d7645 phone-scale and 757\u00d7645 responsive captures plus a normal desktop landing-page capture.",
-    "remaining": "The emulator screenshots show a horizontal scrollbar; fix/retest if the acceptance rule requires no horizontal overflow. Confirm the current rubric weight.",
-    "provisional": true
+    "id": "app-responsiveness",
+    "question": "Does the interface adapt to desktop, tablet and mobile screens?",
+    "evidenceLinks": [
+      {
+        "target": "frontend/accessibility-aesthetics-usability-and-responsiveness",
+        "label": "Responsive layouts"
+      },
+      {
+        "target": "testing/responsive-and-accessibility-evidence",
+        "label": "Device captures"
+      }
+    ],
+    "limitation": "Supplied phone/tablet captures show horizontal overflow. Responsive implementation is not proof of every screen at every size."
   },
   {
     "category": "App",
     "criterion": "Structure",
     "weight": 5,
-    "status": "Provisional weight",
-    "link": "architecture",
-    "answer": "One repository separates React frontend, Express/backend services and Prisma schema/migrations. The documentation repository is independent. Large bootstrap modules are acknowledged as a maintainability trade-off.",
-    "evidence": "Folder/responsibility table and component/deployment diagrams.",
-    "remaining": "Confirm current rubric weight and review final feature module boundaries.",
-    "provisional": true
+    "status": "Role navigation and first-use paths documented",
+    "link": "frontend",
+    "answer": "Users enter a workspace for their role: Students volunteer or book tutoring, Tutors see assignments and timesheets, and Organisers reach the allocation board, approvals and reports. Shared navigation, guided setup, search/command palette and actionable notifications reduce the need to understand the underlying repository. Master approval is part of the Organiser workspace. The role-journey guide explains the task sequence for a first-time user.",
+    "evidence": "Role navigation table, walkthroughs, current application screenshots and the five-response user survey.",
+    "id": "app-structure",
+    "question": "Can a first-time user understand the interface and navigate to a feature easily?",
+    "evidenceLinks": [
+      {
+        "target": "frontend/navigation-and-first-time-use",
+        "label": "Navigation and first use"
+      },
+      {
+        "target": "student-scheduling",
+        "label": "Role journeys"
+      }
+    ],
+    "limitation": "The recorded survey has five responses; no final timed first-use navigation study is included."
   },
   {
     "category": "Misc",
@@ -181,10 +357,21 @@
     "weight": 5,
     "status": "Final SHA + reviewed branch CI evidence",
     "link": "git-methodology",
-    "answer": "Gitea main is official, with no develop branch. Sprint 4 was integrated sequentially through Member 1\u20136; the supplied final repository ends at main commit 361954e after reviewed Member 6 fixes.",
+    "answer": "Gitea main is official, with no develop branch. Sprint 4 was integrated sequentially through Member 1\u20136, ending at release commit 361954e after reviewed Member 6 fixes; the final audit was merged through pull request #104 as main commit a3939f8 on 10 October 2026.",
     "evidence": "Final Git history, handbook methodology and green Gitea ci.yml #115 for reviewed M6 commit 2f62311 before merge 361954e.",
-    "remaining": "A separate green Actions screenshot/log for merge commit 361954e itself was not supplied.",
-    "provisional": true
+    "id": "misc-git-methodology",
+    "question": "Was the chosen Git methodology followed throughout development?",
+    "evidenceLinks": [
+      {
+        "target": "git-methodology",
+        "label": "Branch and merge method"
+      },
+      {
+        "target": "sprint4",
+        "label": "Release history"
+      }
+    ],
+    "limitation": "Earlier non-sequential integration is retained in the history; later sprints used the stricter sequential method."
   },
   {
     "category": "Misc",
@@ -194,29 +381,66 @@
     "link": "integration",
     "answer": "Nager.Date is called through a validated backend holiday adapter with timeout, successful-result cache and a non-blocking fallback. The UI uses the same protected API path.",
     "evidence": "Integration chapter and adapter/test source.",
-    "remaining": "Capture one successful provider result and a controlled fallback in the final app.",
-    "provisional": false
+    "id": "misc-integration",
+    "question": "Is a relevant external API integrated into the application workflow?",
+    "evidenceLinks": [
+      {
+        "target": "integration",
+        "label": "Holiday adapter"
+      },
+      {
+        "target": "api",
+        "label": "HTTP contract"
+      }
+    ],
+    "limitation": ""
   },
   {
     "category": "Misc",
     "criterion": "Testing",
     "weight": 10,
-    "status": "Exact-release Codecov + CI/performance/browser evidence",
+    "status": "Captured Codecov + team-reported final audit",
     "link": "testing",
-    "answer": "Final source contains 52 backend and 77 frontend test files. Codecov for final commit 361954e reports frontend/src 80.96% and backend src 85.29% line coverage; earlier test/coverage results retain their original dates.",
-    "evidence": "Final Codecov for 361954e, green reviewed-M6 branch CI, responsive role screenshots, public API timing/load and Neon production screenshots.",
-    "remaining": "Exact-main Gitea run evidence, production migration-row verification and a standalone accessibility audit remain unsupplied.",
-    "provisional": false
+    "answer": "Final main (a3939f8) has 1,466 backend tests in 52 files and 847 frontend tests in 77 files, all passing in the final audit's full run, and all three CI jobs passed on that commit. Codecov on 11 October 2026 reports 85.42% backend and 80.87% frontend line coverage (82.93% combined); earlier results keep their original dates.",
+    "evidence": "Final Codecov snapshot (11 Oct), final audit validation summary and LCOV reports, green CI on a3939f8, responsive role screenshots and public API timing/load.",
+    "id": "misc-testing",
+    "question": "Are the tests meaningful, what is their coverage, and what remains untested?",
+    "evidenceLinks": [
+      {
+        "target": "testing/final-codecov-snapshot-11-october-2026",
+        "label": "Codecov evidence"
+      },
+      {
+        "target": "testing/what-the-evidence-does-not-test",
+        "label": "Untested areas"
+      }
+    ],
+    "limitation": "Coverage does not prove correctness. Hosted concurrency, external identity/provider behaviour and full assistive-technology use remain limited."
   },
   {
     "category": "Misc",
     "criterion": "Tools",
     "weight": 5,
-    "status": "Documented",
+    "status": "Project boards, 32 bug issues, CI and code-quality gates",
     "link": "process",
-    "answer": "Gitea issues/branches/reviews, shared Actions, Codecov, source checks, Prisma migrations, Auth0, Render and Neon have defined purposes. Tracker and bug evidence are preserved.",
-    "evidence": "Process, Git, deployment and historical work/bug tracker pages.",
-    "remaining": "Attach current issue status, defects/retests and tool-enforced release gates.",
-    "provisional": false
+    "answer": "Gitea project boards track feature cards for all four sprints. Bugs are recorded as 32 Gitea issues with the bug label (written up retrospectively on 11 October 2026) and the pull requests that fixed them. ESLint, TypeScript checks, both test suites and Codecov run in Gitea Actions, and a failing check fails the CI job.",
+    "evidence": "Work tracker and bug tracker pages, Gitea issues #106\u2013#137, pull requests, Gitea Actions runs and Codecov.",
+    "id": "misc-tools",
+    "question": "Were project tracking, bug tracking and code-quality tools used and enforced?",
+    "evidenceLinks": [
+      {
+        "target": "work-tracker",
+        "label": "Four sprint boards"
+      },
+      {
+        "target": "bug-tracker",
+        "label": "32 defect records"
+      },
+      {
+        "target": "process",
+        "label": "Quality gates"
+      }
+    ],
+    "limitation": "The 32 issue records were entered retrospectively. Three records explicitly lack a confirmed original failure."
   }
 ]

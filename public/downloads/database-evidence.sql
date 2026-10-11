@@ -1,53 +1,18 @@
--- Run on the intended authorised Neon branch. Read-only; no personal row values returned.
-BEGIN READ ONLY;
+-- Tutor MX production evidence queries (read-only).
+-- Run each statement in the Neon SQL Editor on the tutor-mx-system "production" branch.
+-- Results contain only table names, roles and counts; no personal row values are returned.
 
-SELECT 'Profile' AS table_name, count(*) AS row_count FROM public."Profile"
-UNION ALL
-SELECT 'OrganiserApplication' AS table_name, count(*) AS row_count FROM public."OrganiserApplication"
-UNION ALL
-SELECT 'Notification' AS table_name, count(*) AS row_count FROM public."Notification"
-UNION ALL
-SELECT 'Course' AS table_name, count(*) AS row_count FROM public."Course"
-UNION ALL
-SELECT 'TutorMark' AS table_name, count(*) AS row_count FROM public."TutorMark"
-UNION ALL
-SELECT 'AcademicTerm' AS table_name, count(*) AS row_count FROM public."AcademicTerm"
-UNION ALL
-SELECT 'TimeSlot' AS table_name, count(*) AS row_count FROM public."TimeSlot"
-UNION ALL
-SELECT 'OccurrenceException' AS table_name, count(*) AS row_count FROM public."OccurrenceException"
-UNION ALL
-SELECT 'TutorHourLimit' AS table_name, count(*) AS row_count FROM public."TutorHourLimit"
-UNION ALL
-SELECT 'Allocation' AS table_name, count(*) AS row_count FROM public."Allocation"
-UNION ALL
-SELECT 'Timesheet' AS table_name, count(*) AS row_count FROM public."Timesheet"
-UNION ALL
-SELECT 'TimesheetRevision' AS table_name, count(*) AS row_count FROM public."TimesheetRevision"
-UNION ALL
-SELECT 'TimesheetDeclaration' AS table_name, count(*) AS row_count FROM public."TimesheetDeclaration"
-UNION ALL
-SELECT 'TimesheetDispute' AS table_name, count(*) AS row_count FROM public."TimesheetDispute"
-UNION ALL
-SELECT 'WorkLog' AS table_name, count(*) AS row_count FROM public."WorkLog"
-UNION ALL
-SELECT 'Excuse' AS table_name, count(*) AS row_count FROM public."Excuse"
-UNION ALL
-SELECT 'OverflowWork' AS table_name, count(*) AS row_count FROM public."OverflowWork"
-UNION ALL
-SELECT 'VolunteerClaim' AS table_name, count(*) AS row_count FROM public."VolunteerClaim"
-UNION ALL
-SELECT 'StaffingRequirement' AS table_name, count(*) AS row_count FROM public."StaffingRequirement"
-UNION ALL
-SELECT 'ApiWriteReceipt' AS table_name, count(*) AS row_count FROM public."ApiWriteReceipt";
+-- 1. Row count for every table in the public schema, counted automatically.
+SELECT table_name,
+  (xpath('/row/c/text()', query_to_xml(
+     format('SELECT count(*) AS c FROM public.%I', table_name), false, true, '')))[1]::text::int AS row_count
+FROM information_schema.tables
+WHERE table_schema = 'public' AND table_type = 'BASE TABLE'
+ORDER BY table_name;
 
-SELECT role, count(*) AS profiles FROM public."Profile" GROUP BY role ORDER BY role;
--- These counts alone do NOT classify real versus test accounts. Use the team's known demo register.
-SELECT table_name, column_name, data_type, is_nullable, column_default
-FROM information_schema.columns WHERE table_schema = 'public' ORDER BY table_name, ordinal_position;
-SELECT conrelid::regclass AS table_name, conname, pg_get_constraintdef(oid) AS constraint
-FROM pg_constraint WHERE connamespace = 'public'::regnamespace ORDER BY 1, 2;
-SELECT tablename, indexname, indexdef FROM pg_indexes WHERE schemaname = 'public' ORDER BY 1, 2;
-SELECT migration_name, started_at, finished_at, rolled_back_at, applied_steps_count
-FROM public."_prisma_migrations" ORDER BY migration_name;
-ROLLBACK;
+-- 2. Accounts by role. Counts alone do not separate real users from test accounts.
+SELECT role, count(*) FROM "Profile" GROUP BY role;
+
+-- 3. Applied Prisma migrations and the most recent one.
+SELECT count(*) AS migrations_applied, max(finished_at) AS latest
+FROM "_prisma_migrations" WHERE finished_at IS NOT NULL AND rolled_back_at IS NULL;

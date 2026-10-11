@@ -13,7 +13,7 @@ Tutor MX uses a **handwritten Node.js/Express HTTP API**, separate from its Reac
 | **3 — Intermediate workflows** | Staffing requirements, rankings, bulk assignments, reporting and Command Centre; import/recurrence/terms, timesheet revision/dispute/export, notifications/search and safer retry/concurrency paths. Master approval arrived in late stabilisation. | Operations, staffing and finance information across more complex workflows. | [Sprint 3 roadmap](#sprint3) |
 | **4 — Advanced workflows** | Shared Student/Tutor schedule ownership, mutual availability, booking and Student sick notes, Tutor swaps, scenario/version/lock checks, audit/restore and deterministic proposal services. | Both-party bookings and safely previewed/reviewed advanced staffing decisions, without replacing original allocation rules. | [Sprint 4 roadmap](#sprint4-roadmap) |
 
-The source inventory of the supplied final application contains **120 registered HTTP operations** and **30 Prisma application models**. Those are whole-project totals, **not** measurements of Sprint 1. [Browse the route inventory](#api) · [View the full schema](#database).
+The final application source contains **120 registered HTTP operations** and **30 Prisma application models**. Those are whole-project totals, **not** measurements of Sprint 1. [Browse the route inventory](#api) · [View the full schema](#database).
 
 ## One request through the system — a concrete example
 

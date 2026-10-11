@@ -2,7 +2,7 @@
 
 Tutor MX helps the Wits School of Computer Science and Applied Mathematics allocate suitable Tutors to courses while enforcing **marks, timetable compatibility and weekly work capacity**. It joins the Organiser's allocation board, the Tutor's working calendar and timesheets, and the Student's volunteering and tutoring-booking journeys through one separately hosted API and relational database.
 
-This is a **complete feature register**, not a Sprint 4 task list. **Introduced in** identifies the sprint in which the handbook first places the capability. Later improvements are shown explicitly; some features evolved in more than one sprint. “In final source” means the capability is represented in the supplied 7 October application code; it is **not** a claim of independent production acceptance testing.
+This is a **complete feature register**, not a Sprint 4 task list. **Introduced in** identifies the sprint in which the handbook first places the capability. Later improvements are shown explicitly; some features evolved in more than one sprint. “In final source” means the capability is present in the final application code; it is **not** a claim of independent production acceptance testing.
 
 **Go to:** [Sprint 1 roadmap](#sprint1) · [Sprint 2 roadmap](#sprint2) · [Sprint 3 roadmap](#sprint3) · [Sprint 4 roadmap](#sprint4-roadmap) · [All four sprint work boards](#work-tracker).
 
@@ -71,6 +71,6 @@ This is a **complete feature register**, not a Sprint 4 task list. **Introduced 
 
 ## Implementation scope and verification
 
-The supplied final application archive includes **120 registered HTTP operations, 30 Prisma application models and 30 migration directories**. This register groups user-facing functionality rather than assuming that every UI component is a separate feature. A label such as “Sprint 1” marks the original *foundation*; it does **not** imply that its final Sprint 4 behaviour existed in August.
+The final application includes **120 registered HTTP operations, 30 Prisma application models and 30 migration directories**. This register groups user-facing functionality rather than assuming that every UI component is a separate feature. A label such as “Sprint 1” marks the original *foundation*; it does **not** imply that its final Sprint 4 behaviour existed in August.
 
-To inspect a feature, follow its sprint's [roadmap](#roadmap) and [work-board evidence](#work-tracker), then its canonical technical chapter: [Architecture](#architecture), [Frontend](#frontend), [Backend](#backend), [Scheduling](#student-scheduling), [API](#api) and [Database](#database). Check the dated [testing evidence](#testing) before asserting that a particular production demonstration or release test passed. Final post-release [user feedback](#user-feedback) remains the unfinished content section.
+To inspect a feature, follow its sprint's [roadmap](#roadmap) and [work-board evidence](#work-tracker), then its canonical technical chapter: [Architecture](#architecture), [Frontend](#frontend), [Backend](#backend), [Scheduling](#student-scheduling), [API](#api) and [Database](#database). Check the dated [testing evidence](#testing) before asserting that a particular production demonstration or release test passed. The recorded [user feedback](#user-feedback) contains five genuine survey responses; a separate final Advanced-workflow acceptance round is not included.

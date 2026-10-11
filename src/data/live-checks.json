@@ -2,37 +2,37 @@
   {
     "url": "https://tutor-mx-api.onrender.com/health",
     "status": 200,
-    "date": "29 Sep 2026",
-    "meaning": "API answered; historical check."
+    "date": "11 Oct 2026 · 13:14 SAST",
+    "meaning": "The API process is up and answering."
   },
   {
     "url": "https://tutor-mx-api.onrender.com/ready",
     "status": 200,
-    "date": "29 Sep 2026",
-    "meaning": "Configured database connected; historical check."
+    "date": "11 Oct 2026 · 13:14 SAST",
+    "meaning": "The API reports its database connection as ready (database: connected)."
   },
   {
     "url": "https://tutor-mx-api.onrender.com/api/tutors",
     "status": 401,
-    "date": "29 Sep 2026",
-    "meaning": "Expected anonymous rejection; no private rows returned."
+    "date": "11 Oct 2026 · 13:14 SAST",
+    "meaning": "The protected Organiser route refuses an anonymous request; no data is returned."
   },
   {
     "url": "https://tutor-mx.pages.dev",
-    "status": 403,
-    "date": "29 Sep 2026",
-    "meaning": "Cloudflare 1010 blocked the automated check; normal-browser verification needed."
+    "status": 200,
+    "date": "11 Oct 2026 · 13:14 SAST",
+    "meaning": "The frontend serves the React application."
   },
   {
     "url": "https://tutor-mx-api.onrender.com/api/auth/organiser-application/me",
     "status": 401,
-    "date": "3 Oct 2026 \u00b7 09:53 SAST",
-    "meaning": "New read route reachable; expected anonymous rejection. Authenticated results not tested."
+    "date": "11 Oct 2026 · 13:14 SAST",
+    "meaning": "The lecturer-application route is live and refuses anonymous requests."
   },
   {
     "url": "https://tutor-mx-api.onrender.com/api/master-organiser/organiser-applications",
     "status": 401,
-    "date": "3 Oct 2026 \u00b7 09:53 SAST",
-    "meaning": "New read route reachable; expected anonymous rejection. Authenticated results not tested."
+    "date": "11 Oct 2026 · 13:14 SAST",
+    "meaning": "The Master Organiser review route is live and refuses anonymous requests."
   }
 ]

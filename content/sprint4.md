@@ -1,6 +1,6 @@
 ## Final status — Sprint 4 is complete on main
 
-Sprint 4 is no longer a future plan. The supplied final repository shows the complete Member 1 → Member 6 sequence merged into `main`, ending at release commit **`361954e`** (`361954ec510c624c5f2a0f3d0940c2f7cb769d2e`) on 7 October 2026. The implementation follows the 30 September handbook's sequential handoff rule: each Member builds on the already-integrated work before them, and the advanced planning layer is added last.
+Sprint 4 is no longer a future plan. The final repository shows the complete Member 1 → Member 6 sequence merged into `main`, ending at release commit **`361954e`** (`361954ec510c624c5f2a0f3d0940c2f7cb769d2e`) on 7 October 2026. The implementation follows the 30 September handbook's sequential handoff rule: each Member builds on the already-integrated work before them, and the advanced planning layer is added last.
 
 The 30 September handbook remains the design/acceptance baseline. Pages 34–41 define the Member order and final release behaviour, while the final code and release evidence below show what was actually delivered.
 
@@ -48,9 +48,9 @@ The final Organiser planning path is:
 
 **Generate Proposal → Why these Tutors? → Save as Scenario → Compare with Live → Publish**
 
-## Final release evidence supplied on 7 October
+## Release evidence — 7 October 2026
 
-The final source of truth in the supplied repository is `main` at **`361954e`**. The Render dashboard screenshot shows the `tutor-mx-api` web service **Live** on that commit. The Codecov screenshots show the same latest commit and these source-root coverage values:
+The 7 October release commit on `main` is **`361954e`**. The Render dashboard screenshot shows the `tutor-mx-api` web service **Live** on that commit. The Codecov screenshots show the same latest commit and these source-root coverage values:
 
 | Coverage root | Tracked lines | Covered | Partial | Missed | Coverage |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -66,9 +66,22 @@ The final source of truth in the supplied repository is `main` at **`361954e`**.
 
 ![Final backend coverage detail](evidence/sprint4-codecov-backend-final-2026-10-07.png)
 
+### Final audit merge — 10 October 2026
+
+On 10 October the final audit was merged into `main` through [pull request #104](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/104) as commit [`a3939f8`](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/commit/a3939f85d81c6911affa6125b423152719e5b801). It made proposal generation atomic, kept manual proposal changes and their audit reasons together, stopped stale strategy comparisons from being saved, kept rejection reasons for unfilled requirements, fixed proposal navigation and corrected excused-history totals, with new regression tests for each. It changed no database schema or API routes.
+
+| Codebase | Tests passing | Codecov line coverage (11 Oct) | Vitest line coverage | Vitest branches | Vitest functions |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Backend | 1,466 (52 files) | **85.42%** | 92.69% | 86.59% | 96.15% |
+| Frontend | 847 (77 files) | **80.87%** | 87.60% | 79.89% | 83.95% |
+
+Codecov figures were measured on 11 October 2026 on `main` commit `6b528a3`, the frontend test fix merged after this audit ([snapshot](#testing)). Vitest counts partially covered lines as covered, so its line figures are higher than Codecov's.
+
+All three Gitea Actions jobs passed on `a3939f8`: backend quality and coverage, frontend quality and coverage, and a clean PostgreSQL migration with API smoke test. Source: [final audit](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/src/branch/main/docs/final-audit.md).
+
 ### Gitea Actions handover evidence
 
-The supplied Actions screenshot shows **ci.yml #115** green for reviewed Member 6 branch commit **`2f62311`** (`fix: complete reviewed Sprint 4 Member 6`). The final merge commit `361954e` has `2f62311` as a parent, so this is direct evidence that the reviewed branch passed remote CI before integration. The same screenshot also preserves earlier red Member 6 merge attempts, which were fixed rather than hidden. A separate green Actions screenshot for the merge commit `361954e` itself was not supplied, so the site does not claim one.
+The Actions screenshot shows **ci.yml #115** green for reviewed Member 6 branch commit **`2f62311`** (`fix: complete reviewed Sprint 4 Member 6`). The final merge commit `361954e` has `2f62311` as a parent, so this is direct evidence that the reviewed branch passed remote CI before integration. The same screenshot also preserves earlier red Member 6 merge attempts, which were then fixed. The final audit merge `a3939f8` also passed all three CI jobs on 10 October 2026 (see above).
 
 <figure class="doc-evidence"><a href="evidence/sprint4-gitea-actions-reviewed-member6-2026-10-07.png" target="_blank" rel="noreferrer"><img src="evidence/sprint4-gitea-actions-reviewed-member6-2026-10-07.png" alt="Gitea Actions list with green reviewed Member 6 CI run and earlier failed Member 6 attempts"></a><figcaption><strong>Reviewed Member 6 CI before final merge.</strong> The green run is commit 2f62311; final main 361954e merges that reviewed commit.</figcaption></figure>
 
@@ -76,6 +89,6 @@ The stable production endpoints remain **https://tutor-mx.pages.dev** for the fr
 
 ## Final Sprint 4 source footprint
 
-The final supplied source now contains **120 registered HTTP operations, 30 Prisma application models, 14 enums, 30 migration directories, 52 backend test files and 77 frontend test files**. The technical reference pages and downloadable route/schema inventories are updated to this final source.
+The final source contains **120 registered HTTP operations, 30 Prisma application models, 14 enums, 30 migration directories, 52 backend test files and 77 frontend test files**. The technical reference pages and downloadable route/schema inventories are updated to this final source.
 
 See [Feature register](#features), [Student scheduling](#student-scheduling), [API](#api), [Database](#database), [Testing](#testing) and [Deployment](#deployment) for the final Sprint 4 state.

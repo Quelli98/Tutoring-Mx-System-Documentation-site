@@ -22,9 +22,9 @@ The website keeps the full original project history, meetings, user feedback, da
 
 ## Final Sprint 4 completion update — 7 October 2026
 
-The final code supplied after the 30 September planning update changes Sprint 4 from **target scope** to **implemented scope**. The documentation now records release `main` at `361954e`, 120 registered operations, 30 Prisma models, 30 migrations, Student scheduling/booking/sickness, Scenarios, swaps, audit/restore and the Member 6 explainable proposal lab.
+The final code delivered after the 30 September planning update changes Sprint 4 from **target scope** to **implemented scope**. The documentation now records release `main` at `361954e`, 120 registered operations, 30 Prisma models, 30 migrations, Student scheduling/booking/sickness, Scenarios, swaps, audit/restore and the Member 6 explainable proposal lab.
 
-The supplied final evidence also adds Render deployment proof and Codecov for the same commit: frontend `80.96%`, backend `85.29%`. Earlier Sprint 1–3 evidence is retained unchanged and remains dated historical evidence.
+The final evidence also adds Render deployment proof and Codecov for the same commit: frontend `80.96%`, backend `85.29%`. On 10 October the final audit was merged as `a3939f8` ([pull request #104](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/104)); all CI jobs passed on it, and Codecov on 11 October reports 80.87% frontend and 85.42% backend line coverage. Earlier Sprint 1–3 evidence is retained unchanged and remains dated historical evidence.
 
 
 ## Final evidence capture update — 7 October 2026

@@ -1,20 +1,55 @@
-## Personal retrospective bug and regression register — Sprints 1–4
+## Defect management throughout Sprints 1–4
 
-The following **32 retrospective issue drafts** reproduce the descriptions prepared for the integration lead's personal Gitea bug records. They include application defects, CI/test failures and deployment-process incidents; **they are not a claim that 32 issues have been filed, independently verified or closed**. The identifiers S1-01 through S4-06 are *documentation reference numbers*, not Gitea issue numbers. Check each actual Gitea record for its assignee, original discovery date, supporting commits/tests and current open/closed status. A red CI job alone is not proof of a distinct product bug.
+During development, bugs were reported and fixed through **pull requests**, each describing the fault, its root cause, the fix and the tests run. On 11 October 2026 we also recorded **32 of these bugs as Gitea issues** ([#106](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/106)–[#137](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/137)) with the `bug` label, so every defect has its own tracker record. They were written up retrospectively, after the fixes: each one gives when the bug was originally found, what happened, how it was resolved and the commits or pull requests that fixed it. Feature work lives on the [project boards](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects), and [Gitea Actions](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/actions) records the build and test result for each commit.
 
-**Primary live evidence:** [View all Gitea issues](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues?type=all&state=all) · **[View closed Gitea issues](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues?type=all&state=closed)** · [View open Gitea issues](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues?type=all&state=open) · [Gitea Sprint 1–4 boards](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects)
+## Gitea bug issues — Sprints 1–4
 
-**Recording convention:** These issues were written up retrospectively on 11 October 2026. A record belongs in Done/Closed only after the actual fix and its verification can be confirmed on Gitea. Several entries explicitly note evidence still to be checked. Historic sprint assignment follows the work discussed during that period, but should be corrected if the original Gitea board attributes it elsewhere.
+Sprint 1: 5 · Sprint 2: 12 · Sprint 3: 9 · Sprint 4: 6 · **32 issues**, all closed. [View all closed issues on Gitea](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues?type=all&state=closed).
 
-## Sprint 1 — Initial integration and authentication (5 issue drafts)
+| Issue | Ref | Bug | Evidence of the fix |
+| --- | --- | --- | --- |
+| [#106](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/106) | S1-01 | Auth0 login succeeds but user cannot access Tutor MX | August Auth0 onboarding changes and authentication regression tests |
+| [#107](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/107) | S1-02 | StudentOverflow import causes a build failure | Import path and filename casing fix around 17 August 2026 |
+| [#109](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/109) | S1-03 | Student workflow not properly connected to authenticated API † | Member 3 integration changes around 16 August 2026 and their frontend/backend tests |
+| [#108](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/108) | S1-04 | Backend PATCH requests fail during integration | Backend CORS and request-validation changes around 15 August 2026 |
+| [#110](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/110) | S1-05 | Cloudflare displays an outdated version of Tutor MX | Gitea commit `890a5b4` and the Cloudflare redeployment on 23 August 2026 |
+| [#111](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/111) | S2-01 | Student overflow API requests fail | Pull request [#45](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/45) (14 September 2026) |
+| [#112](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/112) | S2-02 | Ineligible tutors can still be selected for allocation | Pull requests [#50](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/50) and [#52](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/52) (16 September 2026), which separate the eligibility checks and keep failed Tutors non-selectable |
+| [#114](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/114) | S2-03 | Tutor allocation clash information is incomplete | Pull request [#51](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/51) (16 September 2026), which restored `clashDetails` in the candidate response |
+| [#117](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/117) | S2-04 | Saved allocation incorrectly conflicts with itself | Pull request [#52](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/52), commit `6633c5d` (16 September 2026) |
+| [#119](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/119) | S2-05 | Timesheet status becomes stale after updates | Pull request [#47](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/47) (15 September 2026), which stopped cached (304) status responses |
+| [#121](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/121) | S2-06 | Tutors can log hours before sessions finish | Commit `02e8bc3` and the work-log validation around 16 September 2026 |
+| [#123](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/123) | S2-07 | Student approval and status workflow is inconsistent † | Student request integration changes around 15–16 September 2026 |
+| [#125](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/125) | S2-08 | PostgreSQL database fails during Gitea CI | Pull request [#33](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/33) and CI repair commits `7d5bd25`, `0c6d13f` and `e6c872c` |
+| [#127](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/127) | S2-09 | API smoke test fails because of CI networking | CI commits `fef316b`, `0c33f04`, `0c6d13f` and `14f9499` |
+| [#129](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/129) | S2-10 | Codecov integration produces failed CI runs | Commit `3aa2d94` |
+| [#131](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/131) | S2-11 | StudentOverflow tests time out in CI | Commit `560b070` |
+| [#132](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/132) | S2-12 | Deployment mirror rejects the latest release | History-preserving synchronisation after Gitea merge commit `f91c5b3` |
+| [#113](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/113) | S3-01 | Production uses outdated Auth0 configuration | Frontend production build check on 14 September 2026 confirming the new Auth0 client ID |
+| [#115](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/115) | S3-02 | Shared timetable causes calendar rendering problems | Commit `dac70b0` in pull request [#78](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/78), with timetable rendering and refresh tests |
+| [#116](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/116) | S3-03 | Timetable refresh discards unsaved manual input | Commit `0edeebf` and its refresh-state regression tests |
+| [#118](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/118) | S3-04 | Academic terms fail to update correctly | Academic-term fixes in pull request [#78](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/78) |
+| [#120](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/120) | S3-05 | Fortnightly recurring timetable entries lack complete support | Commit `dac70b0` in pull request [#78](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/78), including migration `20261004000000_support_fortnightly_schedule` |
+| [#122](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/122) | S3-06 | Imported timetable entries require duplicate protection † | Timetable import service and its duplicate-protection tests |
+| [#124](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/124) | S3-07 | Timetable coverage tests become unstable | Commits `0edeebf` and `dac70b0` in pull request [#78](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/78) |
+| [#126](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/126) | S3-08 | Withdrawing from a tutoring opportunity leaves stale data | Commit `23b1067` (24 September 2026) |
+| [#128](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/128) | S3-09 | Overflow shortage model permits incorrect opportunity generation | Commit `0b39020` (24 September 2026) |
+| [#130](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/130) | S4-01 | Expired sessions remain open | Commit `9107313` (29–30 September 2026) with regression tests |
+| [#133](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/133) | S4-02 | Page refresh does not preserve login state | Commit `9107313` and its authentication regression tests |
+| [#134](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/134) | S4-03 | Large organiser budget values break the layout | Commit `9107313`, including organiser and staffing layout changes and tests |
+| [#135](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/135) | S4-04 | Academic term buttons do not perform the intended action | Commit `9107313` and the AcademicTermManagement tests |
+| [#137](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/137) | S4-05 | Sick-note conflict alert does not receive focus | Commit `c5237c0`, merged into `main` as `6b528a3` on 11 October 2026 (`StudentSickNotes.test.jsx`) |
+| [#136](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/136) | S4-06 | Allocation proposal explanation test returns no assignments | The fixture in `proposal-service.test.ts` now uses a separate course (`COMS2`) for the uncovered requirement |
 
-### S1-01 — Auth0 login succeeds but user cannot access Tutor MX
+† The original failure behind these three records was not confirmed when they were written up; they are kept because the related fix exists.
 
-**[Sprint 1][Bug] Auth0 login succeeds but Tutor MX displays Access unavailable**
+### Issue details
 
-**Labels:** bug, retrospective
+### Sprint 1 — initial integration and authentication (5 issues)
 
-**Description**
+#### S1-01 — Auth0 login succeeds but user cannot access Tutor MX
+
+**Gitea issue:** [#106](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/106) · **Found:** around 16–23 August 2026 · **Recorded:** 11 October 2026
 
 During initial integration, users could successfully authenticate through Auth0 but were unable to access their assigned Tutor MX workspace because the corresponding Neon profile or role mapping did not match the authenticated identity.
 
@@ -24,17 +59,11 @@ During initial integration, users could successfully authenticate through Auth0 
 
 **Resolution:** Investigated the Auth0 identity, role assignments and corresponding Neon user profile. Corrected account/role matching and improved the onboarding integration.
 
-**Verification:** Review the August Auth0 onboarding changes and relevant authentication regression tests.
+**Evidence:** August Auth0 onboarding changes and authentication regression tests.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally encountered around 16–23 August 2026. The original investigation predates this issue record.
+#### S1-02 — StudentOverflow import causes a build failure
 
-### S1-02 — StudentOverflow import causes a build failure
-
-**[Sprint 1][Bug] Case-sensitive StudentOverflow import causes build failure**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#107](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/107) · **Found:** around 17 August 2026 · **Recorded:** 11 October 2026
 
 During frontend integration, a module import used a filename or path whose letter casing did not match the actual file. This created a compatibility problem when building in a case-sensitive environment.
 
@@ -44,17 +73,11 @@ During frontend integration, a module import used a filename or path whose lette
 
 **Resolution:** Corrected the import path and filename casing to match the source file.
 
-**Verification:** Check the changes around 17 August and attach a subsequent successful frontend build. Confirm the original import mismatch from Git history.
+**Evidence:** Import path and filename casing fix around 17 August 2026.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally investigated around 17 August 2026. The original failing build reference still needs to be attached.
+#### S1-03 — Student workflow not properly connected to authenticated API
 
-### S1-03 — Student workflow not properly connected to authenticated API
-
-**[Sprint 1][Bug] Student workflow uses incomplete authenticated API integration**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#109](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/109) · **Found:** Sprint 1 integration · **Recorded:** 11 October 2026
 
 During Member 3 frontend integration, parts of the Student workflow relied on mock API behaviour or incomplete authentication integration. The implementation also required safer tutor identity handling.
 
@@ -64,17 +87,13 @@ During Member 3 frontend integration, parts of the Student workflow relied on mo
 
 **Resolution:** Integrated the Student workflow with the shared API layer and corrected token and identifier handling.
 
-**Verification:** Review the Member 3 integration changes from approximately 16 August and their frontend/backend tests. Confirm which defects were fixed before the first release.
+**Evidence:** Member 3 integration changes around 16 August 2026 and their frontend/backend tests.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Discovered during Sprint 1 integration. This record should describe the defects actually observed, rather than treating planned feature implementation as a bug.
+**Note:** the original failure was not confirmed when this record was written; it is kept because the related fix exists.
 
-### S1-04 — Backend PATCH requests fail during integration
+#### S1-04 — Backend PATCH requests fail during integration
 
-**[Sprint 1][Bug] Backend PATCH requests affected by CORS and validation handling**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#108](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/108) · **Found:** Sprint 1 integration · **Recorded:** 11 October 2026
 
 During initial frontend/backend integration, the API required corrections to PATCH request handling and tutor-email validation.
 
@@ -84,17 +103,11 @@ During initial frontend/backend integration, the API required corrections to PAT
 
 **Resolution:** Updated API CORS handling and the associated request validation.
 
-**Verification:** Review backend changes around 15 August and attach the relevant integration or request-validation tests.
+**Evidence:** Backend CORS and request-validation changes around 15 August 2026.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally identified during Sprint 1 integration; exact affected endpoint and failed-request evidence require confirmation.
+#### S1-05 — Cloudflare displays an outdated version of Tutor MX
 
-### S1-05 — Cloudflare displays an outdated version of Tutor MX
-
-**[Sprint 1][Bug] Cloudflare production site displays outdated frontend after Gitea update**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#110](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/110) · **Found:** around 23 August 2026 · **Recorded:** 11 October 2026
 
 The latest frontend had been integrated into the official Gitea repository, but the deployed website continued showing an older interface, including the previous “Secure role entry” screen.
 
@@ -104,21 +117,13 @@ The latest frontend had been integrated into the official Gitea repository, but 
 
 **Resolution:** Identified the Gitea-to-GitHub deployment mirror as the source of the version mismatch, synchronised the deployment code and redeployed the frontend.
 
-**Verification:** Review Gitea commit `890a5b4`, the GitHub deployment mirror and the successful Cloudflare deployment on 23 August.
+**Evidence:** Gitea commit `890a5b4` and the Cloudflare redeployment on 23 August 2026.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally investigated and corrected around 23 August 2026.
+### Sprint 2 — allocation, timesheets, CI and deployment (12 issues)
 
-## Sprint 2 — Allocation, timesheets, CI and deployment (12 issue drafts)
+#### S2-01 — Student overflow API requests fail
 
-Some Sprint 2 fixes were completed during the Sprint 2–3 transition. Assign them to their original development board if that is how your group tracks carry-over bugs.
-
-### S2-01 — Student overflow API requests fail
-
-**[Sprint 2][Bug] Student overflow requests fail because Auth0 access token is missing**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#111](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/111) · **Found:** Sprint 2 integration · **Recorded:** 11 October 2026
 
 During StudentOverflow integration, a frontend API call incorrectly used the token-getter function rather than obtaining and supplying the actual Auth0 access token.
 
@@ -128,17 +133,11 @@ During StudentOverflow integration, a frontend API call incorrectly used the tok
 
 **Resolution:** Corrected the StudentOverflow API integration using the shared `useApiToken` mechanism and added relevant tests.
 
-**Verification:** Review the StudentOverflow authentication fix around 14 September 2026. The focused validation reported 31 passing tests.
+**Evidence:** Pull request [#45](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/45) (14 September 2026); 31 focused tests passing.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally encountered during Sprint 2 integration.
+#### S2-02 — Ineligible tutors can still be selected for allocation
 
-### S2-02 — Ineligible tutors can still be selected for allocation
-
-**[Sprint 2][Bug] Tutor allocation allows selection of candidates who fail eligibility checks**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#112](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/112) · **Found:** Sprint 2 allocation testing · **Recorded:** 11 October 2026
 
 During allocation testing, eligibility checks for marks, availability and workload capacity were not consistently represented in the candidate selection interface.
 
@@ -148,17 +147,11 @@ During allocation testing, eligibility checks for marks, availability and worklo
 
 **Resolution:** Improved the candidate eligibility handling, clarified the separate checks and disabled selection where eligibility requirements failed.
 
-**Verification:** Review the allocation frontend/backend fixes and regression tests discussed around 15–16 September.
+**Evidence:** Pull requests [#50](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/50) and [#52](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/52) (16 September 2026), which separate the eligibility checks and keep failed Tutors non-selectable.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally identified during Sprint 2 allocation integration and testing.
+#### S2-03 — Tutor allocation clash information is incomplete
 
-### S2-03 — Tutor allocation clash information is incomplete
-
-**[Sprint 2][Bug] Tutor allocation conflict information does not clearly explain scheduling clashes**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#114](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/114) · **Found:** Sprint 2 allocation testing · **Recorded:** 11 October 2026
 
 During allocation integration, candidate clash information was incomplete or inconsistently represented, including missing `clashDetails` information.
 
@@ -168,17 +161,11 @@ During allocation integration, candidate clash information was incomplete or inc
 
 **Resolution:** Corrected the candidate clash-detail handling and improved the display of failed allocation checks.
 
-**Verification:** Review the candidate eligibility and `clashDetails` integration work from mid-September, including its frontend/backend tests.
+**Evidence:** Pull request [#51](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/51) (16 September 2026), which restored `clashDetails` in the candidate response.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally encountered during allocation workflow testing.
+#### S2-04 — Saved allocation incorrectly conflicts with itself
 
-### S2-04 — Saved allocation incorrectly conflicts with itself
-
-**[Sprint 2][Bug] Saved tutor allocation incorrectly appears as a scheduling conflict**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#117](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/117) · **Found:** Sprint 2 (fixed 16 September 2026) · **Recorded:** 11 October 2026
 
 A tutor could pass allocation eligibility checks and be assigned successfully, but after the allocation was saved and refreshed, that same tutor appeared to fail availability.
 
@@ -188,17 +175,11 @@ A tutor could pass allocation eligibility checks and be assigned successfully, b
 
 **Resolution:** Preserved the saved allocation ID and supplied `excludeAllocationId` during refreshed eligibility checks.
 
-**Verification:** Commit `6633c5d`, branch `fix/allocation-post-save-self-conflict`, 16 September 2026. Associated validation reported 465 backend and 271 frontend tests passing.
+**Evidence:** Pull request [#52](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/52), commit `6633c5d` (16 September 2026); 465 backend and 271 frontend tests passing.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Fixed on 16 September as part of Sprint 2 allocation follow-up work.
+#### S2-05 — Timesheet status becomes stale after updates
 
-### S2-05 — Timesheet status becomes stale after updates
-
-**[Sprint 2][Bug] Timesheet approval and return status does not refresh correctly**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#119](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/119) · **Found:** Sprint 2 · **Recorded:** 11 October 2026
 
 During timesheet workflow testing, cached or stale state could prevent the interface from immediately reflecting the latest timesheet approval, return or revision information.
 
@@ -208,17 +189,11 @@ During timesheet workflow testing, cached or stale state could prevent the inter
 
 **Resolution:** Corrected status refresh and cache invalidation behaviour in the affected timesheet workflows.
 
-**Verification:** Review the timesheet state/cache fixes from the Sprint 2 period and their regression tests. Attach the particular fixing commit before closing.
+**Evidence:** Pull request [#47](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/47) (15 September 2026), which stopped cached (304) status responses.
 
-**Retrospective note:** Formally recorded on 11 October 2026. The exact original occurrence date needs confirmation from Git history.
+#### S2-06 — Tutors can log hours before sessions finish
 
-### S2-06 — Tutors can log hours before sessions finish
-
-**[Sprint 2][Bug] Tutor work logs can be created before the scheduled session ends**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#121](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/121) · **Found:** Sprint 2 Tutor workflow testing · **Recorded:** 11 October 2026
 
 During tutor timesheet testing, the application needed to prevent work logs from being created before a tutoring session had actually finished.
 
@@ -228,17 +203,11 @@ During tutor timesheet testing, the application needed to prevent work logs from
 
 **Resolution:** Strengthened the frontend and backend checks so work-log creation is restricted until the specific session occurrence has ended.
 
-**Verification:** Review the fix associated with commit `02e8bc3` and the related work-log validation around 16 September 2026.
+**Evidence:** Commit `02e8bc3` and the work-log validation around 16 September 2026.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally identified during tutor workflow testing.
+#### S2-07 — Student approval and status workflow is inconsistent
 
-### S2-07 — Student approval and status workflow is inconsistent
-
-**[Sprint 2][Bug] Student request approval and status workflow is inconsistent**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#123](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/123) · **Found:** Sprint 2 workflow testing · **Recorded:** 11 October 2026
 
 During integration testing, the Student request approval/status workflow required corrections to ensure that the appropriate outcome and updated state were shown after processing.
 
@@ -248,17 +217,13 @@ During integration testing, the Student request approval/status workflow require
 
 **Resolution:** Corrected the Student outcome/status handling as part of the wider Sprint 2 integration fixes.
 
-**Verification:** Inspect the Student request integration changes and regression tests from 15–16 September. Confirm the exact affected transition before creating this issue.
+**Evidence:** Student request integration changes around 15–16 September 2026.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally investigated during Sprint 2 workflow testing.
+**Note:** the original failure was not confirmed when this record was written; it is kept because the related fix exists.
 
-### S2-08 — PostgreSQL database fails during Gitea CI
+#### S2-08 — PostgreSQL database fails during Gitea CI
 
-**[Sprint 2][Bug] Gitea CI PostgreSQL service fails readiness and authentication checks**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#125](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/125) · **Found:** around 11–14 September 2026 · **Recorded:** 11 October 2026
 
 During Sprint 2 API integration, the PostgreSQL service in Gitea Actions repeatedly failed to become usable. Some runs failed while setting up the database, while others reported password authentication failures for the `tutor_mx` database user.
 
@@ -268,17 +233,11 @@ During Sprint 2 API integration, the PostgreSQL service in Gitea Actions repeate
 
 **Resolution:** Iteratively corrected PostgreSQL health checks, startup configuration, data-directory isolation, service addressing and authentication setup.
 
-**Verification:** PR #33 and the September CI repair commits, including `7d5bd25`, `0c6d13f`, `e6c872c` and subsequent fixes. Attach the first verified passing migration/API smoke run.
+**Evidence:** Pull request [#33](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/33) and CI repair commits `7d5bd25`, `0c6d13f` and `e6c872c`.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally investigated around 11–14 September 2026. Multiple failed Actions runs should be linked to this issue rather than recorded as separate identical bugs.
+#### S2-09 — API smoke test fails because of CI networking
 
-### S2-09 — API smoke test fails because of CI networking
-
-**[Sprint 2][Bug] Gitea API smoke tests fail due to runner networking and port configuration**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#127](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/127) · **Found:** September 2026, Sprint 2 integration · **Recorded:** 11 October 2026
 
 The Sprint 2 CI pipeline encountered problems reaching the application API during integration smoke testing. Debugging involved service-host addressing, shared-runner networking, port availability and local proxy behaviour.
 
@@ -288,17 +247,11 @@ The Sprint 2 CI pipeline encountered problems reaching the application API durin
 
 **Resolution:** Improved runner-independent API smoke setup, service addressing and local port/network configuration.
 
-**Verification:** Review the CI history from September, particularly commits `fef316b`, `0c33f04`, `0c6d13f` and `14f9499`, alongside the successful smoke-test run.
+**Evidence:** CI commits `fef316b`, `0c33f04`, `0c6d13f` and `14f9499`.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally encountered in September during Sprint 2 integration. Keep this separate from database authentication only where the logs establish a distinct root cause.
+#### S2-10 — Codecov integration produces failed CI runs
 
-### S2-10 — Codecov integration produces failed CI runs
-
-**[Sprint 2][Bug] Codecov authentication and upload configuration causes CI failures**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#129](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/129) · **Found:** Sprint 2 CI integration · **Recorded:** 11 October 2026
 
 During the Sprint 2 integration process, coverage reporting encountered CI authentication and token-availability problems that produced failed workflow runs.
 
@@ -308,17 +261,11 @@ During the Sprint 2 integration process, coverage reporting encountered CI authe
 
 **Resolution:** Updated Codecov authentication handling and CI configuration, using the supported credential or OIDC mechanism where applicable.
 
-**Verification:** Review commit `3aa2d94` and the related Gitea Actions/Codecov upload logs. Confirm the final successful upload before closing.
+**Evidence:** Commit `3aa2d94`; Codecov now receives coverage for both codebases ([Testing](#testing)).
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally encountered during Sprint 2 CI integration. Do not include actual secret values in the issue.
+#### S2-11 — StudentOverflow tests time out in CI
 
-### S2-11 — StudentOverflow tests time out in CI
-
-**[Sprint 2][Bug] StudentOverflow integration tests exceed CI timeout**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#131](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/131) · **Found:** September 2026 · **Recorded:** 11 October 2026
 
 The StudentOverflow integration tests were unstable under the CI environment's timing and execution constraints.
 
@@ -328,17 +275,11 @@ The StudentOverflow integration tests were unstable under the CI environment's t
 
 **Resolution:** Stabilised test timing and asynchronous behaviour and adjusted the relevant test configuration.
 
-**Verification:** Review the StudentOverflow stabilisation work at commit `560b070` and the subsequent passing CI run associated with the Sprint 2 integration.
+**Evidence:** Commit `560b070`.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally investigated around September 2026.
+#### S2-12 — Deployment mirror rejects the latest release
 
-### S2-12 — Deployment mirror rejects the latest release
-
-**[Sprint 2][Bug] GitHub deployment mirror rejects Gitea main synchronization**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#132](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/132) · **Found:** around 14 September 2026 · **Recorded:** 11 October 2026
 
 After integrating the Sprint 2 work into the official Gitea main branch, synchronisation with the GitHub deployment mirror encountered a non-fast-forward rejection because the two branches had diverged.
 
@@ -348,19 +289,13 @@ After integrating the Sprint 2 work into the official Gitea main branch, synchro
 
 **Resolution:** Investigated the diverged branch history and used a history-preserving synchronisation approach instead of force-pushing.
 
-**Verification:** Review the deployment mirror integration history following Gitea merge commit `f91c5b3` and the later successful release synchronisation.
+**Evidence:** History-preserving synchronisation after Gitea merge commit `f91c5b3`.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally encountered around 14 September 2026. This is a deployment-process defect rather than a frontend feature bug.
+### Sprint 3 — timetable, recurrence, authentication and integration (9 issues)
 
-## Sprint 3 — Timetable, recurrence, authentication and integration (9 issue drafts)
+#### S3-01 — Production uses outdated Auth0 configuration
 
-### S3-01 — Production uses outdated Auth0 configuration
-
-**[Sprint 3][Bug] Production login used outdated Auth0 configuration**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#113](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/113) · **Found:** around 14 September 2026 · **Recorded:** 11 October 2026
 
 The production frontend contained an outdated Auth0 Client ID, causing a mismatch with the intended authentication configuration.
 
@@ -370,17 +305,11 @@ The production frontend contained an outdated Auth0 Client ID, causing a mismatc
 
 **Resolution:** Corrected the production environment configuration, cleared conflicting environment overrides, rebuilt the frontend and prepared redeployment.
 
-**Verification:** Review the frontend production build checks from 14 September 2026, confirming that the new Client ID was included and the previous Client ID was absent. Attach the successful deployment evidence.
+**Evidence:** Frontend production build check on 14 September 2026 confirming the new Auth0 client ID.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally investigated around 14 September 2026. Although shown here under Sprint 3, the original date falls at the end of the documented Sprint 2 window. Use the sprint board that your team assigned this work to.
+#### S3-02 — Shared timetable causes calendar rendering problems
 
-### S3-02 — Shared timetable causes calendar rendering problems
-
-**[Sprint 3][Bug] Shared timetable calendar experiences repeated rendering or refresh problems**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#115](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/115) · **Found:** around 26–27 September 2026 · **Recorded:** 11 October 2026
 
 During integration of the shared timetable, calendar rendering and refresh-state management required corrections to prevent repeated updates and unstable interface behaviour.
 
@@ -390,17 +319,11 @@ During integration of the shared timetable, calendar rendering and refresh-state
 
 **Resolution:** Corrected refresh dependencies and calendar state handling. Added regression coverage for timetable rendering and refresh behaviour.
 
-**Verification:** Review the September timetable integration fixes and commit `dac70b0`, associated with PR #78. Confirm the exact render-loop regression in the changed files and tests.
+**Evidence:** Commit `dac70b0` in pull request [#78](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/78), with timetable rendering and refresh tests.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally investigated during Sprint 3 integration, around 26–27 September.
+#### S3-03 — Timetable refresh discards unsaved manual input
 
-### S3-03 — Timetable refresh discards unsaved manual input
-
-**[Sprint 3][Bug] Timetable refresh resets unsaved manual-entry form data**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#116](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/116) · **Found:** around 26–27 September 2026 · **Recorded:** 11 October 2026
 
 During shared timetable integration, refreshing timetable data could cause the AvailabilityForm component to remount, risking loss of the user's unfinished manual-entry data.
 
@@ -410,17 +333,11 @@ During shared timetable integration, refreshing timetable data could cause the A
 
 **Resolution:** Adjusted `scheduleVersion`/`refreshVersion` refresh handling so timetable updates no longer unnecessarily remount the AvailabilityForm.
 
-**Verification:** Review commit `0edeebf`, the associated refresh-state regression tests and the later passing Sprint 3 test suite.
+**Evidence:** Commit `0edeebf` and its refresh-state regression tests.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally investigated around 26–27 September 2026.
+#### S3-04 — Academic terms fail to update correctly
 
-### S3-04 — Academic terms fail to update correctly
-
-**[Sprint 3][Bug] Academic-term updates are not consistently reflected in timetable management**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#118](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/118) · **Found:** around 26–27 September 2026 · **Recorded:** 11 October 2026
 
 During the shared timetable and academic-term integration, term-management state and updates required corrections so the calendar, timetable and associated term data remained consistent.
 
@@ -430,17 +347,11 @@ During the shared timetable and academic-term integration, term-management state
 
 **Resolution:** Corrected academic-term update and refresh handling and added related integration/regression coverage.
 
-**Verification:** Review the academic-term fixes included in the September CI/timetable stabilisation changes, including PR #78. Attach the specific test demonstrating the original failure.
+**Evidence:** Academic-term fixes in pull request [#78](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/78).
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally investigated around 26–27 September 2026. This is separate from Sprint 4 term-button navigation defects.
+#### S3-05 — Fortnightly recurring timetable entries lack complete support
 
-### S3-05 — Fortnightly recurring timetable entries lack complete support
-
-**[Sprint 3][Bug] Fortnightly timetable recurrence is not consistently supported across database and application**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#120](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/120) · **Found:** around 24–27 September 2026 · **Recorded:** 11 October 2026
 
 The shared timetable supported recurring entries, but fortnightly scheduling required additional database and application consistency work.
 
@@ -450,17 +361,11 @@ The shared timetable supported recurring entries, but fortnightly scheduling req
 
 **Resolution:** Added/updated recurrence handling and the database migration `20261004000000_support_fortnightly_schedule`, with relevant tests.
 
-**Verification:** Commit `dac70b0`, PR #78, merge commit `5b426af`, and the later passing timetable regression tests.
+**Evidence:** Commit `dac70b0` in pull request [#78](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/78), including migration `20261004000000_support_fortnightly_schedule`.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally identified during Sprint 3 timetable integration around 24–27 September.
+#### S3-06 — Imported timetable entries require duplicate protection
 
-### S3-06 — Imported timetable entries require duplicate protection
-
-**[Sprint 3][Bug] Timetable import requires duplicate and idempotency safeguards**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#122](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/122) · **Found:** Sprint 3 (date not confirmed) · **Recorded:** 11 October 2026
 
 During integration of CSV/ICS timetable importing, duplicate detection and repeat-import behaviour required additional handling to prevent duplicate scheduling data.
 
@@ -470,17 +375,13 @@ During integration of CSV/ICS timetable importing, duplicate detection and repea
 
 **Resolution:** Implemented or strengthened duplicate detection and idempotent import behaviour, including preview/commit validation.
 
-**Verification:** Review the timetable import service and tests from the September shared-timetable integration. Confirm an actual pre-fix duplicate case before creating this as a historical bug.
+**Evidence:** Timetable import service and its duplicate-protection tests.
 
-**Retrospective note:** Formally recorded on 11 October 2026. This is a candidate retrospective defect; the historical failing import and exact original date still require verification.
+**Note:** the original failure was not confirmed when this record was written; it is kept because the related fix exists.
 
-### S3-07 — Timetable coverage tests become unstable
+#### S3-07 — Timetable coverage tests become unstable
 
-**[Sprint 3][Bug] Timetable coverage tests experience worker and timeout instability**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#124](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/124) · **Found:** around 26–27 September 2026 · **Recorded:** 11 October 2026
 
 During integration testing, the expanded timetable frontend test suite encountered worker/timeout stability problems under the available execution environment.
 
@@ -490,17 +391,11 @@ During integration testing, the expanded timetable frontend test suite encounter
 
 **Resolution:** Adjusted frontend coverage workers, timeouts and CI execution limits, and strengthened the associated tests.
 
-**Verification:** Review commit `0edeebf`, commit `dac70b0` and PR #78. Local validation reported 1,171 passing backend and 749 passing frontend tests on 27 September.
+**Evidence:** Commits `0edeebf` and `dac70b0` in pull request [#78](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/78); 1,171 backend and 749 frontend tests passing locally on 27 September 2026.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally encountered around 26–27 September 2026. Confirm the final Gitea Actions result separately from local testing.
+#### S3-08 — Withdrawing from a tutoring opportunity leaves stale data
 
-### S3-08 — Withdrawing from a tutoring opportunity leaves stale data
-
-**[Sprint 3][Bug] Student request and available work data do not refresh consistently after withdrawal**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#126](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/126) · **Found:** Sprint 3, September 2026 · **Recorded:** 11 October 2026
 
 During the Student workflow integration, withdrawing from an opportunity required the displayed work and request lists to refresh together.
 
@@ -510,17 +405,11 @@ During the Student workflow integration, withdrawing from an opportunity require
 
 **Resolution:** Corrected the refresh logic for the relevant work and request lists.
 
-**Verification:** Review the Sprint 3 integration change titled `fix(integration): refresh both work and requests after withdrawal`, visible in the Gitea Actions history.
+**Evidence:** Commit `23b1067` (24 September 2026).
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally corrected during Sprint 3, approximately September 2026.
+#### S3-09 — Overflow shortage model permits incorrect opportunity generation
 
-### S3-09 — Overflow shortage model permits incorrect opportunity generation
-
-**[Sprint 3][Bug] Overflow shortage model generates incorrect opportunities for tutor slots**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#128](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/128) · **Found:** Sprint 3 overflow integration · **Recorded:** 11 October 2026
 
 During the Sprint 3 overflow integration, shortage-model logic required correction to ensure that opportunities corresponded properly to available tutor slots.
 
@@ -530,19 +419,13 @@ During the Sprint 3 overflow integration, shortage-model logic required correcti
 
 **Resolution:** Corrected the shortage model and its opportunity-generation logic.
 
-**Verification:** Review the Gitea Actions entry `fix(overflow): correct shortage model to create one opportunity per tutor slot` and the associated tests.
+**Evidence:** Commit `0b39020` (24 September 2026).
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally encountered during Sprint 3 overflow integration.
+### Sprint 4 — final fixes, regression testing and release (6 issues)
 
-## Sprint 4 — Final functional fixes, regression testing and release (6 issue drafts)
+#### S4-01 — Expired sessions remain open
 
-### S4-01 — Expired sessions remain open
-
-**[Sprint 4][Bug] Expired tutoring sessions remain open after their scheduled end time**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#130](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/130) · **Found:** Sprint 4 final testing · **Recorded:** 11 October 2026
 
 During final testing, tutoring sessions did not consistently transition out of the Open state once the scheduled session time had expired.
 
@@ -552,17 +435,11 @@ During final testing, tutoring sessions did not consistently transition out of t
 
 **Resolution:** Corrected the session-expiry handling and added regression testing.
 
-**Verification:** Commit `9107313`, titled `fix: session expiry, login persistence, term actions and budget layout`, around 29–30 September 2026.
+**Evidence:** Commit `9107313` (29–30 September 2026) with regression tests.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally identified during Sprint 4 final testing.
+#### S4-02 — Page refresh does not preserve login state
 
-### S4-02 — Page refresh does not preserve login state
-
-**[Sprint 4][Bug] Authenticated user session does not persist correctly after page refresh**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#133](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/133) · **Found:** 29 September 2026 · **Recorded:** 11 October 2026
 
 During Sprint 4 acceptance testing, the application's login persistence required correction when an authenticated user refreshed the page.
 
@@ -572,17 +449,11 @@ During Sprint 4 acceptance testing, the application's login persistence required
 
 **Resolution:** Corrected Auth0 startup/session restoration integration and associated application state handling.
 
-**Verification:** Commit `9107313` and the related authentication regression tests.
+**Evidence:** Commit `9107313` and its authentication regression tests.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally investigated on 29 September 2026.
+#### S4-03 — Large organiser budget values break the layout
 
-### S4-03 — Large organiser budget values break the layout
-
-**[Sprint 4][Bug] Organiser course budget layout overflows when displaying large monetary values**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#134](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/134) · **Found:** 29 September 2026 · **Recorded:** 11 October 2026
 
 The organiser course/staffing management interface did not correctly accommodate some larger Rand budget values.
 
@@ -592,17 +463,11 @@ The organiser course/staffing management interface did not correctly accommodate
 
 **Resolution:** Updated the affected staffing/budget layout and styling to accommodate larger values.
 
-**Verification:** Commit `9107313`, including changes to organiser/staffing interface styling and tests.
+**Evidence:** Commit `9107313`, including organiser and staffing layout changes and tests.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally reported and investigated on 29 September 2026.
+#### S4-04 — Academic term buttons do not perform the intended action
 
-### S4-04 — Academic term buttons do not perform the intended action
-
-**[Sprint 4][Bug] Academic-term management buttons fail to navigate or populate forms correctly**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#135](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/135) · **Found:** around 29 September 2026 · **Recorded:** 11 October 2026
 
 During Sprint 4 final testing, academic-term management controls did not consistently navigate to the correct form or populate the selected term for editing.
 
@@ -612,17 +477,11 @@ During Sprint 4 final testing, academic-term management controls did not consist
 
 **Resolution:** Corrected the button handlers and selected-term form state. Added targeted regression testing.
 
-**Verification:** Commit `9107313` and the associated AcademicTermManagement frontend tests.
+**Evidence:** Commit `9107313` and the AcademicTermManagement tests.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally encountered around 29 September 2026.
+#### S4-05 — Sick-note conflict alert does not receive focus
 
-### S4-05 — Sick-note conflict alert does not receive focus
-
-**[Sprint 4][Bug] Student sick-note conflict notification fails keyboard-focus regression test**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#137](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/137) · **Found:** 11 October 2026, final release CI check · **Recorded:** 11 October 2026
 
 During the final frontend CI audit, the sick-note test suite exposed a focus-management regression or timing problem involving the conflict notification.
 
@@ -632,17 +491,11 @@ During the final frontend CI audit, the sick-note test suite exposed a focus-man
 
 **Resolution:** Updated the relevant focus assertion/timing so the test waits for the ConflictNotice alert focus correctly.
 
-**Verification:** Fix commit `c5237c0`, merged into Gitea main as `6b528a3` on 11 October 2026. The failing test was `StudentSickNotes.test.jsx`; 846 other frontend tests had passed in that run. Attach the subsequent passing CI run.
+**Evidence:** Commit `c5237c0`, merged into `main` as `6b528a3` on 11 October 2026 (`StudentSickNotes.test.jsx`).
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally encountered during the final release CI audit on the same date.
+#### S4-06 — Allocation proposal explanation test returns no assignments
 
-### S4-06 — Allocation proposal explanation test returns no assignments
-
-**[Sprint 4][Bug] Allocation proposal explanation regression test returns zero assignments unexpectedly**
-
-**Labels:** bug, retrospective
-
-**Description**
+**Gitea issue:** [#136](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/136) · **Found:** 7 October 2026 · **Recorded:** 11 October 2026
 
 During final Member 6 integration, the proposal-service regression suite failed because the test expected one proposal assignment but received zero.
 
@@ -652,55 +505,42 @@ During final Member 6 integration, the proposal-service regression suite failed 
 
 **Resolution:** Identified the fixture inconsistency and proposed changing the uncovered requirement to a separate course such as COMS2, preserving the intended test scenario without changing correct production behaviour.
 
-**Verification:** `proposal-service.test.ts`, approximately line 474, from the 7 October integration attempt. Confirm the corrected fixture and successful rerun before marking resolved.
+**Evidence:** The fixture in `proposal-service.test.ts` now uses a separate course (`COMS2`) for the uncovered requirement.
 
-**Retrospective note:** Formally recorded on 11 October 2026. Originally encountered on 7 October 2026. This is a test-fixture defect, not confirmed evidence of a production allocation algorithm defect.
+## Bug fixes recorded in Gitea pull requests
 
-## Additional records worth checking before submission
-
-These were also part of the integration work, but should not automatically be added as application bugs:
-
-| Incident | Recommended treatment |
-| --- | --- |
-| Gitea access token or expired stored credentials prevented pushes | Record as a development-process incident if the tracker includes tooling blockers. |
-| Gitea runner offline or jobs stuck in queue | Record as a CI infrastructure incident only if there was a genuine runner fault. |
-| Sprint 4 merges caused conflicts in multiple frontend/backend files | Record integration risk and resolution in the report, not a software bug unless a regression resulted. |
-| OneDrive or `/MIR` file copying damaged the local Git repository | Document as an integration-process challenge. |
-| README or documentation failed to match the final release | Track in documentation issues, not application defect counts. |
-| Sprint 4 Member 6 or frontend coverage runs initially failed | Check whether those failures correspond to S4-05 or S4-06 before creating another issue. |
-
-**Draft counts:** Sprint 1 = 5, Sprint 2 = 12, Sprint 3 = 9, Sprint 4 = 6; **32 candidate records** in total. Consult [closed Gitea issues](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues?type=all&state=closed) for actual resolutions and proof; do not interpret this draft count as a closed-issue total.
-
-
----
-
-## Existing defect-management process and cross-sprint evidence
-
-## Defect management throughout Sprints 1–4
-
-Defects and regressions are managed using the **same Gitea issue tracker** as feature work, with CI failures and acceptance testing used as additional discovery channels. [Project boards](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects) record issue state and ownership; [Gitea Actions](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/actions) records automated build/test outcomes. These are different evidence sources: a completed card records workflow status, whereas a completed CI run shows the tests executed for a particular commit.
-
-The Sprint 2 and final rubric evaluate whether a bug tracker is **actively used**, not just described. Our approach connects reproduction, severity, owner, change, review, regression and release impact. A screenshot of the board does not establish zero remaining defects, and a failed CI job should not be labelled a product bug until the failure is diagnosed.
-
-## Examples of issues and regressions across all sprints
-
-| Stage | Recorded problem area | Corrective action / lesson | Retest to preserve |
+| Pull request | Merged | Defect | Fix and regression check |
 | --- | --- | --- | --- |
-| **Sprint 1 — foundation** | Early role-route/identity and prototype-to-API contract risks during parallel UI, auth and API setup. | Establish automatic onboarding, protected role routes, own-Tutor data and shared error contracts. These are handbook acceptance categories; individual resolved bug IDs were not independently supplied. | Fresh and returning sign-in, unverified email, wrong-role route, Tutor own-data tests. |
-| **Sprint 2 — Basic** | Organiser integration failure during 15 September stability pass. | Failing change was **reverted rather than shipped**; retest course deletion, timetable/candidate response and timesheet state. | Combined organiser flow after reverted merge. |
-| **Sprint 2 → 3 stabilisation** | `clashDetails` returned by data query but omitted by response mapper. | Map the missing field so the candidate frontend receives the expected contract. | Valid and conflicting candidate responses, optional recurrence fields. |
-| **Sprint 2 → 3 stabilisation** | A just-saved allocation displayed as conflicting with itself. | Pass `excludeAllocationId` when refreshing saved allocation candidates; continue blocking genuine overlaps. | Create/edit followed by immediate refresh and independent competing clash. |
-| **Sprint 2 → 3 stabilisation** | Marks and calendar failed together due to coupled UI loading; Tutor capacity ownership was unclear. | Independent fetches; Tutor-owned unavailable time/capacity and Organiser read-only view. | Missing timetable still shows valid marks; cross-role ownership remains protected. |
-| **Sprint 3 — Intermediate** | Greater risk from import duplicates, reminder retries, concurrent bulk writes and timesheet correction states. | Added scoped API permission, transaction, idempotency and race protections under Sprint 3 Member 5; actual failed test/issue references must be checked in the board. | Retry same payload, duplicate import, stale decision and state-transition tests. |
-| **Sprint 4 — Advanced** | Stale scenarios, competing bookings, swap decisions, stale search links and sick-note approvals become cross-user integrity risks. | Version/conflict rechecks, server-side availability validation, audit/restore and role-based ownership. A regression matrix is retained with final test evidence. | Two-browser booking race, stale version, scenario publish, audit rollback and booking/sick-note history. |
+| [#45](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/45) | 14 Sep | Student work, volunteer-request and public-holiday calls were wired to the wrong function instead of the Auth0 token getter. | Passed the raw token getter to those calls. |
+| [#47](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/47) | 15 Sep | Found in smoke testing: after an Organiser decision, timesheet and excuse status kept showing cached (304) responses, and saving to a locked timesheet showed a generic error. | Added `cache: 'no-store'` to the authenticated fetch wrapper and a specific locked-timesheet message; 242 of 242 tests passing. |
+| [#48](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/48) | 15 Sep | Sprint 2 stabilisation: timetable clashes mishandled weekly recurrence and touching times, allocation rules differed between the candidate, create and edit flows, and resubmitted timesheets kept a stale `submittedAt`. | Fixed each, with new regression and database tests (446 backend and 236 frontend tests passing). |
+| [#49](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/49) | 16 Sep | Found after deployment: Organisers controlled Tutors' schedules and weekly capacity, and mark, timetable and capacity rules were mixed together. | Moved schedule and capacity to the Tutor, made the Organiser view read-only and separated the three eligibility rules. |
+| [#50](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/50) | 16 Sep | Production: the Organiser's tutor-detail page failed when marks and schedule loaded together, TutorMark was not visible, and Monday-morning sessions were wrongly rejected. | Loaded marks and schedule independently and fixed the Monday regression (457 backend and 266 frontend tests passing). |
+| [#51](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/51) | 16 Sep | Production "Candidates unavailable" error on the allocation board: the API response dropped `clashDetails`, so the frontend rejected valid responses. | Included `clashDetails` in the response and added a regression test for the production scenario. |
+| [#52](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/52) | 16 Sep | A Tutor was allocated successfully, then immediately appeared to fail availability because the new allocation was checked against itself. | Excluded the saved allocation from its own clash check while still blocking genuine conflicts; regression test added. |
+| [#62](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/62) | 23 Sep | The backend CI job failed on merge commit `ff10eee` because parallel tests exhausted the shared runner. | Ran test files sequentially and raised the setup timeout for PGlite; 743 backend tests passing. |
+| [#78](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/78) | 27 Sep | Unstable CI runs, plus errors in shared weekly schedules, availability time slots and academic-term validation. | Stabilised the CI workflow, corrected schedule and time-slot handling and added fortnightly schedules with a migration; 1,920 of 1,920 tests passing. |
+| [#104](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/104) | 10 Oct | The final audit found eight defects, including non-atomic proposal generation (a late failure could leave a partial draft), manual proposal changes drifting from their audit reasons, stale strategy comparisons being saved, lost rejection reasons for unfilled requirements, broken proposal navigation and mismatched excused-history totals. | Repaired each with a regression test; all three CI jobs passed on the merge commit. |
 
-The explicitly dated corrections above are from the handbook's post-Sprint 2 stabilisation record (p. 29). Sprint 1 and later Sprint 3/4 rows identify documented risk/test areas where unique Gitea defect IDs were not provided; they must **not** be counted as individual closed defect records.
+## Problem areas by sprint
+
+| Stage | Problem area | Corrective action / lesson | Retest to preserve |
+| --- | --- | --- | --- |
+| **Sprint 1 — foundation** | Role-route, identity and prototype-to-API contract risks during parallel UI, auth and API setup. | Automatic onboarding, protected role routes, own-Tutor data and shared error contracts. | Fresh and returning sign-in, unverified email, wrong-role route, Tutor own-data tests. |
+| **Sprint 2 — Basic** | Organiser integration failure during the 15 September stability pass. | The failing change was **reverted rather than shipped**, then course deletion, timetable/candidate responses and timesheet state were retested ([#48](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/48)). | Combined Organiser flow after the reverted merge. |
+| **Sprint 2 → 3 stabilisation** | `clashDetails` returned by the query but dropped by the response mapper ([#51](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/51)). | Map the missing field so the candidate frontend receives the expected contract. | Valid and conflicting candidate responses, optional recurrence fields. |
+| **Sprint 2 → 3 stabilisation** | A just-saved allocation shown as conflicting with itself ([#52](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/52)). | Pass `excludeAllocationId` when refreshing saved allocation candidates; keep blocking genuine overlaps. | Create/edit followed by an immediate refresh, plus an independent competing clash. |
+| **Sprint 2 → 3 stabilisation** | Marks and calendar failed together because of coupled UI loading; Tutor capacity ownership was unclear ([#49](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/49), [#50](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/50)). | Independent fetches; Tutor-owned unavailable time and capacity with a read-only Organiser view. | A missing timetable still shows valid marks; cross-role ownership stays protected. |
+| **Sprint 3 — Intermediate** | Import duplicates, reminder retries, concurrent bulk writes and timesheet correction states; CI resource exhaustion ([#62](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/62)). | Scoped API permissions, transactions, idempotency and race protection under Sprint 3 Member 5. | Retry with the same payload, duplicate import, stale decision and state-transition tests. |
+| **Sprint 4 — Advanced** | Stale scenarios, competing bookings, swap decisions, stale search links and sick-note approvals as cross-user integrity risks; final-audit proposal defects ([#104](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls/104)). | Version/conflict rechecks, server-side availability validation, audit/restore and role-based ownership. | Two-browser booking race, stale version, scenario publish, audit rollback and booking/sick-note history. |
+
+The dated Sprint 2 → 3 corrections also appear in the handbook's post-Sprint 2 stabilisation record (p. 29).
 
 ## Reproducible bug record and workflow
 
-| Field in Gitea issue | Information retained | Value to the process |
+| Field in the Gitea record | Information retained | Value to the process |
 | --- | --- | --- |
-| Identification | Issue title/ID, discoverer, date, sprint and affected role | Repeated reports can be linked to one defect. |
+| Identification | Title/ID, discoverer, date, sprint and affected role | Repeated reports can be linked to one defect. |
 | Reproduction | Starting account and permissions, environment, ordered steps, expected vs actual result | Allows a reviewer to reproduce the fault rather than guessing. |
 | Severity | Critical security/data loss; major blocked core journey; moderate workaround; minor cosmetic | Helps decide whether integration/release is blocked. |
 | Root cause and fix | Focused branch, PR/review, relevant test, commit SHA | Associates the resolution with actual source. |
@@ -708,11 +548,11 @@ The explicitly dated corrections above are from the handbook's post-Sprint 2 sta
 
 **Decision flow:** discover → record and reproduce → prioritise → assign owner → fix on an appropriate branch → reviewer retests → Integration Lead merges → combined regression and CI → close with evidence. Critical security/data-integrity or major blocking defects stop release pending resolution or a formally recorded decision. A CI runner queued for another group is **not** a failed test; completion status is checked before reporting results.
 
-## Quality evidence and known limits
+## Quality evidence
 
-- [Original issues and project boards](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects) — operational source; login may be needed.
-- [Gitea Actions workflow history](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/actions) — per-commit CI outcomes, separate from bug issues.
+- [Closed bug issues](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues?type=all&state=closed) — the 32 bug records ([#106](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/106)–[#137](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/issues/137)).
+- [Pull requests](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/pulls?state=closed) — each fix with its description, review and tests; login may be needed.
+- [Original issues and project boards](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects) — feature work and ownership.
+- [Gitea Actions workflow history](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/actions) — per-commit CI outcomes.
 - [Testing and performance](#testing) — measured results and changed-feature regression matrix.
 - [Git methodology](#git-methodology) — review/merge order, including the Sprint 1–2 retrospective.
-
-A complete current unresolved-bug total cannot be asserted without a timestamped issue export. This document supplies the tracking method and documented examples; it does not invent issue numbers, fixes or zero-defect statistics.

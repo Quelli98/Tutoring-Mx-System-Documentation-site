@@ -1,5 +1,5 @@
 {
-  "source": "Final Sprint 4 main supplied 7 October 2026",
+  "source": "Route/schema inventory captured from 7 October 2026 application source; later evidence is dated separately.",
   "releaseSHA": "361954ec510c624c5f2a0f3d0940c2f7cb769d2e",
   "releaseShortSHA": "361954e",
   "routes": 120,
@@ -9,8 +9,20 @@
   "backendTestFiles": 52,
   "frontendTestFiles": 77,
   "schemaSHA256": "525ec714fe27b8a0c5005a3a17b3ce5b3b0108a729bce93cdd6e8013d4e7b389",
-  "routesSHA256": "d72d855616c0fda812c36471b7342e7cecd94e8abf100c2f6fd2b68cbb62cadf",
+  "routesSHA256": "39c1338d51dba7adbb7798e826d643d6d7fe769309a480f3820ed42012c3104b",
   "coverage": {
+    "frontendSrc": 80.87,
+    "backendSrc": 85.42,
+    "combinedTrackedLines": 10366,
+    "combinedCoveredLines": 8597,
+    "combinedCoverage": 82.93,
+    "commit": "6b528a3",
+    "date": "2026-10-11"
+  },
+  "documentationUpdated": "2026-10-11",
+  "auditMergeSHA": "a3939f85d81c6911affa6125b423152719e5b801",
+  "reportedMainShortSHA": "3540d46",
+  "historicalCoverage": {
     "frontendSrc": 80.96,
     "backendSrc": 85.29,
     "combinedTrackedLines": 10333,
@@ -18,5 +30,14 @@
     "combinedCoverage": 82.92,
     "commit": "361954e",
     "date": "2026-10-07"
-  }
+  },
+  "reportedAuditTests": {
+    "backend": 1466,
+    "frontend": 847,
+    "commit": "a3939f8",
+    "date": "2026-10-10",
+    "basis": "Final audit record cited by the member patch; application suites not rerun during the documentation audit."
+  },
+  "routesHashNote": "routesSHA256 hashes the bundled UTF-8 source with LF line endings; routesSourceCRLFSHA256 preserves the original CRLF hash. The route content is unchanged.",
+  "routesSourceCRLFSHA256": "d72d855616c0fda812c36471b7342e7cecd94e8abf100c2f6fd2b68cbb62cadf"
 }

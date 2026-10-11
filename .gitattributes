@@ -1,0 +1,6 @@
+# Preserve evidence files byte-for-byte across Windows and Linux checkouts.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.zip binary

@@ -13,7 +13,7 @@ The database is not simply a list of 30 unrelated tables. Its foreign-key relati
 | **Sprint 3 — Intermediate** | Represent demand/shortages, terms and recurring schedule exceptions, richer timesheet history and notifications. Late stabilisation added lecturer applications. | `StaffingRequirement`, `AcademicTerm`, `OccurrenceException`, `TimesheetRevision`, `TimesheetDispute`, `Notification`, `OrganiserApplication` |
 | **Sprint 4 — Advanced** | Support shared Student/Tutor ownership, two-person bookings, replacement approvals, collaborative draft planning and auditable/restorable state. | `TutoringBooking`, `StudentSickNote`, `TutorSwap`, `Scenario`, `ScenarioItem`, `ScenarioPresence`, `AuditEvent`, `MutationReceipt` |
 
-These are **functional groupings of the supplied final schema**, not precise timestamps for every individual migration. The 30 September handbook documents the baseline; the final 7 October source includes **30 Prisma application models, 14 enums and 30 migration directories**. For exact database changes, inspect the versioned migration files linked in the dictionary and [source downloads](#references). [Sprint roadmaps](#roadmap).
+These are **functional groupings of the final schema**, not precise timestamps for every individual migration. The 30 September handbook documents the baseline; the final 7 October source includes **30 Prisma application models, 14 enums and 30 migration directories**. For exact database changes, inspect the versioned migration files linked in the dictionary and [source downloads](#references). [Sprint roadmaps](#roadmap).
 
 ## 2. Entity–relationship diagram (ERD) — how the records connect
 
@@ -69,7 +69,34 @@ Neon is the **hosted database platform**, not an anonymous public database brows
 <figure><a href="evidence/sprint4-neon-production-tables-2026-10-07.png" target="_blank" rel="noreferrer"><img src="evidence/sprint4-neon-production-tables-2026-10-07.png" alt="Neon table browser showing Tutor MX workflow tables"></a><figcaption><strong>Production tables, 7 October.</strong><span>Visible established and advanced models, but not a full row-count or test-data audit.</span></figcaption></figure>
 </div>
 
-**Rubric evidence limitation:** screenshots show schema and deployment context, **not the exact number of production records or the proportion that are test data**. The final rubric asks for those figures; only publish counts from a dated authorised query and label them accurately. The read-only SQL file is available for that check. [Deployment](#deployment) · [Final submission rubric](#milestone4).
+### Production data — 11 October 2026
+
+We ran the read-only queries in the [database evidence script](downloads/database-evidence.sql) in the Neon SQL Editor on the `production` branch of the `tutor-mx-system` project.
+
+- **353 rows** across the 30 application tables, with data in 18 of them.
+- **27 accounts:** 9 Students, 10 Tutors and 8 Organisers.
+- **All 30 migrations applied**, the latest on 7 October 2026 — the same 30 migrations that are in the final source.
+
+| Area | Tables and row counts |
+| --- | --- |
+| Accounts and courses | Profile 27 · OrganiserApplication 1 · Course 4 · TutorMark 40 · AcademicTerm 4 · Notification 25 |
+| Allocation and staffing | Allocation 62 · StaffingRequirement 15 · TutorHourLimit 10 · TimeSlot 33 |
+| Timesheets and work | Timesheet 35 · TimesheetDeclaration 35 · TimesheetRevision 1 · WorkLog 43 · Excuse 1 · ApiWriteReceipt 4 |
+| Student overflow work | OverflowWork 7 · VolunteerClaim 6 |
+| Empty | Scenario, ScenarioItem, ScenarioPresence, TutoringBooking, BookingEvent, TutorSwap, SwapEvent, StudentSickNote, AuditEvent, MutationReceipt, OccurrenceException, TimesheetDispute |
+
+**Real and test data (team account).** Most of this data was created by the team while developing and testing the application; a smaller number of accounts belong to people outside the team who signed up and used it. The screenshots show counts, not a per-row provenance audit, so the exact proportion of real-user versus test records is not established. The Basic and Intermediate workflows (allocations, timesheets, work logs and volunteering) hold most of the data. The twelve empty tables are mostly the Sprint 4 features: scenarios, bookings, Tutor swaps, Student sick notes and the audit log have automated-test evidence but no persisted records in this production snapshot. An empty table alone cannot establish whether a workflow has ever been exercised.
+
+<div class="evidence-gallery">
+<figure><a href="evidence/neon-row-counts-1-2026-10-11.png" target="_blank" rel="noreferrer"><img src="evidence/neon-row-counts-1-2026-10-11.png" alt="Row counts, tables 1–8"></a><figcaption><strong>Row counts, tables 1–8</strong><span>AcademicTerm to MutationReceipt.</span></figcaption></figure>
+<figure><a href="evidence/neon-row-counts-2-2026-10-11.png" target="_blank" rel="noreferrer"><img src="evidence/neon-row-counts-2-2026-10-11.png" alt="Row counts, tables 9–17"></a><figcaption><strong>Row counts, tables 9–17</strong><span>Notification to StaffingRequirement.</span></figcaption></figure>
+<figure><a href="evidence/neon-row-counts-3-2026-10-11.png" target="_blank" rel="noreferrer"><img src="evidence/neon-row-counts-3-2026-10-11.png" alt="Row counts, tables 18–26"></a><figcaption><strong>Row counts, tables 18–26</strong><span>StudentSickNote to TutorMark.</span></figcaption></figure>
+<figure><a href="evidence/neon-row-counts-4-2026-10-11.png" target="_blank" rel="noreferrer"><img src="evidence/neon-row-counts-4-2026-10-11.png" alt="Row counts, tables 27–31"></a><figcaption><strong>Row counts, tables 27–31</strong><span>TutorSwap to WorkLog, plus 30 rows in _prisma_migrations.</span></figcaption></figure>
+<figure><a href="evidence/neon-profile-roles-2026-10-11.png" target="_blank" rel="noreferrer"><img src="evidence/neon-profile-roles-2026-10-11.png" alt="Accounts by role"></a><figcaption><strong>Accounts by role</strong><span>9 Students, 10 Tutors and 8 Organisers.</span></figcaption></figure>
+<figure><a href="evidence/neon-migrations-2026-10-11.png" target="_blank" rel="noreferrer"><img src="evidence/neon-migrations-2026-10-11.png" alt="Applied migrations"></a><figcaption><strong>Applied migrations</strong><span>30 migrations applied; the latest finished on 7 October 2026 at 14:45 UTC.</span></figcaption></figure>
+</div>
+
+[Deployment](#deployment) · [Final submission rubric](#milestone4).
 
 ## How to use the complete dictionary below
 

@@ -9,9 +9,27 @@ Tutor MX relies on maintained third-party libraries and hosted services for gene
 | **React** | Student, Tutor, Organiser interfaces and reusable stateful components. | Reusable role pages, forms, calendars and testable interaction patterns. | Accessibility, API error feedback and application business workflows. |
 | **Vite** | Frontend development and production asset bundling. | Lightweight local dev server and static Cloudflare build output. | Correct runtime/base-URL configuration and production validation. |
 | **Node.js + Express** | Separately hosted handwritten HTTP API, middleware and routes. | Explicit control over contracts, permissions and business rules; meets the handwritten-API requirement. | All endpoint design, ownership checks, validation and domain logic. |
-| **Prisma + PostgreSQL driver** | Data access, relational schema and migrations. | Source-controlled models, constraints and transaction/query support for Neon. | Schema design, safe migrations, prepared query usage and access policy. |
-| **Auth0 SPA/server SDKs and token verification** | Login, account recovery and cryptographic token verification. | Established identity provider instead of custom password handling. | Tutor MX onboarding, role/ownership checks and protected server routes. |
-| **Vitest and React Testing Library** | API/service tests and user-centred component tests. | Repeatable regression and coverage across both codebases. | Choosing meaningful assertions, fixtures, integration tests and reporting limits. |
+| **React Router** (`react-router-dom`) | Client-side routes for the Student, Tutor and Organiser workspaces, including protected routes. | The standard routing library for React; supports redirecting signed-out users and wrong roles. | Deciding which role may open each route (`ProtectedRoute`), always backed by server-side checks. |
+| **Prisma** (`prisma`, `@prisma/client`, `@prisma/adapter-pg`) | Typed queries, the relational schema and versioned migrations. | Source-controlled models, constraints and transactions for Neon PostgreSQL. | Schema design, safe migrations and every query's access rules. |
+| **node-postgres** (`pg`) | The PostgreSQL connection pool that Prisma's driver adapter uses to reach Neon. | Mature, widely used PostgreSQL driver required by `@prisma/adapter-pg`. | Connection configuration and keeping database URLs server-only. |
+| **Auth0 React SDK** (`@auth0/auth0-react`) | Browser sign-up, sign-in, sign-out and API access tokens. | Established identity provider instead of custom password handling, as the brief requires. | Onboarding and role routing. On the server, Tutor MX checks each token's RS256 signature against Auth0's published keys (JWKS) using Node's built-in `crypto`, and checks audience, issuer and expiry. |
+| **helmet** | Sets HTTP security headers on every API response. | One maintained middleware for headers such as Content-Security-Policy, Strict-Transport-Security and X-Content-Type-Options. | Applying it before all routes; Express's `x-powered-by` header is also disabled. |
+| **express-rate-limit** | Limits each client to 120 API requests per minute, and to 10 requests per 15 minutes on sensitive account routes such as password reset. | Protects against brute-force attempts and request floods without hand-written counters. | Choosing the limits and returning a clear `RATE_LIMITED` error. |
+| **dotenv** | Loads local settings such as database URLs and Auth0 configuration from a `.env` file during development and Prisma commands. | Keeps secrets out of source code. | `.env` files are never committed; production values are set in Render. |
+
+## Development and testing tools
+
+These tools are used to build and check the code; none of them runs in production.
+
+| Tool | Used for | Why it was selected |
+| --- | --- | --- |
+| **TypeScript** and **tsx** | Typed backend source (`npm run typecheck`); `tsx` runs TypeScript directly for the dev server and scripts. | Type errors in API contracts are caught before the code runs. |
+| **Vitest** with `@vitest/coverage-v8` | Test runner for both codebases, and the coverage reports uploaded to Codecov. | Fast, works natively with Vite, and one tool covers backend and frontend. |
+| **React Testing Library**, `user-event` and `jest-dom` | Frontend component tests that click and type as a user would. | Tests behaviour users see rather than component internals. |
+| **jsdom** | A simulated browser environment for frontend tests. | Lets component tests run in CI without a real browser. |
+| **Supertest** | Sends real HTTP requests to the Express app in backend tests without starting a server. | Exercises routes, middleware and status codes end to end. |
+| **PGlite** (`@electric-sql/pglite`) | An in-process PostgreSQL database for backend tests, which applies the real migrations. | Tests run against real PostgreSQL behaviour without Docker or a shared database. Its single connection cannot reproduce multi-connection races, as noted in [Testing](#testing). |
+| **ESLint** with `typescript-eslint` and the React Hooks and React Refresh plugins | Code-quality rules for the backend (`npm run lint:backend`) and frontend (`npm run lint`). | Enforces consistent code and catches React hook mistakes; a lint failure fails the CI job. |
 
 The source package files and lockfiles in the application repository define which specific subpackages and versions are actually installed. Their inclusion does not establish that every upstream package was independently audited or that all transitive licences are identical.
 

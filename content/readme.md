@@ -41,7 +41,7 @@ The frontend normally starts at port 5173 and the API at port 3000. The root dev
 | Auth0 issuer/domain, audience and roles-claim key | Backend environment | Verify the same access-token contract |
 | Auth0 Management credentials / connection | Backend only | Provision authorised roles and account lifecycle |
 | `DATABASE_URL` | Backend runtime | PostgreSQL connection |
-| `DIRECT_URL` when supplied | Backend/CLI environment | Preferred configured migration connection |
+| `DIRECT_URL` when set | Backend/CLI environment | Preferred configured migration connection |
 
 Use the exact variable names from the source `.env.example` files for fields not spelled out here. Never infer a secret from a screenshot or put it in the frontend.
 
@@ -51,11 +51,11 @@ Use the exact variable names from the source `.env.example` files for fields not
 | --- | --- |
 | “Token cache explicitly in memory” | Source sets local storage; documented in Frontend and Security |
 | Older production commit/deployment proof | Retained as historical; final Sprint 4 release is `361954e` |
-| Route inventory | Final catalogue follows the 120 operations registered in the supplied Sprint 4 `src/app.ts` |
+| Route inventory | Final catalogue follows the 120 operations registered in the final `src/app.ts` |
 | Sprint 2/Member 5 handoff wording | Historical; handbook marks Sprint 3 complete and updates Sprint 4 |
-| Linked root `MEMBER5_HANDOFF.md` | Absent from the archive; use the supplied `docs/sprint3-member5-completion.md` evidence instead |
+| Linked root `MEMBER5_HANDOFF.md` | Absent from the archive; use `docs/sprint3-member5-completion.md` instead |
 
-The final application README supplied inside the Sprint 4 repository is retained in the original README panel and download. The linked chapters and catalogues are the maintained explanation of the final source plus the 30 September handbook.
+The final application README from the Sprint 4 repository is retained in the original README panel and download. The linked chapters and catalogues are the maintained explanation of the final source plus the 30 September handbook.
 
 ## Run this documentation website
 

@@ -2,7 +2,7 @@
 
 The group used **Gitea Projects, issues, checklists, Member assignments and reviewed branches** as the operational work tracker throughout the semester. This documentation page is the **four-sprint index**; it does not replace the original issues or pretend that a handbook card alone proves its acceptance tests passed. All issue links below have an associated roadmap and source specification.
 
-The screenshots supplied by the team show the four Gitea project boards with completion columns: **Sprint 1 — 18 Done**, **Sprint 2 — 18 Done**, **Sprint 3 — 19 Done**, and **Sprint 4 — 18 Completed** at the time of capture. Those are *board snapshot counts*, not a live query or an independent assessment of production quality. Use the original Gitea board to inspect current status. Wits Gitea may require an authorised account.
+Our screenshots show the four Gitea project boards with completion columns: **Sprint 1 — 18 Done**, **Sprint 2 — 18 Done**, **Sprint 3 — 19 Done**, and **Sprint 4 — 18 Completed** at the time of capture. Those are *board snapshot counts*, not a live query or an independent assessment of production quality. Use the original Gitea board to inspect current status. Wits Gitea may require an authorised account.
 
 | Sprint | Original work board | Issue / acceptance source | Main delivery |
 | --- | --- | --- | --- |
@@ -11,9 +11,9 @@ The screenshots supplied by the team show the four Gitea project boards with com
 | **Sprint 3 — Intermediate** | [Sprint 3 board](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/42) | [Sprint 3 roadmap](#sprint3) · [completed baseline handbook p.31](documents/tutor-mx-handbook-30-september-2026.pdf#page=31) | Search/notifications, ranking/bulk/reports, import, timesheet corrections and Command Centre |
 | **Sprint 4 — Advanced** | [Gitea Tutor MX projects](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects) → Sprint 4 | [Sprint 4 roadmap & all 18 cards](#sprint4-roadmap) · [handbook pages 34–41](documents/tutor-mx-handbook-30-september-2026.pdf#page=34) | Student calendar/bookings/sickness; scenarios, swaps, audit, proposals |
 
-The Sprint 1 and Sprint 4 board-specific numeric URLs were not established in the supplied evidence; these links therefore open the confirmed project list rather than an invented location. The **18 September Sprint 3 handbook** preserves all 18 Member issue specifications with user acceptance, tests and tasks; a separate screenshot of the project board shows 19 cards in its Done column. That board total is not identical to the number of Member-feature cards because board cards need not be limited to handbook feature cards.
+The Sprint 1 and Sprint 4 board-specific numeric URLs are not recorded in our screenshots, so these links open the project list. The **18 September Sprint 3 handbook** preserves all 18 Member issue specifications with user acceptance, tests and tasks; a separate screenshot of the project board shows 19 cards in its Done column. That board total is not identical to the number of Member-feature cards because board cards need not be limited to handbook feature cards.
 
-## Gitea board screenshots supplied by the team
+## Gitea board screenshots
 
 These are **historical 9 October screenshots**, cropped to the issue board (not continuously refreshed). The Gitea cards themselves remain the authoritative source of current assignments, statuses, acceptance checklists and linked merges. Click any snapshot to inspect it at full size.
 

@@ -1,6 +1,6 @@
 # Sprint roadmaps and rubric traceability
 
-The project was delivered in four assessed milestones. Each roadmap links the **official criterion** to the most appropriate living technical chapter and to the **historical evidence that actually belonged to that sprint**. The roadmaps explain the evolution of the work; the technical reference describes the complete supplied application.
+The project was delivered in four assessed milestones. Each roadmap links the **official criterion** to the most appropriate living technical chapter and to the **historical evidence that actually belonged to that sprint**. The roadmaps explain the evolution of the work; the technical reference describes the complete final application.
 
 | Milestone | Period | Main objective | Read the complete map |
 | --- | --- | --- | --- |
@@ -9,7 +9,7 @@ The project was delivered in four assessed milestones. Each roadmap links the **
 | **Sprint 3 / Milestone 3** | 16–29 September 2026 | Deliver the Intermediate operations, strengthen verification and incorporate feedback. | [Sprint 3 roadmap](#sprint3) |
 | **Sprint 4 / Milestone 4** | 30 September–11 October 2026 | Complete Advanced planning and shared Student scheduling, then assess the whole delivered system. | [Sprint 4 roadmap](#sprint4-roadmap) |
 
-The Sprint 4 handbook records the **planned acceptance criteria**, while the [final source-based delivery record](#sprint4), [feature register](#features) and [rubric evidence map](#milestone4) describe the state of the supplied final code. A planned task is not automatically proof that a production demonstration or external sign-off happened.
+The Sprint 4 handbook records the **planned acceptance criteria**, while the [final source-based delivery record](#sprint4), [feature register](#features) and [rubric evidence map](#milestone4) describe the state of the final code. A planned task is not automatically proof that a production demonstration or external sign-off happened.
 
 ## Live issue boards and the original acceptance tests
 
@@ -19,7 +19,7 @@ All four sprint roadmaps link their official rubric requirements to the most rel
 - [Sprint 2 Gitea project board](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/39)
 - [Sprint 3 Gitea project board](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/42)
 
-The Sprint 1 and Sprint 4 projects are linked through the **all-projects** landing page because the supplied screenshots do not establish a reliable board-specific URL. The individual roadmaps include the *exact handbook pages* for Member stories, acceptance checks and tasks. This public documentation remains readable even for a marker who cannot sign in to Wits Gitea.
+The Sprint 1 and Sprint 4 projects are linked through the **all-projects** landing page because the screenshots do not show their board-specific URLs. The individual roadmaps include the *exact handbook pages* for Member stories, acceptance checks and tasks. This public documentation remains readable even for a marker who cannot sign in to Wits Gitea.
 
 ## How to follow a rubric link
 
@@ -58,6 +58,6 @@ All six **Understand Tutor MX** chapters are written as **cumulative histories f
 | Backend/API | Handwritten routes, security, hard rules | Real protected mutations | Validated workflow services, idempotency | Transactions, proposals, audit and restore | [Backend](#backend) |
 | Scheduling | Tutor busy time | Work/timesheet states | Imports, terms, exceptions | Shared Student/Tutor calendar and bookings | [Scheduling](#student-scheduling) |
 | Master Organiser | Base Auth0/roles | Role security hardening | Lecturer approval introduced during late stabilisation | Approval retained with final security checks | [Master Organiser](#master-organiser) |
-| Gitea work tracker | 18 issue cards | 18 issue cards | 19 Done in supplied screenshot | 18 issue cards | [Work tracker](#work-tracker) |
+| Gitea work tracker | 18 issue cards | 18 issue cards | 19 Done on the board screenshot | 18 issue cards | [Work tracker](#work-tracker) |
 
 [Open complete current database schema](#database) · [Read testing and Codecov](#testing) · [View release evidence](#sprint4).

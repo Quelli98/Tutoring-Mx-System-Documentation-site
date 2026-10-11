@@ -97,9 +97,178 @@ The following requests illustrate how the **same handwritten API** supports diff
 | **Organiser** | `GET /api/organiser/command-centre` | School staffing and operational indicators. |
 | **Master Organiser** | `GET /api/master-organiser/organiser-applications` | Lecturer registration review queue; normal Organisers receive 403. |
 
-For a simple demonstration, change **only the final path** in the authorised PowerShell command above. Some routes require query parameters, a path ID or a defined request body; use the complete contract inventory before calling them. **Do not run mutation examples against production merely to demonstrate curl** — use approved test data and the normal application workflow.
+For a simple demonstration, change **only the final path** in the authorised PowerShell command above. Some routes require query parameters, a path ID or a defined request body; section 5 shows the request bodies for the main workflows, and the complete contract inventory covers the rest. **Do not run mutation examples against production merely to demonstrate curl** — use approved test data and the normal application workflow.
 
-## 5. How the API changed in each sprint
+## 5. Request and response examples for the main workflows
+
+These examples show the exact fields each main workflow accepts and the shape of a successful response. Field names, validation rules and error codes come from the final source (`src/app.ts` and the service files); IDs, names and times are made-up example values. Every successful response wraps its result in `data`, and every error uses the `{"error":{"code","message"}}` envelope from section 3.
+
+The `POST` and `PATCH` examples change data. Run them against a local API with a test account, not against production.
+
+```bash
+API=http://localhost:3000        # or https://tutor-mx-api.onrender.com for read-only requests
+read -s -p "API access token: " TOKEN; echo
+```
+
+PowerShell users can enter the token as in section 2 and use `curl.exe` with the same arguments.
+
+### Any signed-in user: current profile
+
+```bash
+curl -s "$API/api/me" -H "Authorization: Bearer $TOKEN"
+```
+
+```json
+{"data":{"profile":{"id":41,"email":"tutor@example.com","fullName":"Example Tutor A","role":"TUTOR"}}}
+```
+
+A Master Organiser's response also includes `"capabilities":{"masterOrganiser":true}`.
+
+### Organiser: find eligible Tutors for a session
+
+```bash
+curl -s "$API/api/allocations/candidates?courseId=12&startsAt=2026-10-13T08:00:00.000Z&endsAt=2026-10-13T10:00:00.000Z&minimumMark=65&requestedHours=2" \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+```json
+{
+  "data": {
+    "candidates": [
+      {
+        "tutorId": 41, "fullName": "Example Tutor A", "mark": 80,
+        "weeklyLimit": 15, "usedHours": 3, "remainingHours": 12,
+        "hasClash": false, "isEligible": true, "reasonCodes": [],
+        "clashDetails": [], "markBand": 80, "capacityShare": 0.2
+      },
+      {
+        "tutorId": 57, "fullName": "Example Tutor B", "mark": 72,
+        "weeklyLimit": 10, "usedHours": 2, "remainingHours": 8,
+        "hasClash": true, "isEligible": false, "reasonCodes": ["schedule-clash"],
+        "clashDetails": [
+          { "kind": "busy", "label": null, "startsAt": "2026-10-13T09:00:00.000Z",
+            "endsAt": "2026-10-13T11:00:00.000Z", "recurrence": "WEEKLY" }
+        ],
+        "markBand": 70, "capacityShare": 0.2
+      }
+    ]
+  }
+}
+```
+
+`reasonCodes` explains why a Tutor is not eligible: `insufficient-mark`, `schedule-clash` or `hour-limit-exceeded`. A missing or invalid query value returns **400** `VALIDATION_ERROR`.
+
+### Organiser: create the allocation
+
+```bash
+curl -s -X POST "$API/api/allocations" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"tutorId":41,"courseId":12,"startsAt":"2026-10-13T08:00:00.000Z","endsAt":"2026-10-13T10:00:00.000Z","minimumMark":65,"requestedHours":2,"status":"CONFIRMED"}'
+```
+
+**201 Created:**
+
+```json
+{"data":{"allocation":{"id":301,"tutorId":41,"courseId":12,"startsAt":"2026-10-13T08:00:00.000Z","endsAt":"2026-10-13T10:00:00.000Z","allocatedHours":2,"status":"CONFIRMED"}}}
+```
+
+`status` is optional and may be `PROPOSED` or `CONFIRMED`. `requestedHours` must be above 0 and no longer than the session. The server rechecks every rule when saving: a Tutor who fails one returns **409** with that rule's code (for example `schedule-clash` or `hour-limit-exceeded`), an unknown Tutor or course returns **404** (`TUTOR_NOT_FOUND` or `COURSE_NOT_FOUND`), and a conflicting concurrent change returns **409** `ALLOCATION_CONFLICT`.
+
+### Tutor: log worked hours, then submit the timesheet
+
+```bash
+curl -s -X POST "$API/api/tutor/work-logs" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"allocationId":301,"workDate":"2026-10-13","hours":2,"description":"COMS1018A lab session"}'
+```
+
+Returns **201** with `{"data":{"workLog":{…}}}`. `hours` must be above 0 and at most 24, with no more than two decimal places, and `description` is required (up to 500 characters). If that week's timesheet has already been submitted or approved, the API returns **409** `TIMESHEET_LOCKED`.
+
+When the week is complete, submit the timesheet (no request body):
+
+```bash
+curl -s -X POST "$API/api/tutor/timesheets/88/submit" -H "Authorization: Bearer $TOKEN"
+```
+
+### Organiser: approve or return a timesheet
+
+```bash
+curl -s -X PATCH "$API/api/timesheets/88/decision" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"decision":"RETURN","reason":"Please split the Monday hours by session."}'
+```
+
+Returns **200** with `{"data":{"timesheet":{…}}}`. `decision` must be `APPROVE` or `RETURN`, and a `reason` is required when returning.
+
+### Tutor: ask to be excused from a session
+
+```bash
+curl -s -X POST "$API/api/tutor/excuses" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"allocationId":301,"reason":"Medical appointment"}'
+```
+
+Returns **201** with `{"data":{"excuse":{…}}}`. The reason is required (up to 1,000 characters) and the session must be assigned to that Tutor.
+
+### Student: volunteer for open work
+
+```bash
+curl -s "$API/api/student/open-work" -H "Authorization: Bearer $TOKEN"
+curl -s -X POST "$API/api/student/volunteer-requests" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"overflowWorkId":17}'
+```
+
+The first returns `{"data":{"workItems":[…]}}`. The second returns **201** with `{"data":{"volunteerRequest":{…}}}`, which the Student can follow until an Organiser approves or rejects it.
+
+### Student: book a tutoring session
+
+```bash
+curl -s -X POST "$API/api/student/bookings" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"tutorId":41,"courseId":12,"termId":3,"startsAt":"2026-10-15T12:00:00.000Z","endsAt":"2026-10-15T13:00:00.000Z","requestKey":"booking-7f3c1d2a"}'
+```
+
+**201 Created** (the `booking` part of the response):
+
+```json
+{
+  "id": 912, "studentId": 230, "tutorId": 41, "courseId": 12, "termId": 3,
+  "studentName": "Example Student", "tutorName": "Example Tutor A",
+  "courseCode": "COMS1018A", "courseName": "Introduction to Algorithms",
+  "startsAt": "2026-10-15T12:00:00.000Z", "endsAt": "2026-10-15T13:00:00.000Z",
+  "status": "CONFIRMED", "occurrenceStatus": "SCHEDULED", "version": 1,
+  "createdAt": "2026-10-11T11:20:00.000Z", "updatedAt": "2026-10-11T11:20:00.000Z"
+}
+```
+
+Alongside `booking`, the response includes the booking's `history`, the Student's `sickNotes`, and the flags `sickNotePending`, `canSubmitSickNote` and `canCancel`. `requestKey` is a retry key of 8–128 letters, digits, `-` or `_`: repeating the same request with the same key returns the original booking instead of creating a duplicate, while reusing the key for a different request returns **409** `SCHEDULING_STALE`. If someone else takes the time first, the API returns **409** `BOOKING_UNAVAILABLE`.
+
+### Organiser: create a course
+
+```bash
+curl -s -X POST "$API/api/courses" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"code":"COMS1018A","name":"Introduction to Algorithms","hourlyRate":180,"budget":25000}'
+```
+
+Returns **201** with `{"data":{"course":{…}}}`. Only these four fields are accepted; `hourlyRate` must be above 0 and `budget` 0 or more.
+
+### Any signed-in user: South African public holidays
+
+```bash
+curl -s "$API/api/public-holidays?year=2026" -H "Authorization: Bearer $TOKEN"
+```
+
+Shortened to one holiday:
+
+```json
+{"data":{"source":"external","holidays":[{"date":"2026-12-16","name":"Day of Reconciliation","countryCode":"ZA","nationalHoliday":true,"holidayTypes":["Public"]}],"retrievedAt":"2026-10-11T11:14:00.000Z"}}
+```
+
+If the Nager.Date provider is unavailable, `source` is `"fallback"`, `retrievedAt` is `null` and a `reason` is included, so scheduling keeps working. [Holiday integration](#integration).
+
+### Rate limits, pagination and retry keys
+
+**Rate limits.** Every `/api` route allows 120 requests per minute from each client. The account routes `password-reset`, `onboarding`, `organiser-registration`, `organiser-application-status`, `resend-verification` and `delete-account` allow 10 requests per 15 minutes. Over the limit, the API returns **429** `RATE_LIMITED`, and responses carry the standard `RateLimit` and `RateLimit-Policy` headers so a client can see how many requests remain. `/health` and `/ready` are not rate limited.
+
+**Pagination.** List routes that can grow return pages: `GET /api/me/bookings`, `GET /api/swaps` and `GET /api/organiser/student-sick-notes` return 20 items per page, and `GET /api/organiser/audit` returns 50. Pass `?page=2` for the next page; the response includes `page` and `hasMore`. `GET /api/me/bookings` can instead take `startsAt` and `endsAt` for a calendar window of up to 28 days.
+
+**Retry keys.** Some writes can be retried safely without creating duplicates. `POST /api/organiser/overflow-work` and `POST /api/tutor/time-slots/import/commit` accept an `Idempotency-Key` header of 8–128 letters, digits, dots, underscores, colons or hyphens: repeating the same request with the same key returns the original result, while reusing a key for different content returns **409** `IDEMPOTENCY_KEY_REUSED`. Booking, sick-note and swap requests use a `requestKey` field in the body in the same way.
+
+## 6. How the API changed in each sprint
 
 | Sprint | New layer of API functionality | Example contracts in the final source |
 | --- | --- | --- |
@@ -110,7 +279,7 @@ For a simple demonstration, change **only the final path** in the authorised Pow
 
 This table gives **representative routes, not the entire inventory**. The catalogue at the bottom lists the actual final 120 registrations with method, path, access level and source references. [Feature origins](#features) · [Work tracker](#work-tracker).
 
-## 6. Special workflows — how the API protects decisions
+## 7. Special workflows — how the API protects decisions
 
 **Organiser registration:** ordinary Student/Tutor onboarding uses `POST /api/auth/onboarding`; a lecturer instead requests access through `POST /api/auth/organiser-registration`. Their `OrganiserApplication` stays Pending until a Master Organiser's protected review action approves or rejects it. The additional `MASTER_ORGANIZER` claim is checked on the **backend**, not just by hiding a button. [See the entire lecturer approval journey](#student-scheduling).
 
@@ -120,8 +289,8 @@ This table gives **representative routes, not the entire inventory**. The catalo
 
 **External holiday integration:** the backend calls the approved South African holiday service; the frontend reads the safe result/fallback through `GET /api/public-holidays`. The app does not require direct browser access to the external provider. [Holiday integration](#integration).
 
-## 7. Verify the implementation, not just the examples
+## 8. Verify the implementation, not just the examples
 
-The **120-operation catalogue immediately below** is generated from the supplied final `src/app.ts` route registrations. Filter it by method or access scope to inspect what is actually exposed. The evidence downloads include a [read-only Postman collection](downloads/tutor-mx-readonly.postman_collection.json), [OpenAPI-shaped inventory](downloads/openapi-inventory.json), [endpoint inventory](downloads/endpoint-inventory.json) and [captured route source](downloads/api-routes.ts.txt).
+The **120-operation catalogue immediately below** is generated from the route registrations in the final `src/app.ts`. Filter it by method or access scope to inspect what is actually exposed. The evidence downloads include a [read-only Postman collection](downloads/tutor-mx-readonly.postman_collection.json), [OpenAPI-shaped inventory](downloads/openapi-inventory.json), [endpoint inventory](downloads/endpoint-inventory.json) and [captured route source](downloads/api-routes.ts.txt).
 
 These inventories make it possible to review naming, access and HTTP design, but they **do not create a Swagger server on Render or promise complete hand-authored JSON request schemas**. The documentation site serves these files statically. For recorded performance and security evidence, see [Testing, accessibility & performance](#testing) and the [final assessment rubric](#milestone4).

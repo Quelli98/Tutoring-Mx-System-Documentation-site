@@ -2,6 +2,26 @@
 
 Tutor MX was developed for Wits COMS3011A by a six-member team using a **Scrum-inspired, issue-driven methodology**. The course requirements and client needs were translated into user stories, observable acceptance tests and implementable tasks. Rather than assigning work arbitrarily, the group discussed responsibilities together before each sprint, used Gitea to record the decisions and assessed completed work against its agreed acceptance criteria.
 
+## Our methodology: Scrum, adapted for a student team
+
+We followed the Scrum framework as defined in the *Scrum Guide* (Schwaber and Sutherland, 2020), adapted for a six-person student team working to fixed course milestones. We chose Scrum for three reasons. The course already divides the project into four fixed-length milestones, which map directly onto sprints. Our requirements came from a client who reviewed progress at set points, which suits Scrum's sprint reviews. And Scrum's inspect-and-adapt cycle let us change how we worked mid-semester, which we did after Sprint 2.
+
+| Scrum element | How we applied it | Evidence |
+| --- | --- | --- |
+| **Sprints** | Four sprints aligned with the course milestones: 3–25 August, 26 August–15 September, 16–29 September and 30 September–11 October. | [Sprint roadmaps](#roadmap) |
+| **Product Backlog** | User stories with acceptance tests and task breakdowns, written in the sprint handbook (18 cards per sprint). | [Sprint handbook](documents/tutor-mx-handbook-30-september-2026.pdf) · [Work tracker](#work-tracker) |
+| **Sprint Planning** | Before each sprint the team read the plan together and voted on who would own each role and its cards (see below). | [Sprint planning record](evidence/sprint-planning.jpg) |
+| **Sprint Backlog** | Each sprint's cards on its own Gitea project board, with an owner and a status. | [Gitea project boards](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects) |
+| **Daily Scrum** | Short check-ins on progress and blockers, held once or twice a week rather than daily, for example on 17 August (about 15 minutes) and 21 August (about 26 minutes). | [17 August meeting](evidence/scrum-meeting-2026-08-17.png) · [21 August check-in](evidence/daily-scrum-2026-08-21.png) |
+| **Sprint Review** | Reviews with our client tutor on requirements and progress, such as the 18 August requirements review. | [18 August client meeting](evidence/client-requirements-meeting-2026-08-18.png) · [Stakeholder reviews](#stakeholder-decisions) |
+| **Sprint Retrospective** | On 11 September all six members met for about 19 minutes and agreed that parallel integration was not working, so Sprints 3 and 4 switched to a sequential Member 1 → 6 order. | [11 September retrospective](evidence/scrum-meeting-2026-09-11.png) |
+| **Increment** | An integrated, CI-checked `main` at the end of each sprint, deployed to Cloudflare Pages and Render. | [Deployment](#deployment) · [Testing](#testing) |
+| **Definition of Done** | A card is done only when its acceptance tests pass, checks have run and the reviewed work is integrated (see below). | [Definition of Done](#process/definition-of-done-and-improvement-practice) |
+
+**Roles.** Our client tutor acted as **Product Owner**: as the brief describes, the client guides priorities and decides whether a feature is complete. The handbook's **Project Coordinator** role was the closest match to a **Scrum Master**, preparing each sprint goal and board and recording client decisions. The six members were the **Developers**, and an **Integration Lead** reviewed and merged work into `main`.
+
+**Where we adapted Scrum.** Daily Scrums were not daily: alongside other courses, we agreed to meet at least once a week and aim for twice, with some meetings including the client and others just the team. The client was available at set review points rather than continuously, so client decisions were recorded and shared through the Project Coordinator. Roles were chosen by vote each sprint rather than fixed for the whole project.
+
 ## How members chose their responsibilities
 
 1. **Read the work together.** At sprint planning, the members went through the proposed roles and issue cards in the [Tutor MX sprint handbook](documents/tutor-mx-handbook-30-september-2026.pdf), including each user story, dependency, acceptance test and task breakdown.
@@ -26,7 +46,7 @@ The assigned **Member 1–6** labels describe sprint responsibilities, not separ
 
 The issue was not that parallel development is inherently incorrect. **Our particular tasks were tightly connected**: frontend screens depended on API contracts, backend routes depended on Prisma changes and allocation/booking rules were shared across several roles. Under the first two sprints' less coordinated completion order, members could finish their own work while still waiting for or conflicting with another person's changes. That caused difficult merges, repeated troubleshooting and regression work. A chronological review-and-merge order gave the next person one current, approved baseline and helped the team complete the later sprints more reliably.
 
-This is a **team retrospective**, supplied by the group and supported by the handbook's documented change to sequential integration; it is not a claim that the course mandated all teams to work sequentially. The detailed Git mechanics and branch handover rules are documented once in [Git methodology](#git-methodology).
+This is the **team's own retrospective**, supported by the handbook's documented change to sequential integration; it is not a claim that the course mandated all teams to work sequentially. The detailed Git mechanics and branch handover rules are documented once in [Git methodology](#git-methodology).
 
 ## From user story to completed feature
 

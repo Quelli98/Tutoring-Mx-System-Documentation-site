@@ -15,11 +15,11 @@ Testing grew from the Sprint 1 identity/API/role foundations into a combined fro
 
 ### Release gate and evidence chain
 
-`npm run check` combines Prisma generation, lint, type checking, tests, builds and security checks in the application repository; `npm run coverage` generates the test-coverage artifacts. Before merge, each Member reproduces their handbook story, a failure case and a wrong-role/empty case. After review, the Integration Lead retests combined main and checks the completed [Gitea Actions run](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/actions). A queued CI job is not green. Final user testing/feedback is a separate assessment source and should not be replaced by an automated test screenshot. [Work tracker](#work-tracker) · [User feedback](#user-feedback).
+`npm run check` combines Prisma generation, lint, type checking, tests, builds and security checks in the application repository; `npm run coverage` generates the test-coverage artifacts. Before merge, each Member reproduces their handbook story, a failure case and a wrong-role/empty case. After review, the Integration Lead retests combined main and checks the completed [Gitea Actions run](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/actions). A queued CI job is not green. User feedback is reported separately from automated testing. [Work tracker](#work-tracker) · [User feedback](#user-feedback).
 
 ## Tests are evidence with a scope
 
-The supplied final Sprint 4 source contains **52 backend test files and 77 frontend test files**. The Codecov screenshots supplied for the final `main` commit `361954e` show **80.96%** line coverage for `frontend/src` and **85.29%** for backend `src`. These are exact-release Codecov values; they are separate from browser role smoke tests and performance/load evidence.
+The final audited code on `main` (`a3939f8`, 10 October 2026) is reported by the team's final audit as having **1,466 backend tests in 52 files and 847 frontend tests in 77 files**, all passing, with all three Gitea Actions jobs passing on `a3939f8`. These application runs were not repeated as part of this documentation-site audit. **Codecov reports 85.42% line coverage for the backend and 80.87% for the frontend** (82.93% combined), measured on 11 October 2026 on `main` commit `6b528a3`, the final frontend test fix (snapshot below). The final audit's own Vitest report gives higher line figures (92.69% backend, 87.60% frontend) on a different commit and reporting basis. These snapshots are not directly interchangeable, and the attachments alone do not isolate the cause of the difference; the [final audit](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/src/branch/main/docs/final-audit.md) and its [validation summary](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/src/branch/main/docs/evidence/final-audit/validation-summary.json) record that run. These results are separate from browser role smoke tests and performance/load evidence.
 
 | Check | Command in the application checkout | What it demonstrates |
 | --- | --- | --- |
@@ -34,7 +34,7 @@ The supplied final Sprint 4 source contains **52 backend test files and 77 front
 
 ## Historical measurements, not new claims
 
-The supplied Member 5 audit records a local PGlite benchmark with 1,000 Tutors, 50 courses, 500 confirmed allocations and 250 approved work logs. It took seven warm measurements and excluded production network, Auth0 and hosted-database latency.
+The Member 5 audit records a local PGlite benchmark with 1,000 Tutors, 50 courses, 500 confirmed allocations and 250 approved work logs. It took seven warm measurements and excluded production network, Auth0 and hosted-database latency.
 
 | Operation | Median ms | Maximum ms | SQL statements |
 | --- | --- | --- | --- |
@@ -85,30 +85,72 @@ The screenshots show request/latency statistics but do not expose a complete HTT
 
 Chrome device emulation was captured at **400×645** (phone-scale) and **757×645** (tablet/narrow desktop-scale), with a normal desktop landing-page capture retained under Deployment. The Student navigation collapses to a Menu control at the narrow width, and the timetable/availability pages remain readable at the wider test width. One availability capture also shows the visible focus outline on the Menu button, providing concrete focus-state evidence.
 
-The device-emulation screenshots also show a horizontal scrollbar at the bottom of the emulated viewport. This documentation therefore does **not** claim a perfect no-horizontal-overflow audit. A separate Lighthouse score, screen-reader run and complete keyboard traversal transcript were not supplied.
+The device-emulation captures also show a horizontal scrollbar at the bottom of the viewport, listed under [Known limitations](#milestone4/known-limitations). The Lighthouse results follow below.
 
 <div class="evidence-gallery">
 <figure><a href="evidence/sprint4-responsive-student-phone-400x645-2026-10-07.png" target="_blank" rel="noreferrer"><img src="evidence/sprint4-responsive-student-phone-400x645-2026-10-07.png" alt="Student workspace in Chrome device emulation at 400 by 645"></a><figcaption><strong>Phone-scale Student workspace</strong><span>At 400×645 the side navigation collapses into a Menu control and the primary Student workspace content stacks vertically.</span></figcaption></figure>
 <figure><a href="evidence/sprint4-responsive-student-timetable-757x645-2026-10-07.png" target="_blank" rel="noreferrer"><img src="evidence/sprint4-responsive-student-timetable-757x645-2026-10-07.png" alt="Student timetable in Chrome device emulation at 757 by 645"></a><figcaption><strong>Student timetable at a wider responsive width</strong><span>The timetable header, date control and schedule summary remain visible at 757×645.</span></figcaption></figure>
-<figure><a href="evidence/sprint4-responsive-student-availability-757x645-2026-10-07.png" target="_blank" rel="noreferrer"><img src="evidence/sprint4-responsive-student-availability-757x645-2026-10-07.png" alt="Student tutoring availability page at 757 by 645 with visible focus ring"></a><figcaption><strong>Availability screen and visible focus state</strong><span>The Menu button has a visible keyboard-style focus outline; this is useful evidence but not a substitute for a complete accessibility audit.</span></figcaption></figure>
+<figure><a href="evidence/sprint4-responsive-student-availability-757x645-2026-10-07.png" target="_blank" rel="noreferrer"><img src="evidence/sprint4-responsive-student-availability-757x645-2026-10-07.png" alt="Student tutoring availability page at 757 by 645 with visible focus ring"></a><figcaption><strong>Availability screen and visible focus state</strong><span>The Menu button has a visible keyboard-style focus outline.</span></figcaption></figure>
+</div>
+
+### Lighthouse audit — 11 October 2026
+
+We ran Lighthouse 13.4 in Chrome DevTools on the live application: the public landing page in Navigation mode (mobile and desktop), and the signed-in Organiser dashboard in Snapshot mode, which checks the page as it is without signing out. Snapshot mode reports checks passed rather than a score and does not measure performance.
+
+| Page | Mode | Performance | Accessibility | Best practices | SEO |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Landing page, mobile | Navigation | **79** | **100** | **100** | **92** |
+| Landing page, desktop | Navigation | **93** | **100** | **100** | **92** |
+| Organiser dashboard, signed in | Snapshot | not measured | 30 of 31 checks | 4 of 4 checks | 5 of 6 checks |
+
+On desktop the landing page's largest element appears after 1.6 s (first content 0.8 s). On Lighthouse's simulated mobile phone and slow network it appears after 4.6 s (first content 2.9 s). Both runs had no blocking time and essentially no layout shift. Full reports: [mobile](downloads/lighthouse-landing-mobile-2026-10-11.html) · [desktop](downloads/lighthouse-landing-desktop-2026-10-11.html).
+
+**Issues Lighthouse found:**
+
+- **Colour contrast on the Organiser dashboard.** Eight elements fall below the WCAG 2 AA minimum of 4.5:1: grey helper text in empty states and the week-range toggle (`#6B7489` on `#F3F5FA`, 4.29:1), and course chips and Tutor initials in the Student pink (`#FC4C95` on `#FFE6F0`, 2.69:1) and Tutor violet (`#B82FE2` on `#F6E7FC`, 3.9:1). Darker text shades for those three pairs would fix this.
+- **robots.txt.** The site has no `robots.txt`, so Cloudflare Pages returns the application's HTML at that address and Lighthouse cannot read it. Adding a plain-text `robots.txt` to the frontend's public folder would fix this SEO check.
+- **Mobile load time.** Lighthouse's main suggestions are to split the single large JavaScript bundle, reduce render-blocking requests and deliver the landing-page photos in a smaller format.
+
+<div class="evidence-gallery">
+<figure><a href="evidence/lighthouse-landing-mobile-2026-10-11.png" target="_blank" rel="noreferrer"><img src="evidence/lighthouse-landing-mobile-2026-10-11.png" alt="Landing page, mobile"></a><figcaption><strong>Landing page, mobile</strong><span>Performance 79, Accessibility 100, Best practices 100, SEO 92.</span></figcaption></figure>
+<figure><a href="evidence/lighthouse-landing-desktop-2026-10-11.png" target="_blank" rel="noreferrer"><img src="evidence/lighthouse-landing-desktop-2026-10-11.png" alt="Landing page, desktop"></a><figcaption><strong>Landing page, desktop</strong><span>Performance 93, Accessibility 100, Best practices 100, SEO 92.</span></figcaption></figure>
+<figure><a href="evidence/lighthouse-organiser-snapshot-2026-10-11.png" target="_blank" rel="noreferrer"><img src="evidence/lighthouse-organiser-snapshot-2026-10-11.png" alt="Organiser dashboard, Snapshot mode"></a><figcaption><strong>Organiser dashboard, Snapshot mode</strong><span>30 of 31 accessibility checks, 4 of 4 best-practice checks and 5 of 6 SEO checks passed.</span></figcaption></figure>
 </div>
 
 ## Codecov: how automated test coverage was measured
 
 **Codecov** is the reporting service used alongside the automated backend and frontend test suites. When tests run with coverage instrumentation, the tools record which source-code lines were exercised. Gitea Actions can upload these results to Codecov, where the date, commit and coverage of each codebase can be inspected. This complements our unit/integration tests: it helps identify **untested areas**, but a high percentage alone does **not** demonstrate correct feature behaviour, secure authorisation, mobile accessibility or production performance.
 
-**How to read the figures below:** *Tracked* is the total measured lines in that codebase; *Covered* means executed by tests; *Partial* means only part of a measured line/branch was exercised; *Missed* means the run did not exercise it. The displayed percentages are those shown by Codecov for the specified Git commit, **not** an invented total of passed tests and not evidence that every user story passed its browser acceptance test.
+**How to read the figures below:** *Tracked* is the total measured lines in that codebase; *Covered* means executed by tests; *Partial* means only part of a measured line/branch was exercised; *Missed* means the run did not exercise it. The displayed percentages are those shown by Codecov for the specified Git commit, **not** a count of passed tests, and not evidence that every user story passed its browser acceptance test.
 
 For every code change the team also ran the relevant local frontend and backend Vitest suites, checked error/permission boundaries, then used the Gitea Actions/shared-runner workflow. CI/Codecov evidence should be matched to the reviewed commit rather than assumed from a prior screenshot. This is how Codecov supports **Sprint 2 automated-testing**, **Sprint 3 coverage**, and the **final Milestone 4 Testing** rubric.
 
-### Final recorded coverage snapshot — 7 October 2026
+### Final Codecov snapshot — 11 October 2026
+
+Captured at 13:32 on 11 October 2026 from Codecov for `main` commit `6b528a3`, the final frontend test fix merged that day (Codecov project `Quelli98/tutor-mx-deployment`).
+
+| Coverage root | Tracked | Covered | Partial | Missed | Coverage |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `frontend/src` | 5,660 | 4,577 | 475 | 608 | **80.87%** |
+| backend `src` | 4,706 | 4,020 | 351 | 335 | **85.42%** |
+| Combined | 10,366 | 8,597 | 826 | 943 | **82.93%** |
+
+In the backend, `integrations` (94.62%), `http` (93.48%), `services` (88.81%) and `auth` (81.52%) are best covered, while the `app.ts` route wiring is lowest at 78.44%. In the frontend, `auth` (86.67%), `components` (82.30%), `api` (81.06%) and `features` (80.90%) are above 80%, while `routes` (74.07%) and `App.jsx` (69.33%) are the least tested.
+
+<div class="evidence-gallery">
+<figure><a href="evidence/codecov-overview-final-2026-10-11.jpg" target="_blank" rel="noreferrer"><img src="evidence/codecov-overview-final-2026-10-11.jpg" alt="Final Codecov overview"></a><figcaption><strong>Final Codecov overview</strong><span>frontend/src 80.87% and backend src 85.42% on main commit 6b528a3, 11 October 2026.</span></figcaption></figure>
+<figure><a href="evidence/codecov-frontend-final-2026-10-11.jpg" target="_blank" rel="noreferrer"><img src="evidence/codecov-frontend-final-2026-10-11.jpg" alt="Final frontend coverage by folder"></a><figcaption><strong>Final frontend coverage by folder</strong><span>api, auth, components and features above 80%; routes 74.07% and App.jsx 69.33%.</span></figcaption></figure>
+<figure><a href="evidence/codecov-backend-final-2026-10-11.jpg" target="_blank" rel="noreferrer"><img src="evidence/codecov-backend-final-2026-10-11.jpg" alt="Final backend coverage by folder"></a><figcaption><strong>Final backend coverage by folder</strong><span>integrations 94.62%, http 93.48%, services 88.81%, auth 81.52%; app.ts 78.44%.</span></figcaption></figure>
+</div>
+
+### Codecov snapshot for release commit `361954e` — 7 October 2026
 
 | Coverage root | Tracked | Covered | Partial | Missed | Coverage |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | `frontend/src` | 5,650 | 4,574 | 474 | 602 | **80.96%** |
 | backend `src` | 4,683 | 3,994 | 352 | 337 | **85.29%** |
 
-Both screenshots identify **latest commit `361954e`**, matching the final merged source and Render deployment screenshot.
+Both screenshots identify commit **`361954e`**, the release shown live in the Render deployment screenshot. The 11 October snapshot above is the final measurement.
 
 ![Final Codecov overview](evidence/sprint4-codecov-overview-final-2026-10-07.png)
 
@@ -129,3 +171,15 @@ Both screenshots identify **latest commit `361954e`**, matching the final merged
 Local tests run before push. Gitea Actions runs on shared lecturer runners; queueing is expected. Save a **completed** run and Codecov output for the exact reviewed branch/release. The Integration Lead verifies combined main after sequential merges. Do not weaken tests or claim green remote CI when only local commands ran.
 
 [Sprint 1–4 testing roadmap](#roadmap) · [Member 5 audit/source bundle](downloads/technical-source-evidence.zip) · [Git handover](#git-methodology).
+
+## What the evidence does not test
+
+| Boundary | Evidence available | Remaining limit |
+| --- | --- | --- |
+| Application logic | Automated unit/integration runs, regression inventory and Codecov | Executed lines do not prove every business rule or assertion is correct. |
+| Real PostgreSQL concurrency | Migration/smoke evidence and domain conflict tests | Local PGlite tests and short public health probes do not reproduce sustained multi-connection Neon booking/publish races. |
+| Auth0 and external services | Role guards, failure paths and dated public checks | Mocked provider responses do not prove live token expiry, Management API outages or every recovery path. |
+| Accessibility | Landing-page Lighthouse reports, Organiser snapshot, focus and responsive captures | Manual keyboard and screen-reader acceptance is incomplete; dashboard contrast remains open. |
+| Product adoption | Five survey responses and production table counts | No final Advanced-workflow stakeholder sign-off, timed usability study or quantified non-test usage breakdown is included. |
+
+The screenshots and HTML reports are retained with their original dates. Documentation build checks validate this site's content and links; they are not new application test results.

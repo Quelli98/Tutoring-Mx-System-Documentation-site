@@ -7,7 +7,7 @@ Tutor MX has **two separate running deployments**: a React/Vite frontend served 
 | Assessed area | Architecture and evidence | Observation / interpretation | Limit |
 | --- | --- | --- | --- |
 | **Database deployed and accessible (2%)** | Neon production branch screenshot and application/backend readiness checks; Prisma migration history. | Relational persistence lives outside the browser and is reached through Express. | Admin-console screenshot is not a production-row census; `/ready` at one time is not 24/7 availability. |
-| **Database structure (5%) and production/test data (3%)** | [30-model schema and ERD](#database), constraints/migrations and table listing. | Model relationships support real allocation, timesheets, booking and audit rather than independent flat tables. | Exact production vs test row totals have not been independently supplied. |
+| **Database structure (5%) and production/test data (3%)** | [30-model schema and ERD](#database), constraints/migrations and table listing. | Model relationships support real allocation, timesheets, booking and audit rather than independent flat tables. | On 11 October the production branch held 353 rows across 18 of 30 tables, including 27 accounts, with all 30 migrations applied ([production data](#database)). |
 | **API deployed (2%), external availability (3%)** | Public `/health` and `/ready`, Render Live screenshot tied to release SHA. | HTTP endpoints are reachable independently of React. | Public health does not grant unauthenticated access to protected API resources. |
 | **API performance (5%)** | Dated first/warm probes and small concurrent-load samples in [Testing](#testing). | First requests are slower than subsequent warm health checks in the captured sample. | Small samples cannot establish stress capacity or uninterrupted uptime. |
 | **App deployed (2%) and responsive/usable (other criteria)** | Stable Cloudflare URL plus captured Student/role layouts and smoke scenarios. | The built frontend is publicly accessible and calls the Render API. | An uploaded `dist` bundle does not alone prove all authenticated actions work. |
@@ -27,20 +27,20 @@ The Integration Lead selects reviewed Gitea `main`, runs the complete local/test
 
 ## Deployment timeline from Sprint 1 through Sprint 4
 
-**Sprint 1** established separately hosted React/Vite and Express applications, Neon storage, Auth0 identity and Gitea CI. **Sprint 2** stabilised Basic routes, database migration checks and the review/deploy cycle. **Sprint 3** expanded tests, coverage, application reports and shared-runner handovers. **Sprint 4** released the combined Student scheduling and Advanced planning features from reviewed Gitea `main`. This chapter distinguishes architecture and dated release evidence from measurements not independently supplied. [Roadmap](#roadmap) · [Testing](#testing).
+**Sprint 1** established separately hosted React/Vite and Express applications, Neon storage, Auth0 identity and Gitea CI. **Sprint 2** stabilised Basic routes, database migration checks and the review/deploy cycle. **Sprint 3** expanded tests, coverage, application reports and shared-runner handovers. **Sprint 4** released the combined Student scheduling and Advanced planning features from reviewed Gitea `main`. This chapter separates the architecture from the dated release evidence. [Roadmap](#roadmap) · [Testing](#testing).
 
 ## The deployment map
 
 | Service | Public / administrative link | What runs there | Evidence boundary |
 | --- | --- | --- | --- |
-| Tutor MX frontend | [tutor-mx.pages.dev](https://tutor-mx.pages.dev) | Compiled React/Vite static assets | Final deployment plus Student/Tutor/Organiser UI and responsive screenshots supplied |
-| Tutor MX backend | [health](https://tutor-mx-api.onrender.com/health) · [ready](https://tutor-mx-api.onrender.com/ready) | Node.js + Express | Render shows `361954e` Live; final public latency/light-load evidence supplied |
-| Neon PostgreSQL | Administrative console (login required; screenshot evidence retained below) | Relational database | Production branch/table evidence supplied; current row counts not supplied |
-| Auth0 | Administrative console (login required; screenshot evidence retained below) | Identity provider, role claims, Management API | Role-list evidence supplied without exposing tokens or client secrets |
+| Tutor MX frontend | [tutor-mx.pages.dev](https://tutor-mx.pages.dev) | Compiled React/Vite static assets | Final deployment, plus Student/Tutor/Organiser and responsive screenshots |
+| Tutor MX backend | [health](https://tutor-mx-api.onrender.com/health) · [ready](https://tutor-mx-api.onrender.com/ready) | Node.js + Express | Render shows `361954e` Live; final public latency and light-load measurements |
+| Neon PostgreSQL | Administrative console (login required; screenshot evidence retained below) | Relational database | Production branch and table screenshots below |
+| Auth0 | Administrative console (login required; screenshot evidence retained below) | Identity provider, role claims, Management API | Role-list screenshot, without tokens or client secrets |
 | Prisma | Schema/client inside the repository/backend | Database toolkit, migrations and typed queries | It is not a separate hosting server |
-| Documentation | [GitHub Pages](https://quelli98.github.io/Tutoring-Mx-System-Documentation-site/) | This independent static documentation build | This ZIP must be reviewed/pushed to update the public site |
+| Documentation | [GitHub Pages](https://quelli98.github.io/Tutoring-Mx-System-Documentation-site/) | This independent static documentation build | Built and deployed by GitHub Actions on every push to `main` |
 
-The deployment diagram shows managed services, browser execution and network connections. We do not invent provider physical server counts or hardware specifications.
+The deployment diagram shows managed services, browser execution and network connections. Provider hardware is managed by each hosting service and is not shown.
 
 ### Public verification links — no provider login required
 
@@ -55,7 +55,7 @@ Gitea Actions, Neon and Auth0 are intentionally **not** offered as public verifi
 
 ## Frontend configuration
 
-Set the Auth0 domain, SPA client ID, audience and API base URL in the frontend build environment using the supplied `.env.example`. SPA identifiers and audiences are public configuration; database credentials and Auth0 Management client secrets are not. Add the correct development and production callback, logout and web origins to the Auth0 SPA settings.
+Set the Auth0 domain, SPA client ID, audience and API base URL in the frontend build environment using the repository's `.env.example`. SPA identifiers and audiences are public configuration; database credentials and Auth0 Management client secrets are not. Add the correct development and production callback, logout and web origins to the Auth0 SPA settings.
 
 The local defaults are frontend `http://localhost:5173` and backend `http://localhost:3000`. Set `VITE_API_BASE_URL` to the Render HTTPS URL for production. A changed Vite variable requires rebuilding `frontend/dist`.
 
@@ -72,22 +72,25 @@ The handbook's source of truth is Gitea `main`. Member branches are reviewed/int
 ```powershell
 # Run from the approved application checkout after its full release gate.
 git switch main
-git pull origin main
+git pull --ff-only origin main
+# Stop and resolve divergence if either operation fails. Never force-push.
+git push deployment main
 cd frontend
+npm ci
 npm run build
-npx wrangler pages deploy dist --project-name=tutor-mx --branch=main --commit-dirty=true
+npx wrangler pages deploy dist --project-name=tutor-mx --branch=main
 ```
 
-The handbook uses `--commit-dirty=true` for the deployment tool; this does not prove that a dirty working tree is the approved release. For the final supplied repository, the approved source SHA is **`361954e`**. The final frontend upload produced **`https://06d22424.tutor-mx.pages.dev`**; the stable public address remains **`https://tutor-mx.pages.dev`**.
+The `deployment` remote is the existing GitHub application mirror (`https://github.com/Quelli98/tutor-mx-deployment.git`). Run the steps only from a clean, approved checkout, stopping on failure; inspect a divergent mirror instead of force-pushing. A successful upload does not by itself prove that the source passed the release gate. For the 7 October release, the approved source SHA is **`361954e`**. The final frontend upload produced **`https://06d22424.tutor-mx.pages.dev`**; the stable public address remains **`https://tutor-mx.pages.dev`**.
 
 Deploy the matching backend through the team's Render workflow, then verify `/health`, `/ready`, one approved account per role and the Master queue. Keep the release SHA, migration status, logs and screenshots together. A successful frontend upload alone does not verify the backend or all role flows.
 
 ## Final Sprint 4 release evidence — 7 October 2026
 
-The supplied Render dashboard screenshot shows `tutor-mx-api` **Live** on commit **`361954e`** with deployment message **“Merge reviewed Sprint 4 Member 6 final fixes”**. The final Codecov screenshots identify the same commit, linking the release source and coverage evidence.
+The Render dashboard screenshot shows `tutor-mx-api` **Live** on commit **`361954e`** with deployment message **“Merge reviewed Sprint 4 Member 6 final fixes”**. The **7 October** Codecov screenshots identify the same commit. The newer 11 October Codecov snapshot is `6b528a3` and is a separate measurement.
 
 ![Render final Sprint 4 deployment](evidence/sprint4-render-final-2026-10-07.png)
 
-The final release source is therefore no longer an unknown 30 September snapshot: it is the supplied Git repository `main` at `361954ec510c624c5f2a0f3d0940c2f7cb769d2e`. Historical Render/Neon screenshots remain useful for earlier milestones, but this 7 October evidence is the Sprint 4 release record.
+The captured deployed revision is `361954ec510c624c5f2a0f3d0940c2f7cb769d2e`. The later final audit is recorded as `a3939f8`, followed by test/README commits on 11 October. The provided deployment screenshot does not verify those later revisions on Render or Cloudflare; keep the source, CI and deployed revision distinct.
 
-Additional final evidence was supplied after the release capture: a Neon production-branch overview/table list, Auth0 role configuration, the public landing page and a green Gitea Actions run for the reviewed Member 6 branch. These are embedded below; they are evidence screenshots rather than public administrative links.
+Additional final evidence was captured after the release: a Neon production-branch overview/table list, Auth0 role configuration, the public landing page and a green Gitea Actions run for the reviewed Member 6 branch. These are embedded below; they are evidence screenshots rather than public administrative links.

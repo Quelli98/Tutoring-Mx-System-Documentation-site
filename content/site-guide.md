@@ -41,4 +41,8 @@ It is **not the login screen of the tutoring application**: [Open the Tutor MX a
 
 ## Status and feedback
 
-The code-backed technical chapters reflect the supplied final 7 October 2026 source and existing evidence; historical sprint materials are explicitly dated. Five earlier user-feedback responses have been retained. The **new final-release user feedback round** is the section awaiting completion: [User feedback](#user-feedback).
+The technical chapters describe the final source on Gitea `main`: the audited code merged as `a3939f8` on 10 October 2026, plus a test fix and README update on 11 October; historical sprint materials are dated. User-testing results and the improvements they led to are in [User feedback](#user-feedback).
+
+## Assessment routes
+
+Start with [Requirements](#requirements) for the shared and tiered product scope, [Final rubric](#milestone4) for the 20 weighted criteria, and [Reports and presentation](#report-guide) for the separate submissions. Evidence is dated; a documented criterion is not a guarantee of marks.

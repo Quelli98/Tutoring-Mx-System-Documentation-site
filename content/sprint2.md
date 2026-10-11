@@ -21,7 +21,7 @@ Sprint 2 replaced Sprint 1’s deliberate mock and placeholder boundaries with r
 | Automated Testing | 10% | [Open automated testing evidence](#testing) | API and UI suites, dated outputs and coverage evidence. |
 | Stakeholder Reviews | 10% | [Open stakeholder reviews evidence](#stakeholder-decisions) | Dated client consultations, decisions and follow-through. |
 | API | 15% | [Open api evidence](#api) | Externally callable handwritten endpoints and relevant external integration. |
-| User Feedback | 10% | [Open user feedback evidence](#user-feedback) | Historical response screenshots and the remaining final feedback collection. |
+| User Feedback | 10% | [Open user feedback evidence](#user-feedback) | Google Forms survey results, participant comments and the resulting improvement. |
 | Project Methodology | 10% | [Open project methodology evidence](#process) | Documented method used for planning, review and change. |
 | Bug Tracker | 5% | [Open bug tracker evidence](#bug-tracker) | Reproducible defect records, owner, status and retest. |
 | Database Documentation | 5% | [Open database documentation evidence](#database) | Schema, relationships, deployment boundaries and database motivation. |

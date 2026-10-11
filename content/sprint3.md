@@ -18,7 +18,7 @@ Sprint 3 extended the Basic system into a more effective Tutor-management produc
 
 | Official criterion | Weight | Evidence / reference | What to inspect |
 | --- | ---: | --- | --- |
-| User Feedback | 10% | [Open user feedback evidence](#user-feedback) | Five historic responses and screenshots; final post-release feedback is still pending. |
+| User Feedback | 10% | [Open user feedback evidence](#user-feedback) | Five survey responses (28 Sep 2026) with charts, comments and the resulting improvement. |
 | Automated Testing | 10% | [Open automated testing evidence](#testing) | Backend/frontend automated tests plus Codecov, retaining dated sprint baselines. |
 | Feature Implementation | 20% | [Open feature implementation evidence](#features) | Search/notifications, ranking, bulk actions, timesheets, imports and Command Centre. |
 | API Implementation | 20% | [Open api implementation evidence](#api) | Expanded protected Express routes for Intermediate workflows. |
@@ -44,13 +44,13 @@ Sprint 3 was handed over one Member branch at a time to the Integration Lead, th
 
 ## Feedback boundary
 
-The [user-feedback record](#user-feedback) includes a prior five-response survey and at least one recorded change. An additional final-release user-feedback round has not been supplied; this is deliberately marked outstanding rather than presented as verified.
+The [user-feedback record](#user-feedback) includes a prior five-response survey and at least one recorded change.
 
 [Read Sprint 4: Advanced and full-project submission →](#sprint4-roadmap)
 
 ## Sprint 3 stories, acceptance and completed tasks on Gitea
 
-[Sprint 3 project board — Gitea](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/42) holds the completed cards, including the original member assignments, checklist progress and issue discussions. The **30 September handbook explicitly marks Sprint 3 as a completed baseline**, summarising its delivered capabilities on page 31. This edition does not invent a verbatim Sprint 3 issue list absent from that handbook: consult the actual Gitea cards for the precise acceptance checks, user stories and task-level discussion.
+[Sprint 3 project board — Gitea](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects/42) holds the completed cards, including the original member assignments, checklist progress and issue discussions. The **30 September handbook explicitly marks Sprint 3 as a completed baseline**, summarising its delivered capabilities on page 31. The Gitea cards hold the precise acceptance checks, user stories and task-level discussion.
 
 For review without internal account access, the [Sprint 3 feature register](#features), [testing evidence](#testing), [work tracker](#work-tracker) and [Source/evidence library](#references) document the integrated outcomes.
 

@@ -1,35 +1,48 @@
-# Open and publish the Tutor MX project documentation
+# Use the final documentation code
 
-1. Extract this ZIP.
-2. Open `Tutoring-Mx-System-Documentation-site-main` in VS Code.
-3. In the terminal, run:
+This ZIP already contains the member's patch and the final audit changes. **Do not apply the patch again.** It is the complete documentation project, not a partial update.
+
+## Preview
+
+1. Extract the ZIP and open the folder containing `package.json` in VS Code.
+2. Use Node.js 24 and run:
 
 ```powershell
 npm ci
-npm run build
 npm run validate
+npm run build
 npm run dev
 ```
 
-4. Open the Vite URL printed in the terminal. Review the new Overview, Purpose & how to use, all four Sprint roadmaps, Milestone 4 rubric, API, Database, Testing, Deployment, scheduling and UML diagrams.
-5. To update the existing public site, copy/merge this project's contents into your **documentation Git checkout**, preserving its `.git` folder and any unrelated local work. Do not copy into the Tutor MX application checkout.
-6. Inspect and publish from that documentation checkout:
+3. Open the URL Vite prints. Review the homepage, Requirements, Final submission rubric, Reports and presentation, API, Database, Bug tracker and Testing pages. Try search and a narrow window.
+
+## Update your existing documentation repository
+
+Use your existing **Tutor-MX-Documentation-GitHub** checkout. Preserve its `.git` directory and any unrelated work. Copy/merge the project contents, including `.gitattributes`, `.github/workflows/pages.yml`, `src`, `content`, `scripts` and `public`. Do not copy `node_modules` or `dist`. This is separate from the application/Gitea repository.
+
+In that documentation checkout, run each step and stop if it fails:
 
 ```powershell
 git status
 git branch --show-current
 git diff --stat
 npm ci
-npm run build
 npm run validate
-git add README.md START-HERE.md VERIFICATION.md index.html package.json package-lock.json src content scripts public verification
+npm run build
+```
+
+Review the changed files. If the checkout is on the intended `main`, stage only the documentation update:
+
+```powershell
+git add README.md START-HERE.md VERIFICATION.md FINAL_REVIEW.md index.html package.json package-lock.json .gitattributes .github/workflows/pages.yml src content scripts public
 git diff --cached --check
-git commit -m "docs: reorganise complete project site and four-sprint rubric roadmaps"
+git diff --cached --stat
+git commit -m "docs: merge final evidence and complete rubric audit"
 git push origin main
 ```
 
-These commands assume your documentation checkout is already on the intended `main`. Review your local work before switching or committing. Add the truthful course-required `Assisted-by` trailer for the actual tool/model used.
+Do not force-push or overwrite unrelated staged work. The GitHub Pages workflow will run validation, build and deploy after the push. Wait for the workflow to finish before checking:
 
-The existing Pages workflow publishes the built site after the push. This archive itself has not been pushed or deployed. Your application backend/frontend and Neon schema are separate from this documentation deployment.
+https://quelli98.github.io/Tutoring-Mx-System-Documentation-site/
 
-The complete updated handbook is included at `public/documents/tutor-mx-handbook-30-september-2026.pdf`. Current chapters are editable Markdown in `content/`.
+The archive has not already been deployed. Check **FINAL_REVIEW.md** for the application limitations that documentation changes cannot resolve.

@@ -1,91 +1,66 @@
-# Tutor MX | Complete project documentation
+# Tutor MX documentation
 
-A professional, public React/Vite documentation website for the **Tutor MX System (Wits COMS3011A, Team 6)**. The project-wide homepage explains the product and the role of this site. Four dedicated Sprint 1–4 roadmap chapters link every official rubric criterion to the existing implementation and evidence. Current technical content is grounded in the supplied 7 October 2026 final application source; historical material remains intact.
+The complete **Wits COMS3011A · Team 6** documentation website, merged and audited on **11 October 2026**. It explains the product, four-sprint development history, architecture, API, database, testing and assessment evidence.
 
-## What is included
+Public documentation: https://quelli98.github.io/Tutoring-Mx-System-Documentation-site/
 
-- A complete new homepage, purpose/reading guide, six logically grouped documentation sections and collapsible sidebar navigation.
-- A separate **Sprint Roadmaps** area: Sprint 1 (10 rubric criteria), Sprint 2 (10), Sprint 3 (8) and Sprint 4 (20), each linked to the relevant source/evidence chapters.
-- The historical-chapters menu has been removed. Unique historical evidence is linked from the relevant current subject and sprint chapters, with original handbook/source files still available for audit.
-- A clearly identified final-release user-feedback section to fill without discarding the five genuine historical responses.
+## Run locally
 
-- A new responsive website layout, search, contained tables, code-copy controls and printable chapters.
-- All **120 final Sprint 4 API operations**, with method/access filters, source references and external curl/PowerShell guidance.
-- All **30 application models**, their stored columns and separate relation fields, **14 enums** and **30 migrations**.
-- Eight revised UML diagrams plus a final Sprint 4 database relationship map.
-- Written frontend/backend boundaries, Auth0/Render/Neon/Prisma setup, Master Organiser approval and current Tutor sickness rules.
-- The completed Student timetable/availability/booking/sick-note workflows and chronological Sprint 4 Member 1–6 delivery record.
-- A criterion-by-criterion Milestone 4 response with final CI, Neon/Auth0, responsive and deployed performance evidence plus clearly stated remaining verification gaps.
-- Full written Git methodology, team process, testing/performance context and the organised/full supplied README.
-- Consolidated historical sprint material, meetings, Codecov, bug tracking and user feedback into the appropriate maintained chapters.
-- Read-only SQL, PowerShell and Postman tools, OpenAPI/route inventories and a safe technical source bundle.
-
-## Start locally
-
-Use Node.js 24 and npm 11 or later:
+Use **Node.js 24** and **npm 11+**. From this directory:
 
 ```powershell
 npm ci
-npm run build
 npm run validate
+npm run build
 npm run dev
 ```
 
-Open the URL printed by Vite. Its `/Tutoring-Mx-System-Documentation-site/` base path matches the existing GitHub Pages project. No Auth0 secret or Neon password is required for this static documentation website.
+Open the address printed by Vite. The existing `/Tutoring-Mx-System-Documentation-site/` base path is preserved. No application secrets, Auth0 credentials or database connection are needed to build this static documentation site. `npm run preview` serves a production build locally.
 
-## Publish the existing documentation site
+## What is included
 
-Follow **START-HERE.md**. Copy/merge the reviewed changes into your existing **documentation Git repository**, preserving its `.git` directory and unrelated local work. The preserved `.github/workflows/pages.yml` builds and deploys GitHub Pages after the approved push to main.
+- 32 navigable pages grouped by purpose, with full-text search, mobile navigation, deep links, code copying and chapter printing.
+- All **20 Milestone 4 criteria**, with correct category weights totalling 100%, assessed questions, implementation answers, direct evidence links and scoped limitations.
+- The latest attached **15-page project brief**, a shared-requirements and feature-tier map, and evidence guidance for the separate reports and presentation.
+- All **120 registered API operations**, **30 Prisma models**, **14 enums**, **30 migration names** and **9 diagrams**.
+- All **32 Gitea defect records (#106–#137)**, fixing PR references, four sprint work registers, stakeholder records and the five-response user survey.
+- The member's complete seven-commit patch, including 11 October Codecov, Lighthouse and Neon evidence, API examples, library register and Scrum mapping.
+- Chapters, API/schema explorers and the search index loaded on demand. Historical source is preserved without loading every obsolete page into the current site.
 
-Existing URL: https://quelli98.github.io/Tutoring-Mx-System-Documentation-site/
+## Evidence provenance
 
-The ZIP has not been pushed to a remote repository or deployed by this task. This documentation update does not redeploy the Tutor MX application, change its API implementation or migrate Neon.
+The route/schema source bundle is the **7 October `361954e` snapshot**. The member patch cites the final audit merge **`a3939f8`** (10 October), followed by the **`6b528a3`** test fix and **`3540d46`** README update. These later written records do not alter the older bundled source or deployment screenshots.
 
-## Editing guide
+The final audit record reports **1,466 backend and 847 frontend tests**. Captured Codecov evidence on `6b528a3` shows **85.42% backend**, **80.87% frontend** and **82.93% combined coverage**. Lighthouse and Neon evidence retain their original dates. The application tests were not rerun during this documentation-only audit.
+
+All criteria are addressed in the documentation, but this is not a guarantee of full marks. The assessment page explicitly records product/evidence limits, including Organiser contrast, responsive overflow, mobile load time, light-load-only API performance, empty Advanced production tables and the absence of final stakeholder acceptance. This source ZIP does not repair the separate application or establish that a later commit is deployed.
+
+## Edit and maintain
 
 | Path | Purpose |
 | --- | --- |
-| `content/*.md` | Written current chapters, the four linked milestone roadmaps and supplied README |
-| `scripts/compile-content.mjs` | Trusted Markdown-to-page compilation |
-| `src/App.tsx` | Navigation, API/table explorers, evidence map and page composition |
-| `src/styles.css` | Responsive design and print styling |
-| `src/data/endpoints.json` | Source-derived 120-operation final Sprint 4 inventory |
-| `src/data/schema.json` | Current models, fields, enums and migrations |
-| `src/data/source-meta.json` | Counts and SHA-256 hashes of the inspected route/schema files |
-| `src/data/rubric.json` | All 20 criterion responses and evidence gaps |
-| `src/data/live-checks.json` | Dated historical HTTP observations; not a live monitor |
-| `src/legacy.tsx` | Original historical page content |
-| `public/diagrams/` | Revised editable SVG diagrams |
-| `scripts/generate-diagrams.py` | Standard-library Python source for those diagrams |
-| `public/downloads/` | Read-only evidence tools and source downloads |
-| `public/evidence/`, `public/documents/` | Supplied screenshots and PDFs |
+| `content/*.md` | Canonical written chapters |
+| `src/navigation.ts` | Page titles, grouping, aliases and hash routing |
+| `src/App.tsx`, `src/styles.css` | Site shell, search, responsive layout and print styles |
+| `src/Markdown.tsx` | Lazy chapter loading |
+| `src/ApiCatalogue.tsx`, `src/DatabaseCatalogue.tsx` | Searchable technical references |
+| `src/RubricMap.tsx`, `src/data/rubric.json` | Filterable assessment evidence index |
+| `src/data/endpoints.json`, `src/data/schema.json` | Source-derived inventories |
+| `src/data/source-meta.json` | Dated metadata and source fingerprints |
+| `src/data/live-checks.json` | Team-recorded HTTP observations; not a live monitor |
+| `scripts/compile-content.mjs` | Generate chapter HTML and the deferred search index |
+| `scripts/validate-content.mjs`, `scripts/validate-site.mjs` | Inventory, rubric, rendered-link, asset and provenance checks |
+| `public/evidence/`, `public/documents/`, `public/downloads/` | Original dated evidence and reference files |
+| `.github/workflows/pages.yml` | Validate, build and publish the existing GitHub Pages site |
 
-`npm run build` and `npm run dev` compile Markdown first. If editing Markdown while Vite is running, run `npm run docs:compile` to refresh the generated content. Generate revised diagrams with `python scripts/generate-diagrams.py` from a Python environment; the built website does not need Python.
+`build`, `dev` and `validate` compile Markdown first. If Markdown changes while the dev server is running, run `npm run docs:compile`. Generated JSON should be committed with the canonical Markdown. The complete original historical UI source remains downloadable at `public/downloads/historical-site-source.tsx.txt`.
 
-## Source precedence and limits
+## Publish
 
-The final supplied Git repository supersedes the 30 September source snapshot for implementation status. Its `main` and `origin/main` point to **`361954e`**, the final reviewed Sprint 4 merge. The 30 September handbook remains the acceptance/design baseline and historical Sprint 1–3 source records remain available through the handbook and supporting evidence.
+Follow **START-HERE.md** to merge into the existing **documentation repository**, preserving its Git history and local changes. Push the reviewed documentation commit to `main`; the preserved Pages workflow validates and publishes it. This deliverable has not been pushed or deployed, and it does not update the Tutor MX application, Render or Neon.
 
-The final evidence supplied on 7 October shows Render live on `361954e`, Codecov for the same commit (frontend/src 80.96%, backend src 85.29%), a green Gitea Actions run for reviewed Member 6 commit `2f62311` before the final merge, Neon production structure, Auth0 role configuration, responsive application captures, and deployed `/health`/`/ready` timing/light-load measurements. The documentation still does not invent exact production row counts, `_prisma_migrations` rows, a separate green Actions run for merge commit `361954e`, a Lighthouse/screen-reader/full keyboard audit, stakeholder sign-off or a complete unresolved-defect register.
+See **VERIFICATION.md** for checks and limits, and **FINAL_REVIEW.md** for the audit decisions and remaining application evidence gaps.
 
-Three unseen current rubric weights are retained provisionally from the older project brief. See **VERIFICATION.md** and the Milestone 4 page for the remaining evidence list.
+## AI declaration
 
-## AI attribution
-
-This documentation was restored and updated with ChatGPT/Codex assistance. Preserve existing truthful declarations and commit trailers. Record the actual model visible in the session and the required course transcript/attribution; do not infer a model name from an application version.
-
-## Documentation restructure — 9 October 2026
-
-The homepage and navigation are no longer oriented around Sprint 4. Open **Overview → Purpose & how to use** or the independent **Sprint roadmaps** group. Original source assets and legacy evidence components remain in the repository, but duplicated historical chapters are no longer exposed as separate navigation pages. Current roadmaps link directly to the original handbook and evidence. The latest 2026 official project brief and the project-specific Tutor Management System brief have been added under `public/documents/`. Only new **final-release user feedback** needs the team’s actual survey/retest content; earlier feedback is retained.
-
-The documentation’s production-data-count, final-main CI and accessibility audit limitations remain explicitly stated in the final rubric rather than being falsely reported as verified.
-
-## 9 October consolidation follow-up
-
-The updated navigation presents Tutor MX as a **complete four-sprint product**, not a Sprint 4-only project. The former Historical Chapters menu has been removed. Team methodology documents how Members read the assigned stories, discuss preferred tasks, vote on responsibilities and evolve from non-chronological integration in Sprints 1–2 to the sequential reviewed-merge process in Sprints 3–4.
-
-The database reference covers **all 30 source-derived Prisma models** and explains why `MASTER_ORGANIZER` is an Auth0 permission rather than a standalone database table. The optional production Neon Console link requires access to the project; no credentials are embedded. The Codecov page explains percentage meaning and assessment limitations. Sprint 1/2/4 roadmaps link all 18 corresponding Member handbook cards; Sprint 3 links the team's actual internal Gitea board.
-
-Updated Gitea tracker: https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/projects
-
-Full specifics: `REORGANISATION_FOLLOW_UP_2026-10-09.md`.
+This repository makes use of AI code generation and review. Member-supplied historical attribution is retained in `content/references.md`: Codex [GPT-5], ChatGPT [GPT-5.6 Sol, as recorded in the prior documentation], and Claude Code [Claude Opus 5.5] for the member's 11 October patch. The final merge/audit was assisted by ChatGPT Work / Codex. The user reported a ChatGPT configuration of **GPT-6 Astra (Max)**; the exact underlying model of this coding-agent session is not exposed. Assistance covered rubric mapping, evidence reconciliation, site code, loading changes and validation. The team remains responsible for reviewing the result. Application-code AI attribution is maintained separately in the application repository.

@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-11",
+  "scope": "Documentation site only",
+  "inputs": {
+    "memberPatchCommitsApplied": 7,
+    "generalBriefPages": 15
+  },
+  "checks": {
+    "build": "PASS",
+    "contentValidation": "PASS",
+    "renderedLinksAndAssets": "PASS",
+    "whitespace": "PASS",
+    "navigationPages": 32,
+    "compiledMarkdownChapters": 30,
+    "internalLinks": 590,
+    "localAssetReferences": 413,
+    "rubricCriteria": 20,
+    "rubricWeight": 100,
+    "bugIssues": 32,
+    "apiOperations": 120,
+    "databaseModels": 30,
+    "enums": 14,
+    "migrationDirectories": 30,
+    "diagrams": 9
+  },
+  "initialBundleKB": {
+    "afterMemberPatch": 1048.91,
+    "final": 235.68
+  },
+  "browserVerification": "Not performed: supported browser preview tool unavailable",
+  "applicationTests": "Not rerun; existing application results remain dated and attributed",
+  "remotePublishing": "Not performed",
+  "limitationsDocument": "FINAL_REVIEW.md"
+}

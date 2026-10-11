@@ -15,11 +15,11 @@ Sprint 4 added the remaining Advanced workflows and completed the Student/Tutor 
 | 5 | Cross-system audit timeline, allocation restore and API hardening | Track committed changes safely, restore only after current rules pass, avoid duplicate decisions. | [Backend](#backend) · [Security](#security) |
 | 6 | Whole-school proposals, explanations and strategy comparison | Apply the established hard rules and locks, compare weighted presets and save drafts as Scenarios. | [Features](#features) · [Sprint 4 final delivery](#sprint4) |
 
-The handbook details the original acceptance tests on **pages 34–40**. The [Sprint 4 final source record](#sprint4) describes what exists in the supplied final commit `361954e` and links to release evidence; [Git methodology](#git-methodology) explains the chronological integration.
+The handbook details the original acceptance tests on **pages 34–40**. The [Sprint 4 final source record](#sprint4) describes the final source (release commit `361954e`, plus the 10 October final-audit merge `a3939f8`) and links to release evidence; [Git methodology](#git-methodology) explains the chronological integration.
 
 ## Milestone 4 — all official assessment criteria
 
-The 20 criteria below reproduce the supplied final rubric’s categories and weights (100% total). Follow the primary evidence chapter, and use the [detailed rubric map](#milestone4) for individual claims, dates and remaining verification boundaries.
+The 20 criteria below reproduce the categories and weights in section 3.4 of the [official brief](documents/coms3011a-2026-official-brief.pdf#page=11) (100% total). Follow the primary evidence chapter, and use the [detailed rubric map](#milestone4) for individual claims and dates.
 
 
 ### Database (10%)
@@ -51,7 +51,7 @@ The 20 criteria below reproduce the supplied final rubric’s categories and wei
 | Performance | 5% | [Open performance reference](#testing) |
 | Features | 10% | [Open features reference](#features) |
 | Responsiveness | 5% | [Open responsiveness reference](#frontend) |
-| Structure | 5% | [Open structure reference](#architecture) |
+| Structure | 5% | [Navigation and first-time use](#frontend/navigation-and-first-time-use) |
 
 ### Engineering practice (23%)
 
@@ -66,9 +66,9 @@ The 20 criteria below reproduce the supplied final rubric’s categories and wei
 
 The site gives separate, scoped evidence for the [API catalogue](#api), [Prisma models and migrations](#database), [UML](#diagrams), [full feature register](#features), [Auth0 roles](#security), [hosted deployment](#deployment), [CI and performance](#testing), [external-holiday integration](#integration), [Git method](#git-methodology) and [work/bug trackers](#work-tracker).
 
-**Not a fabricated production pass:** Current source and 7 October screenshots demonstrate much of the implementation. Some independent checks are identified as not supplied in [Milestone 4 evidence](#milestone4), notably final production data counts, final-main CI evidence and a standalone full accessibility audit. These remain honest scope limitations, not completed test results.
+Known limitations are listed once, on the [final submission rubric page](#milestone4/known-limitations).
 
-**User feedback:** The final post-release feedback, response analysis and resulting improvements remain the outstanding content round. [Open the existing record and finish this section](#user-feedback).
+**User feedback:** survey results, participant comments and the resulting improvements are in [User feedback](#user-feedback).
 
 [Return to the four-sprint roadmap](#roadmap) · [Read official milestone source](documents/coms3011a-2026-official-brief.pdf)
 

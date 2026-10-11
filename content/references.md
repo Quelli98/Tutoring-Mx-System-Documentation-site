@@ -1,23 +1,25 @@
 ## Source trail across all four sprints
 
-The [Sprint 1](#sprint1), [Sprint 2](#sprint2), [Sprint 3](#sprint3) and [Sprint 4](#sprint4-roadmap) roadmaps distinguish the original work, requirements and decisions. This library consolidates their **shared evidence**, including the exact handbook, final supplied source files, diagrams, dated quality reports and Gitea work boards, without making earlier sprint evidence disappear. [Four-sprint work register](#work-tracker).
+The [Sprint 1](#sprint1), [Sprint 2](#sprint2), [Sprint 3](#sprint3) and [Sprint 4](#sprint4-roadmap) roadmaps distinguish the original work, requirements and decisions. This library consolidates their **shared evidence**, including the exact handbook, final source files, diagrams, dated quality reports and Gitea work boards, without making earlier sprint evidence disappear. [Four-sprint work register](#work-tracker).
 
 ## Source hierarchy and dates
 
-| Source | Used for | Scope |
+| Evidence | Date / version | What it establishes |
 | --- | --- | --- |
-| 30 September 2026 handbook, supplied on 3 October | Current baseline, role onboarding, Sprint 4 owners and no-rebuild rule | Pages 4–6 and 30–44 supersede older conflicting material; pages 13–29 are historical |
-| Final supplied Git repository ZIP, 7 October 2026 | Final Sprint 4 routes, schema, tests, README and Git history | `main`/`origin/main` at `361954e`; supersedes the 30 September source snapshot for final implementation status |
-| Final application `README.md` from the supplied repository | README and organised setup/contract chapters | Retained as the current source README; older README claims remain historical |
-| Historical source PDFs and evidence assets | Early sprint history, decisions and retained dated proof | Integrated into current roadmap, process and evidence chapters; source files retained in downloads |
-| 29 September rubric/platform screenshots | Marking questions and dated provider evidence | Not proof of newer deployment or production row counts |
-| 3 October approval-route HTTP checks | External anonymous requests to the two new read routes | Both returned 401; no token or private data used |
-| Earlier 29 September HTTP check | Health/readiness and anonymous rejection | Dated result retained from the prior work; not rerun as October uptime evidence |
-| 7 October Render + Codecov screenshots | Final release/deployment and coverage evidence | Render and Codecov both identify latest commit `361954e` |
-| 7 October Gitea Actions screenshot | Reviewed Member 6 branch CI evidence | Green `ci.yml` run on `2f62311`, the reviewed commit merged into final `361954e` |
-| 7 October Neon + Auth0 screenshots | Production database structure and role configuration | Administrative screenshots only; no secrets/private rows published |
-| 7 October responsive + performance screenshots | Common-width UI evidence and deployed API measurements | 400×645 / 757×645 captures; public health/readiness timing and light-load samples |
+| Current general project brief | Attached 15-page version, incorporated 11 October | Shared requirements; 20 final criteria and weights; separate report and presentation rubrics |
+| Tutor-specific brief and 30 September handbook | Project scope and later accepted extensions | Basic/Intermediate/Advanced features, Member ownership and acceptance specifications |
+| Bundled route/schema source and technical ZIP | 7 October, `361954e` | 120 operations, 30 models, 14 enums, 30 migration directories and the recorded release history |
+| Member's final-audit record | 10 October, `a3939f8` | Reported audit fixes, 1,466 backend / 847 frontend tests and final CI; original records are linked on Gitea |
+| Follow-up source record | 11 October, `6b528a3` then `3540d46` | Frontend test correction then README update, as recorded in the member patch |
+| Codecov screenshots | 11 October, `6b528a3` | Captured 85.42% backend and 80.87% frontend coverage; 82.93% combined |
+| Render and Cloudflare deployment captures | 7 October | The captured release; these images do not identify a later deployed revision |
+| Neon row/migration screenshots | 11 October | 353 rows, 27 Profiles and 30 completed migrations at the captured time |
+| Lighthouse HTML reports and screenshots | 11 October | Landing-page scores and metrics; separately recorded Organiser accessibility findings |
+| Team-reported HTTP checks | 11 October, 13:14 SAST | Dated availability and anonymous-rejection observations, not continuous monitoring |
+| Five-response user survey | 28 September | Recorded feedback and the response to it; no later survey is implied |
+| Historic handbooks, meetings and sprint evidence | Original dates retained | Development history and decisions across all four sprints |
 
+Later written audit records do not update the bytes in the 7 October technical bundle. The member patch reports no route/schema changes in the final audit; the bundled source remains labelled with its captured date. The application test suites and external provider dashboards were not rerun during this documentation-only audit.
 
 ## Public verification links
 
@@ -43,18 +45,19 @@ Private consoles may be helpful **when a reviewer is authorised**, but they do n
 
 - [Updated 30 September handbook PDF](documents/tutor-mx-handbook-30-september-2026.pdf)
 - [Updated README — display-cleaned Markdown](downloads/updated-README.md)
-- [Updated README — exactly as supplied](downloads/updated-README-as-supplied.md)
+- [Updated README — unedited copy](downloads/updated-README-as-supplied.md)
 - [README from the inspected source archive](downloads/application-README-source.md)
 - [Final Sprint 4 documentation update notes](downloads/UPDATE_NOTES_2026-10-07_SPRINT4_FINAL.md)
-- [Technical source evidence bundle](downloads/technical-source-evidence.zip)
-- [Final Sprint 4 Git log excerpt](downloads/sprint4-final-git-log.txt)
-- [Current schema](downloads/schema.prisma) and [route source](downloads/api-routes.ts.txt)
+- [7 October technical source evidence bundle](downloads/technical-source-evidence.zip)
+- [7 October Sprint 4 Git log excerpt](downloads/sprint4-final-git-log.txt)
+- [Schema snapshot](downloads/schema.prisma) and [route source snapshot](downloads/api-routes.ts.txt)
 - [API bootstrap/service wiring](downloads/api-bootstrap.ts.txt)
+- [Original historical documentation source](downloads/historical-site-source.tsx.txt) — retained for provenance; only the stakeholder and feedback pages are loaded in the current site.
 - [Historical user feedback](#user-feedback) and [official handbook and documents](#references)
 
 ## Official technical references
 
-These references explain the technologies and notation. Tutor MX implementation claims above are grounded in the supplied code and handbook, not inferred merely from a provider's marketing page.
+These references explain the technologies and notation. Tutor MX implementation claims above are based on our code and handbook.
 
 | Subject | Primary reference |
 | --- | --- |
@@ -68,9 +71,19 @@ These references explain the technologies and notation. Tutor MX implementation 
 | GitHub Pages | [GitHub Pages documentation](https://docs.github.com/en/pages) |
 | UML notation | [OMG UML specification](https://www.omg.org/spec/UML/) |
 | Holiday provider | [Nager.Date API](https://date.nager.at/Api) |
+| Project methodology | [The Scrum Guide (Schwaber and Sutherland, 2020)](https://scrumguides.org/scrum-guide.html) |
 
-## AI attribution and evidence integrity
+## AI declaration
 
-The source README lists its existing tools and truthful historical trailers. The updated handbook carries its own declaration. Preserve these. This documentation restoration/update used ChatGPT/Codex assistance; record the actual visible session model and course-required transcript/commit attribution without guessing a model from a tool or software version.
+This documentation website was written with AI assistance. The team takes responsibility for all content on this site, including AI-assisted material.
 
-No production secrets, tokens or user data were required to build this documentation. The diagrams are authored vector models with explicit scope labels, not fabricated production screenshots.
+| Period | Tool | Model | Purpose |
+| --- | --- | --- | --- |
+| 13 August 2026 | Codex | GPT-5 | Code and content for the initial documentation site, and the stakeholder, sprint, testing and architecture-decision evidence pages |
+| 14 September – 9 October 2026 | ChatGPT | GPT-5.6 Sol (as recorded in the prior documentation) | Drafting and editing the Sprint 2–4 chapters, roadmaps and rubric mapping, and code for the site redesign |
+| 11 October 2026 | Claude Code | Claude Opus 5.5 | Editing and drafting: removing internal working notes; updating the test, coverage, service-check, Lighthouse and production-data figures; drafting the bug-fix, library, Scrum, API-example and UI-design sections from the team's code, pull requests and evidence; and writing this declaration |
+| 11 October 2026, final merge and audit | ChatGPT Work / Codex | User-reported ChatGPT configuration: GPT-6 Astra (Max); exact model of this coding-agent session is not exposed | Rubric audit, evidence reconciliation, documentation UI, loading improvements, build and content validation |
+
+AI use in the Tutor MX application code is declared separately in the application repository's [AI_DECLARATION.md](https://sdp.ms.wits.ac.za/innovent/tutor-mx-system/src/branch/main/AI_DECLARATION.md).
+
+No production secrets, tokens or user data were required to build this documentation. The diagrams are authored vector models with explicit scope labels, rather than screenshots of production.
